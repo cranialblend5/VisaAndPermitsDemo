@@ -102,9 +102,9 @@ function shot(s, file, x, y, w){
   flags.forEach((f,i) => {
     const w = 0.2 + f.length*0.115;
     s.addShape(p.ShapeType.roundRect, { x:fx, y:5.72, w, h:0.36, rectRadius:0.17,
-      fill:{color: i===0 ? TEAL_D : INK2}, line:{color: i===0 ? TEAL : '2C4A6A', width:0.75} });
+      fill:{color:INK2}, line:{color:'2C4A6A', width:0.75} });
     s.addText(f, { x:fx, y:5.72, w, h:0.36, isTextBox:true, margin:0,
-      fontFace:B, fontSize:11.5, bold:true, color: i===0 ? WHITE : 'BFD6EC', align:'center', valign:'middle' });
+      fontFace:B, fontSize:11.5, bold:true, color:'BFD6EC', align:'center', valign:'middle' });
     fx += w + 0.14;
   });
 
@@ -115,7 +115,7 @@ function shot(s, file, x, y, w){
   s.addText('A sales and solution overview for SAP and enterprise customers across the GCC', {
     x:0.72, y:6.80, w:9.0, h:0.3, isTextBox:true, margin:0,
     fontFace:B, fontSize:10.5, italic:true, color:'6C87A2' });
-  s.addNotes('Opening frame. The pitch: this is not a concept — it is a live SAP BTP application running work permit, renewal and cancellation lifecycles in production in the UAE, with configured country packs for the rest of the GCC and Libya. Emphasise three words: owned, visible, reconciled.');
+  s.addNotes('Opening frame. The pitch: a pre-built SAP BTP application covering the work permit, renewal and cancellation lifecycles, with configured country packs across the GCC and Libya. Emphasise three words: owned, visible, reconciled.');
 }
 
 /* ========== SLIDE 2 — THE PROBLEM ========== */
@@ -160,7 +160,7 @@ function shot(s, file, x, y, w){
 {
   const s = S(); lightBg(s);
   title(s, 'The solution', 'A tracked runway for every permit.');
-  s.addText('Three governed lifecycles, twenty-two milestones, one task inbox — running in production today.', {
+  s.addText('Three governed lifecycles, twenty-two milestones, one task inbox.', {
     x:0.6, y:1.36, w:11.4, h:0.32, isTextBox:true, margin:0,
     fontFace:B, fontSize:13.5, color:GREY });
 
@@ -182,7 +182,7 @@ function shot(s, file, x, y, w){
   });
 
   shot(s, 'home.jpg', 6.42, 1.95, 6.28);
-  s.addText('The home dashboard — running, completed and cancelled counts across all three lifecycles, over a live queue of initiated cases with priority, status and assigned agent.', {
+  s.addText('The home dashboard — running, completed and cancelled counts across all three lifecycles, over a queue of initiated cases with priority, status and assigned agent.', {
     x:6.42, y:4.95, w:6.28, h:0.5, isTextBox:true, margin:0,
     fontFace:B, fontSize:10, italic:true, color:GREY, lineSpacing:14 });
 
@@ -204,7 +204,7 @@ function shot(s, file, x, y, w){
     cx += w + 0.2;
   });
   footer(s, 3);
-  s.addNotes('Anchor on the screenshot — this is a real system, not a mock-up. The five capability tiles are what makes it a governance tool rather than a tracker.');
+  s.addNotes('Anchor on the screenshot — this is the built application, not a mock-up. The five capability tiles are what makes it a governance tool rather than a tracker.');
 }
 
 /* ========== SLIDE 4 — PERSONAS ========== */
@@ -355,7 +355,7 @@ function shot(s, file, x, y, w){
     fontFace:B, fontSize:12.5, color:'A9C2DA' });
 
   const ctry = [
-    ['United Arab Emirates','LIVE','MOHRE  ·  ICP  ·  GDRFA  ·  Tasheel / Tawjeeh  ·  ILOE','New, renew, cancel, quota, temporary permit, Emiratisation, absconding, company documents', GOOD],
+    ['United Arab Emirates','PACK','MOHRE  ·  ICP  ·  GDRFA  ·  Tasheel / Tawjeeh  ·  ILOE','New, renew, cancel, quota, temporary permit, Emiratisation, absconding, company documents', SAND],
     ['Kingdom of Saudi Arabia','PACK','Qiwa  ·  Muqeem  ·  Absher  ·  GOSI  ·  Mudad','Block visa & quota, work permit, Iqama issue and renewal, exit / re-entry, final exit, profession change, transfer, Nitaqat', SAND],
     ['Qatar','PACK','ADLSA  ·  MOI  ·  Metrash2  ·  Qatar Visa Centre','Work visa quota, contract attestation, entry visa, medical and biometrics, RP and Qatar ID, renewal, exit', SAND],
     ['Kuwait','PACK','PAM (Ashal)  ·  MOI  ·  Sahel  ·  PACI','Article 18 work permit, entry visa, medical and fingerprint, residency stamping, Civil ID, renewal, cancellation', SAND],
@@ -367,7 +367,7 @@ function shot(s, file, x, y, w){
   ctry.forEach((c, i) => {
     const y = 1.90 + i*(rh+gp);
     s.addShape(p.ShapeType.roundRect, { x:0.6, y, w:11.4, h:rh, rectRadius:0.05,
-      fill:{color: i===0 ? '123A4E' : INK2}, line:{color: i===0 ? TEAL_D : '27415C', width:0.75} });
+      fill:{color: i%2 ? INK2 : '13314C'}, line:{color:'27415C', width:0.75} });
     s.addText(c[0], { x:0.82, y:y+0.045, w:2.55, h:0.25, isTextBox:true, margin:0,
       fontFace:H, fontSize:11.5, bold:true, color:WHITE });
     s.addShape(p.ShapeType.roundRect, { x:0.82, y:y+0.31, w:0.62, h:0.19, rectRadius:0.1, fill:{color:c[4]} });
@@ -383,13 +383,11 @@ function shot(s, file, x, y, w){
   s.addText('PROCESSES IN THE PACK', { x:7.8, y:1.66, w:4.0, h:0.19, isTextBox:true, margin:0, fontFace:B, fontSize:8, bold:true, color:'6C87A2', charSpacing:1.4 });
 
   s.addText([
-    { text:'LIVE', options:{ bold:true, color:GOOD } },
-    { text:' = running in production today.   ', options:{ color:'A9C2DA' } },
     { text:'PACK', options:{ bold:true, color:SAND } },
-    { text:' = designed against that country’s statutory flow and configured from the same engine, with a localisation workshop confirming document names, fees and thresholds before go-live.', options:{ color:'A9C2DA' } }
+    { text:' = the country’s statutory flow expressed as configuration on the shared engine — milestones, authorities, document checklist, mandatory fields, payment types and alert thresholds. Pre-built rather than custom-developed, with a localisation workshop confirming document names, fees and thresholds before go-live.', options:{ color:'A9C2DA' } }
   ], { x:0.6, y:6.50, w:11.4, h:0.42, isTextBox:true, margin:0, fontFace:B, fontSize:9.5, lineSpacing:13 });
   footer(s, 7, true);
-  s.addNotes('The GCC-ready slide. Be straight about live versus pack — credibility here is worth more than an overclaim, and the honesty usually earns the follow-up meeting. For KSA note the three-authority split: Qiwa for labour, Muqeem for the Iqama, Absher as the employee-facing mirror.');
+  s.addNotes('The GCC-ready slide. The message is breadth from one engine: each pack is configuration, not a rebuild, which is why deployment is weeks rather than quarters. For KSA note the three-authority split: Qiwa for labour, Muqeem for the Iqama, Absher as the employee-facing mirror.');
 }
 
 /* ========== SLIDE 8 — HEALTHCARE & INDUSTRY PERMITS ========== */
@@ -502,7 +500,7 @@ function shot(s, file, x, y, w){
     { text:'What the customer must obtain. ', options:{ bold:true, color:INK } },
     { text:'GCC governments do not publish open APIs, and access is granted to the employer \u2014 not to the software vendor. The customer approaches each authority directly (Qiwa and Muqeem in KSA, MOHRE and ICP in the UAE, LMRA in Bahrain) for API credentials, a specification and a sandbox under their own establishment registration. We build the connector from those.\n\n', options:{ color:GREY } },
     { text:'Until then ', options:{ bold:true, color:INK } },
-    { text:'— and this is how the system runs in production today — the government step stays a tracked manual PRO activity, with reference number, receipt and status captured in the milestone.', options:{ color:GREY } }
+    { text:'the government step stays a tracked manual PRO activity, with reference number, receipt and status captured in the milestone — which is how the application is designed to operate from day one, with or without a portal connection.', options:{ color:GREY } }
   ], { x:8.64, y:3.78, w:3.84, h:2.76, isTextBox:true, margin:0,
       fontFace:B, fontSize:8.4, lineSpacing:11.4 });
   footer(s, 9);
@@ -565,7 +563,7 @@ function shot(s, file, x, y, w){
 
   s.addText('Ready for the GCC, today.', { x:0.6, y:6.32, w:6.4, h:0.36, isTextBox:true, margin:0,
     fontFace:H, fontSize:20, bold:true, color:WHITE });
-  s.addText('Live in the UAE  ·  Country packs for KSA, Qatar, Kuwait, Oman, Bahrain and Libya  ·  Work permits, healthcare licences and any industry-grade permit', {
+  s.addText('Country packs for the UAE, KSA, Qatar, Kuwait, Oman, Bahrain and Libya  ·  Work permits, healthcare licences and any industry-grade permit', {
     x:0.6, y:6.70, w:8.6, h:0.3, isTextBox:true, margin:0,
     fontFace:B, fontSize:10, color:'A9C2DA' });
   s.addImage({ path:`${IMG}/logo-white.png`, x:10.35, y:6.34, w:2.0, h:0.49 });
