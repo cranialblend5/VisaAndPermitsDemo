@@ -1,0 +1,1782 @@
+<title>Permit Runway</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  /* --- core palette: ink navy + warm sand, blue-biased neutrals --- */
+  --ink:#0C1E33;
+  --ink-deep:#071523;
+  --ink-soft:#16304C;
+  --azure:#1E6FD9;
+  --azure-soft:#E8F1FC;
+  --azure-line:#BBD5F2;
+  --sand:#C9A227;
+  --sand-soft:#FBF3D9;
+  --paper:#F6F4EF;
+  --surface:#FFFFFF;
+  --surface-2:#FBFAF7;
+  --line:#E2DFD7;
+  --line-strong:#CFCBC0;
+  --text:#132639;
+  --text-2:#4B5E75;
+  --text-3:#7A8899;
+  --done:#17795E;
+  --done-soft:#E4F2EC;
+  --due:#B5730F;
+  --due-soft:#FBF0DC;
+  --late:#B23A2F;
+  --late-soft:#FAE8E5;
+  --shadow:0 1px 2px rgba(12,30,51,.06),0 8px 24px -12px rgba(12,30,51,.18);
+  --shadow-lg:0 2px 4px rgba(12,30,51,.07),0 24px 48px -20px rgba(12,30,51,.28);
+  --r:14px;
+  --r-sm:9px;
+  --maxw:1180px;
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#0A1828;--ink-deep:#050E18;--ink-soft:#18334F;
+    --azure:#5CA0F0;--azure-soft:#132A44;--azure-line:#27486E;
+    --sand:#E2BE4A;--sand-soft:#2E2812;
+    --paper:#0B1621;--surface:#111E2C;--surface-2:#0E1927;
+    --line:#22364B;--line-strong:#31485F;
+    --text:#E8EEF5;--text-2:#A8BACD;--text-3:#7A8DA3;
+    --done:#4FBF98;--done-soft:#12312A;
+    --due:#E0A244;--due-soft:#33270F;
+    --late:#EE7B6C;--late-soft:#371916;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.45),0 24px 48px -20px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#0A1828;--ink-deep:#050E18;--ink-soft:#18334F;
+  --azure:#5CA0F0;--azure-soft:#132A44;--azure-line:#27486E;
+  --sand:#E2BE4A;--sand-soft:#2E2812;
+  --paper:#0B1621;--surface:#111E2C;--surface-2:#0E1927;
+  --line:#22364B;--line-strong:#31485F;
+  --text:#E8EEF5;--text-2:#A8BACD;--text-3:#7A8DA3;
+  --done:#4FBF98;--done-soft:#12312A;
+  --due:#E0A244;--due-soft:#33270F;
+  --late:#EE7B6C;--late-soft:#371916;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.45),0 24px 48px -20px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--text);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.018em;line-height:1.15}
+p{margin:0}
+a{color:var(--azure)}
+img{max-width:100%;display:block}
+button{font-family:inherit;font-size:inherit;color:inherit}
+:focus-visible{outline:2.5px solid var(--azure);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+
+/* ---------- shell ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+@media(max-width:560px){.wrap{padding-inline:16px}}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:saturate(1.6) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{max-width:var(--maxw);margin:0 auto;padding:9px 20px;display:flex;align-items:center;gap:14px}
+@media(max-width:560px){.topbar-in{padding:8px 16px;gap:10px}}
+.brand{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none;color:var(--text)}
+.brand-mark{
+  width:28px;height:28px;border-radius:7px;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:-.04em;
+  flex-shrink:0;
+}
+:root[data-theme="dark"] .brand-mark,:root:not([data-theme="light"]) .brand-mark{background:var(--azure)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .brand-mark{background:var(--ink)}}
+.brand-txt{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.02em;white-space:nowrap}
+.brand-txt span{color:var(--text-3);font-weight:500}
+@media(max-width:700px){.brand-txt span{display:none}}
+
+.progress-rail{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;min-width:40px}
+.progress-fill{height:100%;width:0;background:var(--azure);transition:width .25s ease}
+
+.theme-btn{
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  width:32px;height:32px;display:grid;place-items:center;cursor:pointer;flex-shrink:0;
+}
+.theme-btn:hover{border-color:var(--line-strong)}
+
+/* ---------- chapter chips ---------- */
+.chapnav{
+  position:sticky;top:calc(env(safe-area-inset-top,0px) + 47px);z-index:55;
+  background:color-mix(in srgb,var(--paper) 92%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.chapnav-scroll{
+  max-width:var(--maxw);margin:0 auto;padding:7px 20px;
+  display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;
+}
+.chapnav-scroll::-webkit-scrollbar{display:none}
+@media(max-width:560px){.chapnav-scroll{padding:7px 16px}}
+.chip{
+  flex-shrink:0;border:1px solid transparent;background:transparent;
+  padding:5px 11px;border-radius:99px;cursor:pointer;
+  font-size:12.5px;font-weight:600;color:var(--text-2);white-space:nowrap;
+  display:flex;align-items:center;gap:6px;transition:.15s;
+}
+.chip:hover{background:var(--surface);color:var(--text)}
+.chip[aria-current="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+:root[data-theme="dark"] .chip[aria-current="true"],:root:not([data-theme="light"]) .chip[aria-current="true"]{background:var(--azure);color:var(--ink-deep)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .chip[aria-current="true"]{background:var(--ink);color:#fff}}
+.chip b{font-family:var(--mono);font-size:10.5px;font-weight:600;opacity:.65}
+
+/* ---------- sections ---------- */
+section{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 96px)}
+.sec{padding-block:64px}
+@media(max-width:700px){.sec{padding-block:44px}}
+.sec-dark{background:var(--ink);color:#EAF1F8}
+.sec-dark h2,.sec-dark h3,.sec-dark h4{color:#fff}
+.sec-alt{background:var(--surface-2)}
+
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--azure);display:flex;align-items:center;gap:9px;margin-bottom:13px;
+}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--azure);flex-shrink:0}
+.sec-dark .eyebrow{color:var(--sand)}
+.sec-dark .eyebrow::before{background:var(--sand)}
+
+.sec-h{font-size:clamp(25px,3.6vw,38px);font-weight:800;margin-bottom:12px}
+.sec-sub{font-size:clamp(16px,1.9vw,18.5px);color:var(--text-2);max-width:62ch;line-height:1.55}
+.sec-dark .sec-sub{color:#A9C2DA}
+
+/* plain-words callout */
+.plain{
+  margin-top:20px;padding:13px 16px;border-radius:var(--r-sm);
+  background:var(--sand-soft);border-left:3px solid var(--sand);
+  font-size:15px;color:var(--text);max-width:70ch;
+}
+.plain b{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);display:block;margin-bottom:3px}
+.sec-dark .plain{background:rgba(201,162,39,.11);color:#EAF1F8}
+
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;box-shadow:var(--shadow);
+}
+.sec-dark .card{background:var(--ink-soft);border-color:rgba(255,255,255,.09);box-shadow:none}
+.card h3{font-size:17px;font-weight:700;margin-bottom:7px}
+.card p{font-size:14.5px;color:var(--text-2);line-height:1.55}
+.sec-dark .card p{color:#A9C2DA}
+
+/* ---------- hero ---------- */
+.hero{background:var(--ink);color:#EAF1F8;position:relative;overflow:hidden;padding-block:60px 56px}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(760px 420px at 82% 8%,rgba(30,111,217,.30),transparent 62%),
+    radial-gradient(520px 380px at 6% 96%,rgba(201,162,39,.15),transparent 62%);
+}
+.hero-in{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+@media(max-width:560px){.hero-in{padding-inline:16px}}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;padding:5px 13px;border-radius:99px;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#CFE2F5;
+}
+.hero h1{font-size:clamp(33px,6.2vw,64px);font-weight:800;letter-spacing:-.033em;color:#fff;margin:22px 0 0;max-width:19ch}
+.hero h1 em{font-style:normal;color:var(--sand)}
+.hero-lede{margin-top:20px;font-size:clamp(16.5px,2.1vw,20px);color:#B4CCE3;max-width:58ch;line-height:1.55}
+.hero-cta{margin-top:30px;display:flex;flex-wrap:wrap;gap:11px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:9px;
+  font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:.16s;
+}
+.btn-primary{background:var(--azure);color:#fff;border-color:var(--azure)}
+.btn-primary:hover{background:#1A5FBC;border-color:#1A5FBC}
+.btn-ghost{background:transparent;color:#DCE9F6;border-color:rgba(255,255,255,.24)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
+
+.hero-stats{
+  margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:var(--r);overflow:hidden;
+}
+@media(max-width:700px){.hero-stats{grid-template-columns:repeat(2,1fr)}}
+.hstat{background:var(--ink);padding:17px 16px}
+.hstat b{display:block;font-family:var(--display);font-size:clamp(22px,3.3vw,30px);font-weight:800;color:#fff;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hstat span{display:block;font-size:12.5px;color:#94B3D0;margin-top:3px;line-height:1.35}
+
+.flags{margin-top:26px;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.flag{
+  font-family:var(--mono);font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#BFD6EC;letter-spacing:.03em;
+}
+.flag.on{background:rgba(23,121,94,.26);border-color:rgba(79,191,152,.45);color:#8FE3C4}
+
+/* ---------- personas ---------- */
+.persona-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.ptab{
+  border:1px solid var(--line);background:var(--surface);border-radius:10px;
+  padding:9px 14px;cursor:pointer;text-align:left;transition:.15s;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:9px;
+}
+.ptab:hover{border-color:var(--azure-line)}
+.ptab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+:root[data-theme="dark"] .ptab[aria-selected="true"],:root:not([data-theme="light"]) .ptab[aria-selected="true"]{background:var(--azure);border-color:var(--azure);color:var(--ink-deep)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .ptab[aria-selected="true"]{background:var(--ink);color:#fff}}
+.ptab-ini{
+  width:26px;height:26px;border-radius:7px;flex-shrink:0;display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:11px;background:var(--azure-soft);color:var(--azure);
+}
+.ptab[aria-selected="true"] .ptab-ini{background:rgba(255,255,255,.2);color:#fff}
+:root[data-theme="dark"] .ptab[aria-selected="true"] .ptab-ini,:root:not([data-theme="light"]) .ptab[aria-selected="true"] .ptab-ini{background:rgba(0,0,0,.2);color:var(--ink-deep)}
+.ptab-nm{font-weight:700;font-size:14px;line-height:1.2;display:block}
+.ptab-ro{font-size:11.5px;opacity:.72;line-height:1.2;display:block}
+
+.persona-body{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.persona-head{padding:20px 22px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.persona-head h3{font-size:20px;font-weight:800;margin-bottom:5px}
+.persona-quote{
+  font-size:15.5px;font-style:italic;color:var(--text-2);line-height:1.5;
+  padding-left:13px;border-left:2.5px solid var(--sand);
+}
+.persona-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+@media(max-width:800px){.persona-cols{grid-template-columns:1fr}}
+.pcol{padding:20px 22px;border-right:1px solid var(--line)}
+.pcol:last-child{border-right:none}
+@media(max-width:800px){.pcol{border-right:none;border-bottom:1px solid var(--line)}.pcol:last-child{border-bottom:none}}
+.pcol h4{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:11px;
+}
+.plist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.plist li{font-size:14.5px;line-height:1.45;padding-left:20px;position:relative;color:var(--text-2)}
+.plist li::before{
+  content:"";position:absolute;left:4px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--azure-line);
+}
+.plist.win li::before{background:var(--done);border-radius:50%}
+.plist.pain li::before{background:var(--late);border-radius:50%}
+
+/* ---------- process explorer ---------- */
+.pex{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);overflow:hidden}
+.pex-tabs{display:flex;border-bottom:1px solid var(--line);background:var(--surface-2);overflow-x:auto;scrollbar-width:none}
+.pex-tabs::-webkit-scrollbar{display:none}
+.pex-tab{
+  flex:1;min-width:150px;padding:14px 16px;background:transparent;border:none;cursor:pointer;
+  font-weight:700;font-size:14.5px;color:var(--text-2);border-bottom:2.5px solid transparent;transition:.15s;white-space:nowrap;
+}
+.pex-tab:hover{color:var(--text);background:var(--surface)}
+.pex-tab[aria-selected="true"]{color:var(--azure);border-bottom-color:var(--azure);background:var(--surface)}
+.pex-tab small{display:block;font-weight:500;font-size:11.5px;color:var(--text-3);margin-top:1px}
+
+.pex-body{display:grid;grid-template-columns:266px 1fr;min-height:430px}
+@media(max-width:860px){.pex-body{grid-template-columns:1fr}}
+.pex-track{border-right:1px solid var(--line);background:var(--surface-2);padding:10px;overflow-y:auto;max-height:520px;min-width:0}
+@media(max-width:860px){.pex-track{border-right:none;border-bottom:1px solid var(--line);max-height:250px}}
+.mstep{
+  width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:9px;
+  padding:9px 11px;cursor:pointer;display:flex;gap:11px;align-items:flex-start;transition:.14s;position:relative;
+}
+.mstep:hover{background:var(--surface);border-color:var(--line)}
+.mstep[aria-current="true"]{background:var(--surface);border-color:var(--azure);box-shadow:0 0 0 2.5px var(--azure-soft)}
+.mstep-n{
+  flex-shrink:0;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  background:var(--azure-soft);color:var(--azure);border:1px solid var(--azure-line);
+}
+.mstep[aria-current="true"] .mstep-n{background:var(--azure);color:#fff;border-color:var(--azure)}
+.mstep-t{display:block;font-size:13.5px;font-weight:600;line-height:1.3}
+.mstep-o{display:block;font-size:11px;color:var(--text-3);margin-top:2px;font-family:var(--mono);letter-spacing:.02em}
+.mstep>span:last-child{min-width:0;flex:1}
+
+.pex-detail{padding:24px;overflow:hidden;min-width:0}
+@media(max-width:560px){.pex-detail{padding:18px 16px}}
+.pd-owner{
+  display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border-radius:99px;
+  background:var(--azure-soft);color:var(--azure);border:1px solid var(--azure-line);
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+}
+.pd-h{font-size:22px;font-weight:800;margin:12px 0 8px}
+.pd-desc{font-size:15.5px;color:var(--text-2);line-height:1.55;max-width:58ch}
+.pd-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-top:18px}
+.pd-m{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 13px}
+.pd-m span{
+  display:block;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-3);margin-bottom:4px;
+}
+.pd-m b{font-size:13.5px;font-weight:600;line-height:1.35;display:block}
+.pd-capt{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tagx{
+  font-family:var(--mono);font-size:11px;padding:3.5px 9px;border-radius:6px;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);
+}
+.tagx.pay{background:var(--sand-soft);border-color:#E8D9A0;color:#7A6410}
+:root[data-theme="dark"] .tagx.pay,:root:not([data-theme="light"]) .tagx.pay{color:var(--sand);border-color:#4A3F16}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .tagx.pay{color:#7A6410;border-color:#E8D9A0}}
+.tagx.att{background:var(--azure-soft);border-color:var(--azure-line);color:var(--azure)}
+
+/* ---------- screenshot frame ---------- */
+.shot{
+  border:1px solid var(--line-strong);border-radius:11px;overflow:hidden;background:var(--surface);
+  box-shadow:var(--shadow-lg);margin-top:18px;
+}
+.shot-bar{
+  display:flex;align-items:center;gap:7px;padding:8px 12px;
+  background:var(--surface-2);border-bottom:1px solid var(--line);
+}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line-strong)}
+.shot-cap{
+  font-family:var(--mono);font-size:11px;color:var(--text-3);margin-left:5px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.shot img{width:100%;height:auto;cursor:zoom-in;background:#fff}
+.shot-note{
+  padding:10px 13px;font-size:13px;color:var(--text-2);background:var(--surface-2);
+  border-top:1px solid var(--line);line-height:1.5;
+}
+.shot-note b{color:var(--text);font-weight:700}
+
+/* lightbox */
+.lb{
+  position:fixed;inset:0;z-index:200;background:rgba(6,14,24,.93);
+  display:grid;place-items:center;padding:20px;cursor:zoom-out;
+}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:88vh;width:auto;border-radius:9px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.lb-x{
+  position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;
+  cursor:pointer;display:grid;place-items:center;font-size:20px;line-height:1;
+}
+
+/* ---------- task board ---------- */
+.taskboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+@media(max-width:900px){.taskboard{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.taskboard{grid-template-columns:1fr}}
+.tcol{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.tcol-h{
+  padding:11px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.tcol-h b{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.tcol-h i{width:8px;height:8px;border-radius:50%;flex-shrink:0;font-style:normal}
+.tcol-h em{font-family:var(--mono);font-size:11.5px;font-style:normal;color:var(--text-3);font-variant-numeric:tabular-nums}
+.tcol-b{padding:9px;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.tcard{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:10px 11px;
+  border-left-width:3px;transition:.2s;
+}
+.tcard b{display:block;font-size:13px;font-weight:700;line-height:1.3;margin-bottom:3px}
+.tcard span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--text-3);line-height:1.5}
+.tcard .who{color:var(--text-2);font-family:var(--body);font-size:12px;margin-top:4px}
+
+.esc{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+@media(max-width:820px){.esc{grid-template-columns:1fr}}
+.escstep{padding:16px 17px;background:var(--surface);border-right:1px solid var(--line);position:relative}
+.escstep:last-child{border-right:none}
+@media(max-width:820px){.escstep{border-right:none;border-bottom:1px solid var(--line)}.escstep:last-child{border-bottom:none}}
+.escstep b{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  display:flex;align-items:center;gap:7px;margin-bottom:8px;
+}
+.escstep b i{width:7px;height:7px;border-radius:50%;font-style:normal;flex-shrink:0}
+.escstep h4{font-size:15px;font-weight:700;margin-bottom:5px}
+.escstep p{font-size:13.5px;color:var(--text-2);line-height:1.5}
+
+/* ---------- money ---------- */
+.money-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+@media(max-width:900px){.money-rail{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.money-rail{grid-template-columns:1fr}}
+.mr{padding:17px 16px;border-right:1px solid var(--line);position:relative}
+.mr:last-child{border-right:none}
+@media(max-width:900px){.mr{border-bottom:1px solid var(--line)}}
+.mr-n{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--sand);letter-spacing:.1em;margin-bottom:8px;display:block;
+}
+.mr h4{font-size:14.5px;font-weight:700;margin-bottom:5px}
+.mr p{font-size:13px;color:var(--text-2);line-height:1.5}
+
+.guard{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+@media(max-width:820px){.guard{grid-template-columns:1fr}}
+.gcard{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--done);border-radius:var(--r);padding:17px 18px;box-shadow:var(--shadow)}
+.gcard h4{font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.gcard p{font-size:13.8px;color:var(--text-2);line-height:1.55}
+.check{width:17px;height:17px;border-radius:50%;background:var(--done-soft);color:var(--done);display:grid;place-items:center;font-size:11px;flex-shrink:0;font-weight:700}
+
+/* ---------- countries ---------- */
+.ctry-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.ctab{
+  border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:8px 13px;cursor:pointer;
+  font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:8px;transition:.15s;box-shadow:var(--shadow);
+}
+.ctab:hover{border-color:var(--azure-line)}
+.ctab[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+:root[data-theme="dark"] .ctab[aria-selected="true"],:root:not([data-theme="light"]) .ctab[aria-selected="true"]{background:var(--azure);color:var(--ink-deep);border-color:var(--azure)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .ctab[aria-selected="true"]{background:var(--ink);color:#fff}}
+.ctab .st{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.st-live{background:var(--done)}
+.st-pack{background:var(--sand)}
+
+.ctry-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.cp-head{padding:20px 22px;border-bottom:1px solid var(--line);background:var(--surface-2);display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;justify-content:space-between}
+.cp-head h3{font-size:22px;font-weight:800;margin-bottom:5px}
+.cp-head p{font-size:14.5px;color:var(--text-2);max-width:56ch;line-height:1.5}
+.badge{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  padding:5px 11px;border-radius:99px;white-space:nowrap;flex-shrink:0;
+}
+.badge-live{background:var(--done-soft);color:var(--done);border:1px solid color-mix(in srgb,var(--done) 30%,transparent)}
+.badge-pack{background:var(--sand-soft);color:#7A6410;border:1px solid #E5D49A}
+:root[data-theme="dark"] .badge-pack,:root:not([data-theme="light"]) .badge-pack{color:var(--sand);border-color:#4A3F16}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .badge-pack{color:#7A6410;border-color:#E5D49A}}
+
+.cp-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:800px){.cp-cols{grid-template-columns:1fr}}
+.cpc{padding:20px 22px;border-right:1px solid var(--line)}
+.cpc:last-child{border-right:none}
+@media(max-width:800px){.cpc{border-right:none;border-bottom:1px solid var(--line)}.cpc:last-child{border-bottom:none}}
+.cpc h4{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
+
+.portal{display:flex;gap:11px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.portal:last-child{border-bottom:none}
+.portal-nm{
+  font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--azure);
+  flex-shrink:0;width:88px;line-height:1.35;
+}
+.portal-ds{font-size:13.5px;color:var(--text-2);line-height:1.45}
+.portal-ds b{color:var(--text);font-weight:600}
+
+.proclist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.proclist li{font-size:14px;line-height:1.45;padding-left:21px;position:relative;color:var(--text-2)}
+.proclist li::before{
+  content:"";position:absolute;left:5px;top:7px;width:7px;height:7px;border-radius:2px;
+  background:var(--sand);
+}
+.proclist li b{color:var(--text);font-weight:600}
+
+/* ---------- api / integration ---------- */
+.api-note{
+  background:var(--azure-soft);border:1px solid var(--azure-line);border-radius:var(--r);
+  padding:20px 22px;margin-top:20px;
+}
+.sec-dark .api-note{background:rgba(92,160,240,.1);border-color:rgba(92,160,240,.28)}
+.api-note h4{font-size:16.5px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:9px}
+.api-note p{font-size:14.8px;color:var(--text-2);line-height:1.6;max-width:72ch}
+.sec-dark .api-note p{color:#B9D0E6}
+.api-note p+p{margin-top:9px}
+
+.arch{display:grid;gap:11px;margin-top:8px}
+.archrow{
+  display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow);
+}
+.sec-dark .archrow{background:var(--ink-soft);border-color:rgba(255,255,255,.1);box-shadow:none}
+@media(max-width:700px){.archrow{grid-template-columns:1fr;gap:9px}}
+.arch-lbl{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-3);line-height:1.4;
+}
+.arch-items{display:flex;flex-wrap:wrap;gap:7px}
+.aitem{
+  font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:7px;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);
+}
+.sec-dark .aitem{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#CADCEC}
+.aitem.core{background:var(--azure-soft);border-color:var(--azure-line);color:var(--azure)}
+.sec-dark .aitem.core{background:rgba(92,160,240,.17);border-color:rgba(92,160,240,.4);color:#9CC8F7}
+.aitem.opt{border-style:dashed}
+
+/* ---------- btp table ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-3);background:var(--surface-2);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td b{font-weight:700}
+td.svc{font-weight:700;color:var(--text);white-space:nowrap}
+td.role{color:var(--text-2);line-height:1.5}
+.req{
+  font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap;
+  background:var(--azure-soft);color:var(--azure);border:1px solid var(--azure-line);
+}
+.req.o{background:var(--surface-2);color:var(--text-3);border-color:var(--line)}
+
+/* ---------- value ---------- */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.ba{grid-template-columns:1fr}}
+.bacol{border-radius:var(--r);padding:20px 22px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.bacol.before{border-left:3px solid var(--late)}
+.bacol.after{border-left:3px solid var(--done)}
+.bacol h3{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.bacol h3 span{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:5px}
+.bacol.before h3 span{background:var(--late-soft);color:var(--late)}
+.bacol.after h3 span{background:var(--done-soft);color:var(--done)}
+.balist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.balist li{font-size:14.5px;line-height:1.5;color:var(--text-2);padding-left:22px;position:relative}
+.balist li::before{position:absolute;left:0;top:0;font-weight:700;font-size:14px}
+.bacol.before .balist li::before{content:"\00d7";color:var(--late)}
+.bacol.after .balist li::before{content:"\2713";color:var(--done)}
+
+.vstat{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+@media(max-width:860px){.vstat{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.vstat{grid-template-columns:1fr}}
+.vs{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:19px 18px;box-shadow:var(--shadow)}
+.vs b{display:block;font-family:var(--display);font-size:32px;font-weight:800;color:var(--azure);letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.vs span{display:block;font-size:13.5px;color:var(--text-2);margin-top:8px;line-height:1.45}
+
+/* ---------- close ---------- */
+.close-cta{text-align:center;max-width:64ch;margin:0 auto}
+.close-cta h2{font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;margin-bottom:16px}
+.close-cta p{font-size:17px;color:#B4CCE3;line-height:1.6}
+.close-row{margin-top:28px;display:flex;flex-wrap:wrap;gap:11px;justify-content:center}
+
+footer{background:var(--ink-deep);color:#7E99B4;padding-block:28px;font-size:13px}
+.foot-in{max-width:var(--maxw);margin:0 auto;padding-inline:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+@media(max-width:560px){.foot-in{padding-inline:16px}}
+footer b{color:#C6D8EA;font-family:var(--display);font-weight:700}
+footer a{color:#9FBDD9;text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark">IK</span>
+      <span class="brand-txt">Visa &amp; Permits <span>· INK IT on SAP BTP</span></span>
+    </a>
+    <div class="progress-rail"><div class="progress-fill" id="prog"></div></div>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme" title="Switch theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav class="chapnav" aria-label="Journey chapters">
+  <div class="chapnav-scroll" id="chapnav"></div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<div class="hero" id="top">
+  <div class="hero-in">
+    <span class="hero-tag">Interactive Value Journey · Built on SAP BTP</span>
+    <h1>Every permit has an owner, a clock and a <em>receipt</em>.</h1>
+    <p class="hero-lede">
+      Visa &amp; Permits Management turns the messy back-and-forth between government portals,
+      your PRO team and SAP SuccessFactors into one tracked runway — where every task has a name
+      against it, every deadline is visible before it bites, and every dirham or riyal spent is
+      matched to a receipt and a GL account.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#ch3">
+        Walk a real permit
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#ch6">See the GCC country packs</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hstat"><b>3</b><span>Core lifecycles: new, renew, cancel</span></div>
+      <div class="hstat"><b>22</b><span>Tracked milestones across the lifecycle</span></div>
+      <div class="hstat"><b>7</b><span>GCC + Libya country packs</span></div>
+      <div class="hstat"><b>0</b><span>Payments without a receipt and a GL code</span></div>
+    </div>
+
+    <div class="flags">
+      <span class="flag on">UAE — live</span>
+      <span class="flag">KSA</span>
+      <span class="flag">Qatar</span>
+      <span class="flag">Kuwait</span>
+      <span class="flag">Oman</span>
+      <span class="flag">Bahrain</span>
+      <span class="flag">Libya</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CH 1 — THE PROBLEM ============ -->
+<section class="sec" id="ch1">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 01 · The problem</div>
+    <h2 class="sec-h">A visa is not one job. It is forty small jobs, held by six different people.</h2>
+    <p class="sec-sub">
+      A single work permit passes through recruitment, onboarding, the PRO desk, the employee,
+      HR business partners and finance — crossing government portals at least five times.
+      Miss one hand-off and the whole thing stalls silently, usually until a fine arrives.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      Imagine a relay race where the runners can't see each other and nobody holds the baton list.
+      That's how most companies run visas today. We give everyone the same list, and a whistle when someone is late.
+    </div>
+
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card">
+        <h3>The tracking is a spreadsheet</h3>
+        <p>Expiry dates live in a file on someone's laptop. When that person is on leave, the company is blind — and overstay fines start at the border, not in the system.</p>
+      </div>
+      <div class="card">
+        <h3>The PRO has no digital desk</h3>
+        <p>Government relations officers run the whole thing from WhatsApp, email and memory. There is no queue, no due date, no proof of who was asked what and when.</p>
+      </div>
+      <div class="card">
+        <h3>The money is untraceable</h3>
+        <p>Typing fees, medicals, insurance and Emirates ID charges are paid on company cards and petty cash. Receipts arrive weeks later, if at all. Duplicates are found at audit.</p>
+      </div>
+      <div class="card">
+        <h3>Recruitment and PRO don't share a clock</h3>
+        <p>Onboarding promises a joining date. The PRO has not been told the file exists. The candidate sits in another country waiting for an entry permit nobody started.</p>
+      </div>
+      <div class="card">
+        <h3>Compliance is a memory test</h3>
+        <p>Quota availability, skill classification, profession matching, work-location alignment — all rules a human is expected to remember correctly, every time, under pressure.</p>
+      </div>
+      <div class="card">
+        <h3>Nobody can answer "where is it?"</h3>
+        <p>The CHRO asks about one employee. It takes three phone calls and a day. Multiply that across thousands of permits and several operating countries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 2 — PERSONAS ============ -->
+<section class="sec sec-alt" id="ch2">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 02 · Who actually does the work</div>
+    <h2 class="sec-h">Six people, one runway.</h2>
+    <p class="sec-sub">
+      The application is built around the real cast of a GCC permit process — not abstract "users".
+      Pick a role to see the tasks that land in their inbox, what they can finally see, and the
+      worry the system takes off their desk.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      Everybody gets their own to-do list. The list only shows what is actually theirs to do, and it tells them when it's due.
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="persona-tabs" id="personaTabs" role="tablist" aria-label="Personas"></div>
+      <div class="persona-body" id="personaBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 3 — PROCESS EXPLORER ============ -->
+<section class="sec" id="ch3">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 03 · The runway</div>
+    <h2 class="sec-h">Walk a real permit, milestone by milestone.</h2>
+    <p class="sec-sub">
+      These are the actual process tracks running in production today. Click any milestone to see
+      who owns it, what has to be captured, which attachments and payments are mandatory,
+      and what the system does if it goes quiet.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      Think of it like a flight with numbered gates. The permit can't skip a gate, and each gate has one person responsible for opening it.
+    </div>
+
+    <div class="pex" style="margin-top:28px">
+      <div class="pex-tabs" id="pexTabs" role="tablist" aria-label="Permit processes"></div>
+      <div class="pex-body">
+        <div class="pex-track" id="pexTrack" role="tablist" aria-orientation="vertical" aria-label="Milestones"></div>
+        <div class="pex-detail" id="pexDetail"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 4 — TASK MANAGEMENT ============ -->
+<section class="sec sec-alt" id="ch4">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 04 · Task management &amp; accountability</div>
+    <h2 class="sec-h">A task with a name on it behaves differently.</h2>
+    <p class="sec-sub">
+      This is the heart of the application. Every milestone becomes a real task with an assignee,
+      a due date and an escalation path. Nothing sits in a grey zone where everybody assumes
+      somebody else has it.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      The system never says "someone should do this." It says "Rashid must do this by Thursday" — and if Thursday passes, it tells Rashid's manager.
+    </div>
+
+    <h3 style="margin-top:34px;font-size:18px;font-weight:800">The PRO desk, as the officer sees it</h3>
+    <p style="font-size:14.5px;color:var(--text-2);margin-top:6px;max-width:64ch">
+      Work is claimed, not dumped. An officer takes a case with <b>Assign To Yourself</b>, or a supervisor routes it with <b>Assign Agent</b> — and from that moment the case has an owner of record.
+    </p>
+
+    <div class="taskboard" style="margin-top:16px">
+      <div class="tcol">
+        <div class="tcol-h"><b><i style="background:var(--text-3)"></i>Unassigned</b><em>4</em></div>
+        <div class="tcol-b">
+          <div class="tcard" style="border-left-color:var(--text-3)">
+            <b>New Work Permit</b><span>Wilston Dsouza · 20000713</span><span class="who">Waiting for an officer to claim</span>
+          </div>
+          <div class="tcard" style="border-left-color:var(--text-3)">
+            <b>Renew Work Permit</b><span>Ayaz Ayub Khan · 20000428</span><span class="who">Waiting for an officer to claim</span>
+          </div>
+        </div>
+      </div>
+      <div class="tcol">
+        <div class="tcol-h"><b><i style="background:var(--azure)"></i>In progress</b><em>23</em></div>
+        <div class="tcol-b">
+          <div class="tcard" style="border-left-color:var(--azure)">
+            <b>Labour Contract Insurance</b><span>Due 24 Sep · P1</span><span class="who">Rashid K. · PRO, Dubai</span>
+          </div>
+          <div class="tcard" style="border-left-color:var(--azure)">
+            <b>Entry Permit Application</b><span>Due 26 Sep · P1</span><span class="who">Rashid K. · PRO, Dubai</span>
+          </div>
+        </div>
+      </div>
+      <div class="tcol">
+        <div class="tcol-h"><b><i style="background:var(--due)"></i>Due in 48h</b><em>9</em></div>
+        <div class="tcol-b">
+          <div class="tcard" style="border-left-color:var(--due)">
+            <b>Medical confirmation</b><span>Reminder sent · every 2 days</span><span class="who">Employee · with HRBP copied</span>
+          </div>
+          <div class="tcard" style="border-left-color:var(--due)">
+            <b>Signed contract upload</b><span>Reminder 2 of 3</span><span class="who">Candidate · Onboarding chasing</span>
+          </div>
+        </div>
+      </div>
+      <div class="tcol">
+        <div class="tcol-h"><b><i style="background:var(--late)"></i>Escalated</b><em>2</em></div>
+        <div class="tcol-b">
+          <div class="tcard" style="border-left-color:var(--late)">
+            <b>Cancellation signature</b><span>Overdue 3 days</span><span class="who">Escalated to HR Manager</span>
+          </div>
+          <div class="tcard" style="border-left-color:var(--late)">
+            <b>Visa expiry — 14 days</b><span>6-week alert unactioned</span><span class="who">Escalated to HRM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:38px;font-size:18px;font-weight:800">The escalation ladder — nothing goes quiet</h3>
+    <div class="esc">
+      <div class="escstep">
+        <b><i style="background:var(--azure)"></i>Step 1 · Assign</b>
+        <h4>The task gets an owner</h4>
+        <p>On creation the task is routed to a role and claimed by a named officer. Priority (P1–P3) and due date are stamped at that moment.</p>
+      </div>
+      <div class="escstep">
+        <b><i style="background:var(--due)"></i>Step 2 · Nudge</b>
+        <h4>Reminder every 2 days</h4>
+        <p>Open tasks re-notify the assignee on a 2-day cycle. Document expiries fire 6 weeks ahead to employee, PRO and HRBP together.</p>
+      </div>
+      <div class="escstep">
+        <b><i style="background:var(--late)"></i>Step 3 · Escalate</b>
+        <h4>The manager is told</h4>
+        <p>At 2 weeks before expiry — or when a task passes its due date — the line escalates to the HR Manager and line manager automatically.</p>
+      </div>
+      <div class="escstep">
+        <b><i style="background:var(--done)"></i>Step 4 · Prove</b>
+        <h4>The trail is permanent</h4>
+        <p>Who was assigned, when they were reminded, what they uploaded and when they submitted is written to the record. Audits stop being archaeology.</p>
+      </div>
+    </div>
+
+    <div class="shot" id="shot-inbox">
+      <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Visa Permit Management · Inbox · pending task list and task detail</span></div>
+      <img src="shots/inbox-task-details.webp" alt="The Inbox screen listing pending tasks with task type and due date, beside a task detail panel with process type, assignee, due date, note, comment and document upload." loading="lazy" width="1600" height="773">
+      <div class="shot-note"><b>What you're looking at:</b> the officer's pending queue on the left — each entry carries its task type and due date. On the right, the task itself: assignee, due date, a comment thread and the document that has to come back before it can be submitted.</div>
+    </div>
+
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card">
+        <h3>Landing on what matters</h3>
+        <p>The home tiles are counts, not decoration: tasks pending approval, new visa applications, visas about to expire, and cancellations in flight. One glance, whole estate.</p>
+      </div>
+      <div class="card">
+        <h3>Progress you can see</h3>
+        <p>Every case shows its milestone table — done, not done — so an officer, an HRBP or a manager can answer "where is it?" without calling anyone.</p>
+      </div>
+      <div class="card">
+        <h3>Delays surfaced at source</h3>
+        <p>The system shows where the wait actually is: the employee who hasn't signed, the medical not booked, the government step submitted and pending. The bottleneck has an address.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Visa Permit Management · Home · process status and initiated queue</span></div>
+      <img src="shots/vpm-landing-inbox.webp" alt="The VPM landing page showing an Inbox tile with pending task count, and Common Activity tiles for new visa application, visa expiration and visa cancelled." loading="lazy" width="1600" height="773">
+      <div class="shot-note"><b>1,443 visas about to expire</b> is not an alarming number — it is a managed one. Each is already a dated task with an owner, six weeks before it becomes a compliance problem.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 5 — MONEY ============ -->
+<section class="sec" id="ch5">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 05 · The money trail</div>
+    <h2 class="sec-h">No payment without a receipt, a reference and a GL account.</h2>
+    <p class="sec-sub">
+      Government fees are the leakiest part of permit management: paid on cards, in cash,
+      through Noqodi or e-Dirham, by whoever is at the counter. The application makes the payment
+      part of the task, so the money cannot move without leaving a record.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      You can't finish the step until you've told the system what you paid, how you paid it, and uploaded the receipt. So the receipt never goes missing.
+    </div>
+
+    <div class="money-rail" style="margin-top:28px">
+      <div class="mr"><span class="mr-n">01</span><h4>Captured in the step</h4><p>Amount, VAT, payment mode, payment date and reference number are mandatory fields on the milestone form itself.</p></div>
+      <div class="mr"><span class="mr-n">02</span><h4>Receipt attached</h4><p>The scanned receipt or invoice is a required attachment. No file, no submit — the milestone stays open.</p></div>
+      <div class="mr"><span class="mr-n">03</span><h4>Card holder recorded</h4><p>Who paid and on whose card, and whether the cost is borne by the company or the employee. Reimbursement stops being a negotiation.</p></div>
+      <div class="mr"><span class="mr-n">04</span><h4>Posted to finance</h4><p>Published to the correct GL account with a payment document number, ready for journal posting in S/4HANA.</p></div>
+      <div class="mr"><span class="mr-n">05</span><h4>Reportable</h4><p>Filterable by process, company, employee, date range, payment mode and card holder — then exported for finance.</p></div>
+    </div>
+
+    <div class="guard">
+      <div class="gcard">
+        <h4><span class="check">&#10003;</span>No duplicate payments</h4>
+        <p>A payment reference is captured against a specific milestone of a specific case. The same fee cannot be recorded twice against the same step, and a second attempt is visible against the first.</p>
+      </div>
+      <div class="gcard">
+        <h4><span class="check">&#10003;</span>No unaccounted spend</h4>
+        <p>Every dirham leaves with a GL account and a payment document number attached. Finance reconciles from the report, not from a shoebox of receipts.</p>
+      </div>
+      <div class="gcard">
+        <h4><span class="check">&#10003;</span>Fines have a workflow too</h4>
+        <p>Overstay, traffic, labour and immigration fines are entered by the PRO, routed through the HRBP to payroll, and — once approved — stored as a payroll deduction with the HRBP copied.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Report · Payment Report · filterable, exportable, GL-coded</span></div>
+      <img src="shots/report-payment.webp" alt="The Payment Report screen with filters for process type, company, employee ID, payment date range and payment mode, over a table of payment amount, VAT, payment reference number, payment document number, GL account, status and a downloadable receipt per row." loading="lazy" width="1600" height="735">
+      <div class="shot-note"><b>Every row is auditable:</b> amount, VAT, payment reference, payment document number, GL account, status — and the original receipt one click away under Download. This is the report finance actually asked for.</div>
+    </div>
+
+    <div class="shot">
+      <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Milestone form · Labour Contract Insurance Submission · payment is part of the step</span></div>
+      <img src="shots/form-labour-insurance.webp" alt="A milestone form dialog for Labour Contract Insurance Submission, with mandatory insurance payment date, payment mode, payment amount, VAT, payment reference number and an upload field for the payment receipt." loading="lazy" width="1600" height="976">
+      <div class="shot-note">The red asterisks are the point. Payment date, mode, amount, VAT, reference and the receipt file are all mandatory before this milestone can be submitted.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 6 — COUNTRY PACKS ============ -->
+<section class="sec sec-alt" id="ch6">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 06 · Country packs</div>
+    <h2 class="sec-h">One engine. Seven rulebooks.</h2>
+    <p class="sec-sub">
+      Labour law is national, so the process has to be too. The workflow engine, task model,
+      payment capture and reporting stay identical across the region — what changes per country is
+      the milestone set, the authority names, the document checklist and the alert thresholds.
+      Select a country to see its pack.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      Same machine, different instruction card. Saudi Arabia's steps aren't the UAE's steps — but a manager in either country uses exactly the same screens.
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="ctry-tabs" id="ctryTabs" role="tablist" aria-label="Countries"></div>
+      <div class="ctry-panel" id="ctryPanel"></div>
+    </div>
+
+    <div class="api-note" style="margin-top:22px">
+      <h4>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5.5L12 2.5 4 5.5V12c0 6 8 10 8 10Z"/></svg>
+        A note on honesty: what "live" and "country pack" mean
+      </h4>
+      <p>
+        <b>Live</b> means the milestone set is running in production against real employee volumes today — the screens in this journey are that system.
+        <b>Country pack</b> means the process has been designed against that country's statutory flow and is configured from the same engine,
+        with a localisation workshop confirming document names, fee structures and alert thresholds before go-live. We would rather tell you the
+        difference now than during UAT.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 7 — HEALTHCARE ============ -->
+<section class="sec" id="ch7">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 07 · Healthcare &amp; professional permits</div>
+    <h2 class="sec-h">A nurse needs two permissions, not one.</h2>
+    <p class="sec-sub">
+      In healthcare the work permit is only half the story. A clinician cannot legally practise
+      until a separate health regulator has verified their credentials, run primary-source
+      verification and issued a professional licence — on its own clock, with its own renewal
+      cycle and its own CME requirements. The application runs that as a parallel lane on the same case.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      One badge lets you into the country. A second badge lets you touch a patient. We track both — and warn you when either is about to run out.
+    </div>
+
+    <div class="grid g2" style="margin-top:30px">
+      <div class="card">
+        <h3>The professional licensing lane</h3>
+        <p style="margin-bottom:12px">Tracked alongside the immigration lane, with its own milestones, owners and expiry alerts:</p>
+        <ul class="plist">
+          <li>Credential pack collected at recruitment — degree, experience letters, good-standing certificate</li>
+          <li>Primary-source verification (DataFlow) submitted and tracked to result</li>
+          <li>Professional classification or eligibility assessment by the regulator</li>
+          <li>Licensing exam booked, sat and passed — with the certificate uploaded</li>
+          <li>Licence issued, activated against the employing facility, expiry recorded</li>
+          <li>Renewal driven by CME hours, with 90-day advance alerts and 15-day escalations</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Why it fails without a system</h3>
+        <p style="margin-bottom:12px">These are the failure modes the application is designed to remove:</p>
+        <ul class="plist pain">
+          <li>A clinician joins on a valid visa but cannot be rostered — their licence is still in verification</li>
+          <li>Primary-source verification takes months and nobody is watching the queue</li>
+          <li>A trainee pharmacist's 45-day dataflow deadline passes unnoticed</li>
+          <li>CME hours are not logged until the renewal window has already closed</li>
+          <li>Licence expiry and visa expiry drift apart, so one lapses while the other is fine</li>
+          <li>The facility licence itself expires — and every practitioner under it is exposed</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px;font-size:18px;font-weight:800">Health regulators covered by the country packs</h3>
+    <div class="tblwrap" style="margin-top:14px">
+      <table>
+        <thead><tr><th>Country</th><th>Practitioner regulator</th><th>Platform</th><th>Typical validity</th></tr></thead>
+        <tbody>
+          <tr><td class="svc">Saudi Arabia</td><td class="role">SCFHS — Saudi Commission for Health Specialties</td><td class="role"><b>Mumaris+</b> · DataFlow PSV · Prometric exam</td><td class="role">Classification then registration</td></tr>
+          <tr><td class="svc">UAE — Dubai</td><td class="role">DHA — Dubai Health Authority</td><td class="role"><b>Sheryan</b></td><td class="role">1 year, CME-driven renewal</td></tr>
+          <tr><td class="svc">UAE — Abu Dhabi</td><td class="role">DOH — Department of Health</td><td class="role"><b>TAMM</b> / DOH portal</td><td class="role">2 years, CME-driven renewal</td></tr>
+          <tr><td class="svc">UAE — Northern Emirates</td><td class="role">MOHAP — Ministry of Health &amp; Prevention</td><td class="role">MOHAP licensing portal</td><td class="role">1 year, CME-driven renewal</td></tr>
+          <tr><td class="svc">Qatar</td><td class="role">DHP (formerly QCHP) under MOPH</td><td class="role">DHP practitioner portal</td><td class="role">Registration then licence</td></tr>
+          <tr><td class="svc">Bahrain</td><td class="role">NHRA — National Health Regulatory Authority</td><td class="role">NHRA licensing portal</td><td class="role">Renewable professional licence</td></tr>
+          <tr><td class="svc">Oman</td><td class="role">OMSB / Ministry of Health</td><td class="role">MOH licensing · Prometric</td><td class="role">Renewable professional licence</td></tr>
+          <tr><td class="svc">Kuwait</td><td class="role">Ministry of Health</td><td class="role">MOH licensing · Kuwait Prometric</td><td class="role">Renewable professional licence</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card">
+        <h3>Facility permits too</h3>
+        <p>Pharmacy and clinic licences, trade licences, establishment cards, civil defence certificates and immigration cards are tracked as company documents with their own expiry alerts and renewal workflows.</p>
+      </div>
+      <div class="card">
+        <h3>Any industry-grade permit</h3>
+        <p>The same model handles vehicle registrations, site access permits, professional body memberships and equipment certifications. If it expires and somebody must act, it belongs here.</p>
+      </div>
+      <div class="card">
+        <h3>Proven in the sector</h3>
+        <p>The processes in this journey were built with pharmacy retail and healthcare distribution groups — where practitioner licences, facility licences and work permits all had to be governed together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 8 — INTEGRATION & API ============ -->
+<section class="sec sec-dark" id="ch8">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 08 · Integration &amp; API readiness</div>
+    <h2 class="sec-h">Between the government portal and SuccessFactors.</h2>
+    <p class="sec-sub">
+      The application sits exactly where the gap is: it takes candidates from Recruiting, drives the
+      government-facing work, and writes the resulting permit data back into Employee Central —
+      then pushes the money to finance.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      SuccessFactors knows who your people are. The government knows who's allowed to work. Our app is the bridge in the middle — and it keeps both sides honest.
+    </div>
+
+    <div class="arch" style="margin-top:30px">
+      <div class="archrow">
+        <div class="arch-lbl">Inbound<br>from SAP</div>
+        <div class="arch-items">
+          <span class="aitem core">SF Recruiting — candidates who accepted an offer</span>
+          <span class="aitem core">SF Onboarding 2.0 — new-hire files</span>
+          <span class="aitem core">Employee Central — employee master, separations, expiry dates</span>
+        </div>
+      </div>
+      <div class="archrow">
+        <div class="arch-lbl">The application<br>on SAP BTP</div>
+        <div class="arch-items">
+          <span class="aitem core">Workflow &amp; milestone engine</span>
+          <span class="aitem core">Task inbox &amp; escalation</span>
+          <span class="aitem core">Document &amp; attachment store</span>
+          <span class="aitem core">Payment capture</span>
+          <span class="aitem core">Quota register</span>
+          <span class="aitem core">Reporting &amp; dashboards</span>
+        </div>
+      </div>
+      <div class="archrow">
+        <div class="arch-lbl">Outbound<br>to SAP</div>
+        <div class="arch-items">
+          <span class="aitem core">Employee Central — work permit, labour card, EID, visa dates</span>
+          <span class="aitem core">Onboarding — entry permit details for the joiner</span>
+          <span class="aitem core">S/4HANA Finance — payments to GL via journal posting</span>
+          <span class="aitem core">Payroll — approved fine deductions</span>
+        </div>
+      </div>
+      <div class="archrow">
+        <div class="arch-lbl">Government<br>portals</div>
+        <div class="arch-items">
+          <span class="aitem opt">Qiwa</span><span class="aitem opt">Muqeem</span><span class="aitem opt">Absher</span>
+          <span class="aitem opt">MOHRE</span><span class="aitem opt">ICP</span><span class="aitem opt">GDRFA</span>
+          <span class="aitem opt">LMRA</span><span class="aitem opt">PAM</span><span class="aitem opt">ADLSA</span>
+          <span class="aitem opt">SCFHS</span><span class="aitem opt">DHA</span><span class="aitem opt">DOH</span>
+        </div>
+      </div>
+      <div class="archrow">
+        <div class="arch-lbl">Also<br>supported</div>
+        <div class="arch-items">
+          <span class="aitem">SMS gateway (customer-provided)</span>
+          <span class="aitem">Email &amp; notification service</span>
+          <span class="aitem">Employee &amp; manager self-service</span>
+          <span class="aitem opt">Any third-party HRMS via API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="api-note">
+      <h4>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+        Government API integration — what we can promise, and what you must obtain
+      </h4>
+      <p>
+        <b>The application is API-ready by design.</b> Every government-facing milestone is built as an abstracted
+        service call, so a portal integration drops into an existing slot rather than requiring the workflow to be rebuilt.
+        Where an authority exposes an interface, we connect it through SAP Integration Suite and the step becomes automatic —
+        submission, status polling and document retrieval — with the manual path kept as fallback.
+      </p>
+      <p>
+        <b>What we need from you.</b> GCC government portals do not publish open APIs. Access is granted to the
+        <em>employer</em>, not to the software vendor — so the customer must approach each authority directly
+        (Qiwa and Muqeem in KSA, MOHRE and ICP in the UAE, LMRA in Bahrain, and so on) and obtain API credentials,
+        a technical specification and a sandbox under their own establishment registration. Once you hand us those
+        credentials and the spec, we build the connector. Until then — and this is how the system runs successfully in
+        production today — the government step stays a tracked manual PRO activity, with the reference number,
+        receipt and status captured in the milestone.
+      </p>
+      <p>
+        <b>Why this still wins.</b> The value is not in automating the click on the government site. It is in knowing
+        that the click happened, who made it, when, what it cost and what came back — which is precisely what
+        is missing today.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 9 — BTP ============ -->
+<section class="sec" id="ch9">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 09 · What it runs on</div>
+    <h2 class="sec-h">The SAP BTP services required.</h2>
+    <p class="sec-sub">
+      The application is a native SAP Business Technology Platform solution. This is the service
+      footprint to provision in your global account — core services are needed for any deployment,
+      optional ones unlock integration and scale.
+    </p>
+
+    <div class="tblwrap" style="margin-top:26px">
+      <table>
+        <thead><tr><th>SAP BTP service</th><th>What it does here</th><th>Need</th></tr></thead>
+        <tbody>
+          <tr><td class="svc">Cloud Foundry Runtime</td><td class="role">Hosts the application — the workflow engine, task services and APIs</td><td><span class="req">Core</span></td></tr>
+          <tr><td class="svc">SAP HANA Cloud</td><td class="role">Permit records, quota registers, payment entries, audit trail and document metadata</td><td><span class="req">Core</span></td></tr>
+          <tr><td class="svc">SAP Build Work Zone</td><td class="role">The portal and launchpad where each persona lands on their own role-based home</td><td><span class="req">Core</span></td></tr>
+          <tr><td class="svc">SAP Build Process Automation</td><td class="role">Milestone workflows, task routing, due dates, reminder cycles and escalation rules</td><td><span class="req">Core</span></td></tr>
+          <tr><td class="svc">SAP Identity Authentication (IAS)</td><td class="role">Single sign-on and identity federation with your corporate directory</td><td><span class="req">Core</span></td></tr>
+          <tr><td class="svc">Destination &amp; Connectivity</td><td class="role">Secure outbound connections to SuccessFactors, S/4HANA and future government endpoints</td><td><span class="req">Core</span></td></tr>
+          <tr><td class="svc">SAP Integration Suite (CPI)</td><td class="role">The integration flows to SF Recruiting, Onboarding, Employee Central and S/4HANA Finance</td><td><span class="req o">Integration</span></td></tr>
+          <tr><td class="svc">Document Management Service</td><td class="role">Enterprise-grade storage for passports, contracts, receipts and licence certificates</td><td><span class="req o">Recommended</span></td></tr>
+          <tr><td class="svc">Alert Notification / Email</td><td class="role">Expiry alerts, 2-day reminders and escalation mails to employees, PROs and managers</td><td><span class="req o">Recommended</span></td></tr>
+          <tr><td class="svc">Job Scheduling Service</td><td class="role">Nightly expiry scans, reminder sweeps and scheduled report generation</td><td><span class="req o">Recommended</span></td></tr>
+          <tr><td class="svc">SAP Analytics Cloud</td><td class="role">Executive dashboards, drill-down analytics and cross-country compliance reporting</td><td><span class="req o">Optional</span></td></tr>
+          <tr><td class="svc">Business Application Studio</td><td class="role">Development and configuration environment for localisation and change requests</td><td><span class="req o">Optional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card">
+        <h3>Two licensing routes</h3>
+        <p>Either you subscribe and operate the runtime, portal and CI/CD in your own global account — or INK IT manages the subscription and operations entirely, which removes the need for separate developer licences and is materially cheaper to run.</p>
+      </div>
+      <div class="card">
+        <h3>Works without SuccessFactors</h3>
+        <p>The application is system-agnostic within BTP. If your SF modules aren't live yet, the non-integrated deployment still delivers full governance, task management, payment tracking and reporting from day one.</p>
+      </div>
+      <div class="card">
+        <h3>Deployable in weeks</h3>
+        <p>Pre-built and configurable rather than custom-developed: environment setup and configuration, then integration, then localisation — with a typical path from kick-off to hypercare measured in weeks, not quarters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 10 — VALUE ============ -->
+<section class="sec sec-alt" id="ch10">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 10 · The value</div>
+    <h2 class="sec-h">What changes on the Monday after go-live.</h2>
+    <p class="sec-sub">
+      Not a transformation programme. A working desk for the people who hold your compliance risk.
+    </p>
+
+    <div class="ba" style="margin-top:28px">
+      <div class="bacol before">
+        <h3>Today <span>Before</span></h3>
+        <ul class="balist">
+          <li>Expiry tracking in a spreadsheet only one person maintains</li>
+          <li>PRO tasks live in WhatsApp threads and personal memory</li>
+          <li>"Where is this permit?" takes a day and three phone calls</li>
+          <li>Fees paid on cards with receipts reconciled weeks later</li>
+          <li>Duplicate and unaccounted payments found at audit</li>
+          <li>Permit data re-keyed into Employee Central by hand</li>
+          <li>Fines absorbed because nobody saw the deadline coming</li>
+          <li>Each new country means a new spreadsheet and a new process</li>
+        </ul>
+      </div>
+      <div class="bacol after">
+        <h3>After go-live <span>After</span></h3>
+        <ul class="balist">
+          <li>Every expiry is a dated task with an owner, six weeks ahead</li>
+          <li>Each PRO has a claimed queue with priorities and due dates</li>
+          <li>Status is on screen — for the officer, the HRBP and the manager</li>
+          <li>Payment, receipt and card holder captured inside the step</li>
+          <li>Every payment carries a GL account and a document number</li>
+          <li>Permit details flow back into Employee Central automatically</li>
+          <li>Escalation fires before the deadline, not after the fine</li>
+          <li>A new country is a configured pack on the same engine</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vstat">
+      <div class="vs"><b>6 weeks</b><span>Advance warning on every visa and labour card expiry, with escalation at two weeks</span></div>
+      <div class="vs"><b>1 screen</b><span>To answer "where is it?" for any employee, in any country, at any stage</span></div>
+      <div class="vs"><b>100%</b><span>Of government payments carrying a receipt, reference number and GL account</span></div>
+      <div class="vs"><b>7</b><span>Country packs from one engine — add a market without rebuilding the process</span></div>
+    </div>
+
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card">
+        <h3>Accountability</h3>
+        <p>Every task has a named owner, a due date and a reminder cycle. The question stops being "did anyone do this?" and becomes "it's with Rashid, due Thursday."</p>
+      </div>
+      <div class="card">
+        <h3>Traceability</h3>
+        <p>Assignment, reminders, uploads, submissions and payments are written to the record as they happen. An audit becomes a report, not an investigation.</p>
+      </div>
+      <div class="card">
+        <h3>Visibility</h3>
+        <p>Delays are shown at source — the unsigned contract, the unbooked medical, the government step pending. You fix the actual bottleneck instead of chasing everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="sec sec-dark" id="close" style="padding-block:70px">
+  <div class="wrap">
+    <div class="close-cta">
+      <h2>Ready for the GCC, today.</h2>
+      <p>
+        Running in production in the UAE, designed against the statutory flows of Saudi Arabia,
+        Qatar, Kuwait, Oman, Bahrain and Libya — for work permits, healthcare practitioner licences
+        and any industry-grade permit that expires and needs somebody to act.
+      </p>
+      <div class="close-row">
+        <a class="btn btn-primary" href="#ch3">Replay the permit walkthrough</a>
+        <a class="btn btn-ghost" href="#ch6">Open the country packs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span><b>INK IT Business Solutions</b> · Visa &amp; Permits Management on SAP BTP</span>
+    <span>SAP SuccessFactors partner · <a href="mailto:info@inkitsolutions.com">info@inkitsolutions.com</a></span>
+  </div>
+</footer>
+
+<div class="lb" id="lightbox" hidden>
+  <button class="lb-x" id="lbClose" type="button" aria-label="Close image">&times;</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= CHAPTERS ================= */
+var CHAPTERS=[
+  {id:"ch1",n:"01",t:"The problem"},
+  {id:"ch2",n:"02",t:"Who does the work"},
+  {id:"ch3",n:"03",t:"The runway"},
+  {id:"ch4",n:"04",t:"Tasks & accountability"},
+  {id:"ch5",n:"05",t:"The money trail"},
+  {id:"ch6",n:"06",t:"Country packs"},
+  {id:"ch7",n:"07",t:"Healthcare permits"},
+  {id:"ch8",n:"08",t:"Integration & API"},
+  {id:"ch9",n:"09",t:"SAP BTP services"},
+  {id:"ch10",n:"10",t:"The value"}
+];
+
+/* ================= PERSONAS ================= */
+var PERSONAS=[
+{
+ ini:"GRO",nm:"Government Relations Officer",ro:"PRO desk · the engine room",
+ q:"I used to keep the whole company's visa position in my head and in three WhatsApp groups. Now it's a queue with due dates, and I can prove what I did.",
+ does:[
+  "Claims cases from the queue with Assign To Yourself, or receives them from a supervisor",
+  "Applies for MOHRE job offers, labour cards and labour contracts on the government portal",
+  "Records every government payment — amount, VAT, mode, reference — and uploads the receipt",
+  "Applies for entry permits for candidates outside the country, or change of status for those inside",
+  "Books medicals and biometrics, then records fit/unfit results and uploads the report",
+  "Submits visa stamping and Emirates ID applications and tracks them to collection",
+  "Hands over the Emirates ID and records issue and expiry dates against the employee",
+  "Maintains the quota register and applies for new quota when the establishment runs short",
+  "Raises fines for entry and routes them through the HRBP to payroll",
+  "Follows up with recruitment, onboarding and the employee — from inside the task, not over the phone"
+ ],
+ sees:[
+  "One queue of cases, sorted by priority and due date",
+  "Which milestone each case is sitting on, and for how long",
+  "Every payment made on a case, with receipts attached",
+  "Quota availability before starting a new permit",
+  "Exactly who is holding up a case and what they were asked for"
+ ],
+ wins:[
+  "No more reconstructing what happened from memory or chat history",
+  "Reminders arrive automatically — chasing is the system's job now",
+  "Payments are logged as they are made, not from a shoebox at month end",
+  "Work is provably done, with a timestamp against their name"
+ ]
+},
+{
+ ini:"TA",nm:"Recruiter",ro:"Talent acquisition",
+ q:"I can finally tell a candidate a joining date I actually believe, because I can see whether their permit has started moving.",
+ does:[
+  "Completes the candidate file and document checklist at offer acceptance",
+  "Releases accepted candidates into the permit process — automatically from SF Recruiting",
+  "Collects passport copies, photographs and qualification documents",
+  "Coordinates with the PRO on profession and work-location codes before submission",
+  "Keeps the candidate informed while the entry permit is processed"
+ ],
+ sees:[
+  "Which of their accepted candidates have a permit in flight",
+  "Where each one has reached, without asking the PRO",
+  "Whether quota is available before promising a start date"
+ ],
+ wins:[
+  "Candidates stop dropping out during an unexplained silence",
+  "Joining dates are based on real progress, not optimism",
+  "The hand-off to the PRO desk is recorded, not assumed"
+ ]
+},
+{
+ ini:"OB",nm:"Onboarding Coordinator",ro:"Employee relations · new joiners",
+ q:"The permit and the onboarding used to be two separate worlds. Now the same case carries both.",
+ does:[
+  "Initiates the new work permit application from the candidate record",
+  "Checks quota availability and triggers a new quota application when needed",
+  "Chases signed offers, MOHRE contracts and medical receipts from the joiner",
+  "Sends biometric appointment details to the candidate and confirms receipt",
+  "Handles Emiratisation and pension registration steps for national hires",
+  "Blocks a pending hire from progressing until the labour card is uploaded by the PRO"
+ ],
+ sees:[
+  "Every pending hire with its permit status in one list",
+  "Which documents are still outstanding from which candidate",
+  "When the entry permit lands, so day-one logistics can start"
+ ],
+ wins:[
+  "No joiner arrives without the paperwork that makes them legal to work",
+  "Reminders to candidates go out automatically every two days",
+  "The onboarding clock and the permit clock are finally the same clock"
+ ]
+},
+{
+ ini:"HRBP",nm:"HR Business Partner",ro:"Employee relations",
+ q:"I get pulled in at exactly the right moment now — not two weeks after something went wrong.",
+ does:[
+  "Verifies renewal contracts before they go to the employee for signature",
+  "Approves visa allocation for senior grades and designated populations",
+  "Initiates cancellation once end-of-service is settled and approved",
+  "Reviews fines raised by the PRO before they reach payroll as deductions",
+  "Receives escalations when an employee has not acted on their step"
+ ],
+ sees:[
+  "Their population's visa and labour card expiry horizon",
+  "Which employees are holding up their own process",
+  "Fine exposure across their business unit"
+ ],
+ wins:[
+  "Escalations arrive before the fine, not after it",
+  "Cancellation cannot start before end-of-service is properly settled",
+  "No manual tracking of who signed what"
+ ]
+},
+{
+ ini:"EMP",nm:"Employee or Candidate",ro:"Self-service",
+ q:"I know what I have to do, by when, and I can see that it was received.",
+ does:[
+  "Acknowledges and uploads the signed contract or offer",
+  "Confirms whether they are inside or outside the country",
+  "Confirms medical appointment completion",
+  "Confirms unemployment-insurance (ILOE) enrolment where required",
+  "Confirms receipt of the Emirates ID and biometric appointment"
+ ],
+ sees:[
+  "Their own permit status and what is pending from them",
+  "Their document expiry dates, six weeks ahead",
+  "Confirmation that their upload was received"
+ ],
+ wins:[
+  "No guessing whether HR got the document",
+  "Reminders instead of a surprise expiry",
+  "A clear record if a delay was never theirs"
+ ]
+},
+{
+ ini:"FIN",nm:"Finance Controller",ro:"Payments & GL",
+ q:"I get one report with every government payment, its receipt and its GL account. Reconciliation went from days to an export.",
+ does:[
+  "Reconciles government fees against receipts from the payment report",
+  "Posts permit costs to the correct GL accounts via journal entries",
+  "Reviews card-holder spend for reimbursement of e-Dirham, Noqodi and petty cash",
+  "Approves fine deductions routed from the HRBP into payroll"
+ ],
+ sees:[
+  "Every payment filtered by company, process, date range, mode or card holder",
+  "The original receipt against each line",
+  "The payment document number and GL account for each posting"
+ ],
+ wins:[
+  "Duplicate payments are prevented at entry, not discovered at audit",
+  "No unaccounted spend — a payment cannot exist without a receipt",
+  "Cost of permits per entity becomes a number, not an estimate"
+ ]
+},
+{
+ ini:"CHRO",nm:"Head of HR",ro:"Governance & risk",
+ q:"I can answer a board question about compliance exposure in one screen, across every country we operate in.",
+ does:[
+  "Monitors quota utilisation and Saudization or Emiratisation ratios",
+  "Reviews compliance exposure across entities and countries",
+  "Approves policy-level changes to workflows and thresholds",
+  "Signs off on permit cost budgets per entity"
+ ],
+ sees:[
+  "Running, completed and cancelled counts across all three lifecycles",
+  "Expiry horizon across the whole workforce",
+  "Agent workload — how many assignments each officer has closed",
+  "Cost of compliance per entity and per country"
+ ],
+ wins:[
+  "Compliance risk becomes a dashboard, not a fire drill",
+  "Officer performance is measurable and fairly distributed",
+  "Adding a country doesn't mean rebuilding governance"
+ ]
+}
+];
+
+/* ================= PROCESSES ================= */
+var PROCESSES=[
+{
+ id:"new",nm:"New Work Permit",sub:"Candidate to legal employee",shot:"shots/process-new-milestones.webp",
+ shotcap:"Work Permit · New · milestone board for a live case",
+ shotalt:"The process board for a New Work Permit case, showing eleven milestone tiles connected in sequence from MOHRE Job Offer through to Emirates ID Collection.",
+ steps:[
+  {t:"MOHRE Job Offer & Labour Card",o:"PRO / GRO",d:"The officer raises the job offer and labour card application on the government portal, then records what it cost. This is the first government touch — everything downstream depends on it being right.",m:[["Trigger","Candidate released from Recruiting"],["Owner","PRO desk"],["If it stalls","Reminder every 2 days"]],tags:[["pay","Payment date, mode, amount, VAT"],["pay","Payment reference number"],["att","Receipt upload"]],shot:"shots/form-mohre-joblabour.webp",shotcap:"Milestone form · MOHRE Job Offer and Labour Card",shotalt:"A milestone form showing employee ID, candidate name and company pre-filled from the HR system, followed by mandatory payment date, payment mode, payment amount, VAT and payment reference fields."},
+  {t:"MOHRE Job Offer & Labour Card Acceptance",o:"Candidate · tracked by PRO",d:"The offer and labour contract go to the candidate for signature and come back signed. Sent and received dates are both captured, so the waiting time is attributable rather than vague.",m:[["Waiting on","The candidate"],["Captured","Sent date, received date"],["If it stalls","Reminder every 2 days"]],tags:[["att","Signed labour contract"],["","Remarks"]],shot:"shots/form-jolc-acceptance.webp",shotcap:"Milestone form · MOHRE Job Offer and Labour Card Acceptance",shotalt:"A milestone form dialog capturing work permit type, job title, employee ID, the dates the job offer and labour contract were sent and received, an upload for the signed labour contract, and remarks."},
+  {t:"Labour Contract Insurance Submission",o:"PRO / GRO",d:"The mandatory insurance is paid and submitted. Payment and receipt are part of the step itself, not a separate exercise for finance to chase later.",m:[["Owner","PRO desk"],["Finance","Posts to GL on completion"],["Blocking","Cannot submit without receipt"]],tags:[["pay","Insurance payment date, mode, amount"],["pay","VAT and reference number"],["att","Payment receipt — mandatory"]],shot:"shots/form-labour-insurance.webp",shotcap:"Milestone form · Labour Contract Insurance Submission",shotalt:"A milestone form dialog with mandatory insurance payment date, payment mode, amount, VAT, payment reference number, receipt upload and remarks."},
+  {t:"Labour Contract Submission",o:"PRO / GRO",d:"The labour contract is submitted to the ministry and the resulting labour card details are recorded against the employee — number, issue date, expiry date and the document itself.",m:[["Captured","Labour card number"],["Captured","Issue and expiry dates"],["Writes back","Employee Central"]],tags:[["pay","MOHRE application fees"],["att","Labour card document"]]},
+  {t:"Entry Permit Application",o:"PRO / GRO",d:"For a candidate outside the country, the entry permit is applied for and tracked to issue or rejection. A rejection notifies onboarding immediately so the candidate is not left waiting.",m:[["Applies when","Candidate is outside the country"],["On rejection","Onboarding notified to inform candidate"],["Self-service","Candidate confirms in/out of country"]],tags:[["pay","Entry permit fees"],["att","Entry permit document"]]},
+  {t:"Change Status",o:"PRO / GRO",d:"For a candidate already inside the country, status change replaces the entry permit route. The system offers the correct path based on the confirmation the candidate gave.",m:[["Applies when","Candidate is inside the country"],["Validation","Work location must match MOL entity"],["Owner","PRO desk"]],tags:[["pay","Change of status fees"],["att","Status change document"]]},
+  {t:"Medical Application",o:"PRO · with employee",d:"The medical is booked and the appointment details go to the candidate. The candidate confirms attendance, and the system reminds them every two days until they do.",m:[["Sent to","Candidate, by email"],["Reminder","Every 2 days until confirmed"],["Captured","Appointment location and date"]],tags:[["pay","Medical typing fees"],["att","Medical appointment document"]]},
+  {t:"Medical Report",o:"PRO / GRO",d:"The fitness result is recorded. A fit result releases the next milestone; an unfit result routes the case to the HRBP for offboarding rather than letting it drift.",m:[["Outcome","Fit or unfit"],["If unfit","Routed to HRBP to offboard"],["Captured","Report document"]],tags:[["att","Medical report — mandatory"]]},
+  {t:"Emirates ID",o:"PRO / GRO",d:"The Emirates ID application is filed and — for first-time entrants — a biometric appointment is booked and sent to the candidate by the onboarding officer.",m:[["Biometrics","New UAE entrants only"],["Sent by","Onboarding officer"],["Confirmed by","The candidate"]],tags:[["pay","EID application fees"],["att","Stamped EID application form"]]},
+  {t:"Visa Typing",o:"PRO / GRO",d:"Visa stamping is typed and submitted, with the payment and receipt captured in the step as with every other government fee.",m:[["Owner","PRO desk"],["Captured","Payment and receipts"],["Tracks","Approval or rejection"]],tags:[["pay","Visa stamping fees"],["att","Payment receipts"]]},
+  {t:"EID Collection",o:"PRO · employee confirms",d:"The final milestone. The Emirates ID is collected and handed over, both sets of dates are recorded, and the system flags any mismatch between Emirates ID and visa expiry before it becomes a problem.",m:[["Captured","EID and visa issue and expiry dates"],["Validation","System flags date mismatches"],["Closes with","Employee confirmation"]],tags:[["att","Emirates ID document"],["","Handover confirmation"]]}
+ ]
+},
+{
+ id:"renew",nm:"Renew Work Permit",sub:"Before it expires, not after",shot:"shots/process-renew-milestones.webp",
+ shotcap:"Work Permit · Renew · milestone board for a live case",
+ shotalt:"The process board for a Renew Work Permit case, showing seven milestone tiles from Medical Application through to Emirates ID Collection and Updation.",
+ steps:[
+  {t:"Medical Application",o:"PRO · with employee",d:"Renewal begins on an alert, not a crisis. Two months before the labour card or visa expires, HR, the PRO and the employee are all told — and the medical is booked.",m:[["Triggered by","Expiry alert from Employee Central"],["Alert window","6 weeks ahead, escalating at 2"],["Notified","Employee, PRO and HR together"]],tags:[["pay","Medical fees"],["att","Appointment document"]]},
+  {t:"Medical Report",o:"PRO / GRO",d:"Fitness result recorded against the renewal. An unfit result for a renewal triggers the cancellation and repatriation path rather than silently stalling.",m:[["Outcome","Fit or unfit"],["If unfit","Cancellation path with dues settled"],["Reminder","Every 2 days if not completed"]],tags:[["att","Medical report"]]},
+  {t:"Labour Contract Insurance Submission",o:"PRO / GRO",d:"Renewal insurance paid and submitted, with the full payment record captured in the step.",m:[["Owner","PRO desk"],["Blocking","Receipt required to submit"],["Finance","Posted to GL"]],tags:[["pay","Insurance payment and VAT"],["att","Payment receipt"]],shot:"shots/form-labour-insurance.webp",shotcap:"Milestone form · Labour Contract Insurance Submission",shotalt:"A milestone form dialog with mandatory insurance payment date, mode, amount, VAT, reference number and receipt upload."},
+  {t:"Labour Contract Card Submission",o:"PRO · HRBP verifies",d:"The renewal contract is prepared, verified by the HRBP, signed by the employee and submitted. Unemployment insurance status and skill classification are captured here.",m:[["Verified by","HR Business Partner"],["Signed by","The employee"],["Captured","ILOE status, skilled or unskilled"]],tags:[["pay","MOHRE renewal fees"],["att","Signed contract"],["att","Labour card document"]]},
+  {t:"Visa Stamping Process",o:"PRO / GRO",d:"Visa stamping submitted and tracked through to the residence permit, with payment and receipts captured.",m:[["Owner","PRO desk"],["Tracks","Application status"],["Captured","Payment and receipts"]],tags:[["pay","Stamping fees"],["att","Receipts"]]},
+  {t:"Emirates ID Renewal",o:"PRO / GRO",d:"The Emirates ID renewal is filed with its own payment record — including where payment was made outside the normal modes, with the invoice attached.",m:[["Owner","PRO desk"],["Captured","Mode of payment"],["If external","Invoice attachment required"]],tags:[["pay","EID renewal fees"],["att","Invoice or receipt"]]},
+  {t:"Emirates ID Collection and Updation",o:"PRO · employee confirms",d:"Collected, handed over, and — critically — the new dates are written back so Employee Central and the government record agree. The system flags any mismatch between EID and visa expiry.",m:[["Captured","New EID and visa dates"],["Validation","Mismatch flagged automatically"],["Writes back","Employee Central"]],tags:[["att","Emirates ID document"],["","Employee confirmation"]]}
+ ]
+},
+{
+ id:"cancel",nm:"Cancel Work Permit",sub:"Clean exit, no loose ends",shot:"shots/process-cancel-milestones.webp",
+ shotcap:"Work Permit · Cancel · milestone board for a live case",
+ shotalt:"The process board for a Cancel Work Permit case, showing four milestone tiles from Cancellation Form through to Residence Cancellation Form.",
+ steps:[
+  {t:"Cancellation Form",o:"HRBP initiates · PRO completes",d:"Cancellation cannot start until end-of-service is settled. If the leaver has not approved the final settlement draft, the case is held at Pending employee approval — the HRBP simply cannot raise it yet.",m:[["Gate","End-of-service must be settled"],["If not approved","Status: pending employee approval"],["If employee delays","Complaint can be filed and attached"]],tags:[["pay","Cancellation fees"],["att","Cancellation application form"]]},
+  {t:"Cancellation Acceptance Form",o:"Employee · tracked by PRO",d:"The leaver signs the cancellation application. If the signature does not come, a reminder fires every two days to both the employee and HR — and the delay is on the record.",m:[["Signed by","The departing employee"],["Reminder","Every 2 days to employee and HR"],["Escalation","To HR if unsigned"]],tags:[["att","Signed cancellation form"]]},
+  {t:"Cancellation Form Submission To MOHRE",o:"PRO / GRO",d:"Labour card and visa cancellation are submitted to the ministry. An upload not carried out within two days triggers a reminder to the officer.",m:[["Owner","PRO desk"],["Reminder","Every 2 days if not uploaded"],["Notifies","Finance, HRBP and payroll on completion"]],tags:[["pay","Cancellation payment details"],["att","Labour card cancellation"],["att","Visa cancellation form"]]},
+  {t:"Residence Cancellation Form",o:"PRO / GRO",d:"The residence permit is cancelled and the documents are returned to the employee and HR. Finance, the HRBP and payroll are notified so the final settlement can close cleanly.",m:[["Closes","Residence cancellation"],["Documents to","Employee and HR"],["Notified","Finance, HRBP, payroll"]],tags:[["att","Residence cancellation document"]]}
+ ]
+}
+];
+
+/* ================= COUNTRIES ================= */
+var COUNTRIES=[
+{
+ id:"uae",nm:"United Arab Emirates",st:"live",badge:"Live in production",
+ sub:"The processes in this journey are the UAE processes. Running today across multiple operating companies, with emirate-level variations for Dubai versus Abu Dhabi, Sharjah and the Northern Emirates.",
+ portals:[
+  ["MOHRE","<b>Ministry of Human Resources &amp; Emiratisation</b> — work permits, quotas, labour contracts, labour cards, cancellation"],
+  ["ICP","<b>Federal Authority for Identity &amp; Citizenship</b> — entry permits, residence visas, Emirates ID"],
+  ["GDRFA","<b>General Directorate of Residency &amp; Foreigners Affairs</b> — Dubai residency and visa stamping"],
+  ["Tasheel / Tawjeeh","Service centres for submission and the mandatory worker-awareness session for unskilled categories"],
+  ["ILOE","Involuntary loss-of-employment insurance — enrolment tracked and confirmed by the employee"],
+  ["DHA · DOH · MOHAP","Health regulators for Dubai, Abu Dhabi and the Northern Emirates — practitioner and facility licensing"]
+ ],
+ procs:[
+  "<b>New work permit</b> — with distinct Dubai and Abu Dhabi / Sharjah / Northern Emirates tracks",
+  "<b>Renew work permit</b> — contract renewal, medical, stamping, Emirates ID",
+  "<b>Cancel work permit</b> — gated behind end-of-service settlement",
+  "<b>Quota management</b> — availability check, new quota application, inspection tracking",
+  "<b>Temporary work permit</b> — inside or outside entity, with NOC handling",
+  "<b>Emiratisation</b> — national hires with pension registration and IBAN letter",
+  "<b>Non-company sponsorship</b> — golden visa and relative-sponsored employees",
+  "<b>Absconding</b> — separate workflows for active and inactive employees",
+  "<b>Company documents</b> — trade licences, establishment cards, immigration cards with expiry alerts"
+ ]
+},
+{
+ id:"ksa",nm:"Kingdom of Saudi Arabia",st:"pack",badge:"Country pack",
+ sub:"Saudi Arabia splits the process across three authorities, which is exactly why a task-managed system pays off here. The labour side lives in Qiwa, residency lives in Muqeem and Absher, and healthcare practitioners need SCFHS on top.",
+ portals:[
+  ["Qiwa","<b>MHRSD labour platform</b> — work permits, the mandatory digital employment contract, Saudization (Nitaqat) ratios, sponsorship transfer, establishment file"],
+  ["Muqeem","<b>Employer residency portal</b> — this is where the Iqama is issued and renewed, along with exit and re-entry visas, final exit and dependants"],
+  ["Absher","<b>Ministry of Interior platform</b> — the individual-facing mirror of Muqeem; every employer action appears in the employee's Absher account"],
+  ["GOSI","General Organization for Social Insurance — employee registration and contributions"],
+  ["Mudad","Wage protection and payroll compliance"],
+  ["SCFHS · Mumaris+","Saudi Commission for Health Specialties — practitioner classification, DataFlow verification, Prometric exam and registration"]
+ ],
+ procs:[
+  "<b>Block visa &amp; quota</b> — application, approval and utilisation tracking against the establishment file",
+  "<b>Visa authorisation</b> — issuance and allocation to a named candidate",
+  "<b>Work permit</b> — issued and renewed through Qiwa, with the digital contract authenticated before the visa",
+  "<b>Iqama issuance</b> — via Muqeem, within the statutory window from arrival",
+  "<b>Iqama renewal</b> — annual, with advance alerts and fee capture",
+  "<b>Exit and re-entry</b> — single and multiple, tracked to return date so overstays cannot happen quietly",
+  "<b>Final exit</b> — with end-of-service gating, as in the cancellation flow",
+  "<b>Profession change</b> and <b>sponsorship transfer</b> through Qiwa",
+  "<b>Saudization ratio monitoring</b> — Nitaqat band exposure before it changes",
+  "<b>SCFHS licensing lane</b> — for healthcare practitioners, run in parallel"
+ ]
+},
+{
+ id:"qat",nm:"Qatar",st:"pack",badge:"Country pack",
+ sub:"Qatar's flow is front-loaded: the work visa quota and contract attestation happen before the employee travels, and the Qatar Visa Centre handles medical and biometrics in the home country.",
+ portals:[
+  ["ADLSA","<b>Ministry of Labour</b> — work visa quota, contract attestation, recruitment approval"],
+  ["MOI","<b>Ministry of Interior</b> — entry visa, residence permit, Qatar ID"],
+  ["Metrash2 / Hukoomi","Government service channels for status, renewal and exit"],
+  ["QVC","Qatar Visa Centre — medical examination and biometrics completed in the country of origin"],
+  ["DHP / MOPH","Department of Healthcare Professions — practitioner registration and licensing"]
+ ],
+ procs:[
+  "<b>Work visa quota</b> — application and allocation through ADLSA",
+  "<b>Contract attestation</b> — before the entry visa is issued",
+  "<b>Entry visa</b> — issued against the approved quota",
+  "<b>Medical and biometrics</b> — at the Qatar Visa Centre pre-departure, or on arrival",
+  "<b>Residence permit and Qatar ID</b> — issuance and annual renewal",
+  "<b>Renewal</b> — with advance expiry alerts on RP and QID",
+  "<b>Cancellation and exit</b> — with end-of-service settlement gating",
+  "<b>DHP licensing lane</b> — for healthcare practitioners"
+ ]
+},
+{
+ id:"kwt",nm:"Kuwait",st:"pack",badge:"Country pack",
+ sub:"Kuwait runs work authorisation through the Public Authority of Manpower, with residency and civil ID on the Ministry of Interior side — two clocks that have to stay aligned.",
+ portals:[
+  ["PAM · Ashal","<b>Public Authority of Manpower</b> — Article 18 work permits, establishment file, quota"],
+  ["MOI","Ministry of Interior — residency stamping and renewal"],
+  ["Sahel","Government app for individual and business services"],
+  ["PACI","Public Authority for Civil Information — Civil ID issuance"],
+  ["MOH","Ministry of Health — practitioner licensing and Kuwait Prometric examination"]
+ ],
+ procs:[
+  "<b>Work permit (Article 18)</b> — employer application through the PAM portal",
+  "<b>Entry visa</b> — issued against the approved work permit",
+  "<b>Medical examination and fingerprinting</b> — on arrival, tracked to result",
+  "<b>Residency stamping</b> — with fee capture and receipt",
+  "<b>Civil ID</b> — issuance, collection and expiry tracking",
+  "<b>Renewal</b> — work permit and residency, with advance alerts",
+  "<b>Cancellation and exit</b> — with settlement gating",
+  "<b>MOH licensing lane</b> — for healthcare practitioners"
+ ]
+},
+{
+ id:"omn",nm:"Oman",st:"pack",badge:"Country pack",
+ sub:"Oman pairs Ministry of Labour clearance with Royal Oman Police residency, alongside Omanisation quota obligations that need to be visible before they are breached.",
+ portals:[
+  ["Ministry of Labour","Labour clearance, work permits, Omanisation quota"],
+  ["ROP","<b>Royal Oman Police</b> — employment visa and resident card"],
+  ["Invest Easy","Commercial registration and establishment services"],
+  ["OMSB · MOH","Oman Medical Specialty Board and Ministry of Health — practitioner licensing and Prometric examination"]
+ ],
+ procs:[
+  "<b>Labour clearance</b> — application and approval against quota",
+  "<b>Employment visa</b> — issued through ROP",
+  "<b>Medical examination</b> — tracked to fitness result",
+  "<b>Resident card</b> — issuance, collection and expiry tracking",
+  "<b>Renewal</b> — labour clearance and resident card, with advance alerts",
+  "<b>Omanisation monitoring</b> — ratio exposure by establishment",
+  "<b>Cancellation and exit</b> — with settlement gating",
+  "<b>OMSB / MOH licensing lane</b> — for healthcare practitioners"
+ ]
+},
+{
+ id:"bhr",nm:"Bahrain",st:"pack",badge:"Country pack",
+ sub:"Bahrain is the most centralised of the six — LMRA handles work permits end to end through its employer management system, which makes it the cleanest candidate for a future API connection.",
+ portals:[
+  ["LMRA · EMS","<b>Labour Market Regulatory Authority</b> — expatriate work permits, renewal, cancellation, employer management system"],
+  ["NPRA","Nationality, Passports &amp; Residence Affairs — residence permits"],
+  ["SIO / CPR","Information &amp; eGovernment Authority — CPR card issuance"],
+  ["GOSI","Social Insurance Organisation — employee registration"],
+  ["NHRA","National Health Regulatory Authority — practitioner and facility licensing"]
+ ],
+ procs:[
+  "<b>New work permit</b> — expatriate permit application through LMRA EMS",
+  "<b>Medical examination</b> — tracked to fitness result",
+  "<b>Residence permit</b> — issuance through NPRA",
+  "<b>CPR card</b> — issuance, collection and expiry tracking",
+  "<b>Renewal</b> — work permit and CPR, with advance alerts",
+  "<b>Flexi permit tracking</b> — where applicable to the workforce",
+  "<b>Cancellation and exit</b> — with settlement gating",
+  "<b>NHRA licensing lane</b> — for healthcare practitioners"
+ ]
+},
+{
+ id:"lby",nm:"Libya",st:"pack",badge:"Country pack",
+ sub:"Libya matters for energy and industrial operators with rotating expatriate crews. The requirement here is less about volume and more about proof — that every worker on site holds a current, verifiable permit.",
+ portals:[
+  ["Ministry of Labour","Ministry of Labour and Rehabilitation — work permits and labour approvals"],
+  ["PNA","Passport &amp; Nationality Authority — entry visas and residency"],
+  ["Ministry of Health","Practitioner and facility licensing for healthcare operations"],
+  ["Local authority","Municipality and site-level permits where operations require them"]
+ ],
+ procs:[
+  "<b>Work permit</b> — application and approval through the Ministry of Labour",
+  "<b>Entry visa</b> — issued against the approved permit",
+  "<b>Medical examination</b> — tracked to fitness result",
+  "<b>Residency</b> — issuance and renewal with advance alerts",
+  "<b>Rotation tracking</b> — for rotating expatriate crews on site",
+  "<b>Company permits</b> — operating licences, site permits and certifications with expiry alerts",
+  "<b>Cancellation and exit</b> — with settlement gating"
+ ]
+}
+];
+
+/* ================= HELPERS ================= */
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function shotBlock(src,cap,alt,note){
+  var h='<div class="shot"><div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>'
+       +'<span class="shot-cap">'+esc(cap)+'</span></div>'
+       +'<img src="'+esc(src)+'" alt="'+esc(alt)+'" loading="lazy">';
+  if(note)h+='<div class="shot-note">'+note+'</div>';
+  return h+'</div>';
+}
+
+/* ================= CHAPTER NAV ================= */
+var nav=document.getElementById("chapnav");
+CHAPTERS.forEach(function(c){
+  var b=el("button","chip",'<b>'+c.n+'</b>'+esc(c.t));
+  b.type="button";b.dataset.target=c.id;
+  b.addEventListener("click",function(){
+    var t=document.getElementById(c.id);
+    if(t)t.scrollIntoView({block:"start"});
+  });
+  nav.appendChild(b);
+});
+
+/* ================= PERSONAS ================= */
+var pTabs=document.getElementById("personaTabs"),pBody=document.getElementById("personaBody");
+function renderPersona(i){
+  var p=PERSONAS[i];
+  pBody.innerHTML=
+    '<div class="persona-head"><h3>'+esc(p.nm)+'</h3>'
+   +'<p class="persona-quote">&ldquo;'+esc(p.q)+'&rdquo;</p></div>'
+   +'<div class="persona-cols">'
+   +'<div class="pcol"><h4>What they do</h4><ul class="plist">'+p.does.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div>'
+   +'<div class="pcol"><h4>What they can finally see</h4><ul class="plist">'+p.sees.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div>'
+   +'<div class="pcol"><h4>What stops being their problem</h4><ul class="plist win">'+p.wins.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div>'
+   +'</div>';
+  Array.prototype.forEach.call(pTabs.children,function(b,j){b.setAttribute("aria-selected",j===i?"true":"false");});
+}
+PERSONAS.forEach(function(p,i){
+  var b=el("button","ptab",'<span class="ptab-ini">'+esc(p.ini)+'</span><span><span class="ptab-nm">'+esc(p.nm)+'</span><span class="ptab-ro">'+esc(p.ro)+'</span></span>');
+  b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0?"true":"false");
+  b.addEventListener("click",function(){renderPersona(i);});
+  pTabs.appendChild(b);
+});
+renderPersona(0);
+
+/* ================= PROCESS EXPLORER ================= */
+var pexTabs=document.getElementById("pexTabs"),
+    pexTrack=document.getElementById("pexTrack"),
+    pexDetail=document.getElementById("pexDetail"),
+    curProc=0,curStep=0;
+
+function renderDetail(){
+  var pr=PROCESSES[curProc],s=pr.steps[curStep];
+  var src=s.shot||pr.shot, cap=s.shotcap||pr.shotcap, alt=s.shotalt||pr.shotalt;
+  pexDetail.innerHTML=
+    '<span class="pd-owner">'
+   +'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg>'
+   +esc(s.o)+'</span>'
+   +'<h3 class="pd-h">'+esc(s.t)+'</h3>'
+   +'<p class="pd-desc">'+esc(s.d)+'</p>'
+   +'<div class="pd-meta">'+s.m.map(function(m){
+       return '<div class="pd-m"><span>'+esc(m[0])+'</span><b>'+esc(m[1])+'</b></div>';}).join("")
+   +'</div>'
+   +(s.tags&&s.tags.length?'<div class="pd-capt">'+s.tags.map(function(t){
+       return '<span class="tagx '+t[0]+'">'+esc(t[1])+'</span>';}).join("")+'</div>':"")
+   +shotBlock(src,cap,alt,null);
+  Array.prototype.forEach.call(pexTrack.children,function(b,j){
+    b.setAttribute("aria-current",j===curStep?"true":"false");});
+}
+function renderTrack(){
+  var pr=PROCESSES[curProc];
+  pexTrack.innerHTML="";
+  pr.steps.forEach(function(s,i){
+    var b=el("button","mstep",'<span class="mstep-n">'+(i+1)+'</span>'
+      +'<span><span class="mstep-t">'+esc(s.t)+'</span><span class="mstep-o">'+esc(s.o)+'</span></span>');
+    b.type="button";b.setAttribute("role","tab");
+    b.addEventListener("click",function(){curStep=i;renderDetail();});
+    pexTrack.appendChild(b);
+  });
+  renderDetail();
+}
+PROCESSES.forEach(function(pr,i){
+  var b=el("button","pex-tab",esc(pr.nm)+'<small>'+esc(pr.sub)+' · '+pr.steps.length+' milestones</small>');
+  b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0?"true":"false");
+  b.addEventListener("click",function(){
+    curProc=i;curStep=0;
+    Array.prototype.forEach.call(pexTabs.children,function(x,j){x.setAttribute("aria-selected",j===i?"true":"false");});
+    renderTrack();
+  });
+  pexTabs.appendChild(b);
+});
+renderTrack();
+
+/* ================= COUNTRIES ================= */
+var cTabs=document.getElementById("ctryTabs"),cPanel=document.getElementById("ctryPanel");
+function renderCountry(i){
+  var c=COUNTRIES[i];
+  cPanel.innerHTML=
+    '<div class="cp-head"><div><h3>'+esc(c.nm)+'</h3><p>'+esc(c.sub)+'</p></div>'
+   +'<span class="badge badge-'+c.st+'">'+esc(c.badge)+'</span></div>'
+   +'<div class="cp-cols">'
+   +'<div class="cpc"><h4>Authorities &amp; portals</h4>'
+   + c.portals.map(function(p){
+       return '<div class="portal"><span class="portal-nm">'+p[0]+'</span><span class="portal-ds">'+p[1]+'</span></div>';}).join("")
+   +'</div>'
+   +'<div class="cpc"><h4>Processes in the pack</h4><ul class="proclist">'
+   + c.procs.map(function(p){return '<li>'+p+'</li>';}).join("")
+   +'</ul></div></div>';
+  Array.prototype.forEach.call(cTabs.children,function(b,j){b.setAttribute("aria-selected",j===i?"true":"false");});
+}
+COUNTRIES.forEach(function(c,i){
+  var b=el("button","ctab",'<span class="st st-'+c.st+'"></span>'+esc(c.nm));
+  b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0?"true":"false");
+  b.addEventListener("click",function(){renderCountry(i);});
+  cTabs.appendChild(b);
+});
+renderCountry(0);
+
+/* ================= LIGHTBOX ================= */
+var lb=document.getElementById("lightbox"),lbImg=document.getElementById("lbImg"),lbClose=document.getElementById("lbClose");
+document.addEventListener("click",function(e){
+  var t=e.target;
+  if(t&&t.tagName==="IMG"&&t.closest(".shot")){
+    lbImg.src=t.currentSrc||t.src;lbImg.alt=t.alt||"";lb.hidden=false;
+    document.body.style.overflow="hidden";
+  }
+});
+function closeLb(){lb.hidden=true;lbImg.src="";document.body.style.overflow="";}
+lb.addEventListener("click",closeLb);
+lbClose.addEventListener("click",function(e){e.stopPropagation();closeLb();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!lb.hidden)closeLb();});
+
+/* ================= SCROLL PROGRESS + ACTIVE CHAPTER ================= */
+var prog=document.getElementById("prog"),chips=nav.children,
+    secs=CHAPTERS.map(function(c){return document.getElementById(c.id);}),
+    ticking=false;
+function onScroll(){
+  var h=document.documentElement,
+      max=h.scrollHeight-h.clientHeight,
+      pct=max>0?(h.scrollTop/max)*100:0;
+  prog.style.width=pct.toFixed(2)+"%";
+  var mark=h.scrollTop+h.clientHeight*0.32,active=-1;
+  secs.forEach(function(s,i){if(s&&s.offsetTop<=mark)active=i;});
+  for(var i=0;i<chips.length;i++)chips[i].setAttribute("aria-current",i===active?"true":"false");
+  if(active>-1){
+    var c=chips[active],box=nav.getBoundingClientRect(),cb=c.getBoundingClientRect();
+    if(cb.left<box.left+8||cb.right>box.right-8)
+      nav.scrollTo({left:c.offsetLeft-box.width/2+cb.width/2,behavior:"smooth"});
+  }
+  ticking=false;
+}
+window.addEventListener("scroll",function(){
+  if(!ticking){ticking=true;window.requestAnimationFrame(onScroll);}
+},{passive:true});
+window.addEventListener("resize",onScroll,{passive:true});
+window.addEventListener("load",onScroll);
+onScroll();
+
+/* ================= THEME TOGGLE ================= */
+var root=document.documentElement,tBtn=document.getElementById("themeBtn");
+try{var saved=localStorage.getItem("vpm-theme");if(saved)root.setAttribute("data-theme",saved);}catch(e){}
+tBtn.addEventListener("click",function(){
+  var cur=root.getAttribute("data-theme"),next;
+  if(cur)next=cur==="dark"?"light":"dark";
+  else next=window.matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark";
+  root.setAttribute("data-theme",next);
+  try{localStorage.setItem("vpm-theme",next);}catch(e){}
+});
+})();
+</script>
