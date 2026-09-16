@@ -526,6 +526,93 @@ section{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 96px)}
 }
 .proclist li b{color:var(--text);font-weight:600}
 
+
+/* permit types within a country pack */
+.ptypes{padding:20px 22px;border-top:1px solid var(--line);background:var(--surface-2)}
+.ptypes h4{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-3);margin-bottom:14px;
+}
+.ptgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:820px){.ptgrid{grid-template-columns:1fr}}
+.ptcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:14px 16px;box-shadow:var(--shadow);
+}
+.ptcard.lead{border-color:var(--azure-line);background:var(--azure-soft)}
+.pt-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:3px}
+.pt-nm{font-family:var(--display);font-size:14.5px;font-weight:700;line-height:1.25}
+.pt-ct{
+  font-family:var(--mono);font-size:10px;font-weight:600;color:var(--azure);
+  white-space:nowrap;flex-shrink:0;letter-spacing:.03em;
+}
+.pt-who{font-size:12.5px;color:var(--text-3);margin-bottom:9px;line-height:1.4}
+.pt-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.pt-steps li{font-size:12.8px;line-height:1.45;color:var(--text-2);padding-left:16px;position:relative}
+.pt-steps li::before{
+  content:"";position:absolute;left:3px;top:7px;width:5px;height:5px;border-radius:50%;
+  background:var(--azure-line);
+}
+.pt-steps li b{color:var(--text);font-weight:600}
+.pt-diff{
+  margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);
+  font-size:12.3px;color:var(--text-2);line-height:1.45;
+}
+.pt-diff b{color:var(--sand);font-family:var(--display);font-size:10px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;display:block;margin-bottom:2px}
+
+
+/* ---------- diagrams ---------- */
+.figwrap{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;box-shadow:var(--shadow);margin-top:26px;
+}
+.sec-dark .figwrap{background:var(--ink-soft);border-color:rgba(255,255,255,.1);box-shadow:none}
+.figscroll{overflow-x:auto}
+.figwrap svg{display:block;width:100%;min-width:760px;height:auto}
+.figwrap figcaption{
+  margin-top:14px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:13.5px;color:var(--text-2);line-height:1.55;
+}
+.sec-dark .figwrap figcaption{color:#A9C2DA;border-color:rgba(255,255,255,.12)}
+figure{margin:0}
+
+/* shared diagram ink */
+.ahead{fill:var(--text-3)}
+.t-box{font-family:var(--display);font-size:15px;font-weight:700;fill:var(--text)}
+.t-sub{font-family:var(--body);font-size:11.5px;fill:var(--text-3)}
+.t-chip{font-family:var(--body);font-size:11.5px;font-weight:600;fill:var(--text-2)}
+.t-flow{font-family:var(--mono);font-size:11px;fill:var(--text-2)}
+.t-note{font-family:var(--body);font-size:11.5px;fill:var(--text-2)}
+.chip{fill:var(--surface);stroke:var(--line);stroke-width:1}
+.lbl-bg{fill:var(--surface)}
+.flow{stroke:var(--text-3);stroke-width:1.8;fill:none}
+.flow-manual{stroke:var(--sand);stroke-width:1.8;fill:none}
+.note{fill:var(--sand-soft);stroke:var(--sand);stroke-width:1}
+.b-sap{fill:var(--azure-soft);stroke:var(--azure-line);stroke-width:1.5}
+.b-cpi{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5}
+.b-vpm{fill:var(--surface);stroke:var(--azure);stroke-width:2.5}
+.b-fin{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5}
+.b-gov{fill:var(--sand-soft);stroke:var(--sand);stroke-width:1.5}
+.b-ppl{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5}
+.b-ntf{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5}
+.sec-dark .chip,.sec-dark .lbl-bg{fill:var(--ink)}
+.sec-dark .b-vpm{fill:var(--ink)}
+
+/* journey map */
+.jm-stage{fill:var(--ink);stroke:none}
+.t-stage{font-family:var(--display);font-size:12px;font-weight:700;fill:#fff}
+.t-stagen{font-family:var(--mono);font-size:10px;fill:var(--text-3)}
+.jm-band{fill:var(--surface-2)}
+.t-lane{font-family:var(--display);font-size:13.5px;font-weight:700;fill:var(--text)}
+.t-laneq{font-family:var(--mono);font-size:11px;fill:var(--azure)}
+.jm-node{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.2}
+.jm-hot{fill:var(--azure-soft);stroke:var(--azure);stroke-width:2}
+.t-node{font-family:var(--body);font-size:11.5px;font-weight:600;fill:var(--text)}
+.jm-hand{stroke:var(--azure);stroke-width:1.6;opacity:.65;fill:none}
+.jm-foot{fill:var(--sand-soft)}
+.t-foot{font-family:var(--body);font-size:12px;fill:var(--text-2)}
+
 /* ---------- api / integration ---------- */
 .api-note{
   background:var(--azure-soft);border:1px solid var(--azure-line);border-radius:var(--r);
@@ -647,7 +734,7 @@ footer a:hover{text-decoration:underline}
         Walk through a permit
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
       </a>
-      <a class="btn btn-ghost" href="#ch6">See the country packs</a>
+      <a class="btn btn-ghost" href="#ch7">See the country packs</a>
     </div>
 
     <div class="hero-stats">
@@ -738,10 +825,38 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 3 — PROCESS EXPLORER ============ -->
-<section class="sec" id="ch3">
+<!-- ============ CH 3 — JOURNEY MAP ============ -->
+<section class="sec sec-alt" id="ch3">
   <div class="wrap">
-    <div class="eyebrow">Chapter 03 · Walk a permit</div>
+    <div class="eyebrow">Chapter 03 · The journey map</div>
+    <h2 class="sec-h">One permit, five people, seven stages.</h2>
+    <p class="sec-sub">
+      This is the whole thing on one page. Stages run left to right in the order they actually
+      happen. Each lane is a person. A card sits wherever that person has something to do, and
+      every arrow between cards is a hand-off.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      Follow the arrows and you are following the permit. Where an arrow crosses between two lanes,
+      that is where somebody has to pick up what somebody else just put down.
+    </div>
+
+    <figure class="figwrap">
+      <div class="figscroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" role="img" aria-label="Journey map: a work permit moving left to right through seven stages, from offer accepted to exit and cancellation, across five actor lanes: recruitment, onboarding, the PRO desk, the employee, and HR and finance. Arrows show each hand-off between them."><defs><marker id="jh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ahead"/></marker></defs><rect x="172.0" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="245.71428571428572" y="50" class="t-stage" text-anchor="middle">Offer</text><text x="245.71428571428572" y="65" class="t-stage" text-anchor="middle">accepted</text><text x="245.71428571428572" y="22" class="t-stagen" text-anchor="middle">1</text><rect x="327.42857142857144" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="401.14285714285717" y="50" class="t-stage" text-anchor="middle">Quota &</text><text x="401.14285714285717" y="65" class="t-stage" text-anchor="middle">permit</text><text x="401.14285714285717" y="22" class="t-stagen" text-anchor="middle">2</text><rect x="482.85714285714283" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="556.5714285714286" y="50" class="t-stage" text-anchor="middle">Government</text><text x="556.5714285714286" y="65" class="t-stage" text-anchor="middle">submission</text><text x="556.5714285714286" y="22" class="t-stagen" text-anchor="middle">3</text><rect x="638.2857142857142" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="711.9999999999999" y="50" class="t-stage" text-anchor="middle">Medical &</text><text x="711.9999999999999" y="65" class="t-stage" text-anchor="middle">Emirates ID</text><text x="711.9999999999999" y="22" class="t-stagen" text-anchor="middle">4</text><rect x="793.7142857142857" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="867.4285714285713" y="50" class="t-stage" text-anchor="middle">Working</text><text x="867.4285714285713" y="65" class="t-stage" text-anchor="middle">legally</text><text x="867.4285714285713" y="22" class="t-stagen" text-anchor="middle">5</text><rect x="949.1428571428571" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="1022.8571428571428" y="50" class="t-stage" text-anchor="middle">Renewal</text><text x="1022.8571428571428" y="65" class="t-stage" text-anchor="middle">cycle</text><text x="1022.8571428571428" y="22" class="t-stagen" text-anchor="middle">6</text><rect x="1104.5714285714284" y="30" width="147.42857142857142" height="50" rx="8" class="jm-stage"/><text x="1178.2857142857142" y="50" class="t-stage" text-anchor="middle">Exit &</text><text x="1178.2857142857142" y="65" class="t-stage" text-anchor="middle">cancellation</text><text x="1178.2857142857142" y="22" class="t-stagen" text-anchor="middle">7</text><rect x="168" y="96" width="1092" height="96" class="jm-band"/><text x="24" y="140.0" class="t-lane">Recruitment</text><text x="24" y="158.0" class="t-laneq">Noura</text><text x="24" y="236.0" class="t-lane">Onboarding</text><text x="24" y="254.0" class="t-laneq">Aisha</text><rect x="168" y="288" width="1092" height="96" class="jm-band"/><text x="24" y="332.0" class="t-lane">PRO desk</text><text x="24" y="350.0" class="t-laneq">Rashid</text><text x="24" y="428.0" class="t-lane">Employee</text><text x="24" y="446.0" class="t-laneq">Yousef</text><rect x="168" y="480" width="1092" height="96" class="jm-band"/><text x="24" y="524.0" class="t-lane">HR & Finance</text><text x="24" y="542.0" class="t-laneq">Khalid · Fatima</text><line x1="245.71428571428572" y1="174.0" x2="245.71428571428572" y2="210.0" class="jm-hand" marker-end="url(#jh)"/><path d="M307.7142857142857 240.0 C355.7142857142857 240.0 291.14285714285717 240.0 339.14285714285717 240.0" class="jm-hand" fill="none" marker-end="url(#jh)"/><line x1="401.14285714285717" y1="270.0" x2="401.14285714285717" y2="306.0" class="jm-hand" marker-end="url(#jh)"/><path d="M463.14285714285717 336.0 C511.14285714285717 336.0 446.57142857142856 336.0 494.57142857142856 336.0" class="jm-hand" fill="none" marker-end="url(#jh)"/><line x1="556.5714285714286" y1="366.0" x2="556.5714285714286" y2="402.0" class="jm-hand" marker-end="url(#jh)"/><path d="M618.5714285714286 432.0 C666.5714285714286 432.0 601.9999999999999 336.0 649.9999999999999 336.0" class="jm-hand" fill="none" marker-end="url(#jh)"/><line x1="711.9999999999999" y1="366.0" x2="711.9999999999999" y2="402.0" class="jm-hand" marker-end="url(#jh)"/><path d="M773.9999999999999 432.0 C821.9999999999999 432.0 757.4285714285713 336.0 805.4285714285713 336.0" class="jm-hand" fill="none" marker-end="url(#jh)"/><line x1="867.4285714285713" y1="366.0" x2="867.4285714285713" y2="498.0" class="jm-hand" marker-end="url(#jh)"/><path d="M929.4285714285713 528.0 C977.4285714285713 528.0 912.8571428571428 528.0 960.8571428571428 528.0" class="jm-hand" fill="none" marker-end="url(#jh)"/><line x1="1022.8571428571428" y1="558.0" x2="1022.8571428571428" y2="306.0" class="jm-hand" marker-end="url(#jh)"/><line x1="1178.2857142857142" y1="558.0" x2="1178.2857142857142" y2="306.0" class="jm-hand" marker-end="url(#jh)"/><rect x="185.71428571428572" y="120.0" width="120" height="48" rx="8" class="jm-node"/><text x="245.71428571428572" y="140.0" class="t-node" text-anchor="middle">Candidate file</text><text x="245.71428571428572" y="154.0" class="t-node" text-anchor="middle">& documents</text><rect x="185.71428571428572" y="216.0" width="120" height="48" rx="8" class="jm-node"/><text x="245.71428571428572" y="236.0" class="t-node" text-anchor="middle">Permit request</text><text x="245.71428571428572" y="250.0" class="t-node" text-anchor="middle">raised</text><rect x="341.14285714285717" y="223.0" width="120" height="34" rx="8" class="jm-node"/><text x="401.14285714285717" y="243.0" class="t-node" text-anchor="middle">Quota checked</text><rect x="341.14285714285717" y="312.0" width="120" height="48" rx="8" class="jm-node jm-hot"/><text x="401.14285714285717" y="332.0" class="t-node" text-anchor="middle">Quota applied for</text><text x="401.14285714285717" y="346.0" class="t-node" text-anchor="middle">if short</text><rect x="496.57142857142856" y="312.0" width="120" height="48" rx="8" class="jm-node jm-hot"/><text x="556.5714285714286" y="332.0" class="t-node" text-anchor="middle">MOHRE offer,</text><text x="556.5714285714286" y="346.0" class="t-node" text-anchor="middle">labour card</text><rect x="496.57142857142856" y="415.0" width="120" height="34" rx="8" class="jm-node"/><text x="556.5714285714286" y="435.0" class="t-node" text-anchor="middle">Signs contract</text><rect x="651.9999999999999" y="312.0" width="120" height="48" rx="8" class="jm-node jm-hot"/><text x="711.9999999999999" y="332.0" class="t-node" text-anchor="middle">Medical, visa</text><text x="711.9999999999999" y="346.0" class="t-node" text-anchor="middle">stamping, EID</text><rect x="651.9999999999999" y="408.0" width="120" height="48" rx="8" class="jm-node"/><text x="711.9999999999999" y="428.0" class="t-node" text-anchor="middle">Attends medical</text><text x="711.9999999999999" y="442.0" class="t-node" text-anchor="middle">& biometrics</text><rect x="807.4285714285713" y="312.0" width="120" height="48" rx="8" class="jm-node jm-hot"/><text x="867.4285714285713" y="332.0" class="t-node" text-anchor="middle">EID handed over,</text><text x="867.4285714285713" y="346.0" class="t-node" text-anchor="middle">dates recorded</text><rect x="807.4285714285713" y="504.0" width="120" height="48" rx="8" class="jm-node"/><text x="867.4285714285713" y="524.0" class="t-node" text-anchor="middle">Payments posted</text><text x="867.4285714285713" y="538.0" class="t-node" text-anchor="middle">to GL</text><rect x="962.8571428571428" y="504.0" width="120" height="48" rx="8" class="jm-node"/><text x="1022.8571428571428" y="524.0" class="t-node" text-anchor="middle">Expiry alert</text><text x="1022.8571428571428" y="538.0" class="t-node" text-anchor="middle">6 weeks out</text><rect x="962.8571428571428" y="312.0" width="120" height="48" rx="8" class="jm-node jm-hot"/><text x="1022.8571428571428" y="332.0" class="t-node" text-anchor="middle">Renewal steps</text><text x="1022.8571428571428" y="346.0" class="t-node" text-anchor="middle">repeat</text><rect x="1118.2857142857142" y="504.0" width="120" height="48" rx="8" class="jm-node"/><text x="1178.2857142857142" y="524.0" class="t-node" text-anchor="middle">End of service</text><text x="1178.2857142857142" y="538.0" class="t-node" text-anchor="middle">settled first</text><rect x="1118.2857142857142" y="312.0" width="120" height="48" rx="8" class="jm-node jm-hot"/><text x="1178.2857142857142" y="332.0" class="t-node" text-anchor="middle">Cancellation</text><text x="1178.2857142857142" y="346.0" class="t-node" text-anchor="middle">to MOHRE</text><rect x="168" y="598" width="1092" height="30" rx="7" class="jm-foot"/><text x="184" y="618" class="t-foot">Highlighted cards are the PRO desk. Every arrow is a hand-off, and every hand-off is where a permit stalls today.</text></svg></div>
+      <figcaption>
+        Count the arrows. That is how many times a permit changes hands before somebody can legally
+        start work, and today most of those hand-offs happen by message or by memory. Each one is a
+        place the whole thing can stop without anybody noticing.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CH 4 — PROCESS EXPLORER ============ -->
+<section class="sec" id="ch4">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 04 · Walk a permit</div>
     <h2 class="sec-h">Walk through a permit, one step at a time.</h2>
     <p class="sec-sub">
       Here are the actual steps, in order, the way the system runs them. Click any step and you’ll see
@@ -764,10 +879,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 4 — TASK MANAGEMENT ============ -->
-<section class="sec sec-alt" id="ch4">
+<!-- ============ CH 5 — TASK MANAGEMENT ============ -->
+<section class="sec sec-alt" id="ch5">
   <div class="wrap">
-    <div class="eyebrow">Chapter 04 · Task management &amp; accountability</div>
+    <div class="eyebrow">Chapter 05 · Task management &amp; accountability</div>
     <h2 class="sec-h">Put a name on a task and it behaves differently.</h2>
     <p class="sec-sub">
       This is the heart of it. Every step becomes a real task with a person, a due date and somewhere
@@ -884,10 +999,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 5 — MONEY ============ -->
-<section class="sec" id="ch5">
+<!-- ============ CH 6 — MONEY ============ -->
+<section class="sec" id="ch6">
   <div class="wrap">
-    <div class="eyebrow">Chapter 05 · The money trail</div>
+    <div class="eyebrow">Chapter 06 · The money trail</div>
     <h2 class="sec-h">Nothing gets paid without a receipt and a GL code.</h2>
     <p class="sec-sub">
       Government fees are where the money leaks. Paid on cards, in cash, through Noqodi or e-Dirham,
@@ -937,10 +1052,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 6 — COUNTRY PACKS ============ -->
-<section class="sec sec-alt" id="ch6">
+<!-- ============ CH 7 — COUNTRY PACKS ============ -->
+<section class="sec sec-alt" id="ch7">
   <div class="wrap">
-    <div class="eyebrow">Chapter 06 · Country packs</div>
+    <div class="eyebrow">Chapter 07 · Country packs</div>
     <h2 class="sec-h">One engine, seven rulebooks.</h2>
     <p class="sec-sub">
       Labour law is national, so the process has to be too. The engine underneath stays the same
@@ -974,10 +1089,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 7 — HEALTHCARE ============ -->
-<section class="sec" id="ch7">
+<!-- ============ CH 8 — HEALTHCARE ============ -->
+<section class="sec" id="ch8">
   <div class="wrap">
-    <div class="eyebrow">Chapter 07 · Healthcare &amp; professional permits</div>
+    <div class="eyebrow">Chapter 08 · Healthcare &amp; professional permits</div>
     <h2 class="sec-h">A nurse needs two permissions, not one.</h2>
     <p class="sec-sub">
       In healthcare the work permit is only half the story. A clinician can’t legally treat anyone
@@ -1052,10 +1167,60 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 8 — INTEGRATION & API ============ -->
-<section class="sec sec-dark" id="ch8">
+<!-- ============ CH 9 — ARCHITECTURE ============ -->
+<section class="sec sec-alt" id="ch9">
   <div class="wrap">
-    <div class="eyebrow">Chapter 08 · Integration &amp; API readiness</div>
+    <div class="eyebrow">Chapter 09 · Solution architecture</div>
+    <h2 class="sec-h">Every system, and what moves between them.</h2>
+    <p class="sec-sub">
+      Here is the whole landscape on one picture. SuccessFactors stays your system of record for
+      people. We handle the permit work. Finance gets the money. The government sits on the right,
+      and today that connection is a person, not an API.
+    </p>
+
+    <div class="plain">
+      <b>In plain words</b>
+      Four corners. Your HR system at the top, the government on the right, finance at the bottom,
+      your people on the left. We are the bit in the middle that keeps them talking.
+    </div>
+
+    <figure class="figwrap">
+      <div class="figscroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 760" role="img" aria-label="Solution architecture: SAP SuccessFactors sends candidates and employee master data through SAP Integration Suite into the Visa and Permits application on SAP BTP, which writes permit details back, posts payments to S and 4 HANA Finance, serves the PRO desk and employees, and exchanges submissions with government portals manually today with API connectors ready."><defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" class="ahead"/></marker>
+    </defs><rect x="300" y="20" width="520" height="108" rx="10" class="b-sap"/><text x="316" y="45" class="t-box">SAP SuccessFactors HXM</text><text x="316" y="61" class="t-sub">System of record for people</text><rect x="316" y="79" width="98.10000000000001" height="25" rx="6" class="chip"/><text x="365.05" y="96" class="t-chip" text-anchor="middle">SF Recruiting</text><rect x="421.1" y="79" width="104.8" height="25" rx="6" class="chip"/><text x="473.5" y="96" class="t-chip" text-anchor="middle">Onboarding 2.0</text><rect x="532.9" y="79" width="118.2" height="25" rx="6" class="chip"/><text x="592.0" y="96" class="t-chip" text-anchor="middle">Employee Central</text><rect x="300" y="200" width="520" height="56" rx="10" class="b-cpi"/><text x="316" y="225" class="t-box">SAP Integration Suite (CPI)</text><text x="316" y="241" class="t-sub">iFlows, mapping, retry and monitoring</text><line x1="420" y1="128" x2="420" y2="200" class="flow" marker-end="url(#ah)"/><rect x="295.79999999999995" y="134" width="280.40000000000003" height="23" rx="6" class="lbl-bg"/><text x="436" y="150" class="t-flow" text-anchor="middle">candidates, employee master, expiry dates</text><line x1="700" y1="200" x2="700" y2="128" class="flow" marker-end="url(#ah)"/><rect x="543.8" y="172" width="280.40000000000003" height="23" rx="6" class="lbl-bg"/><text x="684" y="188" class="t-flow" text-anchor="middle">permit, labour card, EID, visa dates back</text><rect x="300" y="300" width="520" height="196" rx="10" class="b-vpm"/><text x="316" y="325" class="t-box">Visa &amp; Permits Management</text><text x="316" y="341" class="t-sub">Running on SAP BTP</text><rect x="316" y="359" width="111.5" height="25" rx="6" class="chip"/><text x="371.75" y="376" class="t-chip" text-anchor="middle">Build Work Zone</text><rect x="434.5" y="359" width="131.60000000000002" height="25" rx="6" class="chip"/><text x="500.3" y="376" class="t-chip" text-anchor="middle">Process Automation</text><rect x="316" y="391" width="151.70000000000002" height="25" rx="6" class="chip"/><text x="391.85" y="408" class="t-chip" text-anchor="middle">Cloud Foundry runtime</text><rect x="474.70000000000005" y="391" width="78.0" height="25" rx="6" class="chip"/><text x="513.7" y="408" class="t-chip" text-anchor="middle">HANA Cloud</text><rect x="316" y="423" width="138.3" height="25" rx="6" class="chip"/><text x="385.15" y="440" class="t-chip" text-anchor="middle">Document Management</text><rect x="461.3" y="423" width="138.3" height="25" rx="6" class="chip"/><text x="530.45" y="440" class="t-chip" text-anchor="middle">Identity Auth (SSO)</text><line x1="560" y1="256" x2="560" y2="300" class="flow" marker-end="url(#ah)"/><rect x="461.4" y="268" width="197.20000000000002" height="23" rx="6" class="lbl-bg"/><text x="560.0" y="284" class="t-flow" text-anchor="middle">both directions, through CPI</text><rect x="300" y="610" width="520" height="108" rx="10" class="b-fin"/><text x="316" y="635" class="t-box">SAP S/4HANA Finance &amp; Payroll</text><text x="316" y="651" class="t-sub">Where the money lands</text><rect x="316" y="669" width="151.70000000000002" height="25" rx="6" class="chip"/><text x="391.85" y="686" class="t-chip" text-anchor="middle">Journal posting to GL</text><rect x="474.70000000000005" y="669" width="111.5" height="25" rx="6" class="chip"/><text x="530.45" y="686" class="t-chip" text-anchor="middle">Fine deductions</text><line x1="560" y1="496" x2="560" y2="610" class="flow" marker-end="url(#ah)"/><rect x="439.0" y="541.0" width="242.0" height="23" rx="6" class="lbl-bg"/><text x="560.0" y="557.0" class="t-flow" text-anchor="middle">payment, VAT, reference, GL account</text><rect x="880" y="262" width="228" height="272" rx="10" class="b-gov"/><text x="896" y="287" class="t-box">Government portals</text><text x="896" y="303" class="t-sub">Qiwa · Muqeem · Absher</text><rect x="896" y="321" width="44.5" height="25" rx="6" class="chip"/><text x="918.25" y="338" class="t-chip" text-anchor="middle">MOHRE</text><rect x="896" y="353" width="84.7" height="25" rx="6" class="chip"/><text x="938.35" y="370" class="t-chip" text-anchor="middle">ICP · GDRFA</text><rect x="896" y="385" width="131.60000000000002" height="25" rx="6" class="chip"/><text x="961.8" y="402" class="t-chip" text-anchor="middle">LMRA · PAM · ADLSA</text><rect x="896" y="417" width="124.9" height="25" rx="6" class="chip"/><text x="958.45" y="434" class="t-chip" text-anchor="middle">SCFHS · DHA · DOH</text><line x1="820" y1="372" x2="880" y2="372" class="flow-manual" stroke-dasharray="7 5" marker-end="url(#ah)"/><line x1="880" y1="428" x2="820" y2="428" class="flow-manual" stroke-dasharray="7 5" marker-end="url(#ah)"/><text x="850" y="350" class="t-flow" text-anchor="middle">submit</text><text x="850" y="452" class="t-flow" text-anchor="middle">status, docs</text><rect x="848" y="556" width="260" height="62" rx="8" class="note"/><text x="862" y="577" class="t-note">Manual PRO activity today.</text><text x="862" y="595" class="t-note">Connectors are built and waiting</text><text x="862" y="611" class="t-note">for credentials you obtain.</text><rect x="12" y="262" width="228" height="272" rx="10" class="b-ppl"/><text x="28" y="287" class="t-box">The people</text><text x="28" y="303" class="t-sub">Role-based, on any device</text><rect x="28" y="321" width="64.6" height="25" rx="6" class="chip"/><text x="60.3" y="338" class="t-chip" text-anchor="middle">PRO desk</text><rect x="28" y="353" width="84.7" height="25" rx="6" class="chip"/><text x="70.35" y="370" class="t-chip" text-anchor="middle">Recruitment</text><rect x="28" y="385" width="124.9" height="25" rx="6" class="chip"/><text x="90.45" y="402" class="t-chip" text-anchor="middle">Onboarding · HRBP</text><rect x="28" y="417" width="151.70000000000002" height="25" rx="6" class="chip"/><text x="103.85000000000001" y="434" class="t-chip" text-anchor="middle">Employee self-service</text><rect x="28" y="449" width="57.9" height="25" rx="6" class="chip"/><text x="56.95" y="466" class="t-chip" text-anchor="middle">Finance</text><line x1="240" y1="372" x2="300" y2="372" class="flow" marker-end="url(#ah)"/><line x1="300" y1="424" x2="240" y2="424" class="flow" marker-end="url(#ah)"/><text x="270" y="350" class="t-flow" text-anchor="middle">tasks</text><text x="270" y="448" class="t-flow" text-anchor="middle">alerts</text><rect x="12" y="566" width="228" height="100" rx="10" class="b-ntf"/><text x="28" y="591" class="t-box">Email &amp; SMS</text><text x="28" y="607" class="t-sub">Reminders and escalations</text><rect x="28" y="625" width="91.4" height="25" rx="6" class="chip"/><text x="73.7" y="642" class="t-chip" text-anchor="middle">2-day nudges</text><rect x="28" y="657" width="145.0" height="25" rx="6" class="chip"/><text x="100.5" y="674" class="t-chip" text-anchor="middle">6-week expiry alerts</text><polyline points="300,478 272,478 272,616 244,616" class="flow" fill="none" marker-end="url(#ah)"/></svg></div>
+      <figcaption>
+        Solid arrows are automatic. The dashed arrows on the right are the ones a person still makes,
+        because no GCC authority publishes an open API today. The connectors behind them are already
+        built, so the day you hand us credentials, those two arrows go solid and nothing else changes.
+      </figcaption>
+    </figure>
+
+    <div class="grid g3" style="margin-top:24px">
+      <div class="card">
+        <h3>What flows in</h3>
+        <p>Candidates who accepted an offer, the employee master, separations, and the expiry dates that
+        start a renewal. All of it through SAP Integration Suite, so it is monitored and retried like any
+        other SAP integration.</p>
+      </div>
+      <div class="card">
+        <h3>What flows back</h3>
+        <p>Work permit and labour card numbers, Emirates ID, visa issue and expiry dates, straight into
+        Employee Central. Nobody re-types anything, and the two systems cannot disagree.</p>
+      </div>
+      <div class="card">
+        <h3>What flows down</h3>
+        <p>Every payment with its amount, VAT, reference, receipt and GL account, posted to S/4HANA as a
+        journal. Approved fines go to payroll as deductions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH 10 — INTEGRATION & API ============ -->
+<section class="sec sec-dark" id="ch10">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 10 · Integration &amp; API readiness</div>
     <h2 class="sec-h">We sit between the government portal and SuccessFactors.</h2>
     <p class="sec-sub">
       That gap is exactly where the problem lives. We take candidates out of Recruiting, drive all the
@@ -1146,10 +1311,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 9 — BTP ============ -->
-<section class="sec" id="ch9">
+<!-- ============ CH 10 — BTP ============ -->
+<section class="sec" id="ch11">
   <div class="wrap">
-    <div class="eyebrow">Chapter 09 · What it runs on</div>
+    <div class="eyebrow">Chapter 11 · What it runs on</div>
     <h2 class="sec-h">What you’ll need on SAP BTP.</h2>
     <p class="sec-sub">
       This is a native SAP Business Technology Platform application. Here’s what to provision in your
@@ -1194,10 +1359,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ============ CH 10 — VALUE ============ -->
-<section class="sec sec-alt" id="ch10">
+<!-- ============ CH 11 — VALUE ============ -->
+<section class="sec sec-alt" id="ch12">
   <div class="wrap">
-    <div class="eyebrow">Chapter 10 · The value</div>
+    <div class="eyebrow">Chapter 12 · The value</div>
     <h2 class="sec-h">What’s different the Monday after go-live.</h2>
     <p class="sec-sub">
       This isn’t a transformation programme. It’s a working desk for the people who are carrying your compliance risk.
@@ -1267,7 +1432,7 @@ footer a:hover{text-decoration:underline}
       </p>
       <div class="close-row">
         <a class="btn btn-primary" href="#ch3">Walk through a permit again</a>
-        <a class="btn btn-ghost" href="#ch6">Look at the country packs</a>
+        <a class="btn btn-ghost" href="#ch7">Look at the country packs</a>
       </div>
     </div>
   </div>
@@ -1293,18 +1458,20 @@ footer a:hover{text-decoration:underline}
 var CHAPTERS=[
   {id:"ch1",n:"01",t:"The problem"},
   {id:"ch2",n:"02",t:"Who does the work"},
-  {id:"ch3",n:"03",t:"Walk a permit"},
-  {id:"ch4",n:"04",t:"Tasks & accountability"},
-  {id:"ch5",n:"05",t:"The money trail"},
-  {id:"ch6",n:"06",t:"Country packs"},
-  {id:"ch7",n:"07",t:"Healthcare permits"},
-  {id:"ch8",n:"08",t:"Integration & API"},
-  {id:"ch9",n:"09",t:"SAP BTP services"},
-  {id:"ch10",n:"10",t:"The value"}
+  {id:"ch3",n:"03",t:"The journey map"},
+  {id:"ch4",n:"04",t:"Walk a permit"},
+  {id:"ch5",n:"05",t:"Tasks & accountability"},
+  {id:"ch6",n:"06",t:"The money trail"},
+  {id:"ch7",n:"07",t:"Country packs"},
+  {id:"ch8",n:"08",t:"Healthcare permits"},
+  {id:"ch9",n:"09",t:"Architecture"},
+  {id:"ch10",n:"10",t:"Integration & API"},
+  {id:"ch11",n:"11",t:"SAP BTP services"},
+  {id:"ch12",n:"12",t:"The value"}
 ];
 
 /* ================= PERSONAS ================= */
-var FACES={"rashid": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#DCEFEC\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#F2F4F6\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#A9713F\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#FAFAF8\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#A9713F\"/><path d=\"M31.5 44c0 4 1 9 2.5 13 2.5 7 8.5 12 16 12s13.5-5 16-12 c1.5-4 2.5-9 2.5-13 -2 6-5 8-8.5 9 -3 .8-6.5 1.2-10 1.2s-7-.4-10-1.2 c-3.5-1-6.5-3-8.5-9z\" fill=\"#221A16\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "priya": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#F3E8EF\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#1E6FD9\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#C68A5B\"/><ellipse cx=\"29\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#C68A5B\"/><ellipse cx=\"71\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#C68A5B\"/><ellipse cx=\"50\" cy=\"44\" rx=\"21.5\" ry=\"23\" fill=\"#221A16\"/><circle cx=\"50\" cy=\"19\" r=\"8.5\" fill=\"#221A16\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#C68A5B\"/><path d=\"M31 42c1-13 8-20 19-20s18 7 19 20c-3-9-9-13-19-13s-16 4-19 13z\" fill=\"#221A16\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "aisha": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#EDE9F7\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#F2F4F6\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#C68A5B\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#9A8577\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#C68A5B\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#A89383\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#A89383\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "ahmed": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#E4EEF8\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#16304C\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#A9713F\"/><ellipse cx=\"29\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#A9713F\"/><ellipse cx=\"71\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#A9713F\"/><ellipse cx=\"50\" cy=\"44\" rx=\"21.5\" ry=\"23\" fill=\"#2E231C\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#A9713F\"/><path d=\"M31 42c1-13 8-20 19-20s18 7 19 20c-3-9-9-13-19-13s-16 4-19 13z\" fill=\"#2E231C\"/><path d=\"M31.5 44c0 4 1 9 2.5 13 2.5 7 8.5 12 16 12s13.5-5 16-12 c1.5-4 2.5-9 2.5-13 -2 6-5 8-8.5 9 -3 .8-6.5 1.2-10 1.2s-7-.4-10-1.2 c-3.5-1-6.5-3-8.5-9z\" fill=\"#2E231C\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "ramesh": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#FBEFE0\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#E07A2F\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#8D5524\"/><ellipse cx=\"29\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#8D5524\"/><ellipse cx=\"71\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#8D5524\"/><ellipse cx=\"50\" cy=\"44\" rx=\"21.5\" ry=\"23\" fill=\"#221A16\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#8D5524\"/><path d=\"M31 42c1-13 8-20 19-20s18 7 19 20c-3-9-9-13-19-13s-16 4-19 13z\" fill=\"#221A16\"/><path d=\"M42.5 54.5c2.2-2 5.3-2 7.5 0 2.2-2 5.3-2 7.5 0 -2.2 3-5.3 3-7.5 1.2 -2.2 1.8-5.3 1.8-7.5-1.2z\" fill=\"#221A16\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "fatima": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#E2F0EC\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#2F3C4F\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#D9A374\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#1D2530\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#D9A374\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#2A3340\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#2A3340\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "omar": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#E8EDF2\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#F2F4F6\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#D9A374\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#FAFAF8\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#D9A374\"/><path d=\"M31.5 44c0 4 1 9 2.5 13 2.5 7 8.5 12 16 12s13.5-5 16-12 c1.5-4 2.5-9 2.5-13 -2 6-5 8-8.5 9 -3 .8-6.5 1.2-10 1.2s-7-.4-10-1.2 c-3.5-1-6.5-3-8.5-9z\" fill=\"#6E6A66\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/><g fill=\"none\" stroke=\"#3A4654\" stroke-width=\"1.7\" opacity=\".92\"><circle cx=\"43\" cy=\"46\" r=\"6.4\"/><circle cx=\"57\" cy=\"46\" r=\"6.4\"/><path d=\"M49.4 45.4h1.2M36.6 45h-3M63.4 45h3\"/></g></svg>"};
+var FACES={"rashid": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"rashid-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#C08F5A\"/><stop offset=\".55\" stop-color=\"#A9743F\"/>\n  <stop offset=\"1\" stop-color=\"#8A5A30\"/></linearGradient>\n<radialGradient id=\"rashid-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#8A5A30\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#8A5A30\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"rashid-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#E6F4F1\"/><stop offset=\"1\" stop-color=\"#CFE8E3\"/></linearGradient>\n<linearGradient id=\"rashid-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#FCFDFE\"/><stop offset=\"1\" stop-color=\"#EDEFF2\"/></linearGradient><linearGradient id=\"rashid-cv\" x1=\".15\" y1=\"0\" x2=\".9\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#FFFFFF\"/><stop offset=\".6\" stop-color=\"#F6F6F2\"/>\n  <stop offset=\"1\" stop-color=\"#DFE0DA\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#rashid-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#rashid-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#A9743F\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#8A5A30\" opacity=\".55\"/><path d=\"M50 16c-18.5 0-27.5 13.5-27.5 29.5 0 9 1 16.5 0 22.5 -1.2 7.5-4.5 12.5-8.5 15.5 l0 16.5 72 0 0-16.5c-4-3-7.3-8-8.5-15.5 -1-6 0-13.5 0-22.5 0-16-9-29.5-27.5-29.5z\" fill=\"url(#rashid-cv)\"/><path d=\"M27 46c0 10 .5 17-.5 23 -1 6-3 10-6 13\" stroke=\"#DFE0DA\" stroke-width=\"1.1\" fill=\"none\" opacity=\".55\"/><path d=\"M73 46c0 10-.5 17 .5 23 1 6 3 10 6 13\" stroke=\"#FFFFFF\" stroke-width=\"1.1\" fill=\"none\" opacity=\".45\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#rashid-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#rashid-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#rashid-ch)\"/><path d=\"M31.8 44.5c.2 5 1.2 10.5 3 14.5 3 6.6 8.8 11 15.2 11s12.2-4.4 15.2-11 c1.8-4 2.8-9.5 3-14.5 -1.6 6.6-4.8 9-8.8 10.2 -3.902 1.1-6.4 1.4-9.4 1.4s-5.5-.3-9.4-1.4 c-4-1.2-7.2-3.6-8.8-10.2z\" fill=\"#1E1714\"/><path d=\"M50 70c-4.4 0-8.6-2.4-11.6-6.6 3.4 2.4 7.4 3.6 11.6 3.6s8.2-1.2 11.6-3.6 c-3 4.2-7.2 6.6-11.6 6.6z\" fill=\"#1E1714\" opacity=\".6\"/><path d=\"M26 24.5c8-3 40-3 48 0\" stroke=\"#23282E\" stroke-width=\"3.4\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M26 30c8-3 40-3 48 0\" stroke=\"#23282E\" stroke-width=\"3.4\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M26 24.5c8-3 40-3 48 0\" stroke=\"#fff\" stroke-width=\".7\" fill=\"none\" opacity=\".18\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#8A5A30\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#8A5A30\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/></svg>", "noura": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"noura-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#D6A87A\"/><stop offset=\".55\" stop-color=\"#C08A58\"/>\n  <stop offset=\"1\" stop-color=\"#9E6C41\"/></linearGradient>\n<radialGradient id=\"noura-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#9E6C41\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#9E6C41\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"noura-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#F6EAF0\"/><stop offset=\"1\" stop-color=\"#E9D6E1\"/></linearGradient>\n<linearGradient id=\"noura-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#3A88EC\"/><stop offset=\"1\" stop-color=\"#1E6FD9\"/></linearGradient><linearGradient id=\"noura-cv\" x1=\".15\" y1=\"0\" x2=\".9\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#96607D\"/><stop offset=\".6\" stop-color=\"#7E4A63\"/>\n  <stop offset=\"1\" stop-color=\"#6A3D53\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#noura-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#noura-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#C08A58\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#9E6C41\" opacity=\".55\"/><path d=\"M50 16c-18.5 0-27.5 13.5-27.5 29.5 0 9 1 16.5 0 22.5 -1.2 7.5-4.5 12.5-8.5 15.5 l0 16.5 72 0 0-16.5c-4-3-7.3-8-8.5-15.5 -1-6 0-13.5 0-22.5 0-16-9-29.5-27.5-29.5z\" fill=\"url(#noura-cv)\"/><path d=\"M27 46c0 10 .5 17-.5 23 -1 6-3 10-6 13\" stroke=\"#6A3D53\" stroke-width=\"1.1\" fill=\"none\" opacity=\".55\"/><path d=\"M73 46c0 10-.5 17 .5 23 1 6 3 10 6 13\" stroke=\"#96607D\" stroke-width=\"1.1\" fill=\"none\" opacity=\".45\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#noura-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#noura-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#noura-ch)\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#9E6C41\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#9E6C41\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/></svg>", "aisha": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"aisha-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#D6A87A\"/><stop offset=\".55\" stop-color=\"#C08A58\"/>\n  <stop offset=\"1\" stop-color=\"#9E6C41\"/></linearGradient>\n<radialGradient id=\"aisha-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#9E6C41\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#9E6C41\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"aisha-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#F0ECE6\"/><stop offset=\"1\" stop-color=\"#E2DCD2\"/></linearGradient>\n<linearGradient id=\"aisha-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#FCFDFE\"/><stop offset=\"1\" stop-color=\"#EDEFF2\"/></linearGradient><linearGradient id=\"aisha-cv\" x1=\".15\" y1=\"0\" x2=\".9\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#A08B7B\"/><stop offset=\".6\" stop-color=\"#8B7565\"/>\n  <stop offset=\"1\" stop-color=\"#6F5C4E\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#aisha-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#aisha-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#C08A58\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#9E6C41\" opacity=\".55\"/><path d=\"M50 16c-18.5 0-27.5 13.5-27.5 29.5 0 9 1 16.5 0 22.5 -1.2 7.5-4.5 12.5-8.5 15.5 l0 16.5 72 0 0-16.5c-4-3-7.3-8-8.5-15.5 -1-6 0-13.5 0-22.5 0-16-9-29.5-27.5-29.5z\" fill=\"url(#aisha-cv)\"/><path d=\"M27 46c0 10 .5 17-.5 23 -1 6-3 10-6 13\" stroke=\"#6F5C4E\" stroke-width=\"1.1\" fill=\"none\" opacity=\".55\"/><path d=\"M73 46c0 10-.5 17 .5 23 1 6 3 10 6 13\" stroke=\"#A08B7B\" stroke-width=\"1.1\" fill=\"none\" opacity=\".45\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#aisha-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#aisha-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#aisha-ch)\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#9E6C41\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#9E6C41\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/></svg>", "khalid": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"khalid-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#C08F5A\"/><stop offset=\".55\" stop-color=\"#A9743F\"/>\n  <stop offset=\"1\" stop-color=\"#8A5A30\"/></linearGradient>\n<radialGradient id=\"khalid-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#8A5A30\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#8A5A30\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"khalid-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#E6EEF8\"/><stop offset=\"1\" stop-color=\"#D2E0F0\"/></linearGradient>\n<linearGradient id=\"khalid-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#254666\"/><stop offset=\"1\" stop-color=\"#16304C\"/></linearGradient><linearGradient id=\"khalid-hr\" x1=\".2\" y1=\"0\" x2=\".8\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#3E3128\"/><stop offset=\"1\" stop-color=\"#2B211A\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#khalid-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#khalid-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#A9743F\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#8A5A30\" opacity=\".55\"/><ellipse cx=\"28.8\" cy=\"48.5\" rx=\"3.6\" ry=\"4.9\" fill=\"#A9743F\"/><ellipse cx=\"71.2\" cy=\"48.5\" rx=\"3.6\" ry=\"4.9\" fill=\"#A9743F\"/><path d=\"M50 18.5c-13.5 0-22.5 9.5-22.5 24 0 7 1 13 2 18 -1-15-1-27 1.5-33 2.8-6.8 10.5-10.5 19-10.5s16.2 3.7 19 10.5 c2.5 6 2.5 18 1.5 33 1-5 2-11 2-18 0-14.5-9-24-22.5-24z\" fill=\"url(#khalid-hr)\"/><ellipse cx=\"50\" cy=\"40\" rx=\"21.5\" ry=\"21\" fill=\"url(#khalid-hr)\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#khalid-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#khalid-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#khalid-ch)\"/><path d=\"M31.5 41.5c2.5-10.5 9.5-15.5 18.5-15.5s16 5 18.5 15.5c-4-7.5-10.5-10.5-18.5-10.5s-14.5 3-18.5 10.5z\" fill=\"url(#khalid-hr)\"/><path d=\"M31.8 44.5c.2 5 1.2 10.5 3 14.5 3 6.6 8.8 11 15.2 11s12.2-4.4 15.2-11 c1.8-4 2.8-9.5 3-14.5 -1.6 6.6-4.8 9-8.8 10.2 -3.902 1.1-6.4 1.4-9.4 1.4s-5.5-.3-9.4-1.4 c-4-1.2-7.2-3.6-8.8-10.2z\" fill=\"#2B211A\"/><path d=\"M50 70c-4.4 0-8.6-2.4-11.6-6.6 3.4 2.4 7.4 3.6 11.6 3.6s8.2-1.2 11.6-3.6 c-3 4.2-7.2 6.6-11.6 6.6z\" fill=\"#2B211A\" opacity=\".6\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#8A5A30\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#8A5A30\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/></svg>", "yousef": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"yousef-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#A87244\"/><stop offset=\".55\" stop-color=\"#8A5A32\"/>\n  <stop offset=\"1\" stop-color=\"#6E4425\"/></linearGradient>\n<radialGradient id=\"yousef-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#6E4425\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#6E4425\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"yousef-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#FBF0E2\"/><stop offset=\"1\" stop-color=\"#F2E0CA\"/></linearGradient>\n<linearGradient id=\"yousef-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#EE8B39\"/><stop offset=\"1\" stop-color=\"#D9701F\"/></linearGradient><linearGradient id=\"yousef-hr\" x1=\".2\" y1=\"0\" x2=\".8\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#2E241E\"/><stop offset=\"1\" stop-color=\"#1E1714\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#yousef-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#yousef-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#8A5A32\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#6E4425\" opacity=\".55\"/><ellipse cx=\"28.8\" cy=\"48.5\" rx=\"3.6\" ry=\"4.9\" fill=\"#8A5A32\"/><ellipse cx=\"71.2\" cy=\"48.5\" rx=\"3.6\" ry=\"4.9\" fill=\"#8A5A32\"/><path d=\"M50 18.5c-13.5 0-22.5 9.5-22.5 24 0 7 1 13 2 18 -1-15-1-27 1.5-33 2.8-6.8 10.5-10.5 19-10.5s16.2 3.7 19 10.5 c2.5 6 2.5 18 1.5 33 1-5 2-11 2-18 0-14.5-9-24-22.5-24z\" fill=\"url(#yousef-hr)\"/><ellipse cx=\"50\" cy=\"40\" rx=\"21.5\" ry=\"21\" fill=\"url(#yousef-hr)\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#yousef-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#yousef-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#yousef-ch)\"/><path d=\"M31.5 41.5c2.5-10.5 9.5-15.5 18.5-15.5s16 5 18.5 15.5c-4-7.5-10.5-10.5-18.5-10.5s-14.5 3-18.5 10.5z\" fill=\"url(#yousef-hr)\"/><path d=\"M31.8 44.5c.2 5 1.2 10.5 3 14.5 3 6.6 8.8 11 15.2 11s12.2-4.4 15.2-11 c1.8-4 2.8-9.5 3-14.5 -1.6 6.6-4.8 9-8.8 10.2 -3.902 1.1-6.4 1.4-9.4 1.4s-5.5-.3-9.4-1.4 c-4-1.2-7.2-3.6-8.8-10.2z\" fill=\"#1E1714\"/><path d=\"M50 70c-4.4 0-8.6-2.4-11.6-6.6 3.4 2.4 7.4 3.6 11.6 3.6s8.2-1.2 11.6-3.6 c-3 4.2-7.2 6.6-11.6 6.6z\" fill=\"#1E1714\" opacity=\".6\"/><path d=\"M42.6 54.4c2.4-2.2 5.4-2.2 7.4 .2 2-2.4 5-2.4 7.4-.2 -2 3-5 3.4-7.4 1.4 -2.4 2-5.4 1.6-7.4-1.4z\" fill=\"#1E1714\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#6E4425\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#6E4425\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/></svg>", "fatima": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"fatima-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#E7C39B\"/><stop offset=\".55\" stop-color=\"#D6A87A\"/>\n  <stop offset=\"1\" stop-color=\"#B4855A\"/></linearGradient>\n<radialGradient id=\"fatima-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#B4855A\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#B4855A\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"fatima-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#E4F1ED\"/><stop offset=\"1\" stop-color=\"#D0E6DF\"/></linearGradient>\n<linearGradient id=\"fatima-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#43546C\"/><stop offset=\"1\" stop-color=\"#2F3C4F\"/></linearGradient><linearGradient id=\"fatima-cv\" x1=\".15\" y1=\"0\" x2=\".9\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#2C3744\"/><stop offset=\".6\" stop-color=\"#1D2530\"/>\n  <stop offset=\"1\" stop-color=\"#141A22\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#fatima-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#fatima-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#D6A87A\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#B4855A\" opacity=\".55\"/><path d=\"M50 16c-18.5 0-27.5 13.5-27.5 29.5 0 9 1 16.5 0 22.5 -1.2 7.5-4.5 12.5-8.5 15.5 l0 16.5 72 0 0-16.5c-4-3-7.3-8-8.5-15.5 -1-6 0-13.5 0-22.5 0-16-9-29.5-27.5-29.5z\" fill=\"url(#fatima-cv)\"/><path d=\"M27 46c0 10 .5 17-.5 23 -1 6-3 10-6 13\" stroke=\"#141A22\" stroke-width=\"1.1\" fill=\"none\" opacity=\".55\"/><path d=\"M73 46c0 10-.5 17 .5 23 1 6 3 10 6 13\" stroke=\"#2C3744\" stroke-width=\"1.1\" fill=\"none\" opacity=\".45\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#fatima-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#fatima-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#fatima-ch)\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#2A1F18\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#2A1F18\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#B4855A\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#B4855A\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/></svg>", "omar": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><defs>\n<linearGradient id=\"omar-sk\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#E7C39B\"/><stop offset=\".55\" stop-color=\"#D6A87A\"/>\n  <stop offset=\"1\" stop-color=\"#B4855A\"/></linearGradient>\n<radialGradient id=\"omar-ch\" cx=\".5\" cy=\".5\" r=\".5\">\n  <stop offset=\"0\" stop-color=\"#B4855A\" stop-opacity=\".30\"/>\n  <stop offset=\"1\" stop-color=\"#B4855A\" stop-opacity=\"0\"/></radialGradient>\n<linearGradient id=\"omar-bg\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#EAEEF3\"/><stop offset=\"1\" stop-color=\"#D8DFE8\"/></linearGradient>\n<linearGradient id=\"omar-gm\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#FCFDFE\"/><stop offset=\"1\" stop-color=\"#EDEFF2\"/></linearGradient><linearGradient id=\"omar-cv\" x1=\".15\" y1=\"0\" x2=\".9\" y2=\"1\">\n  <stop offset=\"0\" stop-color=\"#FFFFFF\"/><stop offset=\".6\" stop-color=\"#F6F6F2\"/>\n  <stop offset=\"1\" stop-color=\"#DFE0DA\"/></linearGradient></defs><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"url(#omar-bg)\"/><path d=\"M50 64c-15 0-28 9-32 21 l0 15 64 0 0-15c-4-12-17-21-32-21z\" fill=\"url(#omar-gm)\"/><path d=\"M43.5 55h13v14a6.5 6.5 0 0 1-13 0z\" fill=\"#D6A87A\"/><path d=\"M43.5 55h13v7c-4 3-9 3-13 0z\" fill=\"#B4855A\" opacity=\".55\"/><path d=\"M50 16c-18.5 0-27.5 13.5-27.5 29.5 0 9 1 16.5 0 22.5 -1.2 7.5-4.5 12.5-8.5 15.5 l0 16.5 72 0 0-16.5c-4-3-7.3-8-8.5-15.5 -1-6 0-13.5 0-22.5 0-16-9-29.5-27.5-29.5z\" fill=\"url(#omar-cv)\"/><path d=\"M27 46c0 10 .5 17-.5 23 -1 6-3 10-6 13\" stroke=\"#DFE0DA\" stroke-width=\"1.1\" fill=\"none\" opacity=\".55\"/><path d=\"M73 46c0 10-.5 17 .5 23 1 6 3 10 6 13\" stroke=\"#FFFFFF\" stroke-width=\"1.1\" fill=\"none\" opacity=\".45\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.2\" ry=\"21.8\" fill=\"url(#omar-sk)\"/><ellipse cx=\"38\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#omar-ch)\"/><ellipse cx=\"62\" cy=\"50\" rx=\"6\" ry=\"5\" fill=\"url(#omar-ch)\"/><path d=\"M31.8 44.5c.2 5 1.2 10.5 3 14.5 3 6.6 8.8 11 15.2 11s12.2-4.4 15.2-11 c1.8-4 2.8-9.5 3-14.5 -1.6 6.6-4.8 9-8.8 10.2 -3.902 1.1-6.4 1.4-9.4 1.4s-5.5-.3-9.4-1.4 c-4-1.2-7.2-3.6-8.8-10.2z\" fill=\"#9A958F\"/><path d=\"M50 70c-4.4 0-8.6-2.4-11.6-6.6 3.4 2.4 7.4 3.6 11.6 3.6s8.2-1.2 11.6-3.6 c-3 4.2-7.2 6.6-11.6 6.6z\" fill=\"#9A958F\" opacity=\".6\"/><path d=\"M26 24.5c8-3 40-3 48 0\" stroke=\"#23282E\" stroke-width=\"3.4\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M26 30c8-3 40-3 48 0\" stroke=\"#23282E\" stroke-width=\"3.4\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M26 24.5c8-3 40-3 48 0\" stroke=\"#fff\" stroke-width=\".7\" fill=\"none\" opacity=\".18\"/><path d=\"M39.2 39.4c2-1.9 5.4-2.1 7.6-.5\" stroke=\"#6E6A64\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M60.8 39.4c-2-1.9-5.4-2.1-7.6-.5\" stroke=\"#6E6A64\" stroke-width=\"2.1\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"43.2\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"43.2\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"42.2\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M38.7 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#6E6A64\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><ellipse cx=\"56.8\" cy=\"46\" rx=\"4.4\" ry=\"3.1\" fill=\"#F7F2EC\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"2.5\" fill=\"#4A3524\"/><circle cx=\"56.8\" cy=\"46.1\" r=\"1.2\" fill=\"#140E0A\"/><circle cx=\"55.8\" cy=\"45.1\" r=\".8\" fill=\"#fff\" opacity=\".9\"/><path d=\"M52.3 45.2c1.6-2.2 7.4-2.2 9 0\" stroke=\"#6E6A64\" stroke-width=\"1.3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M50 47.5c-.6 3-1.4 4.6-2.6 5.6 1.6 .9 3.6 .9 5.2 0 -1.2-1-2-2.6-2.6-5.6z\" fill=\"#B4855A\" opacity=\".35\"/><path d=\"M47.4 53.2c1.6 .9 3.6 .9 5.2 0\" stroke=\"#B4855A\" stroke-width=\"1\" fill=\"none\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M45.4 58.4c1.8-1.2 3.2-1.4 4.6-1.4s2.8 .2 4.6 1.4c-1.6 2.6-3 3.4-4.6 3.4s-3-.8-4.6-3.4z\" fill=\"#8C4634\"/><path d=\"M45.4 58.4c2.6-.9 6.6-.9 9.2 0\" stroke=\"#6E3527\" stroke-width=\".8\" fill=\"none\" opacity=\".75\"/><g fill=\"none\" stroke=\"#3B4754\" stroke-width=\"1.6\" opacity=\".92\"><rect x=\"36.4\" y=\"41.4\" width=\"13.6\" height=\"9.4\" rx=\"4.2\"/><rect x=\"50\" y=\"41.4\" width=\"13.6\" height=\"9.4\" rx=\"4.2\"/><path d=\"M49.8 45.4h.4M36.4 45.4c-2 0-3 .4-3.6 1M63.6 45.4c2 0 3 .4 3.6 1\"/></g></svg>"};
 
 var PERSONAS=[
 {
@@ -1337,7 +1504,7 @@ var PERSONAS=[
  ]
 },
 {
- face:"priya",nm:"Priya Menon",ro:"Recruiter",loc:"Talent acquisition",
+ face:"noura",nm:"Noura Al Qassimi",ro:"Recruiter",loc:"Talent acquisition",
  q:"I can finally give a candidate a joining date I actually believe, because I can see whether their permit has started moving.",
  does:[
   "Finishes the candidate file and document checklist once the offer is accepted",
@@ -1380,7 +1547,7 @@ var PERSONAS=[
  ]
 },
 {
- face:"ahmed",nm:"Ahmed Khalil",ro:"HR Business Partner",loc:"Employee relations",
+ face:"khalid",nm:"Khalid Al Dosari",ro:"HR Business Partner",loc:"Employee relations",
  q:"I get pulled in at the right moment now, rather than two weeks after something has already gone wrong.",
  does:[
   "Checks renewal contracts before they go to the employee to sign",
@@ -1401,7 +1568,7 @@ var PERSONAS=[
  ]
 },
 {
- face:"ramesh",nm:"Ramesh Kumar",ro:"Employee",loc:"HVAC technician",
+ face:"yousef",nm:"Yousef Al Balushi",ro:"Employee",loc:"HVAC technician",
  q:"I know what I have to do, by when, and I can see that they received it. That's all I ever wanted.",
  does:[
   "Signs and uploads his contract or offer",
@@ -1534,8 +1701,66 @@ var COUNTRIES=[
   "<b>Non-company sponsorship</b> — golden visa and relative-sponsored employees",
   "<b>Absconding</b> — separate workflows for active and inactive employees",
   "<b>Company documents</b> — trade licences, establishment cards, immigration cards with expiry alerts"
- ]
-},
+ ],
+ types:[
+  {nm:"Standard employment permit",ct:"11 steps",who:"The mainstream company-sponsored hire, blue and white collar",
+   steps:["Quota checked, and a new quota applied for if the establishment is short",
+          "<b>MOHRE</b> job offer and labour card, then the signed labour contract",
+          "Entry permit if they are abroad, or change of status if they are already here",
+          "Medical, then <b>ICP</b> Emirates ID and visa stamping",
+          "Emirates ID collected and handed over, dates written back to Employee Central"],
+   diff:"This is the only type that consumes establishment quota, so it is the one where a blocked quota stops hiring altogether."},
+  {nm:"Golden Visa",ct:"6 steps",who:"10-year residence: investors, specialised talent, top students, senior professionals",
+   steps:["Eligibility and nomination evidence gathered, then submitted to <b>ICP</b>",
+          "No MOHRE quota and no company sponsorship on the residence itself",
+          "Medical and biometrics, then Emirates ID issued",
+          "Residence stamped for 10 years, not 2",
+          "A separate <b>MOHRE work permit</b> still issued so they can legally work for you",
+          "Renewal tracked on a 10-year clock, with the work permit on its own shorter cycle"],
+   diff:"The employee sponsors themselves, so you are not holding their residence. But you still owe them a work permit, and the two clocks run at completely different speeds. That mismatch is where companies get caught out."},
+  {nm:"Green Visa",ct:"5 steps",who:"5-year self-sponsored residence for skilled professionals, freelancers and investors",
+   steps:["Skill and salary thresholds evidenced, submitted to <b>ICP</b>",
+          "Self-sponsored, so no company quota is consumed",
+          "Medical, Emirates ID and 5-year residence stamping",
+          "Work permit issued separately where they are employed by you",
+          "Renewal on a 5-year clock"],
+   diff:"Same split as the Golden Visa but on a shorter cycle, and the salary and qualification evidence has to be kept current for renewal."},
+  {nm:"Relative-sponsored employment",ct:"6 steps",who:"Employees living on a spouse, parent or family visa",
+   steps:["Candidate file created, but no entry permit or visa steps at all",
+          "<b>MOHRE</b> job offer and labour contract only",
+          "Labour card issued against their existing residence",
+          "Dubai insurance and MOHRE fees still apply",
+          "Unemployment insurance enrolment confirmed",
+          "Their residence expiry tracked even though you do not control it"],
+   diff:"You issue the work permit but somebody else holds the visa. If the sponsor\u2019s residence lapses, your employee stops being legal to work and you will not hear it from immigration."},
+  {nm:"Temporary and mission permit",ct:"5 steps",who:"Short-term project work, typically up to 6 months",
+   steps:["HRBP raises it against a named employee or contractor",
+          "<b>MOHRE</b> offer and contract, plus an NOC from the current employer",
+          "NOC signed by the current company, then the offer signed by the employee",
+          "Dubai insurance and MOHRE payment",
+          "Labour card issued with a short expiry, tracked to the end date"],
+   diff:"Covers both inside-entity and outside-entity moves. The short expiry is the whole risk: these lapse quietly because nobody treats them as a real visa."},
+  {nm:"Part-time work permit",ct:"4 steps",who:"Employees working for more than one employer under MOHRE part-time rules",
+   steps:["Part-time contract raised in <b>MOHRE</b>",
+          "Hours declared and checked against the primary employer\u2019s permit",
+          "Payment and contract submission",
+          "Labour card issued with part-time status recorded"],
+   diff:"The permit is valid only while the primary employment holds, so it has a dependency the system has to watch."},
+  {nm:"UAE national (Emiratisation)",ct:"6 steps",who:"Emirati hires counted towards your Emiratisation targets",
+   steps:["Onboarding raises the file, no visa or entry permit steps",
+          "<b>MOHRE</b> offer and contract, labour submission only",
+          "Medical fitness certificate and IBAN letter collected",
+          "<b>GPSSA</b> pension registration through the legal adviser, chased every 2 days until done",
+          "Enrolment completed within the statutory window",
+          "Counted against the Emiratisation ratio for reporting"],
+   diff:"No immigration steps at all, but a pension registration deadline instead. Miss it and you have a compliance problem that looks nothing like a visa problem."},
+  {nm:"Juvenile and student permits",ct:"4 steps",who:"15 to 18 year olds, and students on training placements",
+   steps:["Guardian consent and age evidence collected",
+          "Restricted hours and role declared to <b>MOHRE</b>",
+          "Medical and permit issuance",
+          "Permit tracked to the student\u2019s 18th birthday or placement end date"],
+   diff:"Age-triggered expiry rather than a fixed term, so the renewal date moves with the person, not the contract."}
+ ],},
 {
  id:"ksa",nm:"Kingdom of Saudi Arabia",st:"pack",badge:"Country pack",
  sub:"Saudi Arabia splits the process across three different authorities, which is exactly why managing it as tasks pays off. The labour side sits in Qiwa, residency sits in Muqeem and Absher, and healthcare staff need SCFHS on top of all that.",
@@ -1558,8 +1783,57 @@ var COUNTRIES=[
   "<b>Profession change</b> and <b>sponsorship transfer</b> through Qiwa",
   "<b>Saudization ratio monitoring</b> — Nitaqat band exposure before it changes",
   "<b>SCFHS licensing lane</b> — for healthcare practitioners, run in parallel"
- ]
-},
+ ],
+ types:[
+  {nm:"Standard work visa and Iqama",ct:"9 steps",who:"The mainstream expatriate hire under company sponsorship",
+   steps:["Block visa applied for and approved against the establishment file",
+          "Visa authorisation issued to a named candidate, entry within the validity window",
+          "<b>Qiwa</b> digital employment contract authenticated before the work visa is used",
+          "Medical, then biometrics after arrival",
+          "<b>Iqama</b> issued through Muqeem inside the statutory window from arrival",
+          "<b>GOSI</b> registration and <b>Mudad</b> wage protection set up",
+          "Annual Iqama renewal, with fees tracked",
+          "Exit and re-entry managed per trip",
+          "Final exit on separation"],
+   diff:"Three authorities own different parts of it: Qiwa for labour, Muqeem for the Iqama, Absher as the employee-facing mirror. Nothing joins them up for you."},
+  {nm:"Premium Residency",ct:"5 steps",who:"The Saudi \u201cgreen card\u201d: investors, entrepreneurs, special talent, property owners",
+   steps:["Eligibility category selected and evidenced",
+          "Application through the Premium Residency Center, not through you",
+          "No employer sponsorship and no Kafala relationship",
+          "Medical and biometrics, then the residency card issued",
+          "Renewal depends on the tier: unlimited, or renewable annually"],
+   diff:"The holder needs no sponsor and can change jobs without your permission. You track their status because it affects their right to work, but you have no control over it."},
+  {nm:"Transfer of sponsorship",ct:"5 steps",who:"Hiring someone already in the Kingdom under another employer",
+   steps:["Candidate\u2019s current contract and status checked in <b>Qiwa</b>",
+          "Transfer request raised, no block visa and no entry visa needed",
+          "Previous employer\u2019s position handled under the current transfer rules",
+          "New <b>Qiwa</b> contract authenticated",
+          "Iqama updated to the new establishment through <b>Muqeem</b>"],
+   diff:"Much faster than a fresh hire because there is no entry visa, but it consumes a Nitaqat slot the moment it completes, which can quietly move your band."},
+  {nm:"Temporary work visa",ct:"4 steps",who:"Short-term project work and specialist assignments",
+   steps:["Temporary visa applied for against the establishment",
+          "Duration declared, typically up to 90 days and renewable",
+          "Entry and medical",
+          "Tracked to the end date, with extension or exit before expiry"],
+   diff:"No Iqama is issued, so the usual expiry alerts do not apply. The visa end date is the only thing standing between you and an overstay."},
+  {nm:"Seasonal work visa",ct:"3 steps",who:"Hajj and Umrah season staffing, and other seasonal peaks",
+   steps:["Seasonal quota applied for against the declared season",
+          "Bulk candidate list submitted and approved",
+          "Entry, medical and exit all tracked against the season window"],
+   diff:"High volume over a fixed window, so this is a bulk process rather than a per-employee one, and every worker has to be out before the window closes."},
+  {nm:"Saudi national",ct:"4 steps",who:"Saudi hires counted towards Nitaqat",
+   steps:["Offer and <b>Qiwa</b> contract, no visa or Iqama steps",
+          "<b>GOSI</b> registration",
+          "<b>Mudad</b> wage protection enrolment",
+          "Counted towards the Nitaqat band, with ratio exposure reported"],
+   diff:"No immigration process at all, but each one shifts your Nitaqat band, which is what gates every other visa you want to issue."},
+  {nm:"Domestic worker (Musaned)",ct:"4 steps",who:"Household staff sponsored by an individual, not the company",
+   steps:["Application raised through <b>Musaned</b>, a separate platform",
+          "Recruitment office and contract handled there",
+          "Entry, medical and Iqama",
+          "Tracked separately from the corporate establishment file"],
+   diff:"It sits outside the company establishment entirely, which is exactly why it gets forgotten until something goes wrong."}
+ ],},
 {
  id:"qat",nm:"Qatar",st:"pack",badge:"Country pack",
  sub:"Qatar's flow is front-loaded: the work visa quota and contract attestation happen before the employee travels, and the Qatar Visa Centre handles medical and biometrics in the home country.",
@@ -1579,8 +1853,35 @@ var COUNTRIES=[
   "<b>Renewal</b> — with advance expiry alerts on RP and QID",
   "<b>Cancellation and exit</b> — with end-of-service settlement gating",
   "<b>DHP licensing lane</b> — for healthcare practitioners"
- ]
-},
+ ],
+ types:[
+  {nm:"Standard work residence permit",ct:"7 steps",who:"The mainstream company-sponsored hire",
+   steps:["Work visa quota applied for through <b>ADLSA</b>",
+          "Contract attested before the entry visa is issued",
+          "Entry visa issued against the approved quota",
+          "Medical and biometrics, at the <b>Qatar Visa Centre</b> before departure or on arrival",
+          "Residence permit and Qatar ID issued",
+          "Annual renewal with advance alerts",
+          "Cancellation and exit on separation"],
+   diff:"Most of the work happens before the employee ever travels, so a delay at quota or attestation pushes the joining date by weeks."},
+  {nm:"Temporary work visa",ct:"4 steps",who:"Short-term assignments and specialist visits",
+   steps:["Temporary visa requested against the establishment",
+          "Duration declared and approved",
+          "Entry and medical where required",
+          "Tracked to expiry, with extension or exit"],
+   diff:"No Qatar ID, so none of the usual ID-based expiry tracking helps. The visa date is all you have."},
+  {nm:"Family-sponsored employment",ct:"4 steps",who:"Employees living on a family member\u2019s residence permit",
+   steps:["Work permit raised without any visa steps",
+          "NOC from the sponsoring family member",
+          "Contract attested",
+          "Their residence expiry tracked even though you do not hold it"],
+   diff:"You control the work permit but not the residence underneath it."},
+  {nm:"Qatari national",ct:"3 steps",who:"Qatari hires and Qatarisation reporting",
+   steps:["Offer and contract only, no immigration steps",
+          "Social insurance registration",
+          "Counted towards national workforce reporting"],
+   diff:"No permit lifecycle, but still needs tracking for workforce nationalisation reporting."}
+ ],},
 {
  id:"kwt",nm:"Kuwait",st:"pack",badge:"Country pack",
  sub:"Kuwait runs work authorisation through the Public Authority of Manpower, with residency and civil ID on the Ministry of Interior side — two clocks that have to stay aligned.",
@@ -1600,8 +1901,35 @@ var COUNTRIES=[
   "<b>Renewal</b> — work permit and residency, with advance alerts",
   "<b>Cancellation and exit</b> — with settlement gating",
   "<b>MOH licensing lane</b> — for healthcare practitioners"
- ]
-},
+ ],
+ types:[
+  {nm:"Article 18 private sector permit",ct:"7 steps",who:"The mainstream private-sector expatriate hire",
+   steps:["Work permit applied for through the <b>PAM</b> portal against the establishment file",
+          "Entry visa issued once the permit is approved",
+          "Medical and fingerprinting after arrival",
+          "Residency stamped by <b>MOI</b>, with fees captured",
+          "<b>Civil ID</b> issued through PACI, collected and recorded",
+          "Renewal of both permit and residency, with advance alerts",
+          "Cancellation and exit on separation"],
+   diff:"The work permit and the residency sit with two different authorities on two different clocks, and they do not tell each other when one lapses."},
+  {nm:"Dependent-sponsored work permit",ct:"4 steps",who:"Employees on a spouse or parent residency",
+   steps:["Work permit raised without any visa or residency steps",
+          "Sponsor consent evidenced",
+          "Permit issued against the existing residency",
+          "Sponsor\u2019s residency expiry tracked as a dependency"],
+   diff:"Their right to work ends the moment the sponsor\u2019s residency lapses, and nobody outside the family will tell you."},
+  {nm:"Article 17 and 19 permits",ct:"4 steps",who:"Government-sector and specific contract categories",
+   steps:["Category confirmed before anything is raised",
+          "Permit applied for under the correct article",
+          "Medical, residency and Civil ID",
+          "Renewal tracked per category rules"],
+   diff:"Different articles carry different renewal rules and transfer restrictions, so the category has to be right at the start."},
+  {nm:"Kuwaiti national",ct:"3 steps",who:"Kuwaiti hires and nationalisation reporting",
+   steps:["Offer and contract only",
+          "Social insurance registration",
+          "Counted towards national workforce quotas"],
+   diff:"No permit lifecycle, but it counts towards the quotas that gate your expatriate hiring."}
+ ],},
 {
  id:"omn",nm:"Oman",st:"pack",badge:"Country pack",
  sub:"Oman pairs Ministry of Labour clearance with Royal Oman Police residency, alongside Omanisation quota obligations that need to be visible before they are breached.",
@@ -1620,8 +1948,34 @@ var COUNTRIES=[
   "<b>Omanisation monitoring</b> — ratio exposure by establishment",
   "<b>Cancellation and exit</b> — with settlement gating",
   "<b>OMSB / MOH licensing lane</b> — for healthcare practitioners"
- ]
-},
+ ],
+ types:[
+  {nm:"Standard employment visa",ct:"6 steps",who:"The mainstream company-sponsored hire",
+   steps:["Labour clearance applied for against the Omanisation quota",
+          "Employment visa issued through <b>ROP</b>",
+          "Medical, tracked to a fitness result",
+          "Resident card issued, collected and recorded",
+          "Renewal of clearance and card, with advance alerts",
+          "Cancellation and exit on separation"],
+   diff:"The labour clearance is gated by your Omanisation ratio, so a hiring freeze can arrive from the ratio rather than from budget."},
+  {nm:"Investor residence",ct:"4 steps",who:"Owners and investors in the Omani entity",
+   steps:["Commercial registration evidenced through <b>Invest Easy</b>",
+          "Investor residence applied for, no labour clearance consumed",
+          "Medical and resident card",
+          "Renewal tied to the commercial registration"],
+   diff:"It is tied to the company registration rather than to employment, so it renews on the entity\u2019s clock, not the person\u2019s."},
+  {nm:"Temporary and project work",ct:"4 steps",who:"Short-term contracts and project mobilisation",
+   steps:["Short-term clearance applied for",
+          "Visa issued for the declared duration",
+          "Medical where required",
+          "Tracked to the end date with extension or exit"],
+   diff:"No resident card in many cases, so the visa date is the only expiry you can watch."},
+  {nm:"Omani national",ct:"3 steps",who:"Omani hires counted towards Omanisation",
+   steps:["Offer and contract only",
+          "Social insurance registration",
+          "Counted towards the Omanisation ratio"],
+   diff:"Each one improves the ratio that unlocks your next expatriate clearance."}
+ ],},
 {
  id:"bhr",nm:"Bahrain",st:"pack",badge:"Country pack",
  sub:"Bahrain is the most centralised of the six — LMRA handles work permits end to end through its employer management system, which makes it the cleanest candidate for a future API connection.",
@@ -1641,8 +1995,41 @@ var COUNTRIES=[
   "<b>Flexi permit tracking</b> — where applicable to the workforce",
   "<b>Cancellation and exit</b> — with settlement gating",
   "<b>NHRA licensing lane</b> — for healthcare practitioners"
- ]
-},
+ ],
+ types:[
+  {nm:"Standard LMRA work permit",ct:"7 steps",who:"The mainstream company-sponsored expatriate hire",
+   steps:["Expatriate work permit applied for through <b>LMRA EMS</b>",
+          "Permit approved and fees paid",
+          "Medical, tracked to a fitness result",
+          "Residence permit issued through <b>NPRA</b>",
+          "<b>CPR</b> card issued, collected and recorded",
+          "Renewal of permit and CPR, with advance alerts",
+          "Cancellation and exit on separation"],
+   diff:"LMRA runs the whole permit lifecycle in one system, which makes Bahrain the cleanest candidate in the region for a future API connection."},
+  {nm:"Flexi permit",ct:"4 steps",who:"Self-sponsored workers holding their own LMRA flexi permit",
+   steps:["Flexi permit status verified with <b>LMRA</b>",
+          "No company sponsorship and no company-held residence",
+          "Engagement recorded against the worker",
+          "Their permit expiry tracked even though they hold it"],
+   diff:"They sponsor themselves, so you have no control over the permit that makes them legal to work for you. Tracking it is the only protection you have."},
+  {nm:"Golden Residency",ct:"4 steps",who:"10-year residence for high earners, property owners and talent",
+   steps:["Eligibility evidenced and submitted",
+          "Self-sponsored residence issued for 10 years",
+          "Work permit still issued separately where you employ them",
+          "Two clocks tracked: the 10-year residence and the shorter work permit"],
+   diff:"Same split as the UAE Golden Visa. The residence outlives several work permits, so the short clock is the one that catches people out."},
+  {nm:"Dependent-sponsored permit",ct:"4 steps",who:"Employees on a family member\u2019s residence",
+   steps:["Work permit raised without residence steps",
+          "Sponsor consent evidenced",
+          "Permit issued against the existing residence",
+          "Sponsor\u2019s residence expiry tracked as a dependency"],
+   diff:"Your permit is only as valid as somebody else\u2019s residence."},
+  {nm:"Bahraini national",ct:"3 steps",who:"Bahraini hires counted towards Bahrainisation",
+   steps:["Offer and contract only",
+          "<b>GOSI</b> registration",
+          "Counted towards the Bahrainisation ratio"],
+   diff:"The ratio gates how many expatriate permits LMRA will approve."}
+ ],},
 {
  id:"lby",nm:"Libya",st:"pack",badge:"Country pack",
  sub:"Libya matters for energy and industrial operators running rotating expatriate crews. It’s less about volume here and more about proof. You need to show that every worker on site holds a current, verifiable permit.",
@@ -1660,8 +2047,31 @@ var COUNTRIES=[
   "<b>Rotation tracking</b> — for rotating expatriate crews on site",
   "<b>Company permits</b> — operating licences, site permits and certifications with expiry alerts",
   "<b>Cancellation and exit</b> — with settlement gating"
- ]
-}
+ ],
+ types:[
+  {nm:"Standard work permit and residency",ct:"5 steps",who:"Expatriate staff on longer assignments",
+   steps:["Work permit applied for through the <b>Ministry of Labour</b>",
+          "Entry visa issued against the approved permit",
+          "Medical, tracked to a fitness result",
+          "Residency issued and recorded",
+          "Renewal with advance alerts, and exit on separation"],
+   diff:"Documentation and proof matter more than volume here. The value is being able to show a current permit for every person on site."},
+  {nm:"Rotation crew permit",ct:"4 steps",who:"Rotating expatriate crews on oil, gas and industrial sites",
+   steps:["Crew list raised against the site and rotation cycle",
+          "Permits and visas issued per rotation window",
+          "Entry and exit tracked per rotation, not per year",
+          "Overlap checked so no worker is on site without a current permit"],
+   diff:"The cycle is the rotation, not the calendar. A permit that is valid on paper is useless if it expires mid-rotation while the worker is on site."},
+  {nm:"Short-term project visa",ct:"3 steps",who:"Specialists mobilised for a defined piece of work",
+   steps:["Short-term permit applied for with the project declared",
+          "Entry visa and medical where required",
+          "Tracked to the project end date"],
+   diff:"Tied to a project rather than a contract, so it ends when the work ends."},
+  {nm:"Libyan national",ct:"2 steps",who:"Local hires",
+   steps:["Offer and contract only, no immigration steps",
+          "Social insurance registration where applicable"],
+   diff:"No permit lifecycle, but still tracked so site headcount reconciles against permits held."}
+ ],}
 ];
 
 /* ================= HELPERS ================= */
@@ -1774,7 +2184,17 @@ function renderCountry(i){
    +'</div>'
    +'<div class="cpc"><h4>Processes in the pack</h4><ul class="proclist">'
    + c.procs.map(function(p){return '<li>'+p+'</li>';}).join("")
-   +'</ul></div></div>';
+   +'</ul></div></div>'
+   +'<div class="ptypes"><h4>Permit types \u2014 each one is its own set of steps</h4><div class="ptgrid">'
+   + c.types.map(function(t,k){
+       return '<div class="ptcard'+(k===0?' lead':'')+'">'
+            + '<div class="pt-top"><span class="pt-nm">'+esc(t.nm)+'</span>'
+            + '<span class="pt-ct">'+esc(t.ct)+'</span></div>'
+            + '<div class="pt-who">'+esc(t.who)+'</div>'
+            + '<ul class="pt-steps">'+t.steps.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>'
+            + (t.diff?'<div class="pt-diff"><b>What makes it different</b>'+t.diff+'</div>':'')
+            + '</div>';}).join("")
+   +'</div></div>';
   Array.prototype.forEach.call(cTabs.children,function(b,j){b.setAttribute("aria-selected",j===i?"true":"false");});
 }
 COUNTRIES.forEach(function(c,i){

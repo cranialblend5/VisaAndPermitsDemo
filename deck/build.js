@@ -443,7 +443,33 @@ function shot(s, file, x, y, w){
   s.addNotes('For healthcare prospects this is the slide that proves domain depth. Note that the same model handles facility permits — pharmacy and clinic licences, trade licences, civil defence — and any industry-grade permit that expires.');
 }
 
-/* ========== SLIDE 9 — ARCHITECTURE, INTEGRATION & API ========== */
+/* ========== SLIDE 9 — SOLUTION ARCHITECTURE ========== */
+{
+  const s = S(); lightBg(s);
+  title(s, 'Solution architecture', 'Every system, and what moves between them.');
+
+  s.addImage({ path:`${IMG}/architecture.png`, x:0.6, y:1.26, w:8.25, h:5.60 });
+
+  const notes = [
+    ['What flows in','Candidates who accepted an offer, the employee master, separations and the expiry dates that start a renewal. All through SAP Integration Suite, so it is monitored and retried like any other SAP integration.', TEAL],
+    ['What flows back','Work permit and labour card numbers, Emirates ID, visa issue and expiry dates, straight into Employee Central. Nobody re-types anything and the two systems cannot disagree.', TEAL_D],
+    ['What flows down','Every payment with its amount, VAT, reference, receipt and GL account, posted to S/4HANA as a journal. Approved fines go to payroll as deductions.', TEAL],
+    ['The dashed arrows','The two government arrows are the ones a person still makes. The connectors behind them are built. The day you hand us credentials they go solid, and nothing else in this picture changes.', SAND]
+  ];
+  notes.forEach((n, i) => {
+    const y = 1.26 + i*1.42;
+    s.addShape(p.ShapeType.roundRect, { x:9.05, y, w:3.68, h:1.30, rectRadius:0.07,
+      fill:{color: n[2]===SAND ? 'FCF6E4' : BG}, line:{color: n[2]===SAND ? SAND : GREY_L, width:0.9} });
+    s.addText(n[0], { x:9.24, y:y+0.11, w:3.3, h:0.24, isTextBox:true, margin:0,
+      fontFace:H, fontSize:11.5, bold:true, color: n[2]===SAND ? '7A6410' : INK });
+    s.addText(n[1], { x:9.24, y:y+0.36, w:3.32, h:0.86, isTextBox:true, margin:0,
+      fontFace:B, fontSize:8.6, color:GREY, lineSpacing:11.6 });
+  });
+  footer(s, 9);
+  s.addNotes('Walk the four sides: SuccessFactors at the top stays the system of record, the people on the left, the government on the right, finance at the bottom. Then land the dashed arrows — that is the honest part of the picture and it is usually what a technical audience is waiting to hear.');
+}
+
+/* ========== SLIDE 10 — INTEGRATION & API ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Architecture & integration', 'We sit between government and SuccessFactors.');
@@ -503,11 +529,11 @@ function shot(s, file, x, y, w){
     { text:'the government step stays a tracked manual PRO activity, with reference number, receipt and status captured in the milestone — which is how the application is designed to operate from day one, with or without a portal connection.', options:{ color:GREY } }
   ], { x:8.64, y:3.78, w:3.84, h:2.76, isTextBox:true, margin:0,
       fontFace:B, fontSize:8.4, lineSpacing:11.4 });
-  footer(s, 9);
+  footer(s, 10);
   s.addNotes('Handle the API question head-on before the customer raises it. The value is not automating the click on the government site — it is knowing the click happened, who made it, when, what it cost and what came back.');
 }
 
-/* ========== SLIDE 10 — BTP SERVICES + NEXT STEPS (dark) ========== */
+/* ========== SLIDE 11 — BTP SERVICES + NEXT STEPS (dark) ========== */
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:-2.4, y:4.2, w:6.6, h:6.6, fill:{color:TEAL, transparency:91} });
