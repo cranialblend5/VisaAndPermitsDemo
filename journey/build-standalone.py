@@ -71,10 +71,11 @@ def main() -> int:
     OUT.mkdir(exist_ok=True)
     (OUT / "index.html").write_text(HEAD + html + TAIL, encoding="utf-8")
 
-    shots_src, shots_out = ROOT / "shots", OUT / "shots"
-    if shots_out.exists():
-        shutil.rmtree(shots_out)
-    shutil.copytree(shots_src, shots_out)
+    for folder in ("shots", "brand"):
+        dst = OUT / folder
+        if dst.exists():
+            shutil.rmtree(dst)
+        shutil.copytree(ROOT / folder, dst)
 
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     (OUT / "favicon.svg").write_text(
@@ -84,9 +85,9 @@ def main() -> int:
         'font-weight="bold" fill="#20A098" text-anchor="middle">IK</text></svg>',
         encoding="utf-8")
 
-    n = len(list(shots_out.glob("*")))
+    n = len(list((OUT / "shots").glob("*")))
     kb = (OUT / "index.html").stat().st_size / 1024
-    print(f"wrote site/index.html ({kb:.0f} KB) + {n} screenshots + favicon")
+    print(f"wrote site/index.html ({kb:.0f} KB) + {n} screenshots + brand + favicon")
     return 0
 
 

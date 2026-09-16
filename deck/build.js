@@ -93,7 +93,7 @@ function shot(s, file, x, y, w){
     x:0.72, y:3.92, w:8.6, h:0.36, isTextBox:true, margin:0,
     fontFace:B, fontSize:19, color:TEAL, bold:true });
 
-  s.addText('End-to-end governance of work permits, residency and professional licences — with every task owned, every deadline visible, and every government payment matched to a receipt and a GL account.', {
+  s.addText('We govern work permits, residency and professional licences end to end. Every task has an owner, every deadline shows up early, and every government payment has a receipt and a GL code against it.', {
     x:0.72, y:4.42, w:8.3, h:1.0, isTextBox:true, margin:0,
     fontFace:B, fontSize:14.5, color:'A9C2DA', lineSpacing:22 });
 
@@ -112,7 +112,7 @@ function shot(s, file, x, y, w){
     x:0.72, y:6.30, w:9.0, h:0.3, isTextBox:true, margin:0,
     fontFace:B, fontSize:12, color:'7E99B4' });
 
-  s.addText('A sales and solution overview for SAP and enterprise customers across the GCC', {
+  s.addText('An overview for SAP and enterprise customers across the GCC', {
     x:0.72, y:6.80, w:9.0, h:0.3, isTextBox:true, margin:0,
     fontFace:B, fontSize:10.5, italic:true, color:'6C87A2' });
   s.addNotes('Opening frame. The pitch: a pre-built SAP BTP application covering the work permit, renewal and cancellation lifecycles, with configured country packs across the GCC and Libya. Emphasise three words: owned, visible, reconciled.');
@@ -121,18 +121,18 @@ function shot(s, file, x, y, w){
 /* ========== SLIDE 2 — THE PROBLEM ========== */
 {
   const s = S(); lightBg(s);
-  title(s, 'The problem', 'One permit. Six teams. No shared clock.');
-  s.addText('A single work permit crosses recruitment, onboarding, the PRO desk, the employee, HR and finance — and touches a government portal at least five times. Miss one hand-off and it stalls silently, usually until a fine arrives.', {
+  title(s, 'The problem', 'One permit, six teams, no shared clock.');
+  s.addText('One work permit crosses recruitment, onboarding, the PRO desk, the employee, HR and finance, and touches a government portal at least five times. Miss a single hand-off and it just stops. Usually nobody notices until a fine turns up.', {
     x:0.6, y:1.36, w:11.4, h:0.5, isTextBox:true, margin:0,
     fontFace:B, fontSize:13.5, color:GREY, lineSpacing:19 });
 
   const probs = [
-    ['01','Tracking lives in a spreadsheet','Expiry dates sit in one person’s file. When they are on leave the company is blind — and overstay fines start at the border, not in the system.'],
-    ['02','The PRO has no digital desk','Government relations officers run everything from WhatsApp, email and memory. No queue, no due date, no proof of who was asked what.'],
-    ['03','The money is untraceable','Typing fees, medicals, insurance and ID charges paid on cards and petty cash. Receipts arrive late, or never. Duplicates surface at audit.'],
-    ['04','Recruitment and PRO are unsynced','Onboarding promises a joining date. The PRO has not been told the file exists. The candidate waits abroad for a permit nobody started.'],
-    ['05','Compliance is a memory test','Quota, skill classification, profession matching, work-location alignment — rules a human must recall correctly, every time, under pressure.'],
-    ['06','Nobody can answer "where is it?"','One employee query takes three calls and a day. Multiply that across thousands of permits and several operating countries.']
+    ['01','Tracking lives in a spreadsheet','Expiry dates sit in one person’s file. When they go on leave, the company is blind. And overstay fines start at the border, not in your system.'],
+    ['02','The PRO has no digital desk','Your GROs run all of it from WhatsApp, email and memory. No queue, no due dates, no proof of who was asked what, or when.'],
+    ['03','The money is untraceable','Typing fees, medicals, insurance and ID charges go on cards and petty cash. Receipts turn up late, or never. You find the duplicates at audit.'],
+    ['04','Recruitment and PRO are unsynced','Onboarding promises a joining date. Nobody told the PRO the file exists. The candidate waits abroad for a permit that was never started.'],
+    ['05','Compliance is a memory test','Quota, skill classification, profession matching, work location. Every one is a rule somebody has to remember correctly, every time, in a hurry.'],
+    ['06','Nobody can answer "where is it?"','One employee query takes three calls and a day. Now multiply that across thousands of permits and several countries.']
   ];
   const cw = 3.83, ch = 1.92, gx = 0.31, gy = 0.28;
   probs.forEach((pr, i) => {
@@ -149,8 +149,8 @@ function shot(s, file, x, y, w){
   s.addShape(p.ShapeType.roundRect, { x:0.6, y:6.36, w:11.4, h:0.52, rectRadius:0.09,
     fill:{color:TEAL_L}, line:{color:TEAL, width:0.75} });
   s.addText([
-    { text:'The cost of getting this wrong:  ', options:{ bold:true, color:TEAL_D } },
-    { text:'overstay and labour fines, blocked quotas, employees who cannot legally be rostered, and a compliance position no one can evidence to a regulator or an auditor.', options:{ color:INK } }
+    { text:'What it costs you:  ', options:{ bold:true, color:TEAL_D } },
+    { text:'overstay and labour fines, blocked quotas, employees you cannot legally roster, and a compliance position nobody can actually prove to a regulator or an auditor.', options:{ color:INK } }
   ], { x:0.85, y:6.36, w:10.9, h:0.52, isTextBox:true, margin:0, fontFace:B, fontSize:11.5, valign:'middle' });
   footer(s, 2);
   s.addNotes('Let the audience recognise themselves here. Ask which of the six they have. Almost every GCC enterprise has at least four.');
@@ -159,15 +159,15 @@ function shot(s, file, x, y, w){
 /* ========== SLIDE 3 — THE SOLUTION ========== */
 {
   const s = S(); lightBg(s);
-  title(s, 'The solution', 'A tracked runway for every permit.');
+  title(s, 'The solution', 'Every permit on one track.');
   s.addText('Three governed lifecycles, twenty-two milestones, one task inbox.', {
     x:0.6, y:1.36, w:11.4, h:0.32, isTextBox:true, margin:0,
     fontFace:B, fontSize:13.5, color:GREY });
 
   const lifes = [
-    ['New Work Permit','11 milestones','Candidate to legally employed — offer, labour card, entry permit or status change, medical, Emirates ID.', TEAL],
-    ['Renew Work Permit','7 milestones','Driven by expiry alerts six weeks ahead — medical, contract, stamping, ID renewal and collection.', TEAL_D],
-    ['Cancel Work Permit','4 milestones','Gated behind end-of-service settlement — cancellation forms, ministry submission, residence cancellation.', INK2]
+    ['New Work Permit','11 milestones','From candidate to legally employed: offer, labour card, entry permit or status change, medical, Emirates ID.', TEAL],
+    ['Renew Work Permit','7 milestones','Starts from an expiry alert six weeks out: medical, contract, stamping, ID renewal and collection.', TEAL_D],
+    ['Cancel Work Permit','4 milestones','Held until end-of-service is settled: cancellation forms, ministry submission, residence cancellation.', INK2]
   ];
   lifes.forEach((l, i) => {
     const y = 1.95 + i*1.30;
@@ -211,7 +211,7 @@ function shot(s, file, x, y, w){
 {
   const s = S(); lightBg(s);
   title(s, 'Persona view', 'Everyone gets their own to-do list.');
-  s.addText('Each role sees only what is theirs to do, with a due date against it \u2014 which is how the PRO desk, recruitment, onboarding and employee relations stay coordinated.', {
+  s.addText('Each role only sees what is actually theirs, with a due date on it. That is how the PRO desk, recruitment, onboarding and employee relations stay in step.', {
     x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0,
     fontFace:B, fontSize:13, color:GREY });
 
@@ -249,16 +249,16 @@ function shot(s, file, x, y, w){
 /* ========== SLIDE 5 — TASK MANAGEMENT ========== */
 {
   const s = S(); lightBg(s);
-  title(s, 'Task management & accountability', 'A task with a name on it behaves differently.');
-  s.addText('Every milestone becomes a real task with an assignee, a due date and an escalation path. Nothing sits in a grey zone where everybody assumes somebody else has it.', {
+  title(s, 'Task management & accountability', 'Put a name on a task and it behaves differently.');
+  s.addText('Every step becomes a real task with a person, a due date and somewhere to escalate. Nothing sits in that grey area where everyone assumes someone else picked it up.', {
     x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0,
     fontFace:B, fontSize:13, color:GREY });
 
   const ladder = [
-    ['1','Assign','The task gets an owner','Routed to a role, then claimed by a named officer with "Assign To Yourself" — or pushed by a supervisor with "Assign Agent". Priority and due date are stamped at that moment.', TEAL],
-    ['2','Nudge','Reminder every 2 days','Open tasks re-notify the assignee on a two-day cycle. Document expiries fire six weeks ahead, to the employee, the PRO and the HRBP together.', WARN],
-    ['3','Escalate','The manager is told','At two weeks before expiry, or when a task passes its due date, the line escalates automatically to the HR Manager and the line manager.', BAD],
-    ['4','Prove','The trail is permanent','Who was assigned, when they were reminded, what they uploaded and when they submitted is written to the record. Audits become a report, not an investigation.', GOOD]
+    ['1','Assign','The task gets an owner','It goes to a role, then a named officer picks it up with "Assign To Yourself", or a supervisor sends it over with "Assign Agent". Priority and due date are set right then.', TEAL],
+    ['2','Nudge','Reminder every 2 days','Anything still open pings the owner again every two days. Document expiries go out six weeks ahead, to the employee, the PRO and the HRBP at once.', WARN],
+    ['3','Escalate','The manager is told','Two weeks before expiry, or the moment a task goes past its due date, it escalates on its own to the HR manager and the line manager.', BAD],
+    ['4','Prove','The trail is permanent','Who had it, when they were reminded, what they uploaded and when they submitted. An audit turns into a report instead of a dig through old emails.', GOOD]
   ];
   ladder.forEach((l, i) => {
     const y = 1.94 + i*1.20;
@@ -298,17 +298,17 @@ function shot(s, file, x, y, w){
 /* ========== SLIDE 6 — FINANCIAL CONTROL ========== */
 {
   const s = S(); lightBg(s);
-  title(s, 'Financial control', 'No payment without a receipt and a GL account.');
-  s.addText('Government fees are the leakiest part of permit management. Making the payment part of the task means the money cannot move without leaving a record.', {
+  title(s, 'Financial control', 'Nothing gets paid without a receipt and a GL code.');
+  s.addText('Government fees are where the money leaks. Make the payment part of the task and it cannot move without leaving a trace.', {
     x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0,
     fontFace:B, fontSize:13, color:GREY });
 
   const rail = [
-    ['01','Captured in the step','Amount, VAT, mode, date and reference are mandatory fields on the milestone form itself.'],
-    ['02','Receipt attached','The scanned receipt is a required attachment. No file, no submit — the milestone stays open.'],
-    ['03','Card holder recorded','Who paid, on whose card, and whether the company or the employee bears the cost.'],
-    ['04','Posted to finance','Published to the correct GL account with a payment document number for journal posting.'],
-    ['05','Reportable','Filterable by process, company, employee, date, mode or card holder — then exported.']
+    ['01','Captured in the step','Amount, VAT, how it was paid, the date and the reference are all compulsory on the step itself.'],
+    ['02','Receipt attached','The scanned receipt has to be attached. No file, no submit, and the step stays open.'],
+    ['03','Card holder recorded','Which card, whose card, and whether the company or the employee carries the cost.'],
+    ['04','Posted to finance','Goes to the right GL account with a document number, ready to post.'],
+    ['05','Reportable','Filter by process, company, employee, date, mode or card holder, then export it.']
   ];
   const w5 = 2.3;
   rail.forEach((r, i) => {
@@ -322,9 +322,9 @@ function shot(s, file, x, y, w){
   });
 
   const guards = [
-    ['No duplicate payments','A reference is captured against a specific milestone of a specific case, so the same fee cannot be recorded twice against the same step.'],
-    ['No unaccounted spend','Every payment leaves with a GL account and a document number. Finance reconciles from the report, not a shoebox of receipts.'],
-    ['Fines have a workflow too','Overstay, traffic, labour and immigration fines are raised by the PRO, routed via the HRBP to payroll, and stored as a deduction.']
+    ['No duplicate payments','Every reference is tied to one step of one case, so the same fee cannot be recorded twice against the same step.'],
+    ['No unaccounted spend','Every payment leaves with a GL account and a document number. Finance reconciles from a report, not a shoebox of receipts.'],
+    ['Fines have a workflow too','Overstay, traffic, labour and immigration fines get raised by the PRO, go through the HRBP to payroll, and sit as a deduction.']
   ];
   guards.forEach((g, i) => {
     const y = 3.82 + i*0.80;
@@ -349,8 +349,8 @@ function shot(s, file, x, y, w){
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:10.4, y:-2.6, w:6.4, h:6.4, fill:{color:TEAL, transparency:90} });
-  titleDark(s, 'GCC coverage', 'One engine. Seven rulebooks.');
-  s.addText('Labour law is national, so the process must be too. The workflow engine, task model, payment capture and reporting stay identical — what changes per country is the milestone set, the authorities, the document checklist and the alert thresholds.', {
+  titleDark(s, 'GCC coverage', 'One engine, seven rulebooks.');
+  s.addText('Labour law is national, so the process has to be too. The engine underneath stays the same everywhere. What changes country by country is the steps, the authorities, the document checklist and when the alerts fire.', {
     x:0.6, y:1.36, w:11.4, h:0.36, isTextBox:true, margin:0,
     fontFace:B, fontSize:12.5, color:'A9C2DA' });
 
@@ -394,12 +394,12 @@ function shot(s, file, x, y, w){
 {
   const s = S(); lightBg(s);
   title(s, 'Healthcare & industry permits', 'A nurse needs two permissions, not one.');
-  s.addText('A clinician cannot legally practise until a health regulator has verified their credentials and issued a professional licence — on its own clock, with its own renewal cycle. The application runs that as a parallel lane on the same case.', {
+  s.addText('A clinician cannot legally treat anyone until a health regulator has checked their credentials and issued a professional licence. That runs on its own clock, with its own renewal cycle. We run it as a second lane on the same case.', {
     x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0,
     fontFace:B, fontSize:13, color:GREY });
 
   card(s, 0.6, 1.94, 5.9, 2.72, BG);
-  s.addText('The professional licensing lane', { x:0.86, y:2.12, w:5.4, h:0.3, isTextBox:true, margin:0,
+  s.addText('The licensing lane, running alongside', { x:0.86, y:2.12, w:5.4, h:0.3, isTextBox:true, margin:0,
     fontFace:H, fontSize:14, bold:true, color:INK });
   const lane = ['Credential pack collected at recruitment','Primary-source verification (DataFlow) tracked to result','Professional classification or eligibility assessment','Licensing exam booked, sat and certificate uploaded','Licence issued, activated against the employing facility','Renewal driven by CME hours — 90-day alerts, 15-day escalations'];
   s.addText(lane.map((t,i) => ({ text:t, options:{ bullet:true, breakLine: i < lane.length-1 } })), {
@@ -407,7 +407,7 @@ function shot(s, file, x, y, w){
     fontFace:B, fontSize:10.5, color:GREY, lineSpacing:14, paraSpaceAfter:5 });
 
   card(s, 6.72, 1.94, 6.0, 2.72, WHITE);
-  s.addText('Why it fails without a system', { x:6.98, y:2.12, w:5.5, h:0.3, isTextBox:true, margin:0,
+  s.addText('What goes wrong without it', { x:6.98, y:2.12, w:5.5, h:0.3, isTextBox:true, margin:0,
     fontFace:H, fontSize:14, bold:true, color:BAD });
   const fails = ['A clinician joins on a valid visa but cannot be rostered','Primary-source verification stalls with nobody watching the queue','A trainee’s 45-day dataflow deadline passes unnoticed','CME hours logged only after the renewal window has closed','Licence and visa expiry drift apart — one lapses, the other is fine','The facility licence expires, exposing every practitioner under it'];
   s.addText(fails.map((t,i) => ({ text:t, options:{ bullet:true, breakLine: i < fails.length-1 } })), {
@@ -446,8 +446,8 @@ function shot(s, file, x, y, w){
 /* ========== SLIDE 9 — ARCHITECTURE, INTEGRATION & API ========== */
 {
   const s = S(); lightBg(s);
-  title(s, 'Architecture & integration', 'Between the government portal and SuccessFactors.');
-  s.addText('The application sits exactly where the gap is: it takes candidates from Recruiting, drives the government-facing work, writes permit data back into Employee Central, and posts the money to finance.', {
+  title(s, 'Architecture & integration', 'We sit between government and SuccessFactors.');
+  s.addText('That gap is where the problem lives. We take candidates from Recruiting, drive the government-facing work, write the permit details back into Employee Central, and send the money to finance.', {
     x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0,
     fontFace:B, fontSize:13, color:GREY });
 
@@ -492,13 +492,13 @@ function shot(s, file, x, y, w){
 
   s.addShape(p.ShapeType.roundRect, { x:8.42, y:3.34, w:4.28, h:3.32, rectRadius:0.07,
     fill:{color:'FCF6E4'}, line:{color:SAND, width:1} });
-  s.addText('API integration — read this carefully', { x:8.64, y:3.48, w:3.9, h:0.24, isTextBox:true, margin:0,
+  s.addText('About government APIs', { x:8.64, y:3.48, w:3.9, h:0.24, isTextBox:true, margin:0,
     fontFace:H, fontSize:12, bold:true, color:'7A6410' });
   s.addText([
-    { text:'The application is API-ready by design. ', options:{ bold:true, color:INK } },
-    { text:'Every government-facing milestone is an abstracted service call, so a portal integration drops into an existing slot rather than requiring the workflow to be rebuilt.\n\n', options:{ color:GREY } },
-    { text:'What the customer must obtain. ', options:{ bold:true, color:INK } },
-    { text:'GCC governments do not publish open APIs, and access is granted to the employer \u2014 not to the software vendor. The customer approaches each authority directly (Qiwa and Muqeem in KSA, MOHRE and ICP in the UAE, LMRA in Bahrain) for API credentials, a specification and a sandbox under their own establishment registration. We build the connector from those.\n\n', options:{ color:GREY } },
+    { text:'We built this ready for APIs. ', options:{ bold:true, color:INK } },
+    { text:'Every government-facing step is a service call with a slot waiting behind it, so connecting a portal means plugging it in rather than rebuilding the process.\n\n', options:{ color:GREY } },
+    { text:'What we will need from you. ', options:{ bold:true, color:INK } },
+    { text:'GCC governments do not publish open APIs, and when they do give access they give it to the employer, not to a software vendor. So you go to each authority yourself (Qiwa and Muqeem in Saudi, MOHRE and ICP in the UAE, LMRA in Bahrain) and ask for API credentials, the specification and a sandbox under your own establishment registration. Hand those to us and we build the connector.\n\n', options:{ color:GREY } },
     { text:'Until then ', options:{ bold:true, color:INK } },
     { text:'the government step stays a tracked manual PRO activity, with reference number, receipt and status captured in the milestone — which is how the application is designed to operate from day one, with or without a portal connection.', options:{ color:GREY } }
   ], { x:8.64, y:3.78, w:3.84, h:2.76, isTextBox:true, margin:0,
@@ -511,7 +511,7 @@ function shot(s, file, x, y, w){
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:-2.4, y:4.2, w:6.6, h:6.6, fill:{color:TEAL, transparency:91} });
-  titleDark(s, 'What it runs on', 'SAP BTP services required.');
+  titleDark(s, 'What it runs on', 'What you will need on SAP BTP.');
 
   const core = [
     ['Cloud Foundry Runtime','Hosts the application, workflow engine and APIs'],
@@ -549,9 +549,9 @@ function shot(s, file, x, y, w){
   s.addShape(p.ShapeType.roundRect, { x:0.6, y:5.30, w:11.42, h:0.88, rectRadius:0.07,
     fill:{color:'123A4E'}, line:{color:TEAL_D, width:1} });
   const asks = [
-    ['Two licensing routes','You subscribe and operate the runtime and portal — or INK IT manages the subscription and operations entirely, removing separate developer licences.'],
-    ['Works without SuccessFactors','System-agnostic within BTP. If SF is not live yet, the non-integrated deployment still delivers full governance from day one.'],
-    ['Deployable in weeks','Pre-built and configurable rather than custom-developed — environment and configuration, then integration, then localisation.']
+    ['Two licensing routes','Either you subscribe and run the runtime and portal yourself, or we manage the whole thing, which means no separate developer licences.'],
+    ['Works without SuccessFactors','If your SuccessFactors modules are not live yet, that is fine. The non-integrated version still gives you full governance from day one.'],
+    ['Deployable in weeks','Pre-built and configured rather than written from scratch: environment and configuration, then integration, then localisation.']
   ];
   asks.forEach((a, i) => {
     const x = 0.82 + i*3.76;
@@ -561,7 +561,7 @@ function shot(s, file, x, y, w){
       fontFace:B, fontSize:8.4, color:'A9C2DA', lineSpacing:11.5 });
   });
 
-  s.addText('Ready for the GCC, today.', { x:0.6, y:6.32, w:6.4, h:0.36, isTextBox:true, margin:0,
+  s.addText('Ready for the GCC.', { x:0.6, y:6.32, w:6.4, h:0.36, isTextBox:true, margin:0,
     fontFace:H, fontSize:20, bold:true, color:WHITE });
   s.addText('Country packs for the UAE, KSA, Qatar, Kuwait, Oman, Bahrain and Libya  ·  Work permits, healthcare licences and any industry-grade permit', {
     x:0.6, y:6.70, w:8.6, h:0.3, isTextBox:true, margin:0,
