@@ -133,16 +133,17 @@ html{scroll-behavior:smooth}
 .topbar-in{max-width:var(--maxw);margin:0 auto;padding:9px 20px;display:flex;align-items:center;gap:14px}
 @media(max-width:560px){.topbar-in{padding:8px 16px;gap:10px}}
 .brand{display:flex;align-items:center;gap:9px;flex-shrink:0;text-decoration:none;color:var(--text)}
-.brand-mark{
-  width:28px;height:28px;border-radius:7px;background:var(--ink);color:#fff;
-  display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:-.04em;
-  flex-shrink:0;
+/* the logo's wordmark is white, so it always sits on its own dark plate */
+.brand-plate{
+  display:flex;align-items:center;background:#0C1E33;border-radius:8px;
+  padding:6px 10px;flex-shrink:0;
 }
-:root[data-theme="dark"] .brand-mark,:root:not([data-theme="light"]) .brand-mark{background:var(--azure)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .brand-mark{background:var(--ink)}}
-.brand-txt{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.02em;white-space:nowrap}
+.brand-plate img{height:19px;width:auto;display:block}
+@media(max-width:620px){.brand-plate{padding:5px 8px}.brand-plate img{height:16px}}
+.brand-txt{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:-.02em;white-space:nowrap}
 .brand-txt span{color:var(--text-3);font-weight:500}
-@media(max-width:700px){.brand-txt span{display:none}}
+@media(max-width:820px){.brand-txt span{display:none}}
+@media(max-width:620px){.brand-txt{display:none}}
 
 .progress-rail{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;min-width:40px}
 .progress-fill{height:100%;width:0;background:var(--azure);transition:width .25s ease}
@@ -278,11 +279,11 @@ section{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 96px)}
 :root[data-theme="dark"] .ptab[aria-selected="true"],:root:not([data-theme="light"]) .ptab[aria-selected="true"]{background:var(--azure);border-color:var(--azure);color:var(--ink-deep)}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .ptab[aria-selected="true"]{background:var(--ink);color:#fff}}
 .ptab-ini{
-  width:26px;height:26px;border-radius:7px;flex-shrink:0;display:grid;place-items:center;
-  font-family:var(--display);font-weight:700;font-size:11px;background:var(--azure-soft);color:var(--azure);
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;overflow:hidden;
+  background:var(--azure-soft);border:1.5px solid var(--line);
 }
-.ptab[aria-selected="true"] .ptab-ini{background:rgba(255,255,255,.2);color:#fff}
-:root[data-theme="dark"] .ptab[aria-selected="true"] .ptab-ini,:root:not([data-theme="light"]) .ptab[aria-selected="true"] .ptab-ini{background:rgba(0,0,0,.2);color:var(--ink-deep)}
+.ptab-ini svg{width:100%;height:100%;display:block}
+.ptab[aria-selected="true"] .ptab-ini{border-color:rgba(255,255,255,.45)}
 .ptab-nm{font-weight:700;font-size:14px;line-height:1.2;display:block}
 .ptab-ro{font-size:11.5px;opacity:.72;line-height:1.2;display:block}
 
@@ -290,8 +291,24 @@ section{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 96px)}
   background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
   box-shadow:var(--shadow);overflow:hidden;
 }
-.persona-head{padding:20px 22px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-.persona-head h3{font-size:20px;font-weight:800;margin-bottom:5px}
+.persona-head{
+  padding:20px 22px;border-bottom:1px solid var(--line);background:var(--surface-2);
+  display:flex;gap:18px;align-items:flex-start;
+}
+@media(max-width:560px){.persona-head{gap:14px}}
+.persona-face{
+  width:88px;height:88px;border-radius:50%;flex-shrink:0;overflow:hidden;
+  border:2px solid var(--surface);box-shadow:var(--shadow);
+}
+@media(max-width:560px){.persona-face{width:64px;height:64px}}
+.persona-face svg{width:100%;height:100%;display:block}
+.persona-id{min-width:0;flex:1}
+.persona-head h3{font-size:21px;font-weight:800;margin-bottom:2px}
+.persona-role{
+  font-family:var(--mono);font-size:11.5px;color:var(--azure);font-weight:600;
+  letter-spacing:.04em;margin-bottom:11px;display:block;
+}
+.persona-role b{color:var(--text-3);font-weight:500}
 .persona-quote{
   font-size:15.5px;font-style:italic;color:var(--text-2);line-height:1.5;
   padding-left:13px;border-left:2.5px solid var(--sand);
@@ -599,9 +616,9 @@ footer a:hover{text-decoration:underline}
 <!-- ============ TOP BAR ============ -->
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="#top">
-      <span class="brand-mark">IK</span>
-      <span class="brand-txt">Visa &amp; Permits <span>· INK IT on SAP BTP</span></span>
+    <a class="brand" href="#top" aria-label="INK IT Solutions — Visa and Permits, back to top">
+      <span class="brand-plate"><img src="brand/inkit-logo-ondark.png" alt="INK IT Solutions" width="306" height="75"></span>
+      <span class="brand-txt">Visa &amp; Permits <span>on SAP BTP</span></span>
     </a>
     <div class="progress-rail"><div class="progress-fill" id="prog"></div></div>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme" title="Switch theme">
@@ -618,26 +635,26 @@ footer a:hover{text-decoration:underline}
 <div class="hero" id="top">
   <div class="hero-in">
     <span class="hero-tag">Interactive Value Journey · Built on SAP BTP</span>
-    <h1>Every permit has an owner, a clock and a <em>receipt</em>.</h1>
+    <h1>Every permit gets an owner, a deadline and a <em>receipt</em>.</h1>
     <p class="hero-lede">
-      Visa &amp; Permits Management turns the messy back-and-forth between government portals,
-      your PRO team and SAP SuccessFactors into one tracked runway — where every task has a name
-      against it, every deadline is visible before it bites, and every dirham or riyal spent is
-      matched to a receipt and a GL account.
+      Right now the back-and-forth between government portals, your PRO team and SAP SuccessFactors
+      lives in spreadsheets and chat threads. We put all of it on one track. Every task has somebody's
+      name on it. Every deadline shows up well before it bites. And every dirham or riyal you spend
+      has a receipt and a GL code sitting next to it.
     </p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#ch3">
-        Walk a real permit
+        Walk through a permit
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
       </a>
-      <a class="btn btn-ghost" href="#ch6">See the GCC country packs</a>
+      <a class="btn btn-ghost" href="#ch6">See the country packs</a>
     </div>
 
     <div class="hero-stats">
-      <div class="hstat"><b>3</b><span>Core lifecycles: new, renew, cancel</span></div>
-      <div class="hstat"><b>22</b><span>Tracked milestones across the lifecycle</span></div>
-      <div class="hstat"><b>7</b><span>GCC + Libya country packs</span></div>
-      <div class="hstat"><b>0</b><span>Payments without a receipt and a GL code</span></div>
+      <div class="hstat"><b>3</b><span>Lifecycles: new, renew and cancel</span></div>
+      <div class="hstat"><b>22</b><span>Milestones we track, start to finish</span></div>
+      <div class="hstat"><b>7</b><span>Country packs across the GCC and Libya</span></div>
+      <div class="hstat"><b>0</b><span>Payments that can slip through without a receipt</span></div>
     </div>
 
     <div class="flags">
@@ -656,43 +673,43 @@ footer a:hover{text-decoration:underline}
 <section class="sec" id="ch1">
   <div class="wrap">
     <div class="eyebrow">Chapter 01 · The problem</div>
-    <h2 class="sec-h">A visa is not one job. It is forty small jobs, held by six different people.</h2>
+    <h2 class="sec-h">A visa isn’t one job. It’s forty small ones, spread across six people.</h2>
     <p class="sec-sub">
-      A single work permit passes through recruitment, onboarding, the PRO desk, the employee,
-      HR business partners and finance — crossing government portals at least five times.
-      Miss one hand-off and the whole thing stalls silently, usually until a fine arrives.
+      One work permit passes through recruitment, onboarding, the PRO desk, the employee, the HR
+      business partner and finance. It crosses a government portal at least five times. Miss a single
+      hand-off and the whole thing just stops. Usually nobody notices until a fine turns up.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      Imagine a relay race where the runners can't see each other and nobody holds the baton list.
-      That's how most companies run visas today. We give everyone the same list, and a whistle when someone is late.
+      Think of a relay race where the runners can’t see each other and nobody’s holding the list.
+      That’s how most companies run visas today. We hand everyone the same list, and blow a whistle when someone’s late.
     </div>
 
     <div class="grid g3" style="margin-top:30px">
       <div class="card">
         <h3>The tracking is a spreadsheet</h3>
-        <p>Expiry dates live in a file on someone's laptop. When that person is on leave, the company is blind — and overstay fines start at the border, not in the system.</p>
+        <p>Expiry dates sit in a file on one person’s laptop. When they go on leave, the company is blind. And overstay fines start at the border, not in your system.</p>
       </div>
       <div class="card">
         <h3>The PRO has no digital desk</h3>
-        <p>Government relations officers run the whole thing from WhatsApp, email and memory. There is no queue, no due date, no proof of who was asked what and when.</p>
+        <p>Your government relations officers run all of it from WhatsApp, email and memory. No queue, no due dates, and no proof of who was asked what, or when.</p>
       </div>
       <div class="card">
         <h3>The money is untraceable</h3>
-        <p>Typing fees, medicals, insurance and Emirates ID charges are paid on company cards and petty cash. Receipts arrive weeks later, if at all. Duplicates are found at audit.</p>
+        <p>Typing fees, medicals, insurance and ID charges go on company cards and petty cash. Receipts turn up weeks later, if they turn up at all. You find the duplicates at audit.</p>
       </div>
       <div class="card">
         <h3>Recruitment and PRO don't share a clock</h3>
-        <p>Onboarding promises a joining date. The PRO has not been told the file exists. The candidate sits in another country waiting for an entry permit nobody started.</p>
+        <p>Onboarding promises a joining date. Nobody has told the PRO the file exists. Meanwhile the candidate is sitting in another country, waiting on an entry permit that was never started.</p>
       </div>
       <div class="card">
         <h3>Compliance is a memory test</h3>
-        <p>Quota availability, skill classification, profession matching, work-location alignment — all rules a human is expected to remember correctly, every time, under pressure.</p>
+        <p>Quota, skill classification, profession matching, work location. Every one of those is a rule somebody has to remember correctly, every single time, usually in a hurry.</p>
       </div>
       <div class="card">
         <h3>Nobody can answer "where is it?"</h3>
-        <p>The CHRO asks about one employee. It takes three phone calls and a day. Multiply that across thousands of permits and several operating countries.</p>
+        <p>Your CHRO asks about one employee. Three phone calls and a day later you have an answer. Now multiply that by a few thousand permits across several countries.</p>
       </div>
     </div>
   </div>
@@ -702,16 +719,16 @@ footer a:hover{text-decoration:underline}
 <section class="sec sec-alt" id="ch2">
   <div class="wrap">
     <div class="eyebrow">Chapter 02 · Who actually does the work</div>
-    <h2 class="sec-h">Six people, one runway.</h2>
+    <h2 class="sec-h">Meet the people who actually run this.</h2>
     <p class="sec-sub">
-      The application is built around the real cast of a GCC permit process — not abstract "users".
-      Pick a role to see the tasks that land in their inbox, what they can finally see, and the
-      worry the system takes off their desk.
+      These are the seven people a permit passes through in a typical GCC business. They are not
+      abstract “users”, they are jobs that already exist in your org chart. Pick one and see what
+      lands in their inbox, what they can finally see for themselves, and what stops being their problem.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      Everybody gets their own to-do list. The list only shows what is actually theirs to do, and it tells them when it's due.
+      Everyone gets their own to-do list. It only shows the things that are actually theirs, and it tells them when each one is due.
     </div>
 
     <div style="margin-top:28px">
@@ -724,17 +741,17 @@ footer a:hover{text-decoration:underline}
 <!-- ============ CH 3 — PROCESS EXPLORER ============ -->
 <section class="sec" id="ch3">
   <div class="wrap">
-    <div class="eyebrow">Chapter 03 · The runway</div>
-    <h2 class="sec-h">Walk a real permit, milestone by milestone.</h2>
+    <div class="eyebrow">Chapter 03 · Walk a permit</div>
+    <h2 class="sec-h">Walk through a permit, one step at a time.</h2>
     <p class="sec-sub">
-      These are the configured process tracks, milestone for milestone, as the application runs them. Click any milestone to see
-      who owns it, what has to be captured, which attachments and payments are mandatory,
-      and what the system does if it goes quiet.
+      Here are the actual steps, in order, the way the system runs them. Click any step and you’ll see
+      who owns it, what they have to fill in, which documents and payments are compulsory, and what
+      happens if it goes quiet.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      Think of it like a flight with numbered gates. The permit can't skip a gate, and each gate has one person responsible for opening it.
+      It’s like a flight with numbered gates. The permit can’t skip one, and every gate has a person whose job it is to open it.
     </div>
 
     <div class="pex" style="margin-top:28px">
@@ -751,21 +768,20 @@ footer a:hover{text-decoration:underline}
 <section class="sec sec-alt" id="ch4">
   <div class="wrap">
     <div class="eyebrow">Chapter 04 · Task management &amp; accountability</div>
-    <h2 class="sec-h">A task with a name on it behaves differently.</h2>
+    <h2 class="sec-h">Put a name on a task and it behaves differently.</h2>
     <p class="sec-sub">
-      This is the heart of the application. Every milestone becomes a real task with an assignee,
-      a due date and an escalation path. Nothing sits in a grey zone where everybody assumes
-      somebody else has it.
+      This is the heart of it. Every step becomes a real task with a person, a due date and somewhere
+      to escalate to. Nothing sits in that grey area where everyone quietly assumes someone else picked it up.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      The system never says "someone should do this." It says "Rashid must do this by Thursday" — and if Thursday passes, it tells Rashid's manager.
+      The system never says “someone should do this.” It says “Rashid needs to do this by Thursday.” And if Thursday comes and goes, it tells Rashid’s manager.
     </div>
 
     <h3 style="margin-top:34px;font-size:18px;font-weight:800">The PRO desk, as the officer sees it</h3>
     <p style="font-size:14.5px;color:var(--text-2);margin-top:6px;max-width:64ch">
-      Work is claimed, not dumped. An officer takes a case with <b>Assign To Yourself</b>, or a supervisor routes it with <b>Assign Agent</b> — and from that moment the case has an owner of record.
+      Work gets claimed, not dumped. An officer picks a case up with <b>Assign To Yourself</b>, or a supervisor sends it over with <b>Assign Agent</b>. From that moment the case has an owner on the record.
     </p>
 
     <div class="taskboard" style="margin-top:16px">
@@ -815,55 +831,55 @@ footer a:hover{text-decoration:underline}
       </div>
     </div>
 
-    <h3 style="margin-top:38px;font-size:18px;font-weight:800">The escalation ladder — nothing goes quiet</h3>
+    <h3 style="margin-top:38px;font-size:18px;font-weight:800">The escalation ladder, so nothing goes quiet</h3>
     <div class="esc">
       <div class="escstep">
         <b><i style="background:var(--azure)"></i>Step 1 · Assign</b>
-        <h4>The task gets an owner</h4>
-        <p>On creation the task is routed to a role and claimed by a named officer. Priority (P1–P3) and due date are stamped at that moment.</p>
+        <h4>Somebody owns it</h4>
+        <p>The task goes to a role, then a named officer picks it up. Its priority and due date are set right then.</p>
       </div>
       <div class="escstep">
         <b><i style="background:var(--due)"></i>Step 2 · Nudge</b>
         <h4>Reminder every 2 days</h4>
-        <p>Open tasks re-notify the assignee on a 2-day cycle. Document expiries fire 6 weeks ahead to employee, PRO and HRBP together.</p>
+        <p>Anything still open pings the owner again every two days. Document expiries go out six weeks ahead, to the employee, the PRO and the HRBP at the same time.</p>
       </div>
       <div class="escstep">
         <b><i style="background:var(--late)"></i>Step 3 · Escalate</b>
-        <h4>The manager is told</h4>
-        <p>At 2 weeks before expiry — or when a task passes its due date — the line escalates to the HR Manager and line manager automatically.</p>
+        <h4>The manager hears about it</h4>
+        <p>Two weeks before expiry, or the moment a task goes past its due date, it escalates on its own to the HR manager and the line manager.</p>
       </div>
       <div class="escstep">
         <b><i style="background:var(--done)"></i>Step 4 · Prove</b>
-        <h4>The trail is permanent</h4>
-        <p>Who was assigned, when they were reminded, what they uploaded and when they submitted is written to the record. Audits stop being archaeology.</p>
+        <h4>It’s all on the record</h4>
+        <p>Who had it, when they were reminded, what they uploaded and when they submitted it. An audit stops being a dig through old emails.</p>
       </div>
     </div>
 
     <div class="shot" id="shot-inbox">
       <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Visa Permit Management · Inbox · pending task list and task detail</span></div>
       <img src="shots/inbox-task-details.webp" alt="The Inbox screen listing pending tasks with task type and due date, beside a task detail panel with process type, assignee, due date, note, comment and document upload." loading="lazy" width="1600" height="773">
-      <div class="shot-note"><b>What you're looking at:</b> the officer's pending queue on the left — each entry carries its task type and due date. On the right, the task itself: assignee, due date, a comment thread and the document that has to come back before it can be submitted.</div>
+      <div class="shot-note"><b>What you’re looking at:</b> the officer’s pending queue on the left, each one showing its task type and due date. On the right, the task itself, with the person, the due date, a comment thread and the document that has to come back before it can be submitted.</div>
     </div>
 
     <div class="grid g3" style="margin-top:22px">
       <div class="card">
-        <h3>Landing on what matters</h3>
-        <p>The home tiles are counts, not decoration: tasks pending approval, new visa applications, visas about to expire, and cancellations in flight. One glance, whole estate.</p>
+        <h3>You land on what matters</h3>
+        <p>The tiles on the home screen are real counts, not decoration. Tasks waiting for approval, new applications, visas about to expire, cancellations in flight. One glance and you have the whole picture.</p>
       </div>
       <div class="card">
-        <h3>Progress you can see</h3>
-        <p>Every case shows its milestone table — done, not done — so an officer, an HRBP or a manager can answer "where is it?" without calling anyone.</p>
+        <h3>You can see the progress</h3>
+        <p>Every case shows its steps, done and not done, so an officer, an HRBP or a manager can answer “where is it?” without ringing anybody.</p>
       </div>
       <div class="card">
-        <h3>Delays surfaced at source</h3>
-        <p>The system shows where the wait actually is: the employee who hasn't signed, the medical not booked, the government step submitted and pending. The bottleneck has an address.</p>
+        <h3>Delays show up where they start</h3>
+        <p>You see where the wait actually is. The employee who hasn’t signed, the medical nobody booked, the government step sitting with the ministry. The hold-up has an address.</p>
       </div>
     </div>
 
     <div class="shot">
       <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Visa Permit Management · Home · process status and initiated queue</span></div>
       <img src="shots/vpm-landing-inbox.webp" alt="The VPM landing page showing an Inbox tile with pending task count, and Common Activity tiles for new visa application, visa expiration and visa cancelled." loading="lazy" width="1600" height="773">
-      <div class="shot-note"><b>1,443 visas about to expire</b> is not an alarming number — it is a managed one. Each is already a dated task with an owner, six weeks before it becomes a compliance problem.</div>
+      <div class="shot-note"><b>1,443 visas about to expire</b> sounds alarming until you realise every one of them is already a dated task with someone’s name on it, six weeks before it turns into a compliance problem.</div>
     </div>
   </div>
 </section>
@@ -872,51 +888,51 @@ footer a:hover{text-decoration:underline}
 <section class="sec" id="ch5">
   <div class="wrap">
     <div class="eyebrow">Chapter 05 · The money trail</div>
-    <h2 class="sec-h">No payment without a receipt, a reference and a GL account.</h2>
+    <h2 class="sec-h">Nothing gets paid without a receipt and a GL code.</h2>
     <p class="sec-sub">
-      Government fees are the leakiest part of permit management: paid on cards, in cash,
-      through Noqodi or e-Dirham, by whoever is at the counter. The application makes the payment
-      part of the task, so the money cannot move without leaving a record.
+      Government fees are where the money leaks. Paid on cards, in cash, through Noqodi or e-Dirham,
+      by whoever happens to be at the counter. We make the payment part of the task itself, so money
+      can’t move without leaving a trace.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      You can't finish the step until you've told the system what you paid, how you paid it, and uploaded the receipt. So the receipt never goes missing.
+      You can’t finish the step until you’ve told the system what you paid, how you paid it, and attached the receipt. That way the receipt never goes missing.
     </div>
 
     <div class="money-rail" style="margin-top:28px">
-      <div class="mr"><span class="mr-n">01</span><h4>Captured in the step</h4><p>Amount, VAT, payment mode, payment date and reference number are mandatory fields on the milestone form itself.</p></div>
-      <div class="mr"><span class="mr-n">02</span><h4>Receipt attached</h4><p>The scanned receipt or invoice is a required attachment. No file, no submit — the milestone stays open.</p></div>
-      <div class="mr"><span class="mr-n">03</span><h4>Card holder recorded</h4><p>Who paid and on whose card, and whether the cost is borne by the company or the employee. Reimbursement stops being a negotiation.</p></div>
-      <div class="mr"><span class="mr-n">04</span><h4>Posted to finance</h4><p>Published to the correct GL account with a payment document number, ready for journal posting in S/4HANA.</p></div>
-      <div class="mr"><span class="mr-n">05</span><h4>Reportable</h4><p>Filterable by process, company, employee, date range, payment mode and card holder — then exported for finance.</p></div>
+      <div class="mr"><span class="mr-n">01</span><h4>Captured as you go</h4><p>Amount, VAT, how it was paid, the date and the reference number are all compulsory on the step itself.</p></div>
+      <div class="mr"><span class="mr-n">02</span><h4>Receipt attached</h4><p>The scanned receipt has to be attached. No file, no submit, and the step stays open.</p></div>
+      <div class="mr"><span class="mr-n">03</span><h4>We know who paid</h4><p>Which card, whose card, and whether the company or the employee is carrying the cost. Reimbursement stops being an argument.</p></div>
+      <div class="mr"><span class="mr-n">04</span><h4>Posted to finance</h4><p>It goes to the right GL account with a payment document number, ready to post in S/4HANA.</p></div>
+      <div class="mr"><span class="mr-n">05</span><h4>Easy to pull</h4><p>Filter by process, company, employee, dates, payment mode or card holder, then export it for finance.</p></div>
     </div>
 
     <div class="guard">
       <div class="gcard">
         <h4><span class="check">&#10003;</span>No duplicate payments</h4>
-        <p>A payment reference is captured against a specific milestone of a specific case. The same fee cannot be recorded twice against the same step, and a second attempt is visible against the first.</p>
+        <p>Every reference is tied to one step of one case. You can’t record the same fee twice against the same step, and if somebody tries, it shows up right next to the first one.</p>
       </div>
       <div class="gcard">
         <h4><span class="check">&#10003;</span>No unaccounted spend</h4>
-        <p>Every dirham leaves with a GL account and a payment document number attached. Finance reconciles from the report, not from a shoebox of receipts.</p>
+        <p>Every dirham leaves with a GL account and a document number on it. Finance reconciles from a report instead of a shoebox full of receipts.</p>
       </div>
       <div class="gcard">
         <h4><span class="check">&#10003;</span>Fines have a workflow too</h4>
-        <p>Overstay, traffic, labour and immigration fines are entered by the PRO, routed through the HRBP to payroll, and — once approved — stored as a payroll deduction with the HRBP copied.</p>
+        <p>Overstay, traffic, labour and immigration fines get raised by the PRO, go through the HRBP to payroll, and once they’re approved they sit as a payroll deduction with the HRBP copied in.</p>
       </div>
     </div>
 
     <div class="shot">
       <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Report · Payment Report · filterable, exportable, GL-coded</span></div>
       <img src="shots/report-payment.webp" alt="The Payment Report screen with filters for process type, company, employee ID, payment date range and payment mode, over a table of payment amount, VAT, payment reference number, payment document number, GL account, status and a downloadable receipt per row." loading="lazy" width="1600" height="735">
-      <div class="shot-note"><b>Every row is auditable:</b> amount, VAT, payment reference, payment document number, GL account, status — and the original receipt one click away under Download. This is the report finance actually asked for.</div>
+      <div class="shot-note"><b>Every row stands up to an audit.</b> Amount, VAT, reference, document number, GL account, status, and the original receipt one click away under Download. This is the report your finance team keeps asking for.</div>
     </div>
 
     <div class="shot">
       <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="shot-cap">Milestone form · Labour Contract Insurance Submission · payment is part of the step</span></div>
       <img src="shots/form-labour-insurance.webp" alt="A milestone form dialog for Labour Contract Insurance Submission, with mandatory insurance payment date, payment mode, payment amount, VAT, payment reference number and an upload field for the payment receipt." loading="lazy" width="1600" height="976">
-      <div class="shot-note">The red asterisks are the point. Payment date, mode, amount, VAT, reference and the receipt file are all mandatory before this milestone can be submitted.</div>
+      <div class="shot-note">The red asterisks are the whole point. Date, mode, amount, VAT, reference and the receipt file all have to be there before this step will submit.</div>
     </div>
   </div>
 </section>
@@ -925,17 +941,16 @@ footer a:hover{text-decoration:underline}
 <section class="sec sec-alt" id="ch6">
   <div class="wrap">
     <div class="eyebrow">Chapter 06 · Country packs</div>
-    <h2 class="sec-h">One engine. Seven rulebooks.</h2>
+    <h2 class="sec-h">One engine, seven rulebooks.</h2>
     <p class="sec-sub">
-      Labour law is national, so the process has to be too. The workflow engine, task model,
-      payment capture and reporting stay identical across the region — what changes per country is
-      the milestone set, the authority names, the document checklist and the alert thresholds.
-      Select a country to see its pack.
+      Labour law is national, so the process has to be too. The engine underneath stays the same
+      everywhere: same tasks, same payment capture, same reports. What changes country by country is
+      the steps, the authorities, the document checklist and when the alerts fire. Pick a country and have a look.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      Same machine, different instruction card. Saudi Arabia's steps aren't the UAE's steps — but a manager in either country uses exactly the same screens.
+      Same machine, different instruction card. Saudi Arabia’s steps aren’t the UAE’s steps, but a manager in either country is looking at exactly the same screens.
     </div>
 
     <div style="margin-top:28px">
@@ -949,11 +964,11 @@ footer a:hover{text-decoration:underline}
         What a country pack actually contains
       </h4>
       <p>
-        A pack is the country's statutory flow expressed as configuration on the shared engine: its milestone set, the authorities and
-        document checklist per step, the mandatory fields and attachments, the payment types, and the alert and escalation thresholds.
-        Packs are pre-built rather than custom-developed, which is what makes deployment a matter of weeks. Before go-live, a localisation
-        workshop confirms document names, fee structures and thresholds against your establishment's actual practice — we would rather
-        surface those details then than during UAT.
+        A pack is that country’s legal process written as configuration on the shared engine. The steps, the authority behind each one,
+        the document checklist, which fields and attachments are compulsory, the payment types, and when alerts and escalations fire.
+        They’re pre-built rather than written from scratch, which is why deployment takes weeks instead of quarters. Before go-live we
+        run a short workshop with you to confirm document names, fees and thresholds against how your establishment actually works.
+        Better to sort that out then than halfway through testing.
       </p>
     </div>
   </div>
@@ -965,40 +980,40 @@ footer a:hover{text-decoration:underline}
     <div class="eyebrow">Chapter 07 · Healthcare &amp; professional permits</div>
     <h2 class="sec-h">A nurse needs two permissions, not one.</h2>
     <p class="sec-sub">
-      In healthcare the work permit is only half the story. A clinician cannot legally practise
-      until a separate health regulator has verified their credentials, run primary-source
-      verification and issued a professional licence — on its own clock, with its own renewal
-      cycle and its own CME requirements. The application runs that as a parallel lane on the same case.
+      In healthcare the work permit is only half the story. A clinician can’t legally treat anyone
+      until a health regulator has checked their credentials, verified them with the issuing
+      universities and hospitals, and issued a professional licence. That runs on its own clock, with
+      its own renewal cycle and its own training-hours requirement. We run it as a second lane on the same case.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      One badge lets you into the country. A second badge lets you touch a patient. We track both — and warn you when either is about to run out.
+      One badge gets you into the country. A second badge lets you treat a patient. We track both, and we tell you before either one runs out.
     </div>
 
     <div class="grid g2" style="margin-top:30px">
       <div class="card">
         <h3>The professional licensing lane</h3>
-        <p style="margin-bottom:12px">Tracked alongside the immigration lane, with its own milestones, owners and expiry alerts:</p>
+        <p style="margin-bottom:12px">It runs next to the immigration lane, with its own steps, owners and expiry alerts:</p>
         <ul class="plist">
-          <li>Credential pack collected at recruitment — degree, experience letters, good-standing certificate</li>
-          <li>Primary-source verification (DataFlow) submitted and tracked to result</li>
-          <li>Professional classification or eligibility assessment by the regulator</li>
-          <li>Licensing exam booked, sat and passed — with the certificate uploaded</li>
-          <li>Licence issued, activated against the employing facility, expiry recorded</li>
-          <li>Renewal driven by CME hours, with 90-day advance alerts and 15-day escalations</li>
+          <li>Credentials collected at recruitment: degree, experience letters, good-standing certificate</li>
+          <li>Primary-source verification through DataFlow, submitted and followed to a result</li>
+          <li>The regulator classifies them, or assesses whether they’re eligible</li>
+          <li>Licensing exam booked, sat and passed, with the certificate uploaded</li>
+          <li>Licence issued, activated against the facility they work in, expiry recorded</li>
+          <li>Renewal driven by training hours, with alerts 90 days out and escalations every 15</li>
         </ul>
       </div>
       <div class="card">
         <h3>Why it fails without a system</h3>
-        <p style="margin-bottom:12px">These are the failure modes the application is designed to remove:</p>
+        <p style="margin-bottom:12px">These are the things that go wrong when nobody is tracking it:</p>
         <ul class="plist pain">
-          <li>A clinician joins on a valid visa but cannot be rostered — their licence is still in verification</li>
-          <li>Primary-source verification takes months and nobody is watching the queue</li>
-          <li>A trainee pharmacist's 45-day dataflow deadline passes unnoticed</li>
-          <li>CME hours are not logged until the renewal window has already closed</li>
-          <li>Licence expiry and visa expiry drift apart, so one lapses while the other is fine</li>
-          <li>The facility licence itself expires — and every practitioner under it is exposed</li>
+          <li>A clinician joins on a perfectly good visa but can’t be put on the roster, because their licence is still being verified</li>
+          <li>Verification drags on for months and nobody is watching the queue</li>
+          <li>A trainee pharmacist’s 45-day deadline goes past and nobody notices</li>
+          <li>Training hours only get logged after the renewal window has closed</li>
+          <li>The licence and the visa drift apart, so one lapses while the other is perfectly fine</li>
+          <li>The facility licence itself expires, and every practitioner working under it is exposed</li>
         </ul>
       </div>
     </div>
@@ -1022,16 +1037,16 @@ footer a:hover{text-decoration:underline}
 
     <div class="grid g3" style="margin-top:22px">
       <div class="card">
-        <h3>Facility permits too</h3>
-        <p>Pharmacy and clinic licences, trade licences, establishment cards, civil defence certificates and immigration cards are tracked as company documents with their own expiry alerts and renewal workflows.</p>
+        <h3>Facility permits as well</h3>
+        <p>Pharmacy and clinic licences, trade licences, establishment cards, civil defence certificates and immigration cards all sit here too, as company documents with their own expiry alerts and renewals.</p>
       </div>
       <div class="card">
-        <h3>Any industry-grade permit</h3>
-        <p>The same model handles vehicle registrations, site access permits, professional body memberships and equipment certifications. If it expires and somebody must act, it belongs here.</p>
+        <h3>Any permit, really</h3>
+        <p>The same model handles vehicle registrations, site access permits, professional memberships and equipment certificates. If it expires and somebody has to act on it, it belongs here.</p>
       </div>
       <div class="card">
-        <h3>Proven in the sector</h3>
-        <p>The processes in this journey were built with pharmacy retail and healthcare distribution groups — where practitioner licences, facility licences and work permits all had to be governed together.</p>
+        <h3>Built with the sector</h3>
+        <p>These processes were shaped working with pharmacy retail and healthcare distribution groups, where practitioner licences, facility licences and work permits all had to be governed together.</p>
       </div>
     </div>
   </div>
@@ -1041,16 +1056,16 @@ footer a:hover{text-decoration:underline}
 <section class="sec sec-dark" id="ch8">
   <div class="wrap">
     <div class="eyebrow">Chapter 08 · Integration &amp; API readiness</div>
-    <h2 class="sec-h">Between the government portal and SuccessFactors.</h2>
+    <h2 class="sec-h">We sit between the government portal and SuccessFactors.</h2>
     <p class="sec-sub">
-      The application sits exactly where the gap is: it takes candidates from Recruiting, drives the
-      government-facing work, and writes the resulting permit data back into Employee Central —
-      then pushes the money to finance.
+      That gap is exactly where the problem lives. We take candidates out of Recruiting, drive all the
+      government-facing work, write the permit details back into Employee Central, and send the money
+      across to finance.
     </p>
 
     <div class="plain">
       <b>In plain words</b>
-      SuccessFactors knows who your people are. The government knows who's allowed to work. Our app is the bridge in the middle — and it keeps both sides honest.
+      SuccessFactors knows who your people are. The government decides who’s allowed to work. We’re the bridge in between, and we keep both sides honest.
     </div>
 
     <div class="arch" style="margin-top:30px">
@@ -1105,27 +1120,27 @@ footer a:hover{text-decoration:underline}
     <div class="api-note">
       <h4>
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
-        Government API integration — what we can promise, and what you must obtain
+        Government APIs: what we can do, and what you’ll need to get us
       </h4>
       <p>
-        <b>The application is API-ready by design.</b> Every government-facing milestone is built as an abstracted
-        service call, so a portal integration drops into an existing slot rather than requiring the workflow to be rebuilt.
-        Where an authority exposes an interface, we connect it through SAP Integration Suite and the step becomes automatic —
-        submission, status polling and document retrieval — with the manual path kept as fallback.
+        <b>We built this ready for APIs.</b> Every government-facing step is written as a service call with a slot
+        waiting behind it, so connecting a portal is a matter of plugging it in rather than rebuilding the process.
+        Where an authority does expose an interface, we connect it through SAP Integration Suite and the step becomes
+        automatic: it submits, checks the status and pulls the documents back. The manual path stays there as a fallback.
       </p>
       <p>
-        <b>What we need from you.</b> GCC government portals do not publish open APIs. Access is granted to the
-        <em>employer</em>, not to the software vendor — so the customer must approach each authority directly
-        (Qiwa and Muqeem in KSA, MOHRE and ICP in the UAE, LMRA in Bahrain, and so on) and obtain API credentials,
-        a technical specification and a sandbox under their own establishment registration. Once you hand us those
-        credentials and the spec, we build the connector. Until then the government step stays a tracked manual PRO
-        activity, with the reference number, receipt and status captured in the milestone — which is how the
-        application is designed to operate from day one, with or without a portal connection.
+        <b>Here’s what we’ll need from you.</b> GCC governments don’t publish open APIs, and when they do give access,
+        they give it to the <em>employer</em>, not to a software vendor. So you’ll need to go to each authority yourself.
+        Qiwa and Muqeem in Saudi Arabia, MOHRE and ICP in the UAE, LMRA in Bahrain, and so on. Ask them for API
+        credentials, the technical specification and a sandbox, under your own establishment registration. Hand those
+        to us and we’ll build the connector. Until then the government step stays a manual job for the PRO, tracked
+        like any other, with the reference number, receipt and status captured on the step. That’s how the system is
+        built to work from day one, with or without a portal connection.
       </p>
       <p>
-        <b>Why this still wins.</b> The value is not in automating the click on the government site. It is in knowing
-        that the click happened, who made it, when, what it cost and what came back — which is precisely what
-        is missing today.
+        <b>And honestly, that’s still the win.</b> The value was never in automating the click on the government
+        website. It’s in knowing the click happened, who made it, when, what it cost and what came back. That’s the
+        bit you’re missing today.
       </p>
     </div>
   </div>
@@ -1135,11 +1150,11 @@ footer a:hover{text-decoration:underline}
 <section class="sec" id="ch9">
   <div class="wrap">
     <div class="eyebrow">Chapter 09 · What it runs on</div>
-    <h2 class="sec-h">The SAP BTP services required.</h2>
+    <h2 class="sec-h">What you’ll need on SAP BTP.</h2>
     <p class="sec-sub">
-      The application is a native SAP Business Technology Platform solution. This is the service
-      footprint to provision in your global account — core services are needed for any deployment,
-      optional ones unlock integration and scale.
+      This is a native SAP Business Technology Platform application. Here’s what to provision in your
+      global account. The core services are needed for any deployment. The rest you add as you go,
+      for integration and scale.
     </p>
 
     <div class="tblwrap" style="margin-top:26px">
@@ -1164,16 +1179,16 @@ footer a:hover{text-decoration:underline}
 
     <div class="grid g3" style="margin-top:22px">
       <div class="card">
-        <h3>Two licensing routes</h3>
-        <p>Either you subscribe and operate the runtime, portal and CI/CD in your own global account — or INK IT manages the subscription and operations entirely, which removes the need for separate developer licences and is materially cheaper to run.</p>
+        <h3>Two ways to license it</h3>
+        <p>Either you subscribe and run the runtime, portal and CI/CD in your own global account, or we manage the whole thing for you. The second route means you don’t need separate developer licences, and it works out noticeably cheaper to run.</p>
       </div>
       <div class="card">
-        <h3>Works without SuccessFactors</h3>
-        <p>The application is system-agnostic within BTP. If your SF modules aren't live yet, the non-integrated deployment still delivers full governance, task management, payment tracking and reporting from day one.</p>
+        <h3>It works without SuccessFactors</h3>
+        <p>If your SuccessFactors modules aren’t live yet, that’s fine. The non-integrated version still gives you the full governance, task management, payment tracking and reporting from day one.</p>
       </div>
       <div class="card">
-        <h3>Deployable in weeks</h3>
-        <p>Pre-built and configurable rather than custom-developed: environment setup and configuration, then integration, then localisation — with a typical path from kick-off to hypercare measured in weeks, not quarters.</p>
+        <h3>Weeks, not quarters</h3>
+        <p>Because it’s pre-built and configured rather than written from scratch, the path is short. Set up the environment and configure it, then integrate, then localise. Kick-off to hypercare is usually a matter of weeks.</p>
       </div>
     </div>
   </div>
@@ -1183,59 +1198,59 @@ footer a:hover{text-decoration:underline}
 <section class="sec sec-alt" id="ch10">
   <div class="wrap">
     <div class="eyebrow">Chapter 10 · The value</div>
-    <h2 class="sec-h">What changes on the Monday after go-live.</h2>
+    <h2 class="sec-h">What’s different the Monday after go-live.</h2>
     <p class="sec-sub">
-      Not a transformation programme. A working desk for the people who hold your compliance risk.
+      This isn’t a transformation programme. It’s a working desk for the people who are carrying your compliance risk.
     </p>
 
     <div class="ba" style="margin-top:28px">
       <div class="bacol before">
         <h3>Today <span>Before</span></h3>
         <ul class="balist">
-          <li>Expiry tracking in a spreadsheet only one person maintains</li>
-          <li>PRO tasks live in WhatsApp threads and personal memory</li>
-          <li>"Where is this permit?" takes a day and three phone calls</li>
-          <li>Fees paid on cards with receipts reconciled weeks later</li>
-          <li>Duplicate and unaccounted payments found at audit</li>
-          <li>Permit data re-keyed into Employee Central by hand</li>
-          <li>Fines absorbed because nobody saw the deadline coming</li>
-          <li>Each new country means a new spreadsheet and a new process</li>
+          <li>Expiry tracking in a spreadsheet only one person keeps up</li>
+          <li>PRO work lives in WhatsApp threads and people’s heads</li>
+          <li>“Where is this permit?” takes three phone calls and a day</li>
+          <li>Fees go on cards and the receipts get reconciled weeks later</li>
+          <li>You find the duplicates and the unaccounted spend at audit</li>
+          <li>Somebody re-types the permit data into Employee Central</li>
+          <li>You absorb fines because nobody saw the deadline coming</li>
+          <li>Every new country means another spreadsheet and another process</li>
         </ul>
       </div>
       <div class="bacol after">
         <h3>After go-live <span>After</span></h3>
         <ul class="balist">
-          <li>Every expiry is a dated task with an owner, six weeks ahead</li>
-          <li>Each PRO has a claimed queue with priorities and due dates</li>
-          <li>Status is on screen — for the officer, the HRBP and the manager</li>
-          <li>Payment, receipt and card holder captured inside the step</li>
+          <li>Every expiry is a dated task with an owner, six weeks out</li>
+          <li>Each PRO has their own queue, with priorities and due dates</li>
+          <li>The status is on screen for the officer, the HRBP and the manager</li>
+          <li>Payment, receipt and card holder all captured inside the step</li>
           <li>Every payment carries a GL account and a document number</li>
-          <li>Permit details flow back into Employee Central automatically</li>
-          <li>Escalation fires before the deadline, not after the fine</li>
-          <li>A new country is a configured pack on the same engine</li>
+          <li>Permit details flow back into Employee Central on their own</li>
+          <li>Escalation fires before the deadline, not after the fine lands</li>
+          <li>A new country is just another pack on the same engine</li>
         </ul>
       </div>
     </div>
 
     <div class="vstat">
-      <div class="vs"><b>6 weeks</b><span>Advance warning on every visa and labour card expiry, with escalation at two weeks</span></div>
-      <div class="vs"><b>1 screen</b><span>To answer "where is it?" for any employee, in any country, at any stage</span></div>
-      <div class="vs"><b>100%</b><span>Of government payments carrying a receipt, reference number and GL account</span></div>
-      <div class="vs"><b>7</b><span>Country packs from one engine — add a market without rebuilding the process</span></div>
+      <div class="vs"><b>6 weeks</b><span>Warning on every visa and labour card expiry, escalating at two weeks</span></div>
+      <div class="vs"><b>1 screen</b><span>To answer “where is it?” for anyone, in any country, at any stage</span></div>
+      <div class="vs"><b>100%</b><span>Of government payments carry a receipt, a reference and a GL account</span></div>
+      <div class="vs"><b>7</b><span>Country packs on one engine, so a new market isn’t a rebuild</span></div>
     </div>
 
     <div class="grid g3" style="margin-top:26px">
       <div class="card">
         <h3>Accountability</h3>
-        <p>Every task has a named owner, a due date and a reminder cycle. The question stops being "did anyone do this?" and becomes "it's with Rashid, due Thursday."</p>
+        <p>Every task has a name, a due date and a reminder on it. The question stops being “did anyone do this?” and becomes “it’s with Rashid, due Thursday.”</p>
       </div>
       <div class="card">
         <h3>Traceability</h3>
-        <p>Assignment, reminders, uploads, submissions and payments are written to the record as they happen. An audit becomes a report, not an investigation.</p>
+        <p>Assignments, reminders, uploads, submissions and payments all get written down as they happen. An audit turns into a report instead of an investigation.</p>
       </div>
       <div class="card">
         <h3>Visibility</h3>
-        <p>Delays are shown at source — the unsigned contract, the unbooked medical, the government step pending. You fix the actual bottleneck instead of chasing everyone.</p>
+        <p>You see the delay where it starts: the unsigned contract, the medical nobody booked, the step sitting with the ministry. So you fix the real hold-up instead of chasing everybody.</p>
       </div>
     </div>
   </div>
@@ -1245,15 +1260,14 @@ footer a:hover{text-decoration:underline}
 <section class="sec sec-dark" id="close" style="padding-block:70px">
   <div class="wrap">
     <div class="close-cta">
-      <h2>Ready for the GCC, today.</h2>
+      <h2>Ready for the GCC.</h2>
       <p>
-        Country packs for the UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain and Libya — for work
-        permits, healthcare practitioner licences and any industry-grade permit that expires and
-        needs somebody to act.
+        Country packs for the UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain and Libya. Work permits,
+        healthcare licences, and honestly any permit that expires and needs somebody to do something about it.
       </p>
       <div class="close-row">
-        <a class="btn btn-primary" href="#ch3">Replay the permit walkthrough</a>
-        <a class="btn btn-ghost" href="#ch6">Open the country packs</a>
+        <a class="btn btn-primary" href="#ch3">Walk through a permit again</a>
+        <a class="btn btn-ghost" href="#ch6">Look at the country packs</a>
       </div>
     </div>
   </div>
@@ -1279,7 +1293,7 @@ footer a:hover{text-decoration:underline}
 var CHAPTERS=[
   {id:"ch1",n:"01",t:"The problem"},
   {id:"ch2",n:"02",t:"Who does the work"},
-  {id:"ch3",n:"03",t:"The runway"},
+  {id:"ch3",n:"03",t:"Walk a permit"},
   {id:"ch4",n:"04",t:"Tasks & accountability"},
   {id:"ch5",n:"05",t:"The money trail"},
   {id:"ch6",n:"06",t:"Country packs"},
@@ -1290,160 +1304,162 @@ var CHAPTERS=[
 ];
 
 /* ================= PERSONAS ================= */
+var FACES={"rashid": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#DCEFEC\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#F2F4F6\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#A9713F\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#FAFAF8\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#A9713F\"/><path d=\"M31.5 44c0 4 1 9 2.5 13 2.5 7 8.5 12 16 12s13.5-5 16-12 c1.5-4 2.5-9 2.5-13 -2 6-5 8-8.5 9 -3 .8-6.5 1.2-10 1.2s-7-.4-10-1.2 c-3.5-1-6.5-3-8.5-9z\" fill=\"#221A16\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "priya": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#F3E8EF\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#1E6FD9\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#C68A5B\"/><ellipse cx=\"29\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#C68A5B\"/><ellipse cx=\"71\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#C68A5B\"/><ellipse cx=\"50\" cy=\"44\" rx=\"21.5\" ry=\"23\" fill=\"#221A16\"/><circle cx=\"50\" cy=\"19\" r=\"8.5\" fill=\"#221A16\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#C68A5B\"/><path d=\"M31 42c1-13 8-20 19-20s18 7 19 20c-3-9-9-13-19-13s-16 4-19 13z\" fill=\"#221A16\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "aisha": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#EDE9F7\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#F2F4F6\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#C68A5B\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#9A8577\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#C68A5B\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#A89383\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#A89383\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "ahmed": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#E4EEF8\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#16304C\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#A9713F\"/><ellipse cx=\"29\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#A9713F\"/><ellipse cx=\"71\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#A9713F\"/><ellipse cx=\"50\" cy=\"44\" rx=\"21.5\" ry=\"23\" fill=\"#2E231C\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#A9713F\"/><path d=\"M31 42c1-13 8-20 19-20s18 7 19 20c-3-9-9-13-19-13s-16 4-19 13z\" fill=\"#2E231C\"/><path d=\"M31.5 44c0 4 1 9 2.5 13 2.5 7 8.5 12 16 12s13.5-5 16-12 c1.5-4 2.5-9 2.5-13 -2 6-5 8-8.5 9 -3 .8-6.5 1.2-10 1.2s-7-.4-10-1.2 c-3.5-1-6.5-3-8.5-9z\" fill=\"#2E231C\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "ramesh": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#FBEFE0\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#E07A2F\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#8D5524\"/><ellipse cx=\"29\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#8D5524\"/><ellipse cx=\"71\" cy=\"48\" rx=\"3.4\" ry=\"4.6\" fill=\"#8D5524\"/><ellipse cx=\"50\" cy=\"44\" rx=\"21.5\" ry=\"23\" fill=\"#221A16\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#8D5524\"/><path d=\"M31 42c1-13 8-20 19-20s18 7 19 20c-3-9-9-13-19-13s-16 4-19 13z\" fill=\"#221A16\"/><path d=\"M42.5 54.5c2.2-2 5.3-2 7.5 0 2.2-2 5.3-2 7.5 0 -2.2 3-5.3 3-7.5 1.2 -2.2 1.8-5.3 1.8-7.5-1.2z\" fill=\"#221A16\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "fatima": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#E2F0EC\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#2F3C4F\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#D9A374\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#1D2530\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#D9A374\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#2A3340\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#2A3340\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>", "omar": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" role=\"img\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#E8EDF2\"/><path d=\"M50 63c-14 0-26 8-30 19 l0 18 60 0 0-18c-4-11-16-19-30-19z\" fill=\"#F2F4F6\"/><path d=\"M43 56h14v14a7 7 0 0 1-14 0z\" fill=\"#D9A374\"/><path d=\"M50 16c-18 0-27 13-27 29 0 9 1 16 0 22 -1 7-4 12-8 15 l0 18 70 0 0-18c-4-3-7-8-8-15 -1-6 0-13 0-22 0-16-9-29-27-29z\" fill=\"#FAFAF8\"/><ellipse cx=\"50\" cy=\"45\" rx=\"18.5\" ry=\"22\" fill=\"#D9A374\"/><path d=\"M31.5 44c0 4 1 9 2.5 13 2.5 7 8.5 12 16 12s13.5-5 16-12 c1.5-4 2.5-9 2.5-13 -2 6-5 8-8.5 9 -3 .8-6.5 1.2-10 1.2s-7-.4-10-1.2 c-3.5-1-6.5-3-8.5-9z\" fill=\"#6E6A66\"/><rect x=\"26.5\" y=\"22.5\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><rect x=\"26.5\" y=\"28\" width=\"47\" height=\"3.6\" rx=\"1.8\" fill=\"#23282E\"/><path d=\"M40 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><path d=\"M54 40.5c1.6-1.4 4.4-1.4 6 0\" stroke=\"#2B211B\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".75\"/><circle cx=\"43\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><circle cx=\"57\" cy=\"46\" r=\"2\" fill=\"#2B211B\"/><path d=\"M50 48v5\" stroke=\"#8a5a36\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" opacity=\".45\"/><path d=\"M45.5 58.5c2.6 2.2 6.4 2.2 9 0\" stroke=\"#7A3F2E\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/><g fill=\"none\" stroke=\"#3A4654\" stroke-width=\"1.7\" opacity=\".92\"><circle cx=\"43\" cy=\"46\" r=\"6.4\"/><circle cx=\"57\" cy=\"46\" r=\"6.4\"/><path d=\"M49.4 45.4h1.2M36.6 45h-3M63.4 45h3\"/></g></svg>"};
+
 var PERSONAS=[
 {
- ini:"GRO",nm:"Government Relations Officer",ro:"PRO desk · the engine room",
- q:"I used to keep the whole company's visa position in my head and in three WhatsApp groups. Now it's a queue with due dates, and I can prove what I did.",
+ face:"rashid",nm:"Rashid Al Mazrouei",ro:"Government Relations Officer",loc:"Dubai",
+ q:"I used to carry the whole company's visa position in my head and in three WhatsApp groups. Now it's a queue with due dates, and I can show you exactly what I did and when.",
  does:[
-  "Claims cases from the queue with Assign To Yourself, or receives them from a supervisor",
-  "Applies for MOHRE job offers, labour cards and labour contracts on the government portal",
-  "Records every government payment — amount, VAT, mode, reference — and uploads the receipt",
-  "Applies for entry permits for candidates outside the country, or change of status for those inside",
-  "Books medicals and biometrics, then records fit/unfit results and uploads the report",
-  "Submits visa stamping and Emirates ID applications and tracks them to collection",
-  "Hands over the Emirates ID and records issue and expiry dates against the employee",
-  "Maintains the quota register and applies for new quota when the establishment runs short",
-  "Raises fines for entry and routes them through the HRBP to payroll",
-  "Follows up with recruitment, onboarding and the employee — from inside the task, not over the phone"
+  "Picks up cases from the queue himself, or takes them when a supervisor assigns them",
+  "Files the MOHRE job offer, labour card and labour contract on the government portal",
+  "Logs what each step cost, how he paid, the reference number, and uploads the receipt",
+  "Applies for the entry permit when the candidate is abroad, or change of status when they're already here",
+  "Books medicals and biometrics, then records the fit or unfit result and uploads the report",
+  "Submits visa stamping and the Emirates ID application, and follows them through to collection",
+  "Hands over the Emirates ID and records the issue and expiry dates against the employee",
+  "Keeps an eye on the quota, and applies for more before the company runs out",
+  "Raises fines and sends them through the HRBP to payroll",
+  "Chases recruitment, onboarding and the employee from inside the task, instead of by phone"
  ],
  sees:[
-  "One queue of cases, sorted by priority and due date",
-  "Which milestone each case is sitting on, and for how long",
-  "Every payment made on a case, with receipts attached",
-  "Quota availability before starting a new permit",
-  "Exactly who is holding up a case and what they were asked for"
+  "One queue of cases, sorted by priority and by what's due first",
+  "Which step each case is stuck on, and how long it's been there",
+  "Every payment made on a case, with the receipts attached",
+  "Whether there's quota available before he starts a new permit",
+  "Exactly who is holding a case up, and what they were asked for"
  ],
  wins:[
-  "No more reconstructing what happened from memory or chat history",
-  "Reminders arrive automatically — chasing is the system's job now",
-  "Payments are logged as they are made, not from a shoebox at month end",
-  "Work is provably done, with a timestamp against their name"
+  "No more piecing together what happened from memory and old chats",
+  "Reminders go out on their own, so chasing people isn't his job any more",
+  "Payments get logged as he makes them, not from a pile of receipts at month end",
+  "His work is on the record, with his name and a timestamp on it"
  ]
 },
 {
- ini:"TA",nm:"Recruiter",ro:"Talent acquisition",
- q:"I can finally tell a candidate a joining date I actually believe, because I can see whether their permit has started moving.",
+ face:"priya",nm:"Priya Menon",ro:"Recruiter",loc:"Talent acquisition",
+ q:"I can finally give a candidate a joining date I actually believe, because I can see whether their permit has started moving.",
  does:[
-  "Completes the candidate file and document checklist at offer acceptance",
-  "Releases accepted candidates into the permit process — automatically from SF Recruiting",
-  "Collects passport copies, photographs and qualification documents",
-  "Coordinates with the PRO on profession and work-location codes before submission",
-  "Keeps the candidate informed while the entry permit is processed"
+  "Finishes the candidate file and document checklist once the offer is accepted",
+  "Sends accepted candidates into the permit process, straight from SF Recruiting",
+  "Collects passports, photographs and qualification documents",
+  "Agrees the profession and work-location codes with the PRO before anything is submitted",
+  "Keeps the candidate in the loop while the entry permit is being processed"
  ],
  sees:[
-  "Which of their accepted candidates have a permit in flight",
-  "Where each one has reached, without asking the PRO",
-  "Whether quota is available before promising a start date"
+  "Which of her accepted candidates have a permit in flight",
+  "How far each one has got, without having to ask the PRO",
+  "Whether quota is available before she promises a start date"
  ],
  wins:[
-  "Candidates stop dropping out during an unexplained silence",
-  "Joining dates are based on real progress, not optimism",
-  "The hand-off to the PRO desk is recorded, not assumed"
+  "Candidates stop dropping out during a long silence nobody explained",
+  "Joining dates are based on real progress instead of hope",
+  "The hand-off to the PRO desk is recorded, so it can't be assumed"
  ]
 },
 {
- ini:"OB",nm:"Onboarding Coordinator",ro:"Employee relations · new joiners",
- q:"The permit and the onboarding used to be two separate worlds. Now the same case carries both.",
+ face:"aisha",nm:"Aisha Al Harbi",ro:"Onboarding Coordinator",loc:"Riyadh",
+ q:"The permit and the onboarding used to be two separate worlds. Now they're the same case, so I'm not guessing any more.",
  does:[
-  "Initiates the new work permit application from the candidate record",
-  "Checks quota availability and triggers a new quota application when needed",
-  "Chases signed offers, MOHRE contracts and medical receipts from the joiner",
-  "Sends biometric appointment details to the candidate and confirms receipt",
-  "Handles Emiratisation and pension registration steps for national hires",
-  "Blocks a pending hire from progressing until the labour card is uploaded by the PRO"
+  "Starts the new work permit application from the candidate record",
+  "Checks whether there's quota, and kicks off a new quota application if there isn't",
+  "Chases signed offers, government contracts and medical receipts from the joiner",
+  "Sends the biometric appointment to the candidate and confirms they got it",
+  "Handles the extra steps for national hires, like pension registration and the IBAN letter",
+  "Holds a pending hire back until the PRO has uploaded the labour card"
  ],
  sees:[
-  "Every pending hire with its permit status in one list",
-  "Which documents are still outstanding from which candidate",
-  "When the entry permit lands, so day-one logistics can start"
+  "Every pending hire with its permit status, in one list",
+  "Which documents are still outstanding, and from whom",
+  "When the entry permit lands, so she can start on day-one logistics"
  ],
  wins:[
-  "No joiner arrives without the paperwork that makes them legal to work",
-  "Reminders to candidates go out automatically every two days",
+  "Nobody turns up for their first day without the paperwork that makes them legal to work",
+  "Reminders go to candidates every two days without her writing them",
   "The onboarding clock and the permit clock are finally the same clock"
  ]
 },
 {
- ini:"HRBP",nm:"HR Business Partner",ro:"Employee relations",
- q:"I get pulled in at exactly the right moment now — not two weeks after something went wrong.",
+ face:"ahmed",nm:"Ahmed Khalil",ro:"HR Business Partner",loc:"Employee relations",
+ q:"I get pulled in at the right moment now, rather than two weeks after something has already gone wrong.",
  does:[
-  "Verifies renewal contracts before they go to the employee for signature",
-  "Approves visa allocation for senior grades and designated populations",
-  "Initiates cancellation once end-of-service is settled and approved",
-  "Reviews fines raised by the PRO before they reach payroll as deductions",
-  "Receives escalations when an employee has not acted on their step"
+  "Checks renewal contracts before they go to the employee to sign",
+  "Approves visa allocation for senior grades and certain populations",
+  "Starts the cancellation once end-of-service is settled and signed off",
+  "Reviews fines the PRO has raised before they reach payroll as deductions",
+  "Picks up escalations when an employee hasn't done their part"
  ],
  sees:[
-  "Their population's visa and labour card expiry horizon",
+  "The visa and labour card expiry picture for his population",
   "Which employees are holding up their own process",
-  "Fine exposure across their business unit"
+  "What the company is exposed to in fines across his business unit"
  ],
  wins:[
-  "Escalations arrive before the fine, not after it",
-  "Cancellation cannot start before end-of-service is properly settled",
-  "No manual tracking of who signed what"
+  "Escalations reach him before the fine, not after",
+  "Cancellation can't start until end-of-service is properly settled",
+  "No spreadsheet to track who has signed what"
  ]
 },
 {
- ini:"EMP",nm:"Employee or Candidate",ro:"Self-service",
- q:"I know what I have to do, by when, and I can see that it was received.",
+ face:"ramesh",nm:"Ramesh Kumar",ro:"Employee",loc:"HVAC technician",
+ q:"I know what I have to do, by when, and I can see that they received it. That's all I ever wanted.",
  does:[
-  "Acknowledges and uploads the signed contract or offer",
-  "Confirms whether they are inside or outside the country",
-  "Confirms medical appointment completion",
-  "Confirms unemployment-insurance (ILOE) enrolment where required",
-  "Confirms receipt of the Emirates ID and biometric appointment"
+  "Signs and uploads his contract or offer",
+  "Confirms whether he's inside or outside the country",
+  "Confirms when he's been for his medical",
+  "Confirms his unemployment insurance enrolment where it's needed",
+  "Confirms he's received his biometric appointment and his Emirates ID"
  ],
  sees:[
-  "Their own permit status and what is pending from them",
-  "Their document expiry dates, six weeks ahead",
-  "Confirmation that their upload was received"
+  "Where his own permit has got to, and what's waiting on him",
+  "His document expiry dates, six weeks ahead",
+  "Confirmation that what he uploaded actually arrived"
  ],
  wins:[
-  "No guessing whether HR got the document",
-  "Reminders instead of a surprise expiry",
-  "A clear record if a delay was never theirs"
+  "No wondering whether HR got the document",
+  "A reminder instead of a nasty surprise when something expires",
+  "A clear record when a delay was never his fault"
  ]
 },
 {
- ini:"FIN",nm:"Finance Controller",ro:"Payments & GL",
+ face:"fatima",nm:"Fatima Al Suwaidi",ro:"Finance Controller",loc:"Payments and GL",
  q:"I get one report with every government payment, its receipt and its GL account. Reconciliation went from days to an export.",
  does:[
-  "Reconciles government fees against receipts from the payment report",
-  "Posts permit costs to the correct GL accounts via journal entries",
-  "Reviews card-holder spend for reimbursement of e-Dirham, Noqodi and petty cash",
-  "Approves fine deductions routed from the HRBP into payroll"
+  "Reconciles government fees against receipts, straight from the payment report",
+  "Posts permit costs to the right GL accounts through journal entries",
+  "Reviews card-holder spend so e-Dirham, Noqodi and petty cash can be reimbursed",
+  "Approves the fine deductions the HRBP sends through to payroll"
  ],
  sees:[
-  "Every payment filtered by company, process, date range, mode or card holder",
-  "The original receipt against each line",
+  "Every payment, filtered by company, process, date, mode or card holder",
+  "The original receipt sitting against each line",
   "The payment document number and GL account for each posting"
  ],
  wins:[
-  "Duplicate payments are prevented at entry, not discovered at audit",
-  "No unaccounted spend — a payment cannot exist without a receipt",
-  "Cost of permits per entity becomes a number, not an estimate"
+  "Duplicate payments get stopped at entry instead of found at audit",
+  "Nothing unaccounted for, because a payment can't exist without a receipt",
+  "The cost of permits per entity is a number now, not an estimate"
  ]
 },
 {
- ini:"CHRO",nm:"Head of HR",ro:"Governance & risk",
- q:"I can answer a board question about compliance exposure in one screen, across every country we operate in.",
+ face:"omar",nm:"Omar Al Rashed",ro:"Head of HR",loc:"Governance and risk",
+ q:"I can answer a board question about our compliance exposure from one screen, for every country we operate in.",
  does:[
-  "Monitors quota utilisation and Saudization or Emiratisation ratios",
+  "Watches quota use and the Saudisation or Emiratisation ratios",
   "Reviews compliance exposure across entities and countries",
-  "Approves policy-level changes to workflows and thresholds",
-  "Signs off on permit cost budgets per entity"
+  "Signs off policy changes to workflows and thresholds",
+  "Approves the permit cost budget for each entity"
  ],
  sees:[
   "Running, completed and cancelled counts across all three lifecycles",
-  "Expiry horizon across the whole workforce",
-  "Agent workload — how many assignments each officer has closed",
-  "Cost of compliance per entity and per country"
+  "The expiry picture for the whole workforce",
+  "How much work each officer is carrying, and how much they've closed",
+  "What compliance costs, per entity and per country"
  ],
  wins:[
-  "Compliance risk becomes a dashboard, not a fire drill",
-  "Officer performance is measurable and fairly distributed",
-  "Adding a country doesn't mean rebuilding governance"
+  "Compliance risk becomes a dashboard instead of a fire drill",
+  "Officer workload is measurable, so it can be shared out fairly",
+  "Adding a country doesn't mean rebuilding how any of this is governed"
  ]
 }
 ];
@@ -1455,17 +1471,17 @@ var PROCESSES=[
  shotcap:"Work Permit · New · milestone board for an in-flight case",
  shotalt:"The process board for a New Work Permit case, showing eleven milestone tiles connected in sequence from MOHRE Job Offer through to Emirates ID Collection.",
  steps:[
-  {t:"MOHRE Job Offer & Labour Card",o:"PRO / GRO",d:"The officer raises the job offer and labour card application on the government portal, then records what it cost. This is the first government touch — everything downstream depends on it being right.",m:[["Trigger","Candidate released from Recruiting"],["Owner","PRO desk"],["If it stalls","Reminder every 2 days"]],tags:[["pay","Payment date, mode, amount, VAT"],["pay","Payment reference number"],["att","Receipt upload"]],shot:"shots/form-mohre-joblabour.webp",shotcap:"Milestone form · MOHRE Job Offer and Labour Card",shotalt:"A milestone form showing employee ID, candidate name and company pre-filled from the HR system, followed by mandatory payment date, payment mode, payment amount, VAT and payment reference fields."},
-  {t:"MOHRE Job Offer & Labour Card Acceptance",o:"Candidate · tracked by PRO",d:"The offer and labour contract go to the candidate for signature and come back signed. Sent and received dates are both captured, so the waiting time is attributable rather than vague.",m:[["Waiting on","The candidate"],["Captured","Sent date, received date"],["If it stalls","Reminder every 2 days"]],tags:[["att","Signed labour contract"],["","Remarks"]],shot:"shots/form-jolc-acceptance.webp",shotcap:"Milestone form · MOHRE Job Offer and Labour Card Acceptance",shotalt:"A milestone form dialog capturing work permit type, job title, employee ID, the dates the job offer and labour contract were sent and received, an upload for the signed labour contract, and remarks."},
-  {t:"Labour Contract Insurance Submission",o:"PRO / GRO",d:"The mandatory insurance is paid and submitted. Payment and receipt are part of the step itself, not a separate exercise for finance to chase later.",m:[["Owner","PRO desk"],["Finance","Posts to GL on completion"],["Blocking","Cannot submit without receipt"]],tags:[["pay","Insurance payment date, mode, amount"],["pay","VAT and reference number"],["att","Payment receipt — mandatory"]],shot:"shots/form-labour-insurance.webp",shotcap:"Milestone form · Labour Contract Insurance Submission",shotalt:"A milestone form dialog with mandatory insurance payment date, payment mode, amount, VAT, payment reference number, receipt upload and remarks."},
-  {t:"Labour Contract Submission",o:"PRO / GRO",d:"The labour contract is submitted to the ministry and the resulting labour card details are recorded against the employee — number, issue date, expiry date and the document itself.",m:[["Captured","Labour card number"],["Captured","Issue and expiry dates"],["Writes back","Employee Central"]],tags:[["pay","MOHRE application fees"],["att","Labour card document"]]},
-  {t:"Entry Permit Application",o:"PRO / GRO",d:"For a candidate outside the country, the entry permit is applied for and tracked to issue or rejection. A rejection notifies onboarding immediately so the candidate is not left waiting.",m:[["Applies when","Candidate is outside the country"],["On rejection","Onboarding notified to inform candidate"],["Self-service","Candidate confirms in/out of country"]],tags:[["pay","Entry permit fees"],["att","Entry permit document"]]},
-  {t:"Change Status",o:"PRO / GRO",d:"For a candidate already inside the country, status change replaces the entry permit route. The system offers the correct path based on the confirmation the candidate gave.",m:[["Applies when","Candidate is inside the country"],["Validation","Work location must match MOL entity"],["Owner","PRO desk"]],tags:[["pay","Change of status fees"],["att","Status change document"]]},
-  {t:"Medical Application",o:"PRO · with employee",d:"The medical is booked and the appointment details go to the candidate. The candidate confirms attendance, and the system reminds them every two days until they do.",m:[["Sent to","Candidate, by email"],["Reminder","Every 2 days until confirmed"],["Captured","Appointment location and date"]],tags:[["pay","Medical typing fees"],["att","Medical appointment document"]]},
-  {t:"Medical Report",o:"PRO / GRO",d:"The fitness result is recorded. A fit result releases the next milestone; an unfit result routes the case to the HRBP for offboarding rather than letting it drift.",m:[["Outcome","Fit or unfit"],["If unfit","Routed to HRBP to offboard"],["Captured","Report document"]],tags:[["att","Medical report — mandatory"]]},
-  {t:"Emirates ID",o:"PRO / GRO",d:"The Emirates ID application is filed and — for first-time entrants — a biometric appointment is booked and sent to the candidate by the onboarding officer.",m:[["Biometrics","New UAE entrants only"],["Sent by","Onboarding officer"],["Confirmed by","The candidate"]],tags:[["pay","EID application fees"],["att","Stamped EID application form"]]},
-  {t:"Visa Typing",o:"PRO / GRO",d:"Visa stamping is typed and submitted, with the payment and receipt captured in the step as with every other government fee.",m:[["Owner","PRO desk"],["Captured","Payment and receipts"],["Tracks","Approval or rejection"]],tags:[["pay","Visa stamping fees"],["att","Payment receipts"]]},
-  {t:"EID Collection",o:"PRO · employee confirms",d:"The final milestone. The Emirates ID is collected and handed over, both sets of dates are recorded, and the system flags any mismatch between Emirates ID and visa expiry before it becomes a problem.",m:[["Captured","EID and visa issue and expiry dates"],["Validation","System flags date mismatches"],["Closes with","Employee confirmation"]],tags:[["att","Emirates ID document"],["","Handover confirmation"]]}
+  {t:"MOHRE Job Offer & Labour Card",o:"PRO / GRO",d:"Rashid raises the job offer and labour card on the government portal, then records what it cost. This is the first time you touch the government, and everything after it depends on getting this one right.",m:[["Trigger","Candidate released from Recruiting"],["Owner","PRO desk"],["If it stalls","Reminder every 2 days"]],tags:[["pay","Payment date, mode, amount, VAT"],["pay","Payment reference number"],["att","Receipt upload"]],shot:"shots/form-mohre-joblabour.webp",shotcap:"Milestone form · MOHRE Job Offer and Labour Card",shotalt:"A milestone form showing employee ID, candidate name and company pre-filled from the HR system, followed by mandatory payment date, payment mode, payment amount, VAT and payment reference fields."},
+  {t:"MOHRE Job Offer & Labour Card Acceptance",o:"Candidate · tracked by PRO",d:"The offer and labour contract go out to the candidate and come back signed. We capture both the date it went and the date it came back, so if there was a wait, you can see whose wait it was.",m:[["Waiting on","The candidate"],["Captured","Sent date, received date"],["If it stalls","Reminder every 2 days"]],tags:[["att","Signed labour contract"],["","Remarks"]],shot:"shots/form-jolc-acceptance.webp",shotcap:"Milestone form · MOHRE Job Offer and Labour Card Acceptance",shotalt:"A milestone form dialog capturing work permit type, job title, employee ID, the dates the job offer and labour contract were sent and received, an upload for the signed labour contract, and remarks."},
+  {t:"Labour Contract Insurance Submission",o:"PRO / GRO",d:"The insurance gets paid and submitted. The payment and receipt are part of this step, not something finance has to chase down afterwards.",m:[["Owner","PRO desk"],["Finance","Posts to GL on completion"],["Blocking","Cannot submit without receipt"]],tags:[["pay","Insurance payment date, mode, amount"],["pay","VAT and reference number"],["att","Payment receipt — mandatory"]],shot:"shots/form-labour-insurance.webp",shotcap:"Milestone form · Labour Contract Insurance Submission",shotalt:"A milestone form dialog with mandatory insurance payment date, payment mode, amount, VAT, payment reference number, receipt upload and remarks."},
+  {t:"Labour Contract Submission",o:"PRO / GRO",d:"The labour contract goes to the ministry, and the labour card details come back onto the employee record: number, issue date, expiry date and the document itself.",m:[["Captured","Labour card number"],["Captured","Issue and expiry dates"],["Writes back","Employee Central"]],tags:[["pay","MOHRE application fees"],["att","Labour card document"]]},
+  {t:"Entry Permit Application",o:"PRO / GRO",d:"If the candidate is still abroad, we apply for the entry permit and follow it through to approval or rejection. If it’s rejected, onboarding hears straight away, so nobody is left waiting in the dark.",m:[["Applies when","Candidate is outside the country"],["On rejection","Onboarding notified to inform candidate"],["Self-service","Candidate confirms in/out of country"]],tags:[["pay","Entry permit fees"],["att","Entry permit document"]]},
+  {t:"Change Status",o:"PRO / GRO",d:"If the candidate is already in the country, this replaces the entry permit route. The system picks the right path based on what the candidate told us.",m:[["Applies when","Candidate is inside the country"],["Validation","Work location must match MOL entity"],["Owner","PRO desk"]],tags:[["pay","Change of status fees"],["att","Status change document"]]},
+  {t:"Medical Application",o:"PRO · with employee",d:"The medical gets booked and the details go to the candidate. They confirm they’ve been, and until they do, the system nudges them every two days.",m:[["Sent to","Candidate, by email"],["Reminder","Every 2 days until confirmed"],["Captured","Appointment location and date"]],tags:[["pay","Medical typing fees"],["att","Medical appointment document"]]},
+  {t:"Medical Report",o:"PRO / GRO",d:"We record the result. If they’re fit, the next step opens up. If they’re not, the case goes to the HRBP to offboard rather than quietly drifting.",m:[["Outcome","Fit or unfit"],["If unfit","Routed to HRBP to offboard"],["Captured","Report document"]],tags:[["att","Medical report — mandatory"]]},
+  {t:"Emirates ID",o:"PRO / GRO",d:"The Emirates ID application goes in. If it’s their first time in the country, a biometric appointment is booked and the onboarding officer sends it over.",m:[["Biometrics","New UAE entrants only"],["Sent by","Onboarding officer"],["Confirmed by","The candidate"]],tags:[["pay","EID application fees"],["att","Stamped EID application form"]]},
+  {t:"Visa Typing",o:"PRO / GRO",d:"The visa stamping is typed and submitted, with the payment and receipt captured here like every other government fee.",m:[["Owner","PRO desk"],["Captured","Payment and receipts"],["Tracks","Approval or rejection"]],tags:[["pay","Visa stamping fees"],["att","Payment receipts"]]},
+  {t:"EID Collection",o:"PRO · employee confirms",d:"The last step. The Emirates ID is collected and handed over, both sets of dates go on the record, and if the ID and the visa expiry don’t line up, the system flags it before it becomes a problem.",m:[["Captured","EID and visa issue and expiry dates"],["Validation","System flags date mismatches"],["Closes with","Employee confirmation"]],tags:[["att","Emirates ID document"],["","Handover confirmation"]]}
  ]
 },
 {
@@ -1473,13 +1489,13 @@ var PROCESSES=[
  shotcap:"Work Permit · Renew · milestone board for an in-flight case",
  shotalt:"The process board for a Renew Work Permit case, showing seven milestone tiles from Medical Application through to Emirates ID Collection and Updation.",
  steps:[
-  {t:"Medical Application",o:"PRO · with employee",d:"Renewal begins on an alert, not a crisis. Two months before the labour card or visa expires, HR, the PRO and the employee are all told — and the medical is booked.",m:[["Triggered by","Expiry alert from Employee Central"],["Alert window","6 weeks ahead, escalating at 2"],["Notified","Employee, PRO and HR together"]],tags:[["pay","Medical fees"],["att","Appointment document"]]},
-  {t:"Medical Report",o:"PRO / GRO",d:"Fitness result recorded against the renewal. An unfit result for a renewal triggers the cancellation and repatriation path rather than silently stalling.",m:[["Outcome","Fit or unfit"],["If unfit","Cancellation path with dues settled"],["Reminder","Every 2 days if not completed"]],tags:[["att","Medical report"]]},
-  {t:"Labour Contract Insurance Submission",o:"PRO / GRO",d:"Renewal insurance paid and submitted, with the full payment record captured in the step.",m:[["Owner","PRO desk"],["Blocking","Receipt required to submit"],["Finance","Posted to GL"]],tags:[["pay","Insurance payment and VAT"],["att","Payment receipt"]],shot:"shots/form-labour-insurance.webp",shotcap:"Milestone form · Labour Contract Insurance Submission",shotalt:"A milestone form dialog with mandatory insurance payment date, mode, amount, VAT, reference number and receipt upload."},
-  {t:"Labour Contract Card Submission",o:"PRO · HRBP verifies",d:"The renewal contract is prepared, verified by the HRBP, signed by the employee and submitted. Unemployment insurance status and skill classification are captured here.",m:[["Verified by","HR Business Partner"],["Signed by","The employee"],["Captured","ILOE status, skilled or unskilled"]],tags:[["pay","MOHRE renewal fees"],["att","Signed contract"],["att","Labour card document"]]},
-  {t:"Visa Stamping Process",o:"PRO / GRO",d:"Visa stamping submitted and tracked through to the residence permit, with payment and receipts captured.",m:[["Owner","PRO desk"],["Tracks","Application status"],["Captured","Payment and receipts"]],tags:[["pay","Stamping fees"],["att","Receipts"]]},
-  {t:"Emirates ID Renewal",o:"PRO / GRO",d:"The Emirates ID renewal is filed with its own payment record — including where payment was made outside the normal modes, with the invoice attached.",m:[["Owner","PRO desk"],["Captured","Mode of payment"],["If external","Invoice attachment required"]],tags:[["pay","EID renewal fees"],["att","Invoice or receipt"]]},
-  {t:"Emirates ID Collection and Updation",o:"PRO · employee confirms",d:"Collected, handed over, and — critically — the new dates are written back so Employee Central and the government record agree. The system flags any mismatch between EID and visa expiry.",m:[["Captured","New EID and visa dates"],["Validation","Mismatch flagged automatically"],["Writes back","Employee Central"]],tags:[["att","Emirates ID document"],["","Employee confirmation"]]}
+  {t:"Medical Application",o:"PRO · with employee",d:"A renewal starts with an alert, not a panic. Two months before the labour card or visa runs out, HR, the PRO and the employee all hear about it, and the medical gets booked.",m:[["Triggered by","Expiry alert from Employee Central"],["Alert window","6 weeks ahead, escalating at 2"],["Notified","Employee, PRO and HR together"]],tags:[["pay","Medical fees"],["att","Appointment document"]]},
+  {t:"Medical Report",o:"PRO / GRO",d:"The result goes against the renewal. If they’re not fit, it moves onto the cancellation path with dues settled, instead of stalling with nobody noticing.",m:[["Outcome","Fit or unfit"],["If unfit","Cancellation path with dues settled"],["Reminder","Every 2 days if not completed"]],tags:[["att","Medical report"]]},
+  {t:"Labour Contract Insurance Submission",o:"PRO / GRO",d:"The renewal insurance gets paid and submitted, with the whole payment record captured right here.",m:[["Owner","PRO desk"],["Blocking","Receipt required to submit"],["Finance","Posted to GL"]],tags:[["pay","Insurance payment and VAT"],["att","Payment receipt"]],shot:"shots/form-labour-insurance.webp",shotcap:"Milestone form · Labour Contract Insurance Submission",shotalt:"A milestone form dialog with mandatory insurance payment date, mode, amount, VAT, reference number and receipt upload."},
+  {t:"Labour Contract Card Submission",o:"PRO · HRBP verifies",d:"The renewal contract is prepared, checked by the HRBP, signed by the employee and submitted. Unemployment insurance status and skill classification get captured here too.",m:[["Verified by","HR Business Partner"],["Signed by","The employee"],["Captured","ILOE status, skilled or unskilled"]],tags:[["pay","MOHRE renewal fees"],["att","Signed contract"],["att","Labour card document"]]},
+  {t:"Visa Stamping Process",o:"PRO / GRO",d:"Visa stamping goes in and we follow it through to the residence permit, capturing the payment and receipts along the way.",m:[["Owner","PRO desk"],["Tracks","Application status"],["Captured","Payment and receipts"]],tags:[["pay","Stamping fees"],["att","Receipts"]]},
+  {t:"Emirates ID Renewal",o:"PRO / GRO",d:"The Emirates ID renewal goes in with its own payment record. If it was paid outside the usual channels, the invoice has to be attached.",m:[["Owner","PRO desk"],["Captured","Mode of payment"],["If external","Invoice attachment required"]],tags:[["pay","EID renewal fees"],["att","Invoice or receipt"]]},
+  {t:"Emirates ID Collection and Updation",o:"PRO · employee confirms",d:"Collected, handed over, and this is the important bit: the new dates get written back so Employee Central and the government record actually agree. If the ID and visa expiry don’t match, you’ll hear about it.",m:[["Captured","New EID and visa dates"],["Validation","Mismatch flagged automatically"],["Writes back","Employee Central"]],tags:[["att","Emirates ID document"],["","Employee confirmation"]]}
  ]
 },
 {
@@ -1487,10 +1503,10 @@ var PROCESSES=[
  shotcap:"Work Permit · Cancel · milestone board for an in-flight case",
  shotalt:"The process board for a Cancel Work Permit case, showing four milestone tiles from Cancellation Form through to Residence Cancellation Form.",
  steps:[
-  {t:"Cancellation Form",o:"HRBP initiates · PRO completes",d:"Cancellation cannot start until end-of-service is settled. If the leaver has not approved the final settlement draft, the case is held at Pending employee approval — the HRBP simply cannot raise it yet.",m:[["Gate","End-of-service must be settled"],["If not approved","Status: pending employee approval"],["If employee delays","Complaint can be filed and attached"]],tags:[["pay","Cancellation fees"],["att","Cancellation application form"]]},
-  {t:"Cancellation Acceptance Form",o:"Employee · tracked by PRO",d:"The leaver signs the cancellation application. If the signature does not come, a reminder fires every two days to both the employee and HR — and the delay is on the record.",m:[["Signed by","The departing employee"],["Reminder","Every 2 days to employee and HR"],["Escalation","To HR if unsigned"]],tags:[["att","Signed cancellation form"]]},
-  {t:"Cancellation Form Submission To MOHRE",o:"PRO / GRO",d:"Labour card and visa cancellation are submitted to the ministry. An upload not carried out within two days triggers a reminder to the officer.",m:[["Owner","PRO desk"],["Reminder","Every 2 days if not uploaded"],["Notifies","Finance, HRBP and payroll on completion"]],tags:[["pay","Cancellation payment details"],["att","Labour card cancellation"],["att","Visa cancellation form"]]},
-  {t:"Residence Cancellation Form",o:"PRO / GRO",d:"The residence permit is cancelled and the documents are returned to the employee and HR. Finance, the HRBP and payroll are notified so the final settlement can close cleanly.",m:[["Closes","Residence cancellation"],["Documents to","Employee and HR"],["Notified","Finance, HRBP, payroll"]],tags:[["att","Residence cancellation document"]]}
+  {t:"Cancellation Form",o:"HRBP initiates · PRO completes",d:"Cancellation can’t start until end-of-service is settled. If the leaver hasn’t approved their final settlement, the case sits at Pending employee approval and the HRBP simply can’t raise it yet.",m:[["Gate","End-of-service must be settled"],["If not approved","Status: pending employee approval"],["If employee delays","Complaint can be filed and attached"]],tags:[["pay","Cancellation fees"],["att","Cancellation application form"]]},
+  {t:"Cancellation Acceptance Form",o:"Employee · tracked by PRO",d:"The leaver signs the cancellation application. If the signature doesn’t come, a reminder goes out every two days to both them and HR, and the delay stays on the record.",m:[["Signed by","The departing employee"],["Reminder","Every 2 days to employee and HR"],["Escalation","To HR if unsigned"]],tags:[["att","Signed cancellation form"]]},
+  {t:"Cancellation Form Submission To MOHRE",o:"PRO / GRO",d:"The labour card and visa cancellation go to the ministry. If the upload hasn’t happened within two days, the officer gets a reminder.",m:[["Owner","PRO desk"],["Reminder","Every 2 days if not uploaded"],["Notifies","Finance, HRBP and payroll on completion"]],tags:[["pay","Cancellation payment details"],["att","Labour card cancellation"],["att","Visa cancellation form"]]},
+  {t:"Residence Cancellation Form",o:"PRO / GRO",d:"The residence permit is cancelled and the documents go back to the employee and HR. Finance, the HRBP and payroll all get told, so the final settlement can close cleanly.",m:[["Closes","Residence cancellation"],["Documents to","Employee and HR"],["Notified","Finance, HRBP, payroll"]],tags:[["att","Residence cancellation document"]]}
  ]
 }
 ];
@@ -1499,7 +1515,7 @@ var PROCESSES=[
 var COUNTRIES=[
 {
  id:"uae",nm:"United Arab Emirates",st:"pack",badge:"Country pack",
- sub:"The processes shown throughout this journey are the UAE pack, built out to the deepest level of detail — including emirate-level variations for Dubai versus Abu Dhabi, Sharjah and the Northern Emirates.",
+ sub:"Everything you’ve seen in this journey is the UAE pack. It’s the one we’ve built out in the most detail, including the differences between Dubai and Abu Dhabi, Sharjah and the Northern Emirates.",
  portals:[
   ["MOHRE","<b>Ministry of Human Resources &amp; Emiratisation</b> — work permits, quotas, labour contracts, labour cards, cancellation"],
   ["ICP","<b>Federal Authority for Identity &amp; Citizenship</b> — entry permits, residence visas, Emirates ID"],
@@ -1522,7 +1538,7 @@ var COUNTRIES=[
 },
 {
  id:"ksa",nm:"Kingdom of Saudi Arabia",st:"pack",badge:"Country pack",
- sub:"Saudi Arabia splits the process across three authorities, which is exactly why a task-managed system pays off here. The labour side lives in Qiwa, residency lives in Muqeem and Absher, and healthcare practitioners need SCFHS on top.",
+ sub:"Saudi Arabia splits the process across three different authorities, which is exactly why managing it as tasks pays off. The labour side sits in Qiwa, residency sits in Muqeem and Absher, and healthcare staff need SCFHS on top of all that.",
  portals:[
   ["Qiwa","<b>MHRSD labour platform</b> — work permits, the mandatory digital employment contract, Saudization (Nitaqat) ratios, sponsorship transfer, establishment file"],
   ["Muqeem","<b>Employer residency portal</b> — this is where the Iqama is issued and renewed, along with exit and re-entry visas, final exit and dependants"],
@@ -1629,7 +1645,7 @@ var COUNTRIES=[
 },
 {
  id:"lby",nm:"Libya",st:"pack",badge:"Country pack",
- sub:"Libya matters for energy and industrial operators with rotating expatriate crews. The requirement here is less about volume and more about proof — that every worker on site holds a current, verifiable permit.",
+ sub:"Libya matters for energy and industrial operators running rotating expatriate crews. It’s less about volume here and more about proof. You need to show that every worker on site holds a current, verifiable permit.",
  portals:[
   ["Ministry of Labour","Ministry of Labour and Rehabilitation — work permits and labour approvals"],
   ["PNA","Passport &amp; Nationality Authority — entry visas and residency"],
@@ -1676,8 +1692,11 @@ var pTabs=document.getElementById("personaTabs"),pBody=document.getElementById("
 function renderPersona(i){
   var p=PERSONAS[i];
   pBody.innerHTML=
-    '<div class="persona-head"><h3>'+esc(p.nm)+'</h3>'
-   +'<p class="persona-quote">&ldquo;'+esc(p.q)+'&rdquo;</p></div>'
+    '<div class="persona-head">'
+   +'<span class="persona-face">'+FACES[p.face]+'</span>'
+   +'<span class="persona-id"><h3>'+esc(p.nm)+'</h3>'
+   +'<span class="persona-role">'+esc(p.ro)+' <b>\u00b7 '+esc(p.loc)+'</b></span>'
+   +'<p class="persona-quote">&ldquo;'+esc(p.q)+'&rdquo;</p></span></div>'
    +'<div class="persona-cols">'
    +'<div class="pcol"><h4>What they do</h4><ul class="plist">'+p.does.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div>'
    +'<div class="pcol"><h4>What they can finally see</h4><ul class="plist">'+p.sees.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div>'
@@ -1686,7 +1705,7 @@ function renderPersona(i){
   Array.prototype.forEach.call(pTabs.children,function(b,j){b.setAttribute("aria-selected",j===i?"true":"false");});
 }
 PERSONAS.forEach(function(p,i){
-  var b=el("button","ptab",'<span class="ptab-ini">'+esc(p.ini)+'</span><span><span class="ptab-nm">'+esc(p.nm)+'</span><span class="ptab-ro">'+esc(p.ro)+'</span></span>');
+  var b=el("button","ptab",'<span class="ptab-ini">'+FACES[p.face]+'</span><span><span class="ptab-nm">'+esc(p.nm)+'</span><span class="ptab-ro">'+esc(p.ro)+'</span></span>');
   b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===0?"true":"false");
   b.addEventListener("click",function(){renderPersona(i);});
   pTabs.appendChild(b);
