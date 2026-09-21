@@ -65,6 +65,10 @@ function card(s, x, y, w, h, fill){
   s.addShape(p.ShapeType.roundRect, { x, y, w, h, rectRadius:0.08,
     fill:{color:fill ?? BG}, line:{color:GREY_L, width:0.75} });
 }
+// a stack of short bulleted lines inside a table cell
+function bullets(s, lines, o){
+  s.addText(lines.map(t => ({ text:t, options:{ bullet:{code:'2022'}, breakLine:true } })), o);
+}
 function footer(s, n, dark){
   s.addText('INK IT Business Solutions  ·  Visa & Permits Management  ·  Kingdom of Saudi Arabia',
     { x:0.6, y:7.02, w:9.4, h:0.26, isTextBox:true, margin:0,
@@ -311,7 +315,7 @@ function shot(s, file, x, y, w){
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:10.6, y:-2.6, w:6.4, h:6.4, fill:{color:TEAL, transparency:90} });
   titleDark(s, 'Saudization & Nitaqat', 'The number that decides whether you can hire at all.');
-  s.addText('Nitaqat scores every establishment on the share of Saudi nationals it employs and puts it in a band. The band is not a report card, it is a switch.', {
+  s.addText('Nitaqat bands every establishment on the share of Saudis it employs. The band is not a report card, it is a switch.', {
     x:0.6, y:1.36, w:11.4, h:0.36, isTextBox:true, margin:0, fontFace:B, fontSize:12.5, color:'A9C2DA' });
 
   const bands = [
@@ -367,7 +371,7 @@ function shot(s, file, x, y, w){
     ['Enjaz','MoFA','The visa, stamped abroad','Application and embassy stamping, tracked to the entry window', 0, 'Connector ready', WARN],
     ['GOSI','Social Insurance','Who counts as Saudi','Registration and contributory wage. Feeds the Nitaqat headcount', 0, 'Live lookup', GOOD],
     ['Mudad','Wage protection','Does pay match the contract','Payroll enrolment, salary checked against Qiwa', 0, 'Live lookup', GOOD],
-    ['CCHI','Health insurance council','No cover, no Iqama','Policy validity per employee. Blocks issue and renewal', 0, 'Live lookup', GOOD]
+    ['CCHI','Health insurance','No cover, no Iqama','Policy validity per employee. Blocks issue and renewal', 0, 'Live lookup', GOOD]
   ];
   const cw = 2.92, ch = 1.60;
   portals.slice(0,4).forEach((pt, i) => {
@@ -375,7 +379,7 @@ function shot(s, file, x, y, w){
     card(s, x, 1.94, cw, ch, pt[4] ? 'EAF2FD' : BG);
     s.addText(pt[0], { x:x+0.17, y:2.06, w:1.22, h:0.28, isTextBox:true, margin:0,
       fontFace:H, fontSize:15, bold:true, color:INK });
-    s.addText(pt[1], { x:x+1.45, y:2.07, w:cw-1.62, h:0.34, isTextBox:true, margin:0,
+    s.addText(pt[1], { x:x+1.45, y:2.07, w:cw-1.62, h:0.24, isTextBox:true, margin:0,
       fontFace:B, fontSize:8, color:GREY, align:'right', lineSpacing:10 });
     s.addText(pt[2], { x:x+0.17, y:2.36, w:cw-0.34, h:0.24, isTextBox:true, margin:0,
       fontFace:H, fontSize:11.5, bold:true, color:TEAL_D });
@@ -390,7 +394,7 @@ function shot(s, file, x, y, w){
     card(s, x, 3.72, cw, ch, BG);
     s.addText(pt[0], { x:x+0.17, y:3.84, w:1.22, h:0.28, isTextBox:true, margin:0,
       fontFace:H, fontSize:15, bold:true, color:INK });
-    s.addText(pt[1], { x:x+1.45, y:3.85, w:cw-1.62, h:0.34, isTextBox:true, margin:0,
+    s.addText(pt[1], { x:x+1.45, y:3.85, w:cw-1.62, h:0.24, isTextBox:true, margin:0,
       fontFace:B, fontSize:8, color:GREY, align:'right', lineSpacing:10 });
     s.addText(pt[2], { x:x+0.17, y:4.14, w:cw-0.34, h:0.24, isTextBox:true, margin:0,
       fontFace:H, fontSize:11.5, bold:true, color:TEAL_D });
@@ -474,19 +478,47 @@ function shot(s, file, x, y, w){
 {
   const s = S(); lightBg(s);
   title(s, 'Persona view', 'Everyone gets their own to-do list.');
-  s.addText('Each role only sees what is actually theirs, with a due date on it, and the system already knows which Saudi authority each step belongs to.', {
-    x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0, fontFace:B, fontSize:13, color:GREY });
+  s.addText('Each role sees only what is theirs, with a due date on it. The system already knows which authority owns each step.', {
+    x:0.6, y:1.36, w:11.4, h:0.30, isTextBox:true, margin:0, fontFace:B, fontSize:13, color:GREY });
 
   const rows = [
-    ['GRO','Government Relations','PRO desk · Riyadh','Requests block visas once the band allows it; authenticates Qiwa contracts; issues Iqamas on Muqeem inside the statutory window; applies for exit re-entry and watches every return-by date.','One queue that already knows which authority each step belongs to.', TEAL],
-    ['TA','Recruiter','Talent acquisition','Checks block visa availability before making an offer; releases candidates from SF Recruiting; agrees the Qiwa profession code with the PRO before submission.','Offers made against visas that actually exist.', TEAL_D],
-    ['OB','Onboarding','Employee relations','Records the arrival date that starts the statutory Iqama clock; chases medicals and biometrics; registers Saudi hires with GOSI and Mudad.','Nobody works without the paperwork that makes it legal.', TEAL],
-    ['BP','HR Business Partner','Employee relations','Approves exit re-entry against dues and notice; reviews the Nitaqat impact of a resignation before it is actioned; starts final exit once settlement is agreed.','Told before a resignation moves the band, not after.', TEAL_D],
-    ['EM','Employee','Self-service','Requests exit re-entry with travel dates; confirms medical and biometrics; signs the Qiwa contract; confirms receipt of the renewed Iqama.','Sees their own Iqama expiry and their return-by date.', TEAL],
-    ['FI','Finance Controller','Payments and GL','Reconciles SADAD payments against receipts; posts to GL; forecasts expat levy against the renewal calendar.','The levy stops being a surprise.', TEAL_D],
-    ['HR','Head of HR','Governance and risk','Watches band position per establishment; reviews Saudization against Vision 2030 commitments; signs off the localisation hiring plan.','Nitaqat exposure answerable from one screen.', INK2]
+    ['GRO','Government Relations','PRO desk \u00b7 Riyadh',
+      ['Requests block visas the moment the band allows it',
+       'Authenticates contracts on Qiwa, issues Iqamas on Muqeem',
+       'Applies for exit re-entry and watches every return-by date'],
+      'One queue that knows which authority each step belongs to.', TEAL],
+    ['TA','Recruiter','Talent acquisition',
+      ['Checks visa availability before an offer goes out',
+       'Releases accepted candidates from SF Recruiting',
+       'Agrees the Qiwa profession code with the PRO'],
+      'Offers made against visas that actually exist.', TEAL_D],
+    ['OB','Onboarding','Employee relations',
+      ['Records the arrival date that starts the Iqama clock',
+       'Chases medicals and biometrics',
+       'Registers Saudi hires with GOSI and Mudad'],
+      'Nobody works without the paperwork that makes it legal.', TEAL],
+    ['BP','HR Business Partner','Employee relations',
+      ['Approves exit re-entry against dues and notice',
+       'Sees the Nitaqat impact of a resignation before actioning it',
+       'Starts final exit once settlement is agreed'],
+      'Told before a resignation moves the band, not after.', TEAL_D],
+    ['EM','Employee','Self-service',
+      ['Requests exit re-entry with travel dates',
+       'Signs the Qiwa contract, confirms medical and biometrics',
+       'Confirms the renewed Iqama has reached them'],
+      'Sees their own Iqama expiry and their return-by date.', TEAL],
+    ['FI','Finance Controller','Payments and GL',
+      ['Reconciles SADAD payments against receipts',
+       'Posts permit and levy cost to the right GL account',
+       'Forecasts expat levy against the renewal calendar'],
+      'The levy stops being a surprise.', TEAL_D],
+    ['HR','Head of HR','Governance and risk',
+      ['Watches band position for every establishment',
+       'Reviews Saudization against Vision 2030 commitments',
+       'Signs off the localisation hiring plan'],
+      'Nitaqat exposure answerable from one screen.', INK2]
   ];
-  const rh = 0.60, gap = 0.04;
+  const rh = 0.66, gap = 0.045;
   rows.forEach((r, i) => {
     const y = 2.00 + i*(rh+gap);
     s.addShape(p.ShapeType.roundRect, { x:0.6, y, w:11.4, h:rh, rectRadius:0.06,
@@ -496,10 +528,12 @@ function shot(s, file, x, y, w){
       fontFace:H, fontSize:11, bold:true, color:INK });
     s.addText(r[2], { x:1.26, y:y+0.30, w:2.15, h:0.20, isTextBox:true, margin:0,
       fontFace:B, fontSize:9, color:TEAL_D });
-    s.addText(r[3], { x:3.55, y:y+0.06, w:5.30, h:0.48, isTextBox:true, margin:0,
-      fontFace:B, fontSize:9.3, color:GREY, lineSpacing:12.4 });
-    s.addText(r[4], { x:9.0, y:y+0.06, w:2.86, h:0.48, isTextBox:true, margin:0,
-      fontFace:B, fontSize:9.3, italic:true, bold:true, color:GOOD, lineSpacing:12.4 });
+    bullets(s, r[3], { x:3.50, y:y+0.075, w:5.42, h:0.52, isTextBox:true, margin:0,
+      fontFace:B, fontSize:8.6, color:GREY, lineSpacing:11.0,
+      paraSpaceBefore:0, paraSpaceAfter:0, indentLevel:0 });
+    s.addText(r[4], { x:9.0, y:y+0.075, w:2.86, h:0.52, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9.3, italic:true, bold:true, color:GOOD, lineSpacing:11.6,
+      valign:'middle' });
   });
   s.addText('ROLE', { x:1.26, y:1.76, w:2.1, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
   s.addText('WHAT THEY DO IN THE SYSTEM', { x:3.55, y:1.76, w:5.3, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });

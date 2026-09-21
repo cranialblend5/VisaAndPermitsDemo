@@ -65,6 +65,10 @@ function card(s, x, y, w, h, fill){
   s.addShape(p.ShapeType.roundRect, { x, y, w, h, rectRadius:0.08,
     fill:{color:fill ?? BG}, line:{color:GREY_L, width:0.75} });
 }
+// a stack of short bulleted lines inside a table cell
+function bullets(s, lines, o){
+  s.addText(lines.map(t => ({ text:t, options:{ bullet:{code:'2022'}, breakLine:true } })), o);
+}
 function footer(s, n, dark){
   s.addText('INK IT Business Solutions  ·  Visa & Permits Management on SAP BTP',
     { x:0.6, y:7.02, w:9.4, h:0.26, isTextBox:true, margin:0,
@@ -182,7 +186,7 @@ function shot(s, file, x, y, w){
   });
 
   shot(s, 'home.jpg', 6.42, 1.95, 6.28);
-  s.addText('The home dashboard — running, completed and cancelled counts across all three lifecycles, over a queue of initiated cases with priority, status and assigned agent.', {
+  s.addText('The home dashboard: running, completed and cancelled counts across all three lifecycles, over a queue of initiated cases with priority, status and assigned agent.', {
     x:6.42, y:4.95, w:6.28, h:0.5, isTextBox:true, margin:0,
     fontFace:B, fontSize:10, italic:true, color:GREY, lineSpacing:14 });
 
@@ -211,20 +215,48 @@ function shot(s, file, x, y, w){
 {
   const s = S(); lightBg(s);
   title(s, 'Persona view', 'Everyone gets their own to-do list.');
-  s.addText('Each role only sees what is actually theirs, with a due date on it. That is how the PRO desk, recruitment, onboarding and employee relations stay in step.', {
-    x:0.6, y:1.36, w:11.4, h:0.46, isTextBox:true, margin:0,
+  s.addText('Each role sees only what is theirs, with a due date on it. That is how the PRO desk, recruitment and onboarding stay in step.', {
+    x:0.6, y:1.36, w:11.4, h:0.30, isTextBox:true, margin:0,
     fontFace:B, fontSize:13, color:GREY });
 
   const rows = [
-    ['GRO','Government Relations','PRO desk \u00b7 GRO','Claims cases from the queue; files MOHRE / Qiwa applications; records every payment and receipt; books medicals and biometrics; tracks stamping to ID collection; maintains quota.','A queue with priorities, due dates and proof of what was done.', TEAL],
-    ['TA','Recruiter','Talent acquisition','Completes the candidate file and document checklist; releases accepted candidates into the permit process; aligns profession and work-location codes with the PRO.','Joining dates based on real progress, not optimism.', TEAL_D],
-    ['OB','Onboarding Coordinator','Employee relations','Initiates the permit; checks quota; chases signed offers, contracts and medical receipts; sends biometric appointments; handles national-hire pension steps.','No joiner arrives without the paperwork that makes them legal.', TEAL],
-    ['BP','HR Business Partner','Employee relations','Verifies renewal contracts; approves visa allocation for senior grades; initiates cancellation after end-of-service; reviews fines before payroll deduction.','Escalations arrive before the fine, not after it.', TEAL_D],
-    ['EM','Employee / Candidate','Self-service','Acknowledges and uploads signed contracts; confirms in-country or out-of-country status; confirms medical completion, insurance enrolment and ID receipt.','Knows exactly what is pending from them, and by when.', TEAL],
-    ['FI','Finance Controller','Payments & GL','Reconciles government fees against receipts; posts permit costs to GL accounts; reviews card-holder spend for reimbursement; approves fine deductions.','One export instead of days of reconciliation.', TEAL_D],
-    ['HR','Head of HR','Governance & risk','Monitors quota utilisation and Saudization or Emiratisation ratios; reviews compliance exposure by entity and country; signs off permit cost budgets.','Compliance risk as a dashboard, not a fire drill.', INK2]
+    ['GRO','Government Relations','PRO desk \u00b7 GRO',
+      ['Claims cases from the queue and files them with the authority',
+       'Records every payment and receipt as it happens',
+       'Books medicals and biometrics, tracks stamping to ID collection'],
+      'A queue with priorities, due dates and proof of what was done.', TEAL],
+    ['TA','Recruiter','Talent acquisition',
+      ['Completes the candidate file and document checklist',
+       'Releases accepted candidates into the permit process',
+       'Aligns profession and work-location codes with the PRO'],
+      'Joining dates based on real progress, not optimism.', TEAL_D],
+    ['OB','Onboarding Coordinator','Employee relations',
+      ['Initiates the permit and checks quota before it goes out',
+       'Chases signed offers, contracts and medical receipts',
+       'Sends biometric appointments and handles pension steps'],
+      'No joiner arrives without the paperwork that makes them legal.', TEAL],
+    ['BP','HR Business Partner','Employee relations',
+      ['Verifies renewal contracts and approves senior allocations',
+       'Initiates cancellation once end-of-service is agreed',
+       'Reviews fines before anything reaches payroll'],
+      'Escalations arrive before the fine, not after it.', TEAL_D],
+    ['EM','Employee / Candidate','Self-service',
+      ['Acknowledges and uploads the signed contract',
+       'Confirms in-country or out-of-country status',
+       'Confirms medical, insurance enrolment and ID receipt'],
+      'Knows exactly what is pending from them, and by when.', TEAL],
+    ['FI','Finance Controller','Payments & GL',
+      ['Reconciles government fees against receipts',
+       'Posts permit cost to the right GL account',
+       'Reviews card-holder spend and approves fine deductions'],
+      'One export instead of days of reconciliation.', TEAL_D],
+    ['HR','Head of HR','Governance & risk',
+      ['Monitors quota use and Saudization or Emiratisation ratios',
+       'Reviews compliance exposure by entity and by country',
+       'Signs off permit cost budgets for the year'],
+      'Compliance risk as a dashboard, not a fire drill.', INK2]
   ];
-  const rh = 0.60, gap = 0.04;
+  const rh = 0.66, gap = 0.045;
   rows.forEach((r, i) => {
     const y = 2.00 + i*(rh+gap);
     s.addShape(p.ShapeType.roundRect, { x:0.6, y, w:11.4, h:rh, rectRadius:0.06,
@@ -234,10 +266,12 @@ function shot(s, file, x, y, w){
       fontFace:H, fontSize:11, bold:true, color:INK });
     s.addText(r[2], { x:1.26, y:y+0.30, w:2.15, h:0.20, isTextBox:true, margin:0,
       fontFace:B, fontSize:9, color:TEAL_D });
-    s.addText(r[3], { x:3.55, y:y+0.06, w:5.30, h:0.48, isTextBox:true, margin:0,
-      fontFace:B, fontSize:9.5, color:GREY, lineSpacing:12.5 });
-    s.addText(r[4], { x:9.0, y:y+0.06, w:2.86, h:0.48, isTextBox:true, margin:0,
-      fontFace:B, fontSize:9.5, italic:true, bold:true, color:GOOD, lineSpacing:12.5 });
+    bullets(s, r[3], { x:3.50, y:y+0.075, w:5.42, h:0.52, isTextBox:true, margin:0,
+      fontFace:B, fontSize:8.6, color:GREY, lineSpacing:11.0,
+      paraSpaceBefore:0, paraSpaceAfter:0, indentLevel:0 });
+    s.addText(r[4], { x:9.0, y:y+0.075, w:2.86, h:0.52, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9.3, italic:true, bold:true, color:GOOD, lineSpacing:11.6,
+      valign:'middle' });
   });
   s.addText('ROLE', { x:1.26, y:1.76, w:2.1, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
   s.addText('WHAT THEY DO IN THE SYSTEM', { x:3.55, y:1.76, w:5.3, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
@@ -273,12 +307,12 @@ function shot(s, file, x, y, w){
   });
 
   shot(s, 'inbox.jpg', 6.95, 1.94, 5.75);
-  s.addText('The officer’s inbox — pending tasks with type and due date on the left, the task itself on the right: assignee, due date, comment thread and the document that must come back before it can be submitted.', {
+  s.addText('The officer’s inbox. Pending tasks with type and due date on the left, the task itself on the right: assignee, due date, comment thread and the document that must come back before it can be submitted.', {
     x:6.95, y:4.86, w:5.75, h:0.56, isTextBox:true, margin:0,
     fontFace:B, fontSize:9.8, italic:true, color:GREY, lineSpacing:13.5 });
 
   const wins = [
-    ['Delays surfaced at source','The system shows where the wait actually is — the unsigned contract, the unbooked medical, the government step pending. The bottleneck has an address.'],
+    ['Delays surfaced at source','The system shows where the wait actually is: the unsigned contract, the unbooked medical, the government step pending. The bottleneck has an address.'],
     ['Workload made visible','HR admins can see how many assignments each officer has completed, so work is distributed on evidence rather than on who complains loudest.']
   ];
   wins.forEach((w, i) => {
@@ -338,7 +372,7 @@ function shot(s, file, x, y, w){
   });
 
   shot(s, 'payment.jpg', 6.95, 3.82, 5.75);
-  s.addText('Every row is auditable: amount, VAT, payment reference, payment document number, GL account and status — with the original receipt one click away under Download.', {
+  s.addText('Every row is auditable: amount, VAT, payment reference, payment document number, GL account and status, with the original receipt one click away under Download.', {
     x:6.95, y:6.52, w:5.75, h:0.42, isTextBox:true, margin:0,
     fontFace:B, fontSize:9.8, italic:true, color:GREY, lineSpacing:13.5 });
   footer(s, 6);
@@ -350,8 +384,8 @@ function shot(s, file, x, y, w){
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:10.4, y:-2.6, w:6.4, h:6.4, fill:{color:TEAL, transparency:90} });
   titleDark(s, 'GCC coverage', 'One engine, seven rulebooks.');
-  s.addText('Labour law is national, so the process has to be too. The engine underneath stays the same everywhere. What changes country by country is the steps, the authorities, the document checklist and when the alerts fire.', {
-    x:0.6, y:1.36, w:11.4, h:0.36, isTextBox:true, margin:0,
+  s.addText('The engine stays the same everywhere. What changes per country is the steps, the authorities, the checklist and when alerts fire.', {
+    x:0.6, y:1.36, w:11.4, h:0.26, isTextBox:true, margin:0,
     fontFace:B, fontSize:12.5, color:'A9C2DA' });
 
   const ctry = [
@@ -384,7 +418,7 @@ function shot(s, file, x, y, w){
 
   s.addText([
     { text:'PACK', options:{ bold:true, color:SAND } },
-    { text:' = the country’s statutory flow expressed as configuration on the shared engine — milestones, authorities, document checklist, mandatory fields, payment types and alert thresholds. Pre-built rather than custom-developed, with a localisation workshop confirming document names, fees and thresholds before go-live.', options:{ color:'A9C2DA' } }
+    { text:' = the country’s statutory flow expressed as configuration on the shared engine: milestones, authorities, document checklist, mandatory fields, payment types and alert thresholds. Pre-built rather than custom-developed, with a localisation workshop confirming document names, fees and thresholds before go-live.', options:{ color:'A9C2DA' } }
   ], { x:0.6, y:6.50, w:11.4, h:0.42, isTextBox:true, margin:0, fontFace:B, fontSize:9.5, lineSpacing:13 });
   footer(s, 7, true);
   s.addNotes('The GCC-ready slide. The message is breadth from one engine: each pack is configuration, not a rebuild, which is why deployment is weeks rather than quarters. For KSA note the three-authority split: Qiwa for labour, Muqeem for the Iqama, Absher as the employee-facing mirror.');
@@ -401,7 +435,7 @@ function shot(s, file, x, y, w){
   card(s, 0.6, 1.94, 5.9, 2.72, BG);
   s.addText('The licensing lane, running alongside', { x:0.86, y:2.12, w:5.4, h:0.3, isTextBox:true, margin:0,
     fontFace:H, fontSize:14, bold:true, color:INK });
-  const lane = ['Credential pack collected at recruitment','Primary-source verification (DataFlow) tracked to result','Professional classification or eligibility assessment','Licensing exam booked, sat and certificate uploaded','Licence issued, activated against the employing facility','Renewal driven by CME hours — 90-day alerts, 15-day escalations'];
+  const lane = ['Credential pack collected at recruitment','Primary-source verification (DataFlow) tracked to result','Professional classification or eligibility assessment','Licensing exam booked, sat and certificate uploaded','Licence issued, activated against the employing facility','Renewal driven by CME hours, with 90-day alerts and 15-day escalations'];
   s.addText(lane.map((t,i) => ({ text:t, options:{ bullet:true, breakLine: i < lane.length-1 } })), {
     x:0.86, y:2.48, w:5.4, h:2.02, isTextBox:true, margin:0,
     fontFace:B, fontSize:10.5, color:GREY, lineSpacing:14, paraSpaceAfter:5 });
@@ -409,7 +443,7 @@ function shot(s, file, x, y, w){
   card(s, 6.72, 1.94, 6.0, 2.72, WHITE);
   s.addText('What goes wrong without it', { x:6.98, y:2.12, w:5.5, h:0.3, isTextBox:true, margin:0,
     fontFace:H, fontSize:14, bold:true, color:BAD });
-  const fails = ['A clinician joins on a valid visa but cannot be rostered','Primary-source verification stalls with nobody watching the queue','A trainee’s 45-day dataflow deadline passes unnoticed','CME hours logged only after the renewal window has closed','Licence and visa expiry drift apart — one lapses, the other is fine','The facility licence expires, exposing every practitioner under it'];
+  const fails = ['A clinician joins on a valid visa but cannot be rostered','Primary-source verification stalls with nobody watching the queue','A trainee’s 45-day dataflow deadline passes unnoticed','CME hours logged only after the renewal window has closed','Licence and visa expiry drift apart, so one lapses while the other is fine','The facility licence expires, exposing every practitioner under it'];
   s.addText(fails.map((t,i) => ({ text:t, options:{ bullet:true, breakLine: i < fails.length-1 } })), {
     x:6.98, y:2.48, w:5.5, h:2.02, isTextBox:true, margin:0,
     fontFace:B, fontSize:10.5, color:GREY, lineSpacing:14, paraSpaceAfter:5 });
@@ -479,7 +513,7 @@ function shot(s, file, x, y, w){
 
   const layers = [
     ['SAP SuccessFactors', ['SF Recruiting','SF Onboarding 2.0','Employee Central','SF Work Zone'], TEAL_L, TEAL_D, 'Candidates, employee master, separations and expiry dates flow in'],
-    ['Visa & Permits on SAP BTP', ['Workflow & milestones','Task inbox & escalation','Documents','Payments','Quota register','Reporting'], TEAL, WHITE, 'The governed layer — where the work is actually managed'],
+    ['Visa & Permits on SAP BTP', ['Workflow & milestones','Task inbox & escalation','Documents','Payments','Quota register','Reporting'], TEAL, WHITE, 'The governed layer, where the work is actually managed'],
     ['SAP S/4HANA Finance', ['Payments to GL','Journal posting','Payroll deductions'], TEAL_L, TEAL_D, 'Permit costs and approved fine deductions post outward']
   ];
   let ly = 1.96;
@@ -526,7 +560,7 @@ function shot(s, file, x, y, w){
     { text:'What we will need from you. ', options:{ bold:true, color:INK } },
     { text:'GCC governments do not publish open APIs, and when they do give access they give it to the employer, not to a software vendor. So you go to each authority yourself (Qiwa and Muqeem in Saudi, MOHRE and ICP in the UAE, LMRA in Bahrain) and ask for API credentials, the specification and a sandbox under your own establishment registration. Hand those to us and we build the connector.\n\n', options:{ color:GREY } },
     { text:'Until then ', options:{ bold:true, color:INK } },
-    { text:'the government step stays a tracked manual PRO activity, with reference number, receipt and status captured in the milestone — which is how the application is designed to operate from day one, with or without a portal connection.', options:{ color:GREY } }
+    { text:'the government step stays a tracked manual PRO activity, with reference number, receipt and status captured in the milestone. That is how the application is designed to operate from day one, with or without a portal connection.', options:{ color:GREY } }
   ], { x:8.64, y:3.78, w:3.84, h:2.76, isTextBox:true, margin:0,
       fontFace:B, fontSize:8.4, lineSpacing:11.4 });
   footer(s, 10);
