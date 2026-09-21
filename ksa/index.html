@@ -661,6 +661,52 @@ footer{background:var(--ink-deep);color:#7E99B4;padding-block:28px;font-size:13p
 footer b{color:#C6D8EA;font-family:var(--display);font-weight:700}
 footer a{color:#9FBDD9;text-decoration:none}
 footer a:hover{text-decoration:underline}
+
+/* ---------- government portal cards ---------- */
+.portalgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+@media(max-width:1000px){.portalgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.portalgrid{grid-template-columns:1fr}}
+.pcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 17px;box-shadow:var(--shadow);display:flex;flex-direction:column;
+}
+.pcard.lead{border-color:var(--azure-line);background:var(--azure-soft)}
+.pcard.note{background:var(--sand-soft);border-color:var(--sand)}
+.pc-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px}
+.pc-top b{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.02em}
+.pc-auth{font-family:var(--mono);font-size:10px;color:var(--text-3);text-align:right;line-height:1.3}
+.pc-what{font-size:13.5px;font-weight:700;color:var(--azure);margin-bottom:10px}
+.pcard.note .pc-what{color:var(--sand)}
+.pc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-list li{font-size:12.6px;line-height:1.4;color:var(--text-2);padding-left:14px;position:relative}
+.pc-list li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--azure-line)}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
+.pc-dir{font-family:var(--mono);font-size:10.5px;color:var(--text-3)}
+.pc-st{font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap}
+.pc-st.green{background:var(--done-soft);color:var(--done)}
+.pc-st.amber{background:var(--due-soft);color:var(--due)}
+.pc-note{font-size:12.4px;line-height:1.5;color:var(--text-2)}
+.pc-note b{color:var(--text)}
+
+/* ---------- country pack cards ---------- */
+.packgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+@media(max-width:1000px){.packgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.packgrid{grid-template-columns:1fr}}
+.pk{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 17px;box-shadow:var(--shadow);
+}
+.pk.cur{border-color:var(--azure);border-width:2px;background:var(--azure-soft)}
+.pk.link{background:var(--ink);border-color:var(--ink)}
+.pk.link .pk-top b{color:#fff}
+.pk.link .pk-hook{color:#A9C2DA}
+.pk-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}
+.pk-top b{font-family:var(--display);font-size:15px;font-weight:800;line-height:1.2}
+.pk-tag{font-family:var(--mono);font-size:9.5px;font-weight:600;background:var(--azure);color:#fff;padding:3px 7px;border-radius:5px;white-space:nowrap}
+.pk-n{font-family:var(--mono);font-size:10px;color:var(--text-3);white-space:nowrap}
+.pk-auth{font-family:var(--mono);font-size:10.5px;color:var(--azure);margin-bottom:9px;line-height:1.4}
+.pk-hook{font-size:12.8px;line-height:1.45;color:var(--text-2)}
+
 </style>
 <header class="topbar">
   <div class="topbar-in">
@@ -682,10 +728,9 @@ footer a:hover{text-decoration:underline}
     <span class="hero-tag">Interactive Value Journey · Kingdom of Saudi Arabia</span>
     <h1>In the Kingdom, the <em>band</em> decides what you can do next.</h1>
     <p class="hero-lede">
-      Saudi Arabia splits workforce compliance across three authorities that do not talk to each other.
-      Qiwa holds the labour side. Muqeem holds the Iqama. Absher is what your employee sees. And sitting
-      above all of it, your Nitaqat band quietly decides whether you can hire, renew or transfer anyone
-      at all. We put the whole thing on one track.
+      Qiwa holds the job. Muqeem holds the residence. Absher is what your employee sees. None of them
+      talk to each other, and your Nitaqat band quietly decides whether you can hire at all.
+      We put the lot on one track.
     </p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#ch4">Walk a Saudi permit
@@ -720,23 +765,17 @@ footer a:hover{text-decoration:underline}
       on their phone. If those three disagree, your employee finds out at the airport.</div>
     <div class="grid g3" style="margin-top:30px">
       <div class="card"><h3>The band gates everything</h3>
-        <p>Drop a Nitaqat band and block visas stop, Iqama renewals stop, transfers stop. Most companies
-        find out after it happens, from a rejection in Qiwa, not before it, from their own numbers.</p></div>
+        <p>Drop a band and visas, renewals and transfers all stop. Most companies learn this from a rejection in Qiwa, not from their own numbers.</p></div>
       <div class="card"><h3>The 90-day clock starts on arrival</h3>
-        <p>An employee lands and you have a statutory window to issue the Iqama. Nobody is counting it
-        for you, and the penalty is not a warning letter.</p></div>
+        <p>An employee lands and a statutory window opens. Nobody is counting it for you, and the penalty is not a warning letter.</p></div>
       <div class="card"><h3>Exit re-entry is a trap</h3>
-        <p>Someone travels, the visa expires while they are away, and the Iqama is cancelled. They cannot
-        come back. It is the single most expensive administrative mistake in the Kingdom.</p></div>
+        <p>Someone travels, the visa lapses while they are away, the Iqama is cancelled. They cannot come back.</p></div>
       <div class="card"><h3>The levy is a real number</h3>
-        <p>The expat levy per employee per year is budgeted once and then forgotten. It lands as a
-        payment nobody forecast, in a month nobody planned for.</p></div>
+        <p>SAR 9,600 a head, every year. Budgeted once, then forgotten, then it lands in a month nobody planned for.</p></div>
       <div class="card"><h3>Renewals pile up together</h3>
-        <p>Iqamas cluster around the dates people were hired. One quarter is quiet, the next has three
-        hundred renewals and the fees to match.</p></div>
+        <p>Iqamas bunch around hiring dates. One quarter is quiet, the next carries three hundred renewals and the fees with them.</p></div>
       <div class="card"><h3>SuccessFactors does not know</h3>
-        <p>Your HR system holds the employee. Qiwa and Muqeem hold the truth about whether they may
-        legally work. Nothing keeps those two in agreement.</p></div>
+        <p>Your HR system holds the employee. Qiwa and Muqeem hold the truth about whether they can legally work. Nothing keeps the two honest.</p></div>
     </div>
   </div>
 </section>
@@ -818,13 +857,12 @@ footer a:hover{text-decoration:underline}
     <div class="eyebrow">Chapter 05 · Exit &amp; re-entry</div>
     <h2 class="sec-h">The process that costs the most when it goes wrong.</h2>
     <p class="sec-sub">
-      Every expatriate who leaves the Kingdom and intends to come back needs an exit re-entry visa.
-      It sounds like admin. It is the single highest-consequence process you run, because the penalty
-      for missing a date is that your employee cannot return at all.
+      It sounds like admin. It is the highest-consequence process you run, because the penalty for
+      missing a date is an employee who cannot come back.
     </p>
     <div class="plain"><b>In plain words</b>
-      Your employee goes home to see family. If they are not back before the visa runs out, their
-      Iqama is cancelled and they are stuck outside. We count the days so nobody has to.</div>
+      Your employee goes home to see family. Not back before the visa runs out? Iqama cancelled, stuck
+      outside. We count the days so nobody has to.</div>
 
     <div class="grid g2" style="margin-top:30px">
       <div class="card">
@@ -879,24 +917,20 @@ footer a:hover{text-decoration:underline}
     <div class="eyebrow">Chapter 06 · Saudization &amp; Nitaqat</div>
     <h2 class="sec-h">The number that decides whether you can hire at all.</h2>
     <p class="sec-sub">
-      Nitaqat scores every establishment on the share of Saudi nationals it employs and puts it in a
-      band. The band is not a report card. It is a switch. Fall into the wrong one and Qiwa stops
-      issuing block visas, stops renewing Iqamas and stops accepting transfers.
+      Nitaqat scores each establishment on its share of Saudi nationals and gives it a band. The band
+      is not a report card. It is a switch.
     </p>
     <div class="plain"><b>In plain words</b>
-      The government counts how many Saudis you employ and gives you a colour. Green means you can
-      hire. Red means you cannot. Most companies only find out the colour changed after it changed.</div>
+      The government counts your Saudis and gives you a colour. Green, you can hire. Red, you cannot.
+      Most companies find out the colour changed after it changed.</div>
 
     <div class="grid g3" style="margin-top:30px">
       <div class="card"><h3>We calculate it before Qiwa does</h3>
-        <p>Headcount, nationality and the weighting rules are already in the system. The band is
-        recalculated continuously, so you see the number moving rather than the result.</p></div>
+        <p>Headcount, nationality and the weighting rules are already here. You watch the number move instead of reading the result.</p></div>
       <div class="card"><h3>We show the headroom</h3>
-        <p>Not just the band, but how far you are from the edge of it. "Thirty-three Saudi leavers would
-        drop us" is a sentence that changes a resignation conversation.</p></div>
+        <p>&ldquo;Thirty-three Saudi leavers would drop us.&rdquo; That sentence changes a resignation conversation.</p></div>
       <div class="card"><h3>We simulate before you commit</h3>
-        <p>Before a restructure, a redundancy round or a bulk hire, see what it does to the band and to
-        every visa service that depends on it.</p></div>
+        <p>Model a restructure or a bulk hire, and see what it does to the band before you commit to it.</p></div>
     </div>
 
     <div class="shot">
@@ -933,10 +967,95 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- CH 7 — TASKS -->
+<!-- CH 7 — GOVERNMENT PORTALS -->
 <section class="sec sec-alt" id="ch7">
   <div class="wrap">
-    <div class="eyebrow">Chapter 07 · Tasks &amp; accountability</div>
+    <div class="eyebrow">Chapter 07 · Government portals</div>
+    <h2 class="sec-h">Seven portals. One queue.</h2>
+    <p class="sec-sub">Every Saudi step lands on one of these. Your PRO should not have to remember which.</p>
+    <div class="plain"><b>In plain words</b>
+      Qiwa is the job. Muqeem is the residence. Absher is what your employee sees. Get those three out
+      of step and somebody finds out at an airport.</div>
+
+    <div class="portalgrid">
+      <div class="pcard lead">
+        <div class="pc-top"><b>Qiwa</b><span class="pc-auth">MHRSD</span></div>
+        <p class="pc-what">The job</p>
+        <ul class="pc-list">
+          <li>Work permits and the authenticated contract</li>
+          <li>Nitaqat band and Saudization ratio</li>
+          <li>Sponsorship transfer, profession change</li>
+        </ul>
+        <div class="pc-foot"><span class="pc-dir">Read &amp; write</span><span class="pc-st amber">Connector ready</span></div>
+      </div>
+      <div class="pcard lead">
+        <div class="pc-top"><b>Muqeem</b><span class="pc-auth">Elm · sponsor portal</span></div>
+        <p class="pc-what">The residence</p>
+        <ul class="pc-list">
+          <li>Iqama issue and renewal</li>
+          <li>Exit and re-entry, final exit</li>
+          <li>Dependants and domestic staff</li>
+        </ul>
+        <div class="pc-foot"><span class="pc-dir">Read &amp; write</span><span class="pc-st amber">Connector ready</span></div>
+      </div>
+      <div class="pcard lead">
+        <div class="pc-top"><b>Absher</b><span class="pc-auth">Ministry of Interior</span></div>
+        <p class="pc-what">What the employee sees</p>
+        <ul class="pc-list">
+          <li>Mirrors every Muqeem action, same day</li>
+          <li>Contract acceptance and visa visibility</li>
+          <li>Where disputes actually start</li>
+        </ul>
+        <div class="pc-foot"><span class="pc-dir">Read</span><span class="pc-st amber">Connector ready</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top"><b>Enjaz</b><span class="pc-auth">MoFA</span></div>
+        <p class="pc-what">The visa, stamped abroad</p>
+        <ul class="pc-list"><li>Application and embassy stamping</li><li>Tracked to the entry window</li></ul>
+        <div class="pc-foot"><span class="pc-dir">Read</span><span class="pc-st amber">Connector ready</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top"><b>GOSI</b><span class="pc-auth">Social Insurance</span></div>
+        <p class="pc-what">Who counts as Saudi</p>
+        <ul class="pc-list"><li>Registration and contributory wage</li><li>Feeds the Nitaqat headcount</li></ul>
+        <div class="pc-foot"><span class="pc-dir">Read &amp; write</span><span class="pc-st green">Live lookup</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top"><b>Mudad</b><span class="pc-auth">Wage protection</span></div>
+        <p class="pc-what">Does pay match the contract</p>
+        <ul class="pc-list"><li>Payroll enrolment</li><li>Salary checked against Qiwa</li></ul>
+        <div class="pc-foot"><span class="pc-dir">Read</span><span class="pc-st green">Live lookup</span></div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top"><b>CCHI</b><span class="pc-auth">Health insurance council</span></div>
+        <p class="pc-what">No cover, no Iqama</p>
+        <ul class="pc-list"><li>Policy validity per employee</li><li>Blocks issue and renewal</li></ul>
+        <div class="pc-foot"><span class="pc-dir">Read</span><span class="pc-st green">Live lookup</span></div>
+      </div>
+      <div class="pcard note">
+        <div class="pc-top"><b>How amber goes green</b></div>
+        <p class="pc-note">Qiwa and Muqeem grant API access to <b>the employer</b>, under your own
+        establishment registration. Never to a vendor. You request credentials, we plug them into
+        connectors that are already built.</p>
+        <p class="pc-note" style="margin-top:9px">Until then the step is manual but tracked, with the
+        reference, receipt and status captured exactly as they would be automatically.</p>
+      </div>
+    </div>
+
+    <div class="shot" style="margin-top:26px">
+      <div class="shot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="shot-cap">Miscellaneous · Government Portals · the map, and what is connected</span></div>
+      <img src="web/integrations.webp" alt="The government portal map listing Qiwa, Muqeem, Absher, Enjaz, GOSI, Mudad and CCHI with the authority behind each, what it holds, the steps that touch it, direction of flow and connection status." loading="lazy" width="1600" height="1000">
+      <div class="shot-note">Three are live lookups today. Four have connectors built, waiting on
+      credentials only you can request. Either way, every step leaves a reference behind.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CH 8 — TASKS -->
+<section class="sec sec-alt" id="ch8">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 08 · Tasks &amp; accountability</div>
     <h2 class="sec-h">Put a name on a task and it behaves differently.</h2>
     <p class="sec-sub">
       Every step becomes a real task with a person, a due date and somewhere to escalate. In the
@@ -979,15 +1098,14 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- CH 8 — MONEY -->
-<section class="sec" id="ch8">
+<!-- CH 9 — MONEY -->
+<section class="sec" id="ch9">
   <div class="wrap">
-    <div class="eyebrow">Chapter 08 · The money trail</div>
+    <div class="eyebrow">Chapter 09 · The money trail</div>
     <h2 class="sec-h">Nothing gets paid without a SADAD reference and a GL code.</h2>
     <p class="sec-sub">
-      Saudi Arabia adds something the other GCC markets do not: the expat levy, charged per employee
-      per year, which turns permit costs from petty cash into a budget line big enough for the CFO to
-      care about.
+      Saudi Arabia adds something the rest of the Gulf does not: the expat levy. It turns permit costs
+      from petty cash into a line the CFO cares about.
     </p>
     <div class="plain"><b>In plain words</b>
       You cannot finish a step until you have told the system what you paid and attached the receipt.
@@ -1020,15 +1138,14 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- CH 9 — HEALTHCARE -->
-<section class="sec sec-alt" id="ch9">
+<!-- CH 10 — HEALTHCARE -->
+<section class="sec sec-alt" id="ch10">
   <div class="wrap">
-    <div class="eyebrow">Chapter 09 · Healthcare &amp; professional permits</div>
+    <div class="eyebrow">Chapter 10 · Healthcare &amp; professional permits</div>
     <h2 class="sec-h">A nurse needs SCFHS before an Iqama is any use.</h2>
     <p class="sec-sub">
-      In Saudi healthcare, the Iqama gets them into the country. The Saudi Commission for Health
-      Specialties decides whether they can treat anyone. That runs on its own clock through Mumaris+,
-      and it is long.
+      The Iqama gets them into the country. SCFHS decides whether they can treat anyone. That runs on
+      its own clock through Mumaris+, and it is long.
     </p>
     <div class="plain"><b>In plain words</b>
       One badge gets you in. A second badge lets you near a patient. The second one takes months, so
@@ -1066,10 +1183,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- CH 10 — ARCHITECTURE -->
-<section class="sec" id="ch10">
+<!-- CH 11 — ARCHITECTURE -->
+<section class="sec" id="ch11">
   <div class="wrap">
-    <div class="eyebrow">Chapter 10 · Solution architecture</div>
+    <div class="eyebrow">Chapter 11 · Solution architecture</div>
     <h2 class="sec-h">Every system, and what moves between them.</h2>
     <p class="sec-sub">
       The whole landscape on one picture. SuccessFactors stays your system of record for people. We
@@ -1100,10 +1217,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- CH 11 — BTP -->
-<section class="sec sec-alt" id="ch11">
+<!-- CH 12 — BTP -->
+<section class="sec sec-alt" id="ch12">
   <div class="wrap">
-    <div class="eyebrow">Chapter 11 · What it runs on</div>
+    <div class="eyebrow">Chapter 12 · What it runs on</div>
     <h2 class="sec-h">What you will need on SAP BTP.</h2>
     <p class="sec-sub">
       A native SAP Business Technology Platform application. Here is what to provision in your global
@@ -1136,10 +1253,10 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- CH 12 — VALUE -->
-<section class="sec" id="ch12">
+<!-- CH 13 — VALUE -->
+<section class="sec" id="ch13">
   <div class="wrap">
-    <div class="eyebrow">Chapter 12 · The value</div>
+    <div class="eyebrow">Chapter 13 · The value</div>
     <h2 class="sec-h">What is different the Monday after go-live.</h2>
     <p class="sec-sub">A working desk for the people carrying your Saudi compliance risk.</p>
     <div class="ba" style="margin-top:28px">
@@ -1173,6 +1290,76 @@ footer a:hover{text-decoration:underline}
   </div>
 </section>
 
+<!-- CH 14 — GCC READY -->
+<section class="sec sec-alt" id="ch14">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 14 · Beyond the Kingdom</div>
+    <h2 class="sec-h">Saudi Arabia is one pack. There are seven.</h2>
+    <p class="sec-sub">
+      Everything you have just seen is the KSA pack. The engine underneath runs six more markets,
+      so your second country is a configuration, not another project.
+    </p>
+    <div class="plain"><b>In plain words</b>
+      Same machine, different instruction card. Open an office in Dubai next year and your PRO team
+      is already trained.</div>
+
+    <div class="packgrid">
+      <div class="pk cur">
+        <div class="pk-top"><b>Saudi Arabia</b><span class="pk-tag">You are here</span></div>
+        <p class="pk-auth">Qiwa · Muqeem · Absher · GOSI · Mudad</p>
+        <p class="pk-hook">Nitaqat gates everything. Exit and re-entry is the trap.</p>
+      </div>
+      <div class="pk">
+        <div class="pk-top"><b>United Arab Emirates</b><span class="pk-n">8 permit types</span></div>
+        <p class="pk-auth">MOHRE · ICP · GDRFA · Tasheel</p>
+        <p class="pk-hook">Golden Visa splits the residence from the work permit. Two clocks.</p>
+      </div>
+      <div class="pk">
+        <div class="pk-top"><b>Qatar</b><span class="pk-n">4 permit types</span></div>
+        <p class="pk-auth">ADLSA · MOI · Qatar Visa Centre</p>
+        <p class="pk-hook">Most of the work happens before the employee ever travels.</p>
+      </div>
+      <div class="pk">
+        <div class="pk-top"><b>Kuwait</b><span class="pk-n">4 permit types</span></div>
+        <p class="pk-auth">PAM · MOI · PACI</p>
+        <p class="pk-hook">Permit and residency sit with two authorities on two clocks.</p>
+      </div>
+      <div class="pk">
+        <div class="pk-top"><b>Oman</b><span class="pk-n">4 permit types</span></div>
+        <p class="pk-auth">Ministry of Labour · ROP</p>
+        <p class="pk-hook">Omanisation gates clearance, the same way Nitaqat does here.</p>
+      </div>
+      <div class="pk">
+        <div class="pk-top"><b>Bahrain</b><span class="pk-n">5 permit types</span></div>
+        <p class="pk-auth">LMRA · NPRA · GOSI</p>
+        <p class="pk-hook">One authority runs the whole permit. The cleanest API candidate in the region.</p>
+      </div>
+      <div class="pk">
+        <div class="pk-top"><b>Libya</b><span class="pk-n">4 permit types</span></div>
+        <p class="pk-auth">Ministry of Labour · PNA</p>
+        <p class="pk-hook">Rotating crews. Proof matters more than volume.</p>
+      </div>
+      <div class="pk link">
+        <div class="pk-top"><b>See all seven in detail</b></div>
+        <p class="pk-hook">The GCC journey walks every country pack, all 36 permit types, and the
+        authorities behind each one.</p>
+        <a class="btn btn-primary" style="margin-top:14px;font-size:13.5px;padding:9px 16px"
+           href="https://cranialblend5.github.io/VisaAndPermitsDemo/">Open the GCC journey
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card"><h3>One engine</h3><p>Workflow, tasks, payment capture and reporting are
+      identical everywhere. What changes per country is the steps, the authorities and the thresholds.</p></div>
+      <div class="card"><h3>One training course</h3><p>A PRO who learns the Saudi screens already knows
+      the Emirati ones. Same queue, same inbox, same escalation ladder.</p></div>
+      <div class="card"><h3>One line in your BTP account</h3><p>Adding a country does not add a platform,
+      a contract or a separate support model. It adds a pack.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="sec sec-dark" id="close" style="padding-block:70px">
   <div class="wrap"><div class="close-cta">
     <h2>Built for the Kingdom.</h2>
@@ -1180,7 +1367,7 @@ footer a:hover{text-decoration:underline}
     the day. The same application that runs the rest of the GCC, configured for Saudi rules.</p>
     <div class="close-row">
       <a class="btn btn-primary" href="#ch6">See the Nitaqat engine</a>
-      <a class="btn btn-ghost" href="#ch5">Revisit exit &amp; re-entry</a>
+      <a class="btn btn-ghost" href="#ch14">See the other six countries</a>
     </div>
   </div></div>
 </section>
@@ -1208,12 +1395,14 @@ var CHAPTERS=[
   {id:"ch4",n:"04",t:"Walk a permit"},
   {id:"ch5",n:"05",t:"Exit & re-entry"},
   {id:"ch6",n:"06",t:"Saudization"},
-  {id:"ch7",n:"07",t:"Tasks & accountability"},
-  {id:"ch8",n:"08",t:"The money trail"},
-  {id:"ch9",n:"09",t:"Healthcare permits"},
-  {id:"ch10",n:"10",t:"Architecture"},
-  {id:"ch11",n:"11",t:"SAP BTP services"},
-  {id:"ch12",n:"12",t:"The value"}
+  {id:"ch7",n:"07",t:"Government portals"},
+  {id:"ch8",n:"08",t:"Tasks & accountability"},
+  {id:"ch9",n:"09",t:"The money trail"},
+  {id:"ch10",n:"10",t:"Healthcare permits"},
+  {id:"ch11",n:"11",t:"Architecture"},
+  {id:"ch12",n:"12",t:"SAP BTP services"},
+  {id:"ch13",n:"13",t:"The value"},
+  {id:"ch14",n:"14",t:"Also GCC-ready"}
 ];
 
 var PERSONAS=[
@@ -1322,15 +1511,15 @@ var PROCESSES=[
  shotcap:"Work Visa · New · process board for a live case",
  shotalt:"The process board for a new Saudi work visa and Iqama, showing twelve steps from block visa allocation through Qiwa contract authentication and Iqama issuance to handover.",
  steps:[
-  {t:"Block Visa Allocation",o:"PRO · gated by Nitaqat",d:"Before anything else, the band is checked. If the establishment is in the wrong band, Qiwa will not issue a block visa and there is no point starting. Where visas are available, one is allocated against the establishment file.",m:[["Gate","Nitaqat band must allow it"],["Authority","Qiwa (MHRSD)"],["If blocked","Case held, HR notified"]],tags:[["","Establishment file"],["pay","Block visa fee"]]},
+  {t:"Block Visa Allocation",o:"PRO · gated by Nitaqat",d:"Before anything else, the band is checked. If the establishment is in the wrong band, Qiwa will not issue a block visa and there is no point starting. Where visas are available, one is allocated against the establishment file.",m:[["Gate","Nitaqat band must allow it"],["Authority","Qiwa (MHRSD)"],["If blocked","Case held, HR notified"]],tags:[["","Establishment file"],["pay","Block visa fee"]],shot:"web/f-blockvisa.webp",shotcap:"Block Visa Request \u00b7 the band is checked before the request",shotalt:"The block visa request form showing establishment details, current Nitaqat band and headroom, visas available on file, and the profession classification field."},
   {t:"Visa Authorisation",o:"PRO / GRO",d:"The block visa is assigned to a named candidate and the authorisation number is issued, ready for the embassy.",m:[["Authority","Qiwa"],["Captured","Visa authorisation number"],["Next","Enjaz in country of origin"]],tags:[["","Candidate passport"],["att","Authorisation document"]]},
   {t:"Enjaz & Embassy Stamping",o:"Candidate · tracked by PRO",d:"The candidate applies through Enjaz and has the visa stamped at the Saudi mission in their country. Sent and received dates are both captured, so any wait is attributable.",m:[["Waiting on","The candidate"],["Captured","Stamped date, entry validity"],["If it stalls","Reminder every 2 days"]],tags:[["att","Stamped visa page"],["pay","Enjaz fee"]]},
-  {t:"Qiwa Employment Contract",o:"PRO / GRO",d:"The digital employment contract is created and authenticated in Qiwa. This has to be right before entry, because the contract terms are what the Iqama and every later service hang off.",m:[["Authority","Qiwa"],["Captured","Contract number, salary, profession"],["Blocking","Receipt required to submit"]],tags:[["pay","Contract fee, VAT"],["pay","SADAD reference"],["att","Authenticated contract"]],shot:"web/form-qiwa.webp",shotcap:"Milestone form · Qiwa Employment Contract Authentication",shotalt:"A milestone form capturing Qiwa contract number, start date, duration, profession, salary and allowances, with mandatory SADAD payment fields and an upload for the authenticated contract."},
-  {t:"Arrival & Entry Record",o:"Onboarding",d:"The arrival date is recorded, and that is what starts the statutory window to issue the Iqama. The countdown is visible from this moment on every screen that shows the case.",m:[["Starts","The statutory Iqama window"],["Owner","Onboarding"],["Visible","Days remaining on the case"]],tags:[["","Entry stamp"],["","Arrival date"]]},
+  {t:"Qiwa Employment Contract",o:"PRO / GRO",d:"The digital employment contract is created and authenticated in Qiwa. This has to be right before entry, because the contract terms are what the Iqama and every later service hang off.",m:[["Authority","Qiwa"],["Captured","Contract number, salary, profession"],["Blocking","Receipt required to submit"]],tags:[["pay","Contract fee, VAT"],["pay","SADAD reference"],["att","Authenticated contract"]],shot:"web/form-qiwa.webp",shotcap:"Milestone form · Qiwa Employment Contract Authentication",shotalt:"A milestone form capturing Qiwa contract number, start date, duration, profession, salary and allowances, with mandatory SADAD payment fields and an upload for the authenticated contract.",shot:"web/f-qiwacontract.webp",shotcap:"Qiwa Employment Contract \u00b7 authenticated in Arabic",shotalt:"The Qiwa employment contract form with Arabic and English job titles, contract type, probation and notice periods, basic salary with mandatory housing and transport allowances, and SADAD payment fields."},
+  {t:"Arrival & Entry Record",o:"Onboarding",d:"The arrival date is recorded, and that is what starts the statutory window to issue the Iqama. The countdown is visible from this moment on every screen that shows the case.",m:[["Starts","The statutory Iqama window"],["Owner","Onboarding"],["Visible","Days remaining on the case"]],tags:[["","Entry stamp"],["","Arrival date"]],shot:"web/f-arrival.webp",shotcap:"Arrival \u00b7 the border number and the ninety-day clock",shotalt:"The arrival form capturing the ten-digit border number, port and date of entry in both calendars, passport validity, and the date by which the Iqama must be issued with days remaining."},
   {t:"Medical Examination",o:"Employee · tracked by PRO",d:"The medical is booked at an approved centre and the result recorded. A fit result releases the next step; anything else routes to the HRBP rather than drifting.",m:[["Outcome","Fit or unfit"],["Reminder","Every 2 days until attended"],["If unfit","Routed to HRBP"]],tags:[["pay","Medical fee"],["att","Medical report"]]},
   {t:"Biometrics & Absher",o:"Employee · tracked by PRO",d:"Fingerprints are captured and the employee's Absher account is activated, which is how they will see everything you do on Muqeem from here on.",m:[["Authority","MoI / Absher"],["Owner","Employee, chased by PRO"],["Result","Absher account active"]],tags:[["","Biometric appointment"],["att","Confirmation"]]},
-  {t:"Iqama Issuance (Muqeem)",o:"PRO / GRO",d:"The Iqama is issued through Muqeem. Number, issue date, expiry and profession are recorded and written back to Employee Central, so your HR system and the government agree.",m:[["Authority","Muqeem"],["Captured","Iqama number and expiry"],["Writes back","Employee Central"]],tags:[["pay","Iqama issue fee"],["pay","Expat levy"],["att","Iqama copy"]]},
-  {t:"GOSI Registration",o:"Onboarding",d:"The employee is registered with the General Organization for Social Insurance. For Saudi nationals this is the step that makes them count towards your Nitaqat ratio.",m:[["Authority","GOSI"],["Nitaqat","Saudi hires count from here"],["Owner","Onboarding"]],tags:[["","GOSI number"],["att","Registration confirmation"]]},
+  {t:"Iqama Issuance (Muqeem)",o:"PRO / GRO",d:"The Iqama is issued through Muqeem. Number, issue date, expiry and profession are recorded and written back to Employee Central, so your HR system and the government agree.",m:[["Authority","Muqeem"],["Captured","Iqama number and expiry"],["Writes back","Employee Central"]],tags:[["pay","Iqama issue fee"],["pay","Expat levy"],["att","Iqama copy"]],shot:"web/f-iqama.webp",shotcap:"Iqama Issuance \u00b7 Hijri and Gregorian, CCHI verified",shotalt:"The Iqama issuance form with border number, Iqama number, profession, issue and expiry dates in both Hijri and Gregorian, CCHI insurance verified automatically, expat levy and a SADAD fee breakdown."},
+  {t:"GOSI Registration",o:"Onboarding",d:"The employee is registered with the General Organization for Social Insurance. For Saudi nationals this is the step that makes them count towards your Nitaqat ratio.",m:[["Authority","GOSI"],["Nitaqat","Saudi hires count from here"],["Owner","Onboarding"]],tags:[["","GOSI number"],["att","Registration confirmation"]],shot:"web/f-gosi.webp",shotcap:"GOSI Registration \u00b7 the step that moves your Nitaqat number",shotalt:"The GOSI registration form with establishment GOSI number, contributory wage that must agree with the Qiwa contract, and employer contribution rate."},
   {t:"Mudad Wage Protection",o:"Finance · with HR",d:"Payroll enrolment confirmed so salary payments are visible to the wage protection system, which is itself a compliance check the authorities run against you.",m:[["Authority","Mudad"],["Owner","Finance"],["Checked","Salary matches the Qiwa contract"]],tags:[["","Payroll enrolment"]]},
   {t:"Nitaqat Recount",o:"System · reviewed by HR",d:"Headcount is updated and the band position recalculated, so you see the effect of this hire on your ratio immediately rather than at the next Qiwa cycle.",m:[["Recalculated","On every hire and leaver"],["Shows","New ratio and headroom"],["Alerts","If the band is close to moving"]],tags:[["","Weighted headcount"]]},
   {t:"Handover & Confirmation",o:"PRO · employee confirms",d:"The Iqama is handed over, the employee confirms receipt, and the case closes. Expiry is now tracked automatically and the renewal will be raised six weeks before it matters.",m:[["Closes with","Employee confirmation"],["Starts","Renewal tracking"],["Recorded","Handover date"]],tags:[["att","Signed handover"],["","Iqama expiry"]]}]},
@@ -1341,7 +1530,7 @@ var PROCESSES=[
   {t:"Expiry Alert",o:"System",d:"Raised six weeks ahead to the employee, the PRO and the HRBP together. Renewals cluster around hiring dates, so the calendar view matters as much as the individual alert.",m:[["Raised","6 weeks before expiry"],["Notified","Employee, PRO, HRBP"],["Escalates","At 2 weeks"]],tags:[["","Renewal calendar"]]},
   {t:"Nitaqat Gate Check",o:"System · reviewed by HR",d:"The band is checked before any money is spent. If the establishment has fallen into a band that blocks renewals, paying the levy first would simply waste it.",m:[["Gate","Band must permit renewal"],["Prevents","Paying fees that cannot be used"],["If blocked","Escalated to HR immediately"]],tags:[["","Band position"]]},
   {t:"Qiwa Contract Validity",o:"PRO / GRO",d:"The employment contract has to be current and authenticated in Qiwa. An expired or unauthenticated contract will stop the renewal at Muqeem.",m:[["Authority","Qiwa"],["Checked","Contract still valid"],["If expired","Contract renewed first"]],tags:[["att","Contract copy"]]},
-  {t:"Levy & Iqama Fees",o:"PRO · finance visibility",d:"The expat levy and the Iqama fee are paid through SADAD. This is the largest recurring cost in the Saudi permit lifecycle and it is forecast against the renewal calendar rather than discovered.",m:[["Paid via","SADAD"],["Forecast","Against renewal calendar"],["Blocking","Receipt required"]],tags:[["pay","Expat levy"],["pay","Iqama renewal fee"],["att","SADAD receipt"]]},
+  {t:"Levy & Iqama Fees",o:"PRO · finance visibility",d:"The expat levy and the Iqama fee are paid through SADAD. This is the largest recurring cost in the Saudi permit lifecycle and it is forecast against the renewal calendar rather than discovered.",m:[["Paid via","SADAD"],["Forecast","Against renewal calendar"],["Blocking","Receipt required"]],tags:[["pay","Expat levy"],["pay","Iqama renewal fee"],["att","SADAD receipt"]],shot:"web/f-renewal.webp",shotcap:"Iqama Renewal \u00b7 six checks before a riyal moves",shotalt:"The Iqama renewal form showing pre-flight checks for Nitaqat band, Qiwa contract, passport validity, outstanding fines, CCHI insurance and biometrics, then the renewal period and a fee breakdown."},
   {t:"Medical Insurance",o:"HR · with PRO",d:"Cover is renewed and the certificate attached. Without valid insurance the Iqama renewal will not complete.",m:[["Required for","Iqama renewal"],["Captured","Policy number, validity"],["Owner","HR with the PRO"]],tags:[["pay","Insurance premium"],["att","Insurance certificate"]]},
   {t:"Muqeem Renewal",o:"PRO / GRO",d:"The Iqama is renewed on Muqeem and the new expiry recorded. The employee sees it in Absher on the same day.",m:[["Authority","Muqeem"],["Captured","New expiry date"],["Employee sees","Absher updated"]],tags:[["att","Renewed Iqama"]]},
   {t:"Employee Central Update",o:"System",d:"The new expiry is written back to SuccessFactors so your HR system and the government record agree, and the next renewal alert is scheduled from the correct date.",m:[["Writes back","Employee Central"],["Schedules","Next renewal alert"],["Prevents","Records drifting apart"]],tags:[["","Iqama expiry"]]},
@@ -1353,7 +1542,7 @@ var PROCESSES=[
   {t:"Employee Request",o:"Employee · self-service",d:"The employee raises the request with their travel dates and reason. Getting the dates from the person travelling, rather than second hand, is what makes the return-by calculation trustworthy.",m:[["Raised by","The employee"],["Captured","Departure and return dates"],["Channel","Self-service"]],tags:[["","Travel dates"]]},
   {t:"Line Manager Approval",o:"Line manager",d:"The absence is approved against the leave calendar, so an exit re-entry cannot be issued for time the business has not agreed to.",m:[["Approver","Line manager"],["Checked","Against leave calendar"],["Reminder","Every 2 days"]],tags:[["","Approval"]]},
   {t:"HR Eligibility Check",o:"HRBP",d:"Iqama validity, outstanding dues, loans and notice period are all checked. An employee whose Iqama expires while they are abroad cannot re-enter on it, whatever the exit visa says.",m:[["Checked","Iqama validity vs travel"],["Checked","Dues and loans"],["Blocks","If Iqama expires abroad"]],tags:[["","Eligibility"]]},
-  {t:"Muqeem Application",o:"PRO / GRO",d:"The PRO applies on Muqeem, choosing single or multiple and the duration. The choice is recorded because the cost and the risk differ, and the wrong one is expensive either way.",m:[["Authority","Muqeem"],["Choice","Single or multiple"],["Captured","Duration requested"]],tags:[["","Visa type"],["att","Application"]]},
+  {t:"Muqeem Application",o:"PRO / GRO",d:"The PRO applies on Muqeem, choosing single or multiple and the duration. The choice is recorded because the cost and the risk differ, and the wrong one is expensive either way.",m:[["Authority","Muqeem"],["Choice","Single or multiple"],["Captured","Duration requested"]],tags:[["","Visa type"],["att","Application"]],shot:"web/f-exitreentry.webp",shotcap:"Exit & Re-entry \u00b7 single or multiple, and what it costs",shotalt:"The exit and re-entry application form with Iqama validity and violations checks, visa type and duration, intended travel dates, and a fee calculation showing the doubled rate for extending from outside the Kingdom."},
   {t:"Fee Payment",o:"PRO / GRO",d:"The SADAD fee is paid and the receipt captured in the step, like every other government payment.",m:[["Paid via","SADAD"],["Blocking","Receipt required to submit"],["Posted","To GL"]],tags:[["pay","Exit re-entry fee"],["pay","SADAD reference"],["att","Receipt"]]},
   {t:"Visa Issued",o:"PRO / GRO",d:"The visa number and its validity window are recorded against the employee, and the employee can see it in Absher.",m:[["Captured","Visa number"],["Captured","Validity window"],["Employee sees","Absher"]],tags:[["att","Visa copy"]]},
   {t:"Departure Recorded",o:"PRO · confirmed by employee",d:"This is the step everything hinges on. The actual departure date is recorded, and the return-by clock is calculated from that, not from the application date. Getting this wrong by a week is how people get stranded.",m:[["Starts","The return-by clock"],["Calculated from","Actual departure"],["Visible","Days remaining"]],tags:[["","Departure date"]]},
@@ -1365,7 +1554,7 @@ var PROCESSES=[
  steps:[
   {t:"Candidate Status Check",o:"PRO / GRO",d:"The candidate's current employer, contract and Iqama status are checked in Qiwa before anything is promised. Transfers fail on details that are visible up front.",m:[["Authority","Qiwa"],["Checked","Current contract and status"],["No","Block visa or entry visa needed"]],tags:[["","Qiwa status"]]},
   {t:"Nitaqat Impact Check",o:"System · reviewed by HR",d:"A transfer in consumes a slot in your ratio the moment it completes. The band impact is shown before the request is raised, not after it lands.",m:[["Shows","Band impact before commit"],["Consumes","A Nitaqat slot"],["Alerts","If it moves the band"]],tags:[["","Band forecast"]]},
-  {t:"Transfer Request",o:"PRO / GRO",d:"The transfer is raised in Qiwa under the current rules, and the fee is paid through SADAD.",m:[["Authority","Qiwa"],["Paid via","SADAD"],["Tracked","To approval or rejection"]],tags:[["pay","Transfer fee"],["att","Receipt"]]},
+  {t:"Transfer Request",o:"PRO / GRO",d:"The transfer is raised in Qiwa under the current rules, and the fee is paid through SADAD.",m:[["Authority","Qiwa"],["Paid via","SADAD"],["Tracked","To approval or rejection"]],tags:[["pay","Transfer fee"],["att","Receipt"]],shot:"web/f-transfer.webp",shotcap:"Sponsorship Transfer \u00b7 band impact before you commit",shotalt:"The sponsorship transfer form showing the candidate current sponsor and contract status, the receiving establishment band before and after the transfer, and the transfer fee."},
   {t:"New Qiwa Contract",o:"PRO / GRO",d:"A new employment contract is created and authenticated under your establishment, with the agreed salary and profession.",m:[["Authority","Qiwa"],["Captured","Contract number, salary"],["Signed by","The employee"]],tags:[["att","Authenticated contract"]]},
   {t:"Iqama Updated (Muqeem)",o:"PRO / GRO",d:"The Iqama is moved to your establishment on Muqeem and the details written back to Employee Central.",m:[["Authority","Muqeem"],["Updated","Sponsor and profession"],["Writes back","Employee Central"]],tags:[["att","Updated Iqama"]]},
   {t:"GOSI & Mudad Update",o:"Onboarding · with finance",d:"Social insurance and wage protection records move across, and the transfer is complete.",m:[["Authorities","GOSI and Mudad"],["Owner","Onboarding"],["Closes","The case"]],tags:[["","Registration update"]]}]},

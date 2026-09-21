@@ -11,6 +11,7 @@ ROOT = pathlib.Path(__file__).resolve().parent
 GCC  = ROOT.parent / "journey"
 
 style  = re.search(r"<style>.*?</style>", (GCC / "index.html").read_text(encoding="utf-8"), re.S).group(0)
+style  = style.replace("</style>", (ROOT / "extra.css").read_text(encoding="utf-8") + "\n</style>")
 faces  = {n: (GCC / "people" / f"{n}.svg").read_text(encoding="utf-8").strip()
           for n in ["rashid", "noura", "aisha", "khalid", "yousef", "fatima", "omar"]}
 jmap   = (ROOT / "diagrams" / "journeymap.svg").read_text(encoding="utf-8")

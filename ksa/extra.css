@@ -1,0 +1,45 @@
+
+/* ---------- government portal cards ---------- */
+.portalgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+@media(max-width:1000px){.portalgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.portalgrid{grid-template-columns:1fr}}
+.pcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 17px;box-shadow:var(--shadow);display:flex;flex-direction:column;
+}
+.pcard.lead{border-color:var(--azure-line);background:var(--azure-soft)}
+.pcard.note{background:var(--sand-soft);border-color:var(--sand)}
+.pc-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px}
+.pc-top b{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.02em}
+.pc-auth{font-family:var(--mono);font-size:10px;color:var(--text-3);text-align:right;line-height:1.3}
+.pc-what{font-size:13.5px;font-weight:700;color:var(--azure);margin-bottom:10px}
+.pcard.note .pc-what{color:var(--sand)}
+.pc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-list li{font-size:12.6px;line-height:1.4;color:var(--text-2);padding-left:14px;position:relative}
+.pc-list li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--azure-line)}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
+.pc-dir{font-family:var(--mono);font-size:10.5px;color:var(--text-3)}
+.pc-st{font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap}
+.pc-st.green{background:var(--done-soft);color:var(--done)}
+.pc-st.amber{background:var(--due-soft);color:var(--due)}
+.pc-note{font-size:12.4px;line-height:1.5;color:var(--text-2)}
+.pc-note b{color:var(--text)}
+
+/* ---------- country pack cards ---------- */
+.packgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+@media(max-width:1000px){.packgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.packgrid{grid-template-columns:1fr}}
+.pk{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 17px;box-shadow:var(--shadow);
+}
+.pk.cur{border-color:var(--azure);border-width:2px;background:var(--azure-soft)}
+.pk.link{background:var(--ink);border-color:var(--ink)}
+.pk.link .pk-top b{color:#fff}
+.pk.link .pk-hook{color:#A9C2DA}
+.pk-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}
+.pk-top b{font-family:var(--display);font-size:15px;font-weight:800;line-height:1.2}
+.pk-tag{font-family:var(--mono);font-size:9.5px;font-weight:600;background:var(--azure);color:#fff;padding:3px 7px;border-radius:5px;white-space:nowrap}
+.pk-n{font-family:var(--mono);font-size:10px;color:var(--text-3);white-space:nowrap}
+.pk-auth{font-family:var(--mono);font-size:10.5px;color:var(--azure);margin-bottom:9px;line-height:1.4}
+.pk-hook{font-size:12.8px;line-height:1.45;color:var(--text-2)}

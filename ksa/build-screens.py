@@ -432,3 +432,362 @@ page("queue-new", nav("Work Visa", ["New Work Visa", "Renew Iqama", "Exit &amp; 
 
 if __name__ == "__main__":
     print(f"wrote {len(list(OUT.glob('*.html')))} screen templates to {OUT}")
+
+
+# ================================================================ form kit
+FORMCSS = """<style>
+.wrap2{max-width:1020px;margin:0 auto}
+.fcard{background:#fff;border:1px solid #E3E6E8;border-radius:10px;overflow:hidden}
+.fhd{padding:15px 22px;border-bottom:1px solid #EDEFF1;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.fhd b{font-size:17px}
+.fhd .src{font-size:12px;color:#5A6E82}
+.badge2{background:#E3EEFB;color:#0B5FD9;border:1px solid #BFD8F6;border-radius:13px;padding:4px 11px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.badge2.mu{background:#EAF3EC;color:#177D48;border-color:#C4E2CF}
+.badge2.ab{background:#F3EDF9;color:#6B4E9E;border-color:#DCCDEE}
+.badge2.go{background:#FDF2E3;color:#9A6512;border-color:#EBD5AE}
+.sect{padding:6px 22px 0}
+.sect h3{font-size:12.5px;font-weight:700;color:#0B5FD9;letter-spacing:.07em;text-transform:uppercase;margin:16px 0 11px;padding-bottom:7px;border-bottom:1px solid #EDEFF1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;padding:0 22px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-size:12.5px;color:#3F5265;font-weight:600}
+.fld label i{color:#B0392C;font-style:normal}
+.fld label em{color:#8C9AA8;font-style:normal;font-weight:400}
+.inp{border:1px solid #8C9AA8;border-radius:4px;padding:8px 11px;font-size:13px;min-height:35px;background:#fff}
+.inp.ro{background:#EDEFF1;border:none;border-bottom:1px dashed #A7B2BC;border-radius:0;color:#243447}
+.inp.ph{color:#97A3AE;font-style:italic}
+.inp.ok{border-color:#177D48;background:#F4FBF6}
+.inp.warn{border-color:#C9821A;background:#FDF8EF}
+.hint{font-size:11.5px;color:#65798C;line-height:1.4}
+.hint b{color:#243447}
+.hint.g{color:#177D48;font-weight:600}
+.hint.a{color:#9A6512;font-weight:600}
+.hint.r{color:#B0392C;font-weight:600}
+.full{grid-column:1/-1}
+.note2{margin:16px 22px 0;padding:12px 15px;border-radius:8px;background:#FDF8EF;border:1px solid #EBD5AE;font-size:12.5px;color:#6B4E14;line-height:1.55}
+.note2 b{color:#8A5F12}
+.note2.blue{background:#F1F7FE;border-color:#C8DDF5;color:#1F4C7A}
+.note2.blue b{color:#0B5FD9}
+.calc{margin:0 22px;background:#F7F9FB;border:1px solid #E3E6E8;border-radius:8px;padding:13px 16px}
+.crow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:#3F5265}
+.crow.tot{border-top:1px solid #DDE2E6;margin-top:6px;padding-top:9px;font-weight:700;color:#1D2D3E;font-size:14.5px}
+.ftr{padding:16px 22px;border-top:1px solid #EDEFF1;display:flex;gap:11px;justify-content:flex-end;background:#FAFBFC}
+</style>"""
+
+
+def fld(label, value, req=False, ro=False, ph=False, hint=None, hcls="", state="", full=False):
+    cls = "inp ro" if ro else "inp" + (" ph" if ph else "") + (f" {state}" if state else "")
+    star = "<i>*</i>" if req else ""
+    h = (f'<div class="fld{" full" if full else ""}"><label>{label} {star}</label>'
+         f'<div class="{cls}">{value}</div>')
+    if hint:
+        h += f'<div class="hint {hcls}">{hint}</div>'
+    return h + "</div>"
+
+
+def form(name, title, source, badges, sections, notes="", calc="", navtab="Work Visa"):
+    h = [SHELL, FORMCSS, nav(navtab), '<div class="body"><div class="wrap2"><div class="fcard">']
+    h.append(f'<div class="fhd"><div><b>{title}</b><div class="src">{source}</div></div>'
+             f'<div style="display:flex;gap:7px">{"".join(badges)}</div></div>')
+    for sh, fields in sections:
+        h.append(f'<div class="sect"><h3>{sh}</h3></div><div class="grid2">{"".join(fields)}</div>')
+    if calc:
+        h.append(calc)
+    if notes:
+        h.append(notes)
+    h.append('<div class="ftr"><span class="bsv">Save draft</span>'
+             '<span class="bsub">Submit</span><span class="bcn">Cancel</span></div>')
+    h.append('</div></div></div>')
+    (OUT / f"{name}.html").write_text("".join(h), encoding="utf-8")
+    return name
+
+QIWA = '<span class="badge2">Writes to Qiwa</span>'
+MUQ  = '<span class="badge2 mu">Writes to Muqeem</span>'
+ABS  = '<span class="badge2 ab">Visible in Absher</span>'
+GOSI = '<span class="badge2 go">Writes to GOSI</span>'
+SF   = '<span class="badge2">From SuccessFactors</span>'
+
+# ---------------------------------------------------------------- f1. block visa
+form("f-blockvisa", "Block Visa Request", "Step 1 of 12 · New Work Visa &amp; Iqama · Rashid Al Mutairi",
+ [QIWA],
+ [("Establishment", [
+    fld("Establishment", "JED-OPS · Jeddah Operations", ro=True),
+    fld("Unified number (700)", "7001234567", ro=True),
+    fld("Labour office", "Jeddah · 21", ro=True),
+    fld("Economic activity", "Wholesale distribution", ro=True)]),
+  ("Nitaqat position", [
+    fld("Current band", "Green · Mid", ro=True, state="ok",
+        hint="Band permits block visa requests this cycle", hcls="g"),
+    fld("Saudization ratio", "19.5%", ro=True,
+        hint="148 Saudi of 760 weighted headcount"),
+    fld("Headroom to next band down", "1.9%", ro=True, state="warn",
+        hint="33 Saudi leavers would drop this establishment to Green Low", hcls="a"),
+    fld("Visas available on file", "6", ro=True,
+        hint="Approved and not yet assigned")]),
+  ("Request", [
+    fld("Profession (MHRSD classification)", "Warehouse Supervisor &nbsp;&nbsp;&#9662;", req=True,
+        hint="Must match the qualification on the attested degree, or the Cultural Attach&eacute; will reject the visa later"),
+    fld("Profession code", "5-31.20", ro=True),
+    fld("Nationality", "Egypt &nbsp;&nbsp;&#9662;", req=True),
+    fld("Number of visas requested", "2", req=True),
+    fld("Justification", "Peak season cover for the Jeddah distribution centre", req=True, full=True)])],
+ notes='<div class="note2"><b>Why this step comes first.</b> Qiwa will refuse a block visa outright if the '
+       'establishment has fallen into a band that blocks issuance. We check the band before the request is '
+       'raised, so you never pay for a request that cannot succeed.</div>')
+
+# ---------------------------------------------------------------- f2. qiwa contract
+form("f-qiwacontract", "Qiwa Employment Contract", "Step 4 of 12 · New Work Visa &amp; Iqama · Rashid Al Mutairi",
+ [QIWA, ABS],
+ [("Employee", [
+    fld("Employee ID", "30015904", ro=True),
+    fld("Name (as per passport)", "Mohammed Ahmed Al Otaibi", ro=True),
+    fld("Nationality", "Egypt", ro=True),
+    fld("Passport number", "A21884930", ro=True)]),
+  ("Contract terms", [
+    fld("Job title (Arabic)", "&#1605;&#1588;&#1585;&#1601; &#1605;&#1587;&#1578;&#1608;&#1583;&#1593;", req=True,
+        hint="Qiwa contracts are authenticated in Arabic"),
+    fld("Job title (English)", "Warehouse Supervisor", req=True,
+        hint="Must match the attested qualification", hcls="a"),
+    fld("Contract type", "Fixed term &nbsp;&nbsp;&#9662;", req=True),
+    fld("Contract duration", "1 year &nbsp;&nbsp;&#9662;", req=True),
+    fld("Start date (Gregorian)", "01/11/2026", req=True),
+    fld("Start date (Hijri)", "1448-05-11", ro=True, hint="Derived automatically"),
+    fld("Probation period", "90 days", req=True, hint="Maximum 180 days under the Labour Law"),
+    fld("Notice period", "60 days", req=True),
+    fld("Working hours per week", "48", req=True),
+    fld("Annual leave (days)", "21", req=True)]),
+  ("Remuneration", [
+    fld("Basic salary (SAR)", "6,500", req=True),
+    fld("Housing allowance (SAR)", "1,625", req=True, hint="Mandatory field in Qiwa"),
+    fld("Transport allowance (SAR)", "650", req=True, hint="Mandatory field in Qiwa"),
+    fld("Other allowances (SAR)", "0"),
+    fld("Total monthly (SAR)", "8,775", ro=True, state="ok",
+        hint="Must match what is declared to Mudad wage protection", hcls="g"),
+    fld("Payment method", "Bank transfer &nbsp;&nbsp;&#9662;", req=True)]),
+  ("Authentication &amp; payment", [
+    fld("Qiwa contract number", "", req=True, ph=False),
+    fld("SADAD bill number", "", req=True),
+    fld("Contract fee (SAR)", "1,000", req=True),
+    fld("VAT (SAR)", "150", req=True),
+    fld("Payment date", "e.g. 24/09/2026", req=True, ph=True),
+    fld("GL account", "0000180208", ro=True, hint="Posted to S/4HANA on submit"),
+    fld("Authenticated contract (PDF)", 'Upload file&hellip; &nbsp;&nbsp;<span style="color:#0B5FD9;font-weight:700">Browse</span>',
+        req=True, ph=True, full=True)])],
+ notes='<div class="note2 blue"><b>The employee sees this too.</b> Once authenticated, the contract appears in '
+       'the employee\'s Absher account for acceptance. If what they see there does not match what you agreed, '
+       'you will hear about it from the Labour Office, not from them.</div>')
+
+# ---------------------------------------------------------------- f3. arrival / border number
+form("f-arrival", "Arrival &amp; Border Number", "Step 5 of 12 · New Work Visa &amp; Iqama · Aisha Al Harbi",
+ [MUQ],
+ [("Entry record", [
+    fld("Border number (Hudood)", "3412889075", req=True,
+        hint="Ten digits, handwritten by Jawazat on the visa page at the port of entry"),
+    fld("Port of entry", "King Abdulaziz Intl · Jeddah &nbsp;&nbsp;&#9662;", req=True),
+    fld("Date of entry (Gregorian)", "02/11/2026", req=True),
+    fld("Date of entry (Hijri)", "1448-05-12", ro=True),
+    fld("Visa number", "6041227893", ro=True),
+    fld("Passport expiry", "14/08/2029", ro=True, state="ok",
+        hint="Valid beyond the Iqama period", hcls="g")]),
+  ("Statutory clock", [
+    fld("Iqama must be issued by", "31/01/2027", ro=True, state="warn",
+        hint="Counted from the recorded entry date, not from the visa date", hcls="a"),
+    fld("Days remaining", "90", ro=True, state="warn", hint="Visible on every screen showing this case", hcls="a"),
+    fld("National address registered", "Not yet &nbsp;&nbsp;&#9662;", req=True,
+        hint="Required before the Iqama can be issued"),
+    fld("Employee contacted", "Yes &nbsp;&nbsp;&#9662;", req=True)])],
+ notes='<div class="note2"><b>This is the field everything hangs off.</b> Until the Iqama exists, the border '
+       'number is the only way to identify this person to any Saudi system. Record it wrong and every later '
+       'lookup fails. Record the entry date wrong and the ninety-day clock is wrong with it.</div>')
+
+# ---------------------------------------------------------------- f4. iqama issuance
+form("f-iqama", "Iqama Issuance", "Step 8 of 12 · New Work Visa &amp; Iqama · Rashid Al Mutairi",
+ [MUQ, ABS],
+ [("Identification", [
+    fld("Border number (Hudood)", "3412889075", ro=True),
+    fld("Iqama number", "", req=True, hint="Ten digits, begins with 2 for expatriate residents"),
+    fld("Profession as printed on Iqama", "Warehouse Supervisor", req=True,
+        hint="Must match the Qiwa contract exactly, or transfers and renewals fail later", hcls="a"),
+    fld("Sponsor (establishment)", "JED-OPS · 7001234567", ro=True)]),
+  ("Validity", [
+    fld("Issue date (Hijri)", "1448-06-03", req=True),
+    fld("Issue date (Gregorian)", "23/11/2026", ro=True, hint="Derived automatically"),
+    fld("Expiry date (Hijri)", "1449-06-02", req=True,
+        hint="Iqama validity runs on the Hijri calendar", hcls="a"),
+    fld("Expiry date (Gregorian)", "12/11/2027", ro=True,
+        hint="Both are written back to Employee Central")]),
+  ("Insurance &amp; fees", [
+    fld("CCHI insurance policy", "Verified &nbsp;&#10003;", ro=True, state="ok",
+        hint="Checked against the CCHI platform automatically", hcls="g"),
+    fld("Insurance class", "Class C &nbsp;&nbsp;&#9662;", req=True),
+    fld("Iqama issue fee (SAR)", "650", req=True),
+    fld("Expat levy (SAR / year)", "9,600", req=True,
+        hint="Rate depends on the establishment Saudization ratio", hcls="a"),
+    fld("SADAD bill number", "", req=True),
+    fld("Payment date", "e.g. 23/11/2026", req=True, ph=True),
+    fld("Iqama copy (PDF)", 'Upload file&hellip; &nbsp;&nbsp;<span style="color:#0B5FD9;font-weight:700">Browse</span>',
+        req=True, ph=True, full=True)])],
+ calc='<div class="calc"><div class="crow"><span>Iqama issue fee</span><span>SAR 650.00</span></div>'
+      '<div class="crow"><span>Expat levy &#183; 12 months at SAR 800</span><span>SAR 9,600.00</span></div>'
+      '<div class="crow"><span>Medical insurance &#183; Class C</span><span>SAR 1,840.00</span></div>'
+      '<div class="crow tot"><span>Total due via SADAD</span><span>SAR 12,090.00</span></div></div>',
+ notes='<div class="note2 blue"><b>Two calendars, one record.</b> The Iqama runs on Hijri dates, your HR system '
+       'runs on Gregorian. We hold both and write both back, so the renewal alert fires on the right day rather '
+       'than eleven days late.</div>', navtab="Iqama")
+
+# ---------------------------------------------------------------- f5. exit re-entry
+form("f-exitreentry", "Exit &amp; Re-entry Application", "Step 4 of 9 · Exit &amp; Re-entry · Rashid Al Mutairi",
+ [MUQ, ABS],
+ [("Employee", [
+    fld("Employee", "Abdulrahman Al Zahrani · 30014782", ro=True),
+    fld("Iqama number", "2445119087", ro=True),
+    fld("Iqama expiry (Hijri)", "1449-09-14", ro=True, state="ok",
+        hint="Valid well beyond the intended return", hcls="g"),
+    fld("Outstanding violations", "None &nbsp;&#10003;", ro=True, state="ok",
+        hint="Traffic and labour fines block issuance", hcls="g")]),
+  ("Travel", [
+    fld("Visa type", "Single &nbsp;&nbsp;&#9662;", req=True,
+        hint="Single allows one return. Multiple allows several within the window"),
+    fld("Duration requested", "2 months &nbsp;&nbsp;&#9662;", req=True),
+    fld("Intended departure", "06/09/2026", req=True),
+    fld("Intended return", "28/10/2026", req=True,
+        hint="Eight days of margin before the visa expires", hcls="g"),
+    fld("Reason", "Annual leave &nbsp;&nbsp;&#9662;", req=True),
+    fld("Line manager approval", "Approved &#183; 28/08/2026", ro=True, state="ok")]),
+  ("Fee &amp; payment", [
+    fld("SADAD bill number", "", req=True),
+    fld("Payment date", "e.g. 02/09/2026", req=True, ph=True),
+    fld("GL account", "0000180211", ro=True),
+    fld("SADAD receipt", 'Upload file&hellip; &nbsp;&nbsp;<span style="color:#0B5FD9;font-weight:700">Browse</span>',
+        req=True, ph=True)])],
+ calc='<div class="calc"><div class="crow"><span>Single exit re-entry &#183; first 2 months</span><span>SAR 200.00</span></div>'
+      '<div class="crow"><span>Additional months</span><span>SAR 0.00</span></div>'
+      '<div class="crow" style="color:#9A6512"><span>If extended later from outside the Kingdom</span><span>SAR 200.00 / month</span></div>'
+      '<div class="crow tot"><span>Total due via SADAD</span><span>SAR 200.00</span></div></div>',
+ notes='<div class="note2"><b>The return-by date is not this form.</b> It is set when the actual departure is '
+       'recorded, which may not be the date requested here. Extending from outside the Kingdom costs double per '
+       'month, and once the visa has expired the system will not accept an extension at all.</div>')
+
+# ---------------------------------------------------------------- f6. iqama renewal
+form("f-renewal", "Iqama Renewal", "Step 4 of 8 · Iqama Renewal · Aisha Al Harbi",
+ [MUQ, QIWA, ABS],
+ [("Pre-flight checks", [
+    fld("Nitaqat band permits renewal", "Green &#183; Mid &nbsp;&#10003;", ro=True, state="ok",
+        hint="Checked before any fee is paid", hcls="g"),
+    fld("Qiwa contract valid", "Authenticated &#183; expires 31/10/2027 &nbsp;&#10003;", ro=True, state="ok"),
+    fld("Passport validity", "14/08/2029", ro=True, state="ok",
+        hint="Must exceed the new Iqama period", hcls="g"),
+    fld("Outstanding fines", "None &nbsp;&#10003;", ro=True, state="ok",
+        hint="Traffic, labour and municipal fines all block renewal", hcls="g"),
+    fld("CCHI insurance", "Renewed to 12/11/2027 &nbsp;&#10003;", ro=True, state="ok",
+        hint="Verified automatically against the CCHI platform", hcls="g"),
+    fld("Biometrics current", "Yes &nbsp;&#10003;", ro=True, state="ok")]),
+  ("Renewal", [
+    fld("Current expiry (Hijri)", "1449-06-02", ro=True),
+    fld("Renewal period", "1 year &nbsp;&nbsp;&#9662;", req=True),
+    fld("New expiry (Hijri)", "1450-06-01", ro=True, hint="Calculated on the Hijri calendar"),
+    fld("New expiry (Gregorian)", "01/11/2028", ro=True, hint="Written back to Employee Central")]),
+  ("Fees", [
+    fld("Expat levy rate", "SAR 800 / month", ro=True, state="warn",
+        hint="Rises if the Saudization ratio falls", hcls="a"),
+    fld("Levy total (SAR)", "9,600", ro=True),
+    fld("Iqama renewal fee (SAR)", "650", ro=True),
+    fld("Medical insurance (SAR)", "1,840", ro=True),
+    fld("SADAD bill number", "", req=True),
+    fld("Payment date", "e.g. 30/09/2026", req=True, ph=True)])],
+ calc='<div class="calc"><div class="crow"><span>Expat levy &#183; 12 months</span><span>SAR 9,600.00</span></div>'
+      '<div class="crow"><span>Iqama renewal fee</span><span>SAR 650.00</span></div>'
+      '<div class="crow"><span>Medical insurance &#183; Class C</span><span>SAR 1,840.00</span></div>'
+      '<div class="crow tot"><span>Total due via SADAD</span><span>SAR 12,090.00</span></div></div>',
+ notes='<div class="note2"><b>Six checks before a riyal moves.</b> Each one of these will stop a renewal at '
+       'Muqeem. Finding out after you have paid the levy is how companies lose four figures on a single '
+       'employee.</div>', navtab="Iqama")
+
+# ---------------------------------------------------------------- f7. gosi
+form("f-gosi", "GOSI Registration", "Step 9 of 12 · New Work Visa &amp; Iqama · Aisha Al Harbi",
+ [GOSI, QIWA],
+ [("Employee", [
+    fld("Employee", "Mohammed Al Otaibi · 30015904", ro=True),
+    fld("Iqama number", "2447301889", ro=True),
+    fld("Nationality", "Egypt &#183; Non-Saudi", ro=True,
+        hint="Non-Saudi contributions cover occupational hazards only"),
+    fld("Date of joining", "02/11/2026", ro=True)]),
+  ("Contribution basis", [
+    fld("Establishment GOSI number", "500442189", ro=True),
+    fld("Contributory wage (SAR)", "8,775", req=True,
+        hint="Basic plus housing, and it must agree with the Qiwa contract", hcls="a"),
+    fld("Employer contribution", "2%", ro=True, hint="Occupational hazards, non-Saudi"),
+    fld("Employee contribution", "0%", ro=True),
+    fld("Effective from", "01/11/2026", req=True),
+    fld("GOSI reference", "", req=True)])],
+ notes='<div class="note2 blue"><b>This is the step that moves your Nitaqat number.</b> For a Saudi national, '
+       'GOSI registration is what makes them count towards the ratio. Register late and your band is understated '
+       'for a whole cycle, which can cost you visas you were entitled to.</div>', navtab="Nitaqat")
+
+# ---------------------------------------------------------------- f8. transfer
+form("f-transfer", "Sponsorship Transfer", "Step 3 of 6 · Sponsorship Transfer · Rashid Al Mutairi",
+ [QIWA, MUQ],
+ [("Candidate", [
+    fld("Name", "Faisal Ur Rahman", ro=True),
+    fld("Iqama number", "2398115604", ro=True),
+    fld("Current sponsor", "Al Waha Trading &#183; 7004411982", ro=True),
+    fld("Current contract status", "Active &#183; ends 14/12/2026", ro=True,
+        hint="Transfer rules depend on contract status and service length"),
+    fld("Profession on Iqama", "Storekeeper", ro=True,
+        hint="A change of profession is a separate Qiwa process", hcls="a"),
+    fld("Iqama expiry (Hijri)", "1449-02-28", ro=True, state="ok")]),
+  ("Nitaqat impact", [
+    fld("Receiving establishment", "RIY-HO &#183; 7001234567", ro=True),
+    fld("Current band", "Platinum", ro=True, state="ok"),
+    fld("Band after transfer", "Platinum", ro=True, state="ok",
+        hint="Ratio moves from 34.7% to 34.6%, band unchanged", hcls="g"),
+    fld("Slots consumed", "1", ro=True,
+        hint="A transfer in counts against your ratio the moment it completes")]),
+  ("Request &amp; payment", [
+    fld("Transfer reason", "Direct hire &nbsp;&nbsp;&#9662;", req=True),
+    fld("New contract start", "01/12/2026", req=True),
+    fld("Transfer fee (SAR)", "2,000", req=True),
+    fld("VAT (SAR)", "300", req=True),
+    fld("SADAD bill number", "", req=True),
+    fld("GL account", "0000180209", ro=True)])],
+ notes='<div class="note2"><b>Faster than a fresh hire, and quieter.</b> No block visa, no entry visa, no '
+       'medical. But it consumes a Nitaqat slot the moment it completes, so we show the band impact before the '
+       'request is raised rather than after.</div>')
+
+# ---------------------------------------------------------------- 12. integrations
+page("integrations", nav("Miscellaneous", ["Government Portals", "Notifications", "Users", "Audit Log"], "Government Portals") + '''<div class="body">
+<div class="two" style="margin-bottom:16px">
+ <div class="kpi"><span>Portals mapped</span><b>7</b><em>Every Saudi step routes to one of these</em></div>
+ <div class="kpi"><span>Automatic today</span><b style="color:#177D48">3</b><em>CCHI, GOSI and Mudad lookups</em></div>
+ <div class="kpi"><span>Connector built, awaiting credentials</span><b style="color:#9A6512">4</b><em>Qiwa, Muqeem, Absher, Enjaz</em></div>
+ <div class="kpi"><span>Steps with a recorded reference</span><b>100%</b><em>Manual or automatic, it is on the record</em></div>
+</div>
+<div class="card"><div class="ch"><h2>Government portal map</h2>
+ <div class="acts"><span class="act">Test connection</span><span class="act">Export</span></div></div>
+<table><tr><th>Portal</th><th>Authority</th><th>What it holds</th><th>Steps that touch it</th>
+<th>Direction</th><th>Connection</th></tr>''' + "".join(f'''
+<tr><td><b>{a}</b></td><td>{b}</td><td>{c}</td><td>{d}</td><td>{e}</td>
+<td><span class="pill {f}">{g}</span></td></tr>''' for a,b,c,d,e,f,g in [
+ ("Qiwa","MHRSD","Work permits, employment contracts, Nitaqat band, transfers",
+  "Block visa, contract, transfer, profession change","Read &amp; write","p-due","CONNECTOR READY"),
+ ("Muqeem","Elm &#183; sponsor portal","Iqama issue and renewal, exit re-entry, final exit, dependants",
+  "Iqama, renewal, exit re-entry, final exit","Read &amp; write","p-due","CONNECTOR READY"),
+ ("Absher","Ministry of Interior","The employee-facing mirror of everything you do on Muqeem",
+  "Contract acceptance, visa visibility","Read","p-due","CONNECTOR READY"),
+ ("Enjaz","MoFA &#183; visa platform","Visa application and embassy stamping abroad",
+  "Visa authorisation, stamping","Read","p-due","CONNECTOR READY"),
+ ("GOSI","Social Insurance","Employee registration and contributory wage",
+  "GOSI registration, Nitaqat headcount","Read &amp; write","p-ok","LIVE LOOKUP"),
+ ("Mudad","Wage protection","Payroll enrolment and salary verification",
+  "Wage protection enrolment","Read","p-ok","LIVE LOOKUP"),
+ ("CCHI","Health insurance council","Medical insurance validity per employee",
+  "Iqama issue, Iqama renewal","Read","p-ok","LIVE LOOKUP"),
+]) + '''</table></div>
+<div class="card" style="margin-top:16px;border-color:#E8C9A0;background:#FDF7EC">
+ <div style="padding:15px 18px;font-size:13.2px;color:#6B4E14;line-height:1.6">
+ <b style="color:#8A5F12">How the four amber rows go green.</b>
+ Qiwa and Muqeem grant API access to the employer, under your own establishment registration, never to a
+ software vendor. You request credentials and a sandbox; we plug them into connectors that are already
+ built and tested. Until that day the step stays a tracked manual activity, with the reference number,
+ the receipt and the status captured exactly as they would be automatically. Nothing about the process
+ changes when the switch is flipped.
+ </div></div></div>''')

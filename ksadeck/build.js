@@ -288,7 +288,76 @@ function shot(s, file, x, y, w){
   s.addNotes('This is where the deal widens. Visa tracking is a PRO-desk purchase; Nitaqat forecasting is a CHRO and CFO purchase, and it ties straight to Vision 2030 localisation commitments. For an SAP account team this is the slide that justifies the platform conversation.');
 }
 
-/* ========== SLIDE 7 — PERSONAS ========== */
+/* ========== SLIDE 7 — GOVERNMENT PORTALS ========== */
+{
+  const s = S(); lightBg(s);
+  title(s, 'Government portals', 'Seven portals. One queue.');
+  s.addText('Every Saudi step lands on one of these. Your PRO should not have to remember which.', {
+    x:0.6, y:1.36, w:11.4, h:0.34, isTextBox:true, margin:0, fontFace:B, fontSize:13, color:GREY });
+
+  const portals = [
+    ['Qiwa','MHRSD','The job','Work permits, the authenticated contract, Nitaqat band, transfers', 1, 'Connector ready', WARN],
+    ['Muqeem','Elm','The residence','Iqama issue and renewal, exit and re-entry, final exit, dependants', 1, 'Connector ready', WARN],
+    ['Absher','Ministry of Interior','What the employee sees','Mirrors every Muqeem action, same day. Where disputes start', 1, 'Connector ready', WARN],
+    ['Enjaz','MoFA','The visa, stamped abroad','Application and embassy stamping, tracked to the entry window', 0, 'Connector ready', WARN],
+    ['GOSI','Social Insurance','Who counts as Saudi','Registration and contributory wage. Feeds the Nitaqat headcount', 0, 'Live lookup', GOOD],
+    ['Mudad','Wage protection','Does pay match the contract','Payroll enrolment, salary checked against Qiwa', 0, 'Live lookup', GOOD],
+    ['CCHI','Health insurance council','No cover, no Iqama','Policy validity per employee. Blocks issue and renewal', 0, 'Live lookup', GOOD]
+  ];
+  const cw = 2.92, ch = 1.60;
+  portals.slice(0,4).forEach((pt, i) => {
+    const x = 0.6 + i*(cw+0.17);
+    card(s, x, 1.94, cw, ch, pt[4] ? 'EAF2FD' : BG);
+    s.addText(pt[0], { x:x+0.17, y:2.06, w:1.22, h:0.28, isTextBox:true, margin:0,
+      fontFace:H, fontSize:15, bold:true, color:INK });
+    s.addText(pt[1], { x:x+1.45, y:2.07, w:cw-1.62, h:0.34, isTextBox:true, margin:0,
+      fontFace:B, fontSize:8, color:GREY, align:'right', lineSpacing:10 });
+    s.addText(pt[2], { x:x+0.17, y:2.36, w:cw-0.34, h:0.24, isTextBox:true, margin:0,
+      fontFace:H, fontSize:11.5, bold:true, color:TEAL_D });
+    s.addText(pt[3], { x:x+0.17, y:2.62, w:cw-0.34, h:0.62, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9.2, color:GREY, lineSpacing:12.4 });
+    s.addShape(p.ShapeType.roundRect, { x:x+0.17, y:3.28, w:1.45, h:0.22, rectRadius:0.11, fill:{color:pt[6]} });
+    s.addText(pt[5], { x:x+0.17, y:3.28, w:1.45, h:0.22, isTextBox:true, margin:0,
+      fontFace:B, fontSize:7.8, bold:true, color:WHITE, align:'center', valign:'middle' });
+  });
+  portals.slice(4).forEach((pt, i) => {
+    const x = 0.6 + i*(cw+0.17);
+    card(s, x, 3.72, cw, ch, BG);
+    s.addText(pt[0], { x:x+0.17, y:3.84, w:1.22, h:0.28, isTextBox:true, margin:0,
+      fontFace:H, fontSize:15, bold:true, color:INK });
+    s.addText(pt[1], { x:x+1.45, y:3.85, w:cw-1.62, h:0.34, isTextBox:true, margin:0,
+      fontFace:B, fontSize:8, color:GREY, align:'right', lineSpacing:10 });
+    s.addText(pt[2], { x:x+0.17, y:4.14, w:cw-0.34, h:0.24, isTextBox:true, margin:0,
+      fontFace:H, fontSize:11.5, bold:true, color:TEAL_D });
+    s.addText(pt[3], { x:x+0.17, y:4.40, w:cw-0.34, h:0.62, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9.2, color:GREY, lineSpacing:12.4 });
+    s.addShape(p.ShapeType.roundRect, { x:x+0.17, y:5.06, w:1.45, h:0.22, rectRadius:0.11, fill:{color:pt[6]} });
+    s.addText(pt[5], { x:x+0.17, y:5.06, w:1.45, h:0.22, isTextBox:true, margin:0,
+      fontFace:B, fontSize:7.8, bold:true, color:WHITE, align:'center', valign:'middle' });
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x:9.89, y:3.72, w:2.84, h:1.60, rectRadius:0.08,
+    fill:{color:'FCF6E4'}, line:{color:SAND, width:1} });
+  s.addText('How amber goes green', { x:10.06, y:3.84, w:2.5, h:0.24, isTextBox:true, margin:0,
+    fontFace:H, fontSize:12, bold:true, color:'7A6410' });
+  s.addText('Qiwa and Muqeem grant API access to the employer, under your own establishment registration. Never to a vendor. You request credentials, we plug them into connectors already built.', {
+    x:10.06, y:4.12, w:2.52, h:1.08, isTextBox:true, margin:0,
+    fontFace:B, fontSize:8.8, color:GREY, lineSpacing:11.8 });
+
+  s.addShape(p.ShapeType.roundRect, { x:0.6, y:5.50, w:12.13, h:1.38, rectRadius:0.08,
+    fill:{color:TEAL_L}, line:{color:TEAL, width:0.9} });
+  s.addText('Three live today. Four await your credentials.', {
+    x:0.85, y:5.64, w:5.6, h:0.26, isTextBox:true, margin:0,
+    fontFace:H, fontSize:13, bold:true, color:TEAL_D });
+  s.addText('Until a connector goes live the step is manual, but it is still tracked. The reference number, the receipt and the status are captured exactly as they would be automatically, so nothing about the process changes on the day the switch is flipped. That is the difference between being API-ready and being API-dependent.', {
+    x:0.85, y:5.94, w:6.0, h:0.82, isTextBox:true, margin:0,
+    fontFace:B, fontSize:9.6, color:INK, lineSpacing:13 });
+  shot(s, 'integrations.jpg', 7.1, 5.58, 5.5);
+  footer(s, 7);
+  s.addNotes('The integration slide a Saudi CIO is waiting for. Be precise: access is granted to the employer under their establishment registration, not to a software vendor, so the credentials have to come from the customer. Saying that plainly earns more trust than promising automation you cannot deliver.');
+}
+
+/* ========== SLIDE 8 — PERSONAS ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Persona view', 'Everyone gets their own to-do list.');
@@ -322,11 +391,11 @@ function shot(s, file, x, y, w){
   s.addText('ROLE', { x:1.26, y:1.76, w:2.1, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
   s.addText('WHAT THEY DO IN THE SYSTEM', { x:3.55, y:1.76, w:5.3, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
   s.addText('WHAT THEY GET', { x:9.0, y:1.76, w:2.86, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
-  footer(s, 7);
+  footer(s, 8);
   s.addNotes('With a mixed audience, let people find their own row. The GRO row is the operational win; the Head of HR row is the one an SAP account executive should point at when the conversation turns to platform value.');
 }
 
-/* ========== SLIDE 8 — TASKS & MONEY ========== */
+/* ========== SLIDE 9 — TASKS & MONEY ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Accountability & cost control', 'Every step owned. Every riyal accounted for.');
@@ -361,11 +430,11 @@ function shot(s, file, x, y, w){
   s.addText('Qiwa contract fee, expat levy, Iqama issue fee, exit re-entry, transfer fee, medical insurance. Each with its own GL account and its own receipt, one click away.', {
     x:6.75, y:5.72, w:5.95, h:0.5, isTextBox:true, margin:0,
     fontFace:B, fontSize:10, italic:true, color:GREY, lineSpacing:13.5 });
-  footer(s, 8);
+  footer(s, 9);
   s.addNotes('Two buyers on one slide. The ladder is for the HR operations lead, the levy box is for the CFO. The levy is usually the number that turns this from a nice-to-have into a budgeted project.');
 }
 
-/* ========== SLIDE 9 — ARCHITECTURE ========== */
+/* ========== SLIDE 10 — ARCHITECTURE ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Solution architecture', 'Every system, and what moves between them.');
@@ -385,11 +454,11 @@ function shot(s, file, x, y, w){
     s.addText(n[1], { x:9.24, y:y+0.36, w:3.32, h:0.86, isTextBox:true, margin:0,
       fontFace:B, fontSize:8.5, color:GREY, lineSpacing:11.4 });
   });
-  footer(s, 9);
+  footer(s, 10);
   s.addNotes('The technical slide. Walk the four sides, then land the dashed arrows. Being straight that government API access belongs to the employer is what earns credibility with a Saudi CIO, and it is the question they will ask.');
 }
 
-/* ========== SLIDE 10 — BTP + DELIVERY (dark) ========== */
+/* ========== SLIDE 11 — BTP + DELIVERY (dark) ========== */
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:-2.4, y:4.2, w:6.6, h:6.6, fill:{color:TEAL, transparency:91} });
@@ -443,14 +512,78 @@ function shot(s, file, x, y, w){
       fontFace:B, fontSize:8.4, color:'A9C2DA', lineSpacing:11.5 });
   });
 
-  s.addText('Built for the Kingdom.', { x:0.6, y:6.32, w:6.4, h:0.36, isTextBox:true, margin:0,
-    fontFace:H, fontSize:20, bold:true, color:WHITE });
-  s.addText('Qiwa, Muqeem and Absher in step  ·  Nitaqat calculated before it bites  ·  Exit and re-entry tracked to the day', {
-    x:0.6, y:6.70, w:8.8, h:0.3, isTextBox:true, margin:0, fontFace:B, fontSize:10, color:'A9C2DA' });
-  s.addImage({ path:`${IMG}/logo-white.png`, x:10.35, y:6.34, w:2.0, h:0.49 });
-  s.addText('info@inkitsolutions.com', { x:9.6, y:6.92, w:2.75, h:0.22, isTextBox:true, margin:0,
-    fontFace:B, fontSize:9, color:'7E99B4', align:'right' });
+  footer(s, 11, true);
   s.addNotes('Close on provisioning and the three questions a Saudi buyer always asks: where does the data sit, is there Arabic, and how long does it take. Have answers ready rather than promises.');
+}
+
+
+/* ========== SLIDE 12 — ALSO GCC-READY (dark) ========== */
+{
+  const s = S(); darkBg(s);
+  s.addShape(p.ShapeType.ellipse, { x:9.8, y:-2.4, w:6.8, h:6.8, fill:{color:TEAL, transparency:89} });
+  titleDark(s, 'Beyond the Kingdom', 'Saudi Arabia is one pack. There are seven.');
+  s.addText('The engine underneath runs six more markets, so your second country is a configuration, not another project.', {
+    x:0.6, y:1.36, w:11.4, h:0.34, isTextBox:true, margin:0, fontFace:B, fontSize:12.5, color:'A9C2DA' });
+
+  const packs = [
+    ['Saudi Arabia','Qiwa / Muqeem / Absher','Nitaqat gates everything. Exit and re-entry is the trap.', 1],
+    ['United Arab Emirates','MOHRE / ICP / GDRFA','Golden Visa splits residence from work permit. Two clocks.', 0],
+    ['Qatar','ADLSA / MOI / QVC','Most of the work happens before the employee travels.', 0],
+    ['Kuwait','PAM / MOI / PACI','Permit and residency on two clocks, two authorities.', 0],
+    ['Oman','Ministry of Labour / ROP','Omanisation gates clearance, as Nitaqat does here.', 0],
+    ['Bahrain','LMRA / NPRA / GOSI','One authority runs the whole permit. Cleanest API candidate.', 0],
+    ['Libya','Ministry of Labour / PNA','Rotating crews. Proof matters more than volume.', 0]
+  ];
+  const cw = 2.92, ch = 1.32;
+  packs.forEach((pk, i) => {
+    const col = i % 4, row = Math.floor(i / 4);
+    const x = 0.6 + col*(cw+0.17), y = 1.94 + row*(ch+0.20);
+    s.addShape(p.ShapeType.roundRect, { x, y, w:cw, h:ch, rectRadius:0.08,
+      fill:{color: pk[3] ? '123A4E' : INK2}, line:{color: pk[3] ? TEAL : '27415C', width: pk[3] ? 1.6 : 0.8} });
+    s.addText(pk[0], { x:x+0.17, y:y+0.12, w: pk[3] ? cw-1.32 : cw-0.34, h:0.26, isTextBox:true, margin:0,
+      fontFace:H, fontSize:12.5, bold:true, color:WHITE });
+    s.addText(pk[1], { x:x+0.17, y:y+0.42, w:cw-0.34, h:0.22, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9, color:TEAL });
+    s.addText(pk[2], { x:x+0.17, y:y+0.66, w:cw-0.34, h:0.54, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9.2, color:'A9C2DA', lineSpacing:12.2 });
+    if (pk[3]) {
+      s.addShape(p.ShapeType.roundRect, { x:x+cw-1.10, y:y+0.13, w:0.93, h:0.22, rectRadius:0.11, fill:{color:TEAL} });
+      s.addText('You are here', { x:x+cw-1.10, y:y+0.13, w:0.93, h:0.22, isTextBox:true, margin:0,
+        fontFace:B, fontSize:7.4, bold:true, color:INK, align:'center', valign:'middle' });
+    }
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x:9.89, y:3.46, w:2.84, h:1.32, rectRadius:0.08,
+    fill:{color:TEAL_D}, line:{color:TEAL, width:1.2} });
+  s.addText('36 permit types', { x:10.06, y:3.60, w:2.5, h:0.26, isTextBox:true, margin:0,
+    fontFace:H, fontSize:14, bold:true, color:WHITE });
+  s.addText('across seven country packs, on one engine, in one BTP subscription.', {
+    x:10.06, y:3.90, w:2.52, h:0.76, isTextBox:true, margin:0,
+    fontFace:B, fontSize:9.4, color:'CFEFEB', lineSpacing:12.4 });
+
+  const why = [
+    ['One engine','Workflow, tasks, payment capture and reporting are identical everywhere. Only the steps, authorities and thresholds change.'],
+    ['One training course','A PRO who learns the Saudi screens already knows the Emirati ones. Same queue, same inbox, same escalation.'],
+    ['One line in your BTP account','Adding a country does not add a platform, a contract or a separate support model. It adds a pack.']
+  ];
+  why.forEach((w, i) => {
+    const x = 0.6 + i*4.09;
+    s.addShape(p.ShapeType.roundRect, { x, y:4.98, w:3.95, h:1.06, rectRadius:0.08,
+      fill:{color:INK2}, line:{color:'27415C', width:0.8} });
+    s.addText(w[0], { x:x+0.18, y:5.10, w:3.6, h:0.24, isTextBox:true, margin:0,
+      fontFace:H, fontSize:11.5, bold:true, color:TEAL });
+    s.addText(w[1], { x:x+0.18, y:5.36, w:3.6, h:0.58, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9, color:'A9C2DA', lineSpacing:12 });
+  });
+
+  s.addText('Built for the Kingdom. Ready for the Gulf.', { x:0.6, y:6.28, w:7.4, h:0.38, isTextBox:true, margin:0,
+    fontFace:H, fontSize:21, bold:true, color:WHITE });
+  s.addText('Qiwa, Muqeem and Absher in step   ·   Nitaqat calculated before it bites   ·   Exit and re-entry tracked to the day', {
+    x:0.6, y:6.72, w:9.0, h:0.3, isTextBox:true, margin:0, fontFace:B, fontSize:10, color:'A9C2DA' });
+  s.addImage({ path:`${IMG}/logo-white.png`, x:10.35, y:6.30, w:2.0, h:0.49 });
+  s.addText('info@inkitsolutions.com', { x:9.6, y:6.88, w:2.75, h:0.22, isTextBox:true, margin:0,
+    fontFace:B, fontSize:9, color:'7E99B4', align:'right' });
+  s.addNotes('Close by widening. The Saudi deal is the entry point; the platform argument is that the second and third country cost configuration rather than another project. For an SAP account executive this is the slide that turns one country into a regional account plan.');
 }
 
 p.writeFile({ fileName: 'INK_IT_Visa_and_Permits_KSA.pptx' }).then(f => console.log('WROTE', f));
