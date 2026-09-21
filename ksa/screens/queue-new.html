@@ -1,0 +1,116 @@
+<!doctype html><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:14px/1.45 -apple-system,'Segoe UI',Arial,sans-serif;background:#F5F6F7;color:#1D2D3E;width:1440px}
+.nav{background:#fff;padding:0 26px;display:flex;gap:30px;border-bottom:1px solid #E3E6E8}
+.nav a{padding:15px 2px;font-size:14.5px;font-weight:600;color:#3F5265;text-decoration:none;border-bottom:2.5px solid transparent}
+.nav a.on{color:#0B5FD9;border-bottom-color:#0B5FD9}
+.sub{background:#F5F6F7;padding:12px 26px 0;display:flex;gap:26px;border-bottom:1px solid #E3E6E8}
+.sub a{padding:7px 3px 11px;font-size:13.5px;font-weight:600;color:#3F5265;text-decoration:none;border-bottom:2.5px solid transparent}
+.sub a.on{color:#0B5FD9;border-bottom-color:#0B5FD9}
+.body{padding:20px 26px 26px}
+.card{background:#fff;border:1px solid #E3E6E8;border-radius:9px}
+.ch{padding:13px 17px;border-bottom:1px solid #EDEFF1;display:flex;align-items:center;justify-content:space-between}
+.ch h2{font-size:15.5px;font-weight:700}
+.acts{display:flex;gap:15px;align-items:center}
+.act{font-size:13px;color:#0B5FD9;font-weight:600;display:flex;gap:5px;align-items:center}
+.btn{background:#0B5FD9;color:#fff;border-radius:16px;padding:6px 15px;font-size:12.5px;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{font-size:12.5px;font-weight:700;color:#4A5C6E;text-align:left;padding:11px 14px;border-bottom:1px solid #E3E6E8;white-space:nowrap}
+td{font-size:13px;padding:11px 14px;border-bottom:1px solid #F0F2F4;color:#243447}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11.5px;font-weight:700}
+.p-run{background:#E3EEFB;color:#0B5FD9}.p-ok{background:#E2F3E9;color:#177D48}
+.p-due{background:#FDF0DC;color:#9A6512}.p-late{background:#FBE7E4;color:#B0392C}
+.grn{color:#177D48;font-weight:600}.amb{color:#9A6512;font-weight:600}.red{color:#B0392C;font-weight:600}
+.agent{background:#F0F2F4;border-bottom:1px dashed #B9C2CB;padding:4px 9px;border-radius:4px;font-size:12.5px;display:inline-block}
+.tiles{display:flex;gap:15px}
+.tile{flex:1;border-radius:10px;overflow:hidden;border:1px solid #E3E6E8;background:#fff}
+.tile .th{padding:13px 15px;background:#fff}
+.tile .th b{font-size:14.5px;display:block}.tile .th span{font-size:12.5px;color:#65798C}
+.tile .tb{padding:15px;display:flex;gap:15px;align-items:center}
+.lg{font-size:12.5px;display:flex;flex-direction:column;gap:7px}
+.lg div{display:flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;border-radius:2px;display:inline-block}
+.lg b{margin-left:auto;font-variant-numeric:tabular-nums}
+.proc{background:#fff;border:1px solid #E3E6E8;border-radius:10px;padding:20px}
+.prow{display:flex;align-items:center;gap:0;margin-bottom:15px}
+.pt{flex:1;background:#DCE9FB;border-radius:9px;padding:14px 15px;min-height:96px;border:1px solid #CADCF5}
+.pt.cur{border:2px solid #0B5FD9;background:#EAF2FD}
+.pt.done{background:#E2F3E9;border-color:#BFE3CE}
+.pt b{font-size:13.5px;display:block;margin-bottom:6px;line-height:1.3}
+.pt span{font-size:11.8px;color:#5A6E82;line-height:1.35;display:block}
+.arw{width:40px;text-align:center;color:#8C9AA8;font-size:15px;flex-shrink:0}
+.form{background:#fff;border:1px solid #E3E6E8;border-radius:9px;max-width:760px;margin:0 auto}
+.fh{padding:14px 20px;border-bottom:1px solid #EDEFF1;border:2px solid #16308C;border-radius:9px 9px 0 0}
+.fh b{font-size:16px}
+.fb{padding:20px 26px}
+.fr{display:flex;align-items:center;gap:14px;margin-bottom:15px}
+.fl{width:270px;text-align:right;font-size:13.5px;color:#3F5265;flex-shrink:0}
+.fl i{color:#B0392C;font-style:normal;font-weight:700}
+.fi{flex:1;border:1px solid #8C9AA8;border-radius:4px;padding:7px 10px;font-size:13px;background:#fff;min-height:33px}
+.fi.ro{background:#EDEFF1;border:none;border-bottom:1px dashed #A7B2BC;border-radius:0}
+.fi.ph{color:#97A3AE;font-style:italic}
+.ff{padding:14px 26px;border-top:1px solid #EDEFF1;display:flex;gap:11px;justify-content:center}
+.bsub{background:#0B5FD9;color:#fff;border-radius:16px;padding:7px 20px;font-size:13px;font-weight:700}
+.bsv{color:#0B5FD9;border-radius:16px;padding:7px 18px;font-size:13px;font-weight:700}
+.bcn{background:#FBE7E4;color:#B0392C;border-radius:16px;padding:7px 18px;font-size:13px;font-weight:700}
+.filt{background:#fff;border:1px solid #E3E6E8;border-radius:9px;padding:14px 16px;display:flex;gap:16px;align-items:flex-end;margin-bottom:15px;flex-wrap:wrap}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;color:#4A5C6E;font-weight:600}
+.fg .fi{width:172px}
+.two{display:flex;gap:16px}
+.kpi{background:#fff;border:1px solid #E3E6E8;border-radius:10px;padding:16px 18px;flex:1}
+.kpi span{font-size:12.5px;color:#65798C;display:block;margin-bottom:5px}
+.kpi b{font-size:27px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:block}
+.kpi em{font-size:12px;font-style:normal;color:#65798C}
+</style><div class="nav"><a class="">Home</a><a class="on">Work Visa</a><a class="">Iqama</a><a class="">Nitaqat</a><a class="">Report</a><a class="">Miscellaneous</a></div><div class="sub"><a class="on">New Work Visa</a><a class="">Renew Iqama</a><a class="">Exit &amp; Re-entry</a><a class="">Final Exit</a><a class="">Initiate New Request</a></div><div class="body">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<div class="card" style="padding:16px 17px">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px">
+  <b style="font-size:14.5px;line-height:1.3">Mohammed Al Otaibi<br><span style="font-weight:400;color:#65798C;font-size:12.5px">(30015904)</span></b>
+  <span style="background:#0B5FD9;color:#fff;border-radius:5px;padding:3px 6px;font-size:11px">&#128197;</span></div>
+ <div style="font-size:12.8px;color:#4A5C6E;line-height:1.9">
+  Visa Type: <b style="color:#1D2D3E">Work Visa</b><br>Establishment: <b style="color:#1D2D3E">JED-OPS (1300)</b><br>
+  Profession: Warehouse Supervisor<br>Nationality: Egypt</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:13px">
+  <span class="pill p-run">RUNNING</span>
+  <span style="border:1px solid #0B5FD9;color:#0B5FD9;border-radius:15px;padding:5px 11px;font-size:12px;font-weight:600">Assign To Yourself</span></div>
+ <div style="margin-top:13px;border-top:1px solid #F0F2F4;padding-top:11px;font-size:12.5px;color:#65798C">
+  <b style="color:#1D2D3E">Status</b><div style="margin-top:8px;line-height:1.85">Block Visa Allocation <b class="grn">DONE</b><br>Visa Authorisation <b class="grn">DONE</b><br>Enjaz Stamping <b class="grn">DONE</b><br>Qiwa Contract <b class="amb">IN PROGRESS</b><br>Iqama Issuance <span style="color:#97A3AE">NOT STARTED</span></div></div></div>
+<div class="card" style="padding:16px 17px">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px">
+  <b style="font-size:14.5px;line-height:1.3">Yara Al Mutairi<br><span style="font-weight:400;color:#65798C;font-size:12.5px">(30016118)</span></b>
+  <span style="background:#0B5FD9;color:#fff;border-radius:5px;padding:3px 6px;font-size:11px">&#128197;</span></div>
+ <div style="font-size:12.8px;color:#4A5C6E;line-height:1.9">
+  Visa Type: <b style="color:#1D2D3E">Saudi National</b><br>Establishment: <b style="color:#1D2D3E">RIY-HO (1100)</b><br>
+  Profession: Financial Analyst<br>Nationality: Saudi Arabia</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:13px">
+  <span class="pill p-run">RUNNING</span>
+  <span style="border:1px solid #0B5FD9;color:#0B5FD9;border-radius:15px;padding:5px 11px;font-size:12px;font-weight:600">Assign To Yourself</span></div>
+ <div style="margin-top:13px;border-top:1px solid #F0F2F4;padding-top:11px;font-size:12.5px;color:#65798C">
+  <b style="color:#1D2D3E">Status</b><div style="margin-top:8px;line-height:1.85">Qiwa Contract <b class="grn">DONE</b><br>GOSI Registration <b class="amb">IN PROGRESS</b><br>Nitaqat Recount <span style="color:#97A3AE">NOT STARTED</span></div></div></div>
+<div class="card" style="padding:16px 17px">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px">
+  <b style="font-size:14.5px;line-height:1.3">Ravi Chandran<br><span style="font-weight:400;color:#65798C;font-size:12.5px">(30016205)</span></b>
+  <span style="background:#0B5FD9;color:#fff;border-radius:5px;padding:3px 6px;font-size:11px">&#128197;</span></div>
+ <div style="font-size:12.8px;color:#4A5C6E;line-height:1.9">
+  Visa Type: <b style="color:#1D2D3E">Work Visa</b><br>Establishment: <b style="color:#1D2D3E">DMM-PLANT (1500)</b><br>
+  Profession: Mechanical Fitter<br>Nationality: India</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:13px">
+  <span class="pill p-run">RUNNING</span>
+  <span style="border:1px solid #0B5FD9;color:#0B5FD9;border-radius:15px;padding:5px 11px;font-size:12px;font-weight:600">Assign To Yourself</span></div>
+ <div style="margin-top:13px;border-top:1px solid #F0F2F4;padding-top:11px;font-size:12.5px;color:#65798C">
+  <b style="color:#1D2D3E">Status</b><div style="margin-top:8px;color:#97A3AE">&#9656; expand</div></div></div>
+<div class="card" style="padding:16px 17px">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px">
+  <b style="font-size:14.5px;line-height:1.3">Ahmed Bassiouni<br><span style="font-weight:400;color:#65798C;font-size:12.5px">(30016277)</span></b>
+  <span style="background:#0B5FD9;color:#fff;border-radius:5px;padding:3px 6px;font-size:11px">&#128197;</span></div>
+ <div style="font-size:12.8px;color:#4A5C6E;line-height:1.9">
+  Visa Type: <b style="color:#1D2D3E">Work Visa</b><br>Establishment: <b style="color:#1D2D3E">JED-OPS (1300)</b><br>
+  Profession: Quality Inspector<br>Nationality: Egypt</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:13px">
+  <span class="pill p-due">PENDING</span>
+  <span style="border:1px solid #0B5FD9;color:#0B5FD9;border-radius:15px;padding:5px 11px;font-size:12px;font-weight:600">Assign To Yourself</span></div>
+ <div style="margin-top:13px;border-top:1px solid #F0F2F4;padding-top:11px;font-size:12.5px;color:#65798C">
+  <b style="color:#1D2D3E">Status</b><div style="margin-top:8px;color:#97A3AE">&#9656; expand</div></div></div></div></div>
