@@ -186,7 +186,72 @@ function shot(s, file, x, y, w){
   s.addNotes('Screens in this deck are the application configured for Saudi Arabia. Say plainly that they are representative KSA screens rather than captures of a live Saudi tenant, and that the engine underneath is the one running in the UAE today.');
 }
 
-/* ========== SLIDE 4 — JOURNEY MAP ========== */
+/* ========== SLIDE 4 — PERMIT & VISA TYPES ========== */
+{
+  const s = S(); lightBg(s);
+  title(s, 'Permit & visa types', 'Not every worker needs the same door.');
+  s.addText('Ten ways into the Kingdom. Each has its own steps, its own fees and its own trap.', {
+    x:0.6, y:1.36, w:11.4, h:0.34, isTextBox:true, margin:0, fontFace:B, fontSize:13, color:GREY });
+
+  const types = [
+    ['Work visa + Iqama','The standard hire','12 steps','Nitaqat gated', WARN, 1],
+    ['Premium Residency','No sponsor at all','5 steps','No quota used', GOOD, 0],
+    ['Sponsorship transfer','Already in the Kingdom','6 steps','Nitaqat gated', WARN, 0],
+    ['Temporary work','Project based, no Iqama','4 steps','No expiry alerts', WARN, 0],
+    ['Seasonal','Hajj and Umrah, bulk','3 steps','Hard end date', WARN, 0],
+    ['Business visit','Meetings, not employment','3 steps','No quota used', GOOD, 0],
+    ['Freelancer','They hold their own permit','3 steps','No quota used', GOOD, 0],
+    ['Dependant Iqama','Spouse and children','4 steps','Fee per head', WARN, 0],
+    ['Domestic worker','Musaned, separate file','4 steps','Separate file', GOOD, 0],
+    ['Saudi national','No visa. Moves the ratio','4 steps','Improves band', GOOD, 1]
+  ];
+  const cw = 2.37, chh = 1.04;
+  types.forEach((t, i) => {
+    const col = i % 5, row = Math.floor(i / 5);
+    const x = 0.6 + col*(cw+0.15), y = 1.94 + row*(chh+0.16);
+    card(s, x, y, cw, chh, t[5] ? 'EAF2FD' : BG);
+    s.addText(t[0], { x:x+0.14, y:y+0.10, w:cw-0.28, h:0.24, isTextBox:true, margin:0,
+      fontFace:H, fontSize:11.5, bold:true, color:INK });
+    s.addText(t[1], { x:x+0.14, y:y+0.34, w:cw-0.28, h:0.32, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9, color:GREY, lineSpacing:11.5 });
+    s.addText(t[2], { x:x+0.14, y:y+0.72, w:0.9, h:0.2, isTextBox:true, margin:0,
+      fontFace:B, fontSize:8.2, color:TEAL_D, bold:true });
+    s.addShape(p.ShapeType.roundRect, { x:x+cw-1.22, y:y+0.72, w:1.08, h:0.2, rectRadius:0.1, fill:{color:t[4]} });
+    s.addText(t[3], { x:x+cw-1.22, y:y+0.72, w:1.08, h:0.2, isTextBox:true, margin:0,
+      fontFace:B, fontSize:7.2, bold:true, color:WHITE, align:'center', valign:'middle' });
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x:0.6, y:4.42, w:12.13, h:0.42, rectRadius:0.08, fill:{color:INK} });
+  s.addText('BLOCK VISAS: FOUR THINGS DECIDE WHETHER YOU GET ONE', {
+    x:0.85, y:4.42, w:11.6, h:0.42, isTextBox:true, margin:0,
+    fontFace:B, fontSize:10.5, bold:true, color:TEAL, charSpacing:1.6, valign:'middle' });
+
+  const gates = [
+    ['Your band','Nitaqat decides whether the tap opens at all. Red means nothing is issued, whatever the business case.'],
+    ['Your size and age','Allocation scales with the establishment. A new entity gets a handful, an established one far more.'],
+    ['The profession','Allocation is per profession code, and some are reserved for Saudis. The code must match the qualification.'],
+    ['The nationality','High-volume nationalities go on temporary hold, often seasonally. An approved visa you cannot use is a blocked hire.']
+  ];
+  gates.forEach((g, i) => {
+    const x = 0.6 + i*3.09;
+    card(s, x, 5.00, 2.94, 1.30, BG);
+    s.addText(g[0], { x:x+0.16, y:5.12, w:2.62, h:0.24, isTextBox:true, margin:0,
+      fontFace:H, fontSize:12, bold:true, color:INK });
+    s.addText(g[1], { x:x+0.16, y:5.38, w:2.64, h:0.82, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9, color:GREY, lineSpacing:12 });
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x:0.6, y:6.44, w:12.13, h:0.44, rectRadius:0.08,
+    fill:{color:TEAL_L}, line:{color:TEAL, width:0.8} });
+  s.addText([
+    { text:'An unused block visa is an asset with an expiry.  ', options:{ bold:true, color:TEAL_D } },
+    { text:'Hold too few and hiring stalls. Hold too many and capital sits idle while the nationality you need goes on hold.', options:{ color:INK } }
+  ], { x:0.85, y:6.44, w:11.6, h:0.44, isTextBox:true, margin:0, fontFace:B, fontSize:10.5, valign:'middle' });
+  footer(s, 4);
+  s.addNotes('90 seconds. Do not read the grid. Point at three: the standard hire, Premium Residency where you are not the sponsor, and Saudi national where there is no visa at all but the ratio moves. Then land the four block visa gates, because that is the slide people photograph.');
+}
+
+/* ========== SLIDE 6 — JOURNEY MAP ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'The journey map', 'One Iqama, five people, seven stages.');
@@ -199,11 +264,11 @@ function shot(s, file, x, y, w){
     { text:'Look at stage one.  ', options:{ bold:true, color:'7A6410' } },
     { text:'In the UAE a permit starts with a quota check. In Saudi Arabia it starts with a Nitaqat check, because the band decides whether a block visa can be requested at all. That is why a KSA rollout is not a UAE rollout with the names changed.', options:{ color:INK } }
   ], { x:0.85, y:6.42, w:11.6, h:0.5, isTextBox:true, margin:0, fontFace:B, fontSize:11, valign:'middle' });
-  footer(s, 4);
+  footer(s, 6);
   s.addNotes('This is the slide to slow down on with a mixed audience. Business people read the lanes, technical people read the arrows, and both end up at the same conclusion about where the risk sits.');
 }
 
-/* ========== SLIDE 5 — EXIT & RE-ENTRY ========== */
+/* ========== SLIDE 7 — EXIT & RE-ENTRY ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Exit & re-entry', 'The process that costs the most when it goes wrong.');
@@ -237,11 +302,11 @@ function shot(s, file, x, y, w){
   s.addText('Twelve more return inside a fortnight. That is a question your HR director cannot answer today. Here it is one screen, and the overdue rows have already escalated to their line managers.', {
     x:6.95, y:6.14, w:5.55, h:0.64, isTextBox:true, margin:0,
     fontFace:B, fontSize:9.6, color:GREY, lineSpacing:13 });
-  footer(s, 5);
+  footer(s, 7);
   s.addNotes('If you only land one slide with a Saudi customer, land this one. Every HR leader in the Kingdom has a story about someone who could not get back, and this is the slide where they tell it to you.');
 }
 
-/* ========== SLIDE 6 — SAUDIZATION (dark) ========== */
+/* ========== SLIDE 8 — SAUDIZATION (dark) ========== */
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:10.6, y:-2.6, w:6.4, h:6.4, fill:{color:TEAL, transparency:90} });
@@ -284,11 +349,11 @@ function shot(s, file, x, y, w){
   s.addText('The right-hand panel is the point. Not a compliance score, but the four things you cannot do this week because one establishment fell into the red band.', {
     x:6.75, y:5.68, w:5.95, h:0.52, isTextBox:true, margin:0,
     fontFace:B, fontSize:10, italic:true, color:'A9C2DA', lineSpacing:13.5 });
-  footer(s, 6, true);
+  footer(s, 8, true);
   s.addNotes('This is where the deal widens. Visa tracking is a PRO-desk purchase; Nitaqat forecasting is a CHRO and CFO purchase, and it ties straight to Vision 2030 localisation commitments. For an SAP account team this is the slide that justifies the platform conversation.');
 }
 
-/* ========== SLIDE 7 — GOVERNMENT PORTALS ========== */
+/* ========== SLIDE 9 — GOVERNMENT PORTALS ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Government portals', 'Seven portals. One queue.');
@@ -353,11 +418,59 @@ function shot(s, file, x, y, w){
     x:0.85, y:5.94, w:6.0, h:0.82, isTextBox:true, margin:0,
     fontFace:B, fontSize:9.6, color:INK, lineSpacing:13 });
   shot(s, 'integrations.jpg', 7.1, 5.58, 5.5);
-  footer(s, 7);
+  footer(s, 9);
   s.addNotes('The integration slide a Saudi CIO is waiting for. Be precise: access is granted to the employer under their establishment registration, not to a software vendor, so the credentials have to come from the customer. Saying that plainly earns more trust than promising automation you cannot deliver.');
 }
 
-/* ========== SLIDE 8 — PERSONAS ========== */
+/* ========== SLIDE 9 — COMPLIANCE ========== */
+{
+  const s = S(); lightBg(s);
+  title(s, 'Compliance', 'Eight obligations. One inspection.');
+  s.addText('Saudi enforcement is joined up now. Fail one and the others stop working.', {
+    x:0.6, y:1.36, w:11.4, h:0.34, isTextBox:true, margin:0, fontFace:B, fontSize:13, color:GREY });
+
+  const obs = [
+    ['Qiwa contracts','Registered, authenticated, in Arabic and accepted by the employee', 1],
+    ['Saudization','Recalculated continuously. Gates visas, renewals and transfers', 1],
+    ['Wage protection','Pay on time through the bank, matching the Qiwa contract', 1],
+    ['GOSI','Register from day one. Contributory wage must agree with Qiwa', 0],
+    ['Absence from work','Evidence of contact attempts before any report is filed', 0],
+    ['Medical cover','CCHI verified automatically. No cover, no Iqama', 0],
+    ['Self-assessment','Declare periodically. First-visit findings settle cheaper', 0],
+    ['Exit obligations','Settlement agreed and dues cleared before a final exit issues', 0]
+  ];
+  const cw = 2.94, chh = 1.18;
+  obs.forEach((o, i) => {
+    const col = i % 4, row = Math.floor(i / 4);
+    const x = 0.6 + col*(cw+0.15), y = 1.94 + row*(chh+0.18);
+    card(s, x, y, cw, chh, o[2] ? 'EAF2FD' : BG);
+    circle(s, x+0.16, y+0.14, 0.34, String(i+1), o[2] ? TEAL : TEAL_D, WHITE, 10);
+    s.addText(o[0], { x:x+0.60, y:y+0.16, w:cw-0.76, h:0.26, isTextBox:true, margin:0,
+      fontFace:H, fontSize:12.5, bold:true, color:INK });
+    s.addText(o[1], { x:x+0.16, y:y+0.56, w:cw-0.32, h:0.50, isTextBox:true, margin:0,
+      fontFace:B, fontSize:9.2, color:GREY, lineSpacing:12.2 });
+  });
+
+  s.addShape(p.ShapeType.roundRect, { x:0.6, y:4.68, w:6.0, h:2.20, rectRadius:0.09,
+    fill:{color:'FDECE9'}, line:{color:'E0A79D', width:1} });
+  s.addText('What repeat findings actually cost', { x:0.84, y:4.84, w:5.5, h:0.28, isTextBox:true, margin:0,
+    fontFace:H, fontSize:14, bold:true, color:'8E3428' });
+  s.addText('Not just fines. Repeated violations suspend work permit issuance, sponsorship transfers and residency renewals.', {
+    x:0.84, y:5.18, w:5.5, h:0.54, isTextBox:true, margin:0,
+    fontFace:B, fontSize:11, color:INK, lineSpacing:14.5 });
+  s.addText('In practice that is a hiring freeze imposed on you, at a time you did not choose, for as long as it takes to clear the findings.', {
+    x:0.84, y:5.78, w:5.5, h:0.60, isTextBox:true, margin:0,
+    fontFace:B, fontSize:10.5, color:GREY, lineSpacing:14 });
+  s.addText('Which is why every obligation above is a tracked task with an owner.', {
+    x:0.84, y:6.44, w:5.5, h:0.28, isTextBox:true, margin:0,
+    fontFace:H, fontSize:10.5, bold:true, color:'8E3428' });
+
+  shot(s, 'integrations.jpg', 6.9, 4.68, 5.8);
+  footer(s, 9);
+  s.addNotes('75 seconds. The eight are context, the red box is the message. Say it plainly: repeat findings do not just cost money, they switch off your ability to hire. That reframes compliance from a cost centre into an operational risk, which is the language a CFO and an SAP account team both work in.');
+}
+
+/* ========== SLIDE 10 — PERSONAS ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Persona view', 'Everyone gets their own to-do list.');
@@ -391,11 +504,11 @@ function shot(s, file, x, y, w){
   s.addText('ROLE', { x:1.26, y:1.76, w:2.1, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
   s.addText('WHAT THEY DO IN THE SYSTEM', { x:3.55, y:1.76, w:5.3, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
   s.addText('WHAT THEY GET', { x:9.0, y:1.76, w:2.86, h:0.2, isTextBox:true, margin:0, fontFace:B, fontSize:8.5, bold:true, color:'96A3AE', charSpacing:1.4 });
-  footer(s, 8);
+  footer(s, 10);
   s.addNotes('With a mixed audience, let people find their own row. The GRO row is the operational win; the Head of HR row is the one an SAP account executive should point at when the conversation turns to platform value.');
 }
 
-/* ========== SLIDE 9 — TASKS & MONEY ========== */
+/* ========== SLIDE 11 — TASKS & MONEY ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Accountability & cost control', 'Every step owned. Every riyal accounted for.');
@@ -430,11 +543,11 @@ function shot(s, file, x, y, w){
   s.addText('Qiwa contract fee, expat levy, Iqama issue fee, exit re-entry, transfer fee, medical insurance. Each with its own GL account and its own receipt, one click away.', {
     x:6.75, y:5.72, w:5.95, h:0.5, isTextBox:true, margin:0,
     fontFace:B, fontSize:10, italic:true, color:GREY, lineSpacing:13.5 });
-  footer(s, 9);
+  footer(s, 11);
   s.addNotes('Two buyers on one slide. The ladder is for the HR operations lead, the levy box is for the CFO. The levy is usually the number that turns this from a nice-to-have into a budgeted project.');
 }
 
-/* ========== SLIDE 10 — ARCHITECTURE ========== */
+/* ========== SLIDE 12 — ARCHITECTURE ========== */
 {
   const s = S(); lightBg(s);
   title(s, 'Solution architecture', 'Every system, and what moves between them.');
@@ -454,11 +567,11 @@ function shot(s, file, x, y, w){
     s.addText(n[1], { x:9.24, y:y+0.36, w:3.32, h:0.86, isTextBox:true, margin:0,
       fontFace:B, fontSize:8.5, color:GREY, lineSpacing:11.4 });
   });
-  footer(s, 10);
+  footer(s, 12);
   s.addNotes('The technical slide. Walk the four sides, then land the dashed arrows. Being straight that government API access belongs to the employer is what earns credibility with a Saudi CIO, and it is the question they will ask.');
 }
 
-/* ========== SLIDE 11 — BTP + DELIVERY (dark) ========== */
+/* ========== SLIDE 13 — BTP + DELIVERY (dark) ========== */
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:-2.4, y:4.2, w:6.6, h:6.6, fill:{color:TEAL, transparency:91} });
@@ -512,12 +625,12 @@ function shot(s, file, x, y, w){
       fontFace:B, fontSize:8.4, color:'A9C2DA', lineSpacing:11.5 });
   });
 
-  footer(s, 11, true);
+  footer(s, 13, true);
   s.addNotes('Close on provisioning and the three questions a Saudi buyer always asks: where does the data sit, is there Arabic, and how long does it take. Have answers ready rather than promises.');
 }
 
 
-/* ========== SLIDE 12 — ALSO GCC-READY (dark) ========== */
+/* ========== SLIDE 14 — ALSO GCC-READY (dark) ========== */
 {
   const s = S(); darkBg(s);
   s.addShape(p.ShapeType.ellipse, { x:9.8, y:-2.4, w:6.8, h:6.8, fill:{color:TEAL, transparency:89} });

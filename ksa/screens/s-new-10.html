@@ -1,0 +1,103 @@
+<!doctype html><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:14px/1.45 -apple-system,'Segoe UI',Arial,sans-serif;background:#F5F6F7;color:#1D2D3E;width:1440px}
+.nav{background:#fff;padding:0 26px;display:flex;gap:30px;border-bottom:1px solid #E3E6E8}
+.nav a{padding:15px 2px;font-size:14.5px;font-weight:600;color:#3F5265;text-decoration:none;border-bottom:2.5px solid transparent}
+.nav a.on{color:#0B5FD9;border-bottom-color:#0B5FD9}
+.sub{background:#F5F6F7;padding:12px 26px 0;display:flex;gap:26px;border-bottom:1px solid #E3E6E8}
+.sub a{padding:7px 3px 11px;font-size:13.5px;font-weight:600;color:#3F5265;text-decoration:none;border-bottom:2.5px solid transparent}
+.sub a.on{color:#0B5FD9;border-bottom-color:#0B5FD9}
+.body{padding:20px 26px 26px}
+.card{background:#fff;border:1px solid #E3E6E8;border-radius:9px}
+.ch{padding:13px 17px;border-bottom:1px solid #EDEFF1;display:flex;align-items:center;justify-content:space-between}
+.ch h2{font-size:15.5px;font-weight:700}
+.acts{display:flex;gap:15px;align-items:center}
+.act{font-size:13px;color:#0B5FD9;font-weight:600;display:flex;gap:5px;align-items:center}
+.btn{background:#0B5FD9;color:#fff;border-radius:16px;padding:6px 15px;font-size:12.5px;font-weight:700}
+table{width:100%;border-collapse:collapse}
+th{font-size:12.5px;font-weight:700;color:#4A5C6E;text-align:left;padding:11px 14px;border-bottom:1px solid #E3E6E8;white-space:nowrap}
+td{font-size:13px;padding:11px 14px;border-bottom:1px solid #F0F2F4;color:#243447}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11.5px;font-weight:700}
+.p-run{background:#E3EEFB;color:#0B5FD9}.p-ok{background:#E2F3E9;color:#177D48}
+.p-due{background:#FDF0DC;color:#9A6512}.p-late{background:#FBE7E4;color:#B0392C}
+.grn{color:#177D48;font-weight:600}.amb{color:#9A6512;font-weight:600}.red{color:#B0392C;font-weight:600}
+.agent{background:#F0F2F4;border-bottom:1px dashed #B9C2CB;padding:4px 9px;border-radius:4px;font-size:12.5px;display:inline-block}
+.tiles{display:flex;gap:15px}
+.tile{flex:1;border-radius:10px;overflow:hidden;border:1px solid #E3E6E8;background:#fff}
+.tile .th{padding:13px 15px;background:#fff}
+.tile .th b{font-size:14.5px;display:block}.tile .th span{font-size:12.5px;color:#65798C}
+.tile .tb{padding:15px;display:flex;gap:15px;align-items:center}
+.lg{font-size:12.5px;display:flex;flex-direction:column;gap:7px}
+.lg div{display:flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;border-radius:2px;display:inline-block}
+.lg b{margin-left:auto;font-variant-numeric:tabular-nums}
+.proc{background:#fff;border:1px solid #E3E6E8;border-radius:10px;padding:20px}
+.prow{display:flex;align-items:center;gap:0;margin-bottom:15px}
+.pt{flex:1;background:#DCE9FB;border-radius:9px;padding:14px 15px;min-height:96px;border:1px solid #CADCF5}
+.pt.cur{border:2px solid #0B5FD9;background:#EAF2FD}
+.pt.done{background:#E2F3E9;border-color:#BFE3CE}
+.pt b{font-size:13.5px;display:block;margin-bottom:6px;line-height:1.3}
+.pt span{font-size:11.8px;color:#5A6E82;line-height:1.35;display:block}
+.arw{width:40px;text-align:center;color:#8C9AA8;font-size:15px;flex-shrink:0}
+.form{background:#fff;border:1px solid #E3E6E8;border-radius:9px;max-width:760px;margin:0 auto}
+.fh{padding:14px 20px;border-bottom:1px solid #EDEFF1;border:2px solid #16308C;border-radius:9px 9px 0 0}
+.fh b{font-size:16px}
+.fb{padding:20px 26px}
+.fr{display:flex;align-items:center;gap:14px;margin-bottom:15px}
+.fl{width:270px;text-align:right;font-size:13.5px;color:#3F5265;flex-shrink:0}
+.fl i{color:#B0392C;font-style:normal;font-weight:700}
+.fi{flex:1;border:1px solid #8C9AA8;border-radius:4px;padding:7px 10px;font-size:13px;background:#fff;min-height:33px}
+.fi.ro{background:#EDEFF1;border:none;border-bottom:1px dashed #A7B2BC;border-radius:0}
+.fi.ph{color:#97A3AE;font-style:italic}
+.ff{padding:14px 26px;border-top:1px solid #EDEFF1;display:flex;gap:11px;justify-content:center}
+.bsub{background:#0B5FD9;color:#fff;border-radius:16px;padding:7px 20px;font-size:13px;font-weight:700}
+.bsv{color:#0B5FD9;border-radius:16px;padding:7px 18px;font-size:13px;font-weight:700}
+.bcn{background:#FBE7E4;color:#B0392C;border-radius:16px;padding:7px 18px;font-size:13px;font-weight:700}
+.filt{background:#fff;border:1px solid #E3E6E8;border-radius:9px;padding:14px 16px;display:flex;gap:16px;align-items:flex-end;margin-bottom:15px;flex-wrap:wrap}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;color:#4A5C6E;font-weight:600}
+.fg .fi{width:172px}
+.two{display:flex;gap:16px}
+.kpi{background:#fff;border:1px solid #E3E6E8;border-radius:10px;padding:16px 18px;flex:1}
+.kpi span{font-size:12.5px;color:#65798C;display:block;margin-bottom:5px}
+.kpi b{font-size:27px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:block}
+.kpi em{font-size:12px;font-style:normal;color:#65798C}
+</style><style>
+.wrap2{max-width:1020px;margin:0 auto}
+.fcard{background:#fff;border:1px solid #E3E6E8;border-radius:10px;overflow:hidden}
+.fhd{padding:15px 22px;border-bottom:1px solid #EDEFF1;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.fhd b{font-size:17px}
+.fhd .src{font-size:12px;color:#5A6E82}
+.badge2{background:#E3EEFB;color:#0B5FD9;border:1px solid #BFD8F6;border-radius:13px;padding:4px 11px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.badge2.mu{background:#EAF3EC;color:#177D48;border-color:#C4E2CF}
+.badge2.ab{background:#F3EDF9;color:#6B4E9E;border-color:#DCCDEE}
+.badge2.go{background:#FDF2E3;color:#9A6512;border-color:#EBD5AE}
+.sect{padding:6px 22px 0}
+.sect h3{font-size:12.5px;font-weight:700;color:#0B5FD9;letter-spacing:.07em;text-transform:uppercase;margin:16px 0 11px;padding-bottom:7px;border-bottom:1px solid #EDEFF1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;padding:0 22px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-size:12.5px;color:#3F5265;font-weight:600}
+.fld label i{color:#B0392C;font-style:normal}
+.fld label em{color:#8C9AA8;font-style:normal;font-weight:400}
+.inp{border:1px solid #8C9AA8;border-radius:4px;padding:8px 11px;font-size:13px;min-height:35px;background:#fff}
+.inp.ro{background:#EDEFF1;border:none;border-bottom:1px dashed #A7B2BC;border-radius:0;color:#243447}
+.inp.ph{color:#97A3AE;font-style:italic}
+.inp.ok{border-color:#177D48;background:#F4FBF6}
+.inp.warn{border-color:#C9821A;background:#FDF8EF}
+.hint{font-size:11.5px;color:#65798C;line-height:1.4}
+.hint b{color:#243447}
+.hint.g{color:#177D48;font-weight:600}
+.hint.a{color:#9A6512;font-weight:600}
+.hint.r{color:#B0392C;font-weight:600}
+.full{grid-column:1/-1}
+.note2{margin:16px 22px 0;padding:12px 15px;border-radius:8px;background:#FDF8EF;border:1px solid #EBD5AE;font-size:12.5px;color:#6B4E14;line-height:1.55}
+.note2 b{color:#8A5F12}
+.note2.blue{background:#F1F7FE;border-color:#C8DDF5;color:#1F4C7A}
+.note2.blue b{color:#0B5FD9}
+.calc{margin:0 22px;background:#F7F9FB;border:1px solid #E3E6E8;border-radius:8px;padding:13px 16px}
+.crow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:#3F5265}
+.crow.tot{border-top:1px solid #DDE2E6;margin-top:6px;padding-top:9px;font-weight:700;color:#1D2D3E;font-size:14.5px}
+.ftr{padding:16px 22px;border-top:1px solid #EDEFF1;display:flex;gap:11px;justify-content:flex-end;background:#FAFBFC}
+</style><div class="nav"><a class="">Home</a><a class="">Work Visa</a><a class="">Iqama</a><a class="">Nitaqat</a><a class="on">Report</a><a class="">Miscellaneous</a></div><div class="body"><div class="wrap2"><div class="fcard"><div class="fhd"><div><b>Mudad Wage Protection</b><div class="src">Step 10 of 12 &#183; New Work Visa &amp; Iqama &#183; Fatima Al Ghamdi</div></div><div style="display:flex;gap:7px"><span class="badge2 go">Writes to Mudad</span><span class="badge2">Writes to Qiwa</span></div></div><div class="sect"><h3>Details</h3></div><div class="grid2"><div class="fld"><label>Bank <i>*</i></label><div class="inp">Al Rajhi Bank &nbsp;&#9662;</div></div><div class="fld"><label>IBAN <i>*</i></label><div class="inp">SA03 8000 0000 6080 1016 7519</div></div><div class="fld"><label>Declared monthly wage (SAR) <i>*</i></label><div class="inp">8,775</div></div><div class="fld"><label>Matches Qiwa contract </label><div class="inp ro">Yes &nbsp;&#10003;</div><div class="hint g">A mismatch between Mudad and Qiwa is one of the most common inspection findings</div></div><div class="fld"><label>Payroll enrolment date <i>*</i></label><div class="inp">01/12/2026</div></div><div class="fld"><label>First WPS file <i>*</i></label><div class="inp">December 2026 &nbsp;&#9662;</div></div><div class="fld"><label>Payment channel </label><div class="inp ro">Approved bank transfer</div></div><div class="fld"><label>Mudad reference <i>*</i></label><div class="inp"></div></div></div><div class="note2"><b>Late pay is a fine, not a conversation.</b> Salaries must run through approved channels and match the authenticated contract. We check the two figures against each other before the first payroll runs.</div><div class="ftr"><span class="bsv">Save draft</span><span class="bsub">Submit</span><span class="bcn">Cancel</span></div></div></div></div>
