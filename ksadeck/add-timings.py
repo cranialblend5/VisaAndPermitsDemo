@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Stamp a run-sheet timing onto each slide's speaker notes.
 
+PLAN is zipped against the deck in slide order, so a label here must match the
+slide at that position. Insert a slide and every label below it shifts.
+
 The deck is built to be delivered in twenty minutes. These add up to 1200
 seconds exactly, so a presenter can see at a glance whether they are ahead or
 behind. Run after `node build.js`.
@@ -16,14 +19,14 @@ PLAN = [
     (3,  70,  "What it is"),
     (4,  85,  "Permit types"),
     (5,  95,  "The map"),
-    (6,  140, "Demo the walkthrough"),
-    (7,  115, "The story they recognise"),
-    (8,  145, "Where the deal widens"),
-    (9,  80,  "Integration answer"),
-    (10, 70,  "Risk reframe"),
-    (11, 65,  "Who uses it"),
-    (12, 70,  "Accountability and cost"),
-    (13, 85,  "Technical credibility"),
+    (6,  140, "Walk the permit that hurts"),
+    (7,  115, "Where the deal widens"),
+    (8,  145, "Integration answer"),
+    (9,  80,  "Risk reframe"),
+    (10, 70,  "Who uses it"),
+    (11, 65,  "Accountability and cost"),
+    (12, 70,  "Technical credibility"),
+    (13, 85,  "What you provision"),
     (14, 60,  "Close wide"),
 ]
 
